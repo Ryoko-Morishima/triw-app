@@ -1,0 +1,12 @@
+本番にしたいとき
+
+デプロイ環境（Vercel 等）で .env をこう設定すればOK：
+
+NEXT_PUBLIC_BASE_URL=https://your-production-domain.com/
+NEXT_PUBLIC_SPOTIFY_CLIENT_ID=xxx
+NEXT_PUBLIC_SPOTIFY_REDIRECT_URI=https://your-production-domain.com/api/auth/callback
+
+
+Spotify Dashboard 側でも Redirect URI を同じ本番URLで登録しておく必要があります。
+
+これで解決できること
