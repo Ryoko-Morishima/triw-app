@@ -1,0 +1,36 @@
+{
+  "theme_direction": "夜汽車での移動を感じさせる穏やかで心地よい音楽のセレクション",
+  "hard_constraints": {
+    "required_genres": [
+      "Indie Pop",
+      "Folk",
+      "Dream Pop"
+    ],
+    "exclude_genres": [
+      "ハードEDM",
+      "デスメタル",
+      "演歌"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "穏やか",
+      "リラックス",
+      "旅の楽しさ"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [],
+    "notes": [
+      "日常を切り取るような楽曲を選ぶ"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "cooldown"
+  ]
+}

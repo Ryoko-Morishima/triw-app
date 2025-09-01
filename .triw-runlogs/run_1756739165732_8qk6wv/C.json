@@ -1,0 +1,54 @@
+{
+  "candidates": [
+    {
+      "title": "Wake Me Up",
+      "artist": "Avicii",
+      "album": null,
+      "arc": "peak",
+      "reason": "エネルギッシュなメロディとキャッチーなサビが、パーティーを盛り上げる。",
+      "whyPersonaFit": "大ネタ系パーティーメーカーとして、アンセムとしての存在感が抜群。",
+      "whyThemeFit": "夜汽車の旅にぴったりな高揚感を与えてくれる。",
+      "year_guess": 2013
+    },
+    {
+      "title": "Titanium",
+      "artist": "David Guetta ft. Sia",
+      "album": null,
+      "arc": "build",
+      "reason": "力強いボーカルとビートが、聴く人を引き込む。",
+      "whyPersonaFit": "この曲もまた、大合唱ができるアンセムとしての要素を持つ。",
+      "whyThemeFit": "エネルギッシュで感情的な旅を演出してくれる。",
+      "year_guess": 2011
+    },
+    {
+      "title": "Uptown Funk",
+      "artist": "Mark Ronson ft. Bruno Mars",
+      "album": null,
+      "arc": "intro",
+      "reason": "キャッチーなリズムと楽しい雰囲気で、パーティーのスタートに最適。",
+      "whyPersonaFit": "多くの人が楽しめるファンキーなサウンドが魅力。",
+      "whyThemeFit": "町から町へ移動する際に、気分を盛り上げるのにぴったり。",
+      "year_guess": 2014
+    },
+    {
+      "title": "Don't You Worry Child",
+      "artist": "Swedish House Mafia",
+      "album": null,
+      "arc": "peak",
+      "reason": "感動的なサビが印象的で、みんなで歌いたくなる。",
+      "whyPersonaFit": "大ネタ系パーティーメーカーにとって欠かせない曲。",
+      "whyThemeFit": "旅の途中での高揚感を与えてくれる。",
+      "year_guess": 2012
+    },
+    {
+      "title": "Shut Up and Dance",
+      "artist": "WALK THE MOON",
+      "album": null,
+      "arc": "cooldown",
+      "reason": "楽しいリズムと軽快なメロディが、心を明るくしてくれる。",
+      "whyPersonaFit": "パーティーの締めくくりにも使えるキャッチーな一曲。",
+      "whyThemeFit": "最後のクールダウンに最適で、旅の思い出を振り返るのにぴったり。",
+      "year_guess": 2014
+    }
+  ]
+}

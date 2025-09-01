@@ -1,0 +1,39 @@
+{
+  "theme_direction": "夜汽車に乗って町から町へ移動する際のエネルギッシュでキャッチーなBGMを提供",
+  "hard_constraints": {
+    "required_genres": [
+      "EDM",
+      "Big Room",
+      "Pop Remixes",
+      "Rock Anthems"
+    ],
+    "exclude_genres": [
+      "繊細アコースティック",
+      "実験音楽",
+      "即興ジャズ"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "エネルギッシュ",
+      "高揚感",
+      "楽しさ"
+    ],
+    "tempo_trend": "rise",
+    "preferred_eras": [
+      "2020年代",
+      "2010年代"
+    ],
+    "notes": []
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

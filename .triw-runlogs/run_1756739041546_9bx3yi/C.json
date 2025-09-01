@@ -1,0 +1,204 @@
+{
+  "candidates": [
+    {
+      "title": "Electric Feel",
+      "artist": "MGMT",
+      "album": "Oracular Spectacular",
+      "arc": "intro",
+      "reason": "心地よいメロディが、旅の始まりを感じさせる。",
+      "whyPersonaFit": "インディポップの要素があり、日常の楽しさを描いている。",
+      "whyThemeFit": "夜の移動を連想させるリズムが特徴。",
+      "year_guess": 2007
+    },
+    {
+      "title": "Home",
+      "artist": "Edward Sharpe & The Magnetic Zeros",
+      "album": "Up From Below",
+      "arc": "build",
+      "reason": "心温まる歌詞が、旅の途中の思い出を引き立てる。",
+      "whyPersonaFit": "フォークのエッセンスが強く、日常を描写している。",
+      "whyThemeFit": "家のような心地よさが、移動中の安心感を与える。",
+      "year_guess": 2009
+    },
+    {
+      "title": "Rivers and Roads",
+      "artist": "The Head and the Heart",
+      "album": "The Head and the Heart",
+      "arc": "cooldown",
+      "reason": "余韻を残す美しいメロディが、旅行の終わりを感じさせる。",
+      "whyPersonaFit": "インディフォークの代表的な楽曲で、心に残るストーリーがある。",
+      "whyThemeFit": "道と川のイメージが、移動の感覚を引き立てる。",
+      "year_guess": 2011
+    },
+    {
+      "title": "First Day of My Life",
+      "artist": "Bright Eyes",
+      "album": "I'm Wide Awake, It's Morning",
+      "arc": "intro",
+      "reason": "新しい旅立ちを感じさせる穏やかなメロディ。",
+      "whyPersonaFit": "シンガーソングライターのストーリーテリングが際立つ。",
+      "whyThemeFit": "旅の始まりにぴったりな曲調。",
+      "year_guess": 2005
+    },
+    {
+      "title": "Budapest",
+      "artist": "George Ezra",
+      "album": "Wanted on Voyage",
+      "arc": "build",
+      "reason": "軽快なリズムが、旅の楽しさを引き立てる。",
+      "whyPersonaFit": "インディポップの要素があり、日常の楽しさを描写。",
+      "whyThemeFit": "異国の地への移動を感じさせる。",
+      "year_guess": 2014
+    },
+    {
+      "title": "Dog Days Are Over",
+      "artist": "Florence + The Machine",
+      "album": "Lungs",
+      "arc": "peak",
+      "reason": "高揚感があり、旅のクライマックスを彩る。",
+      "whyPersonaFit": "シンガーソングライター系の力強さが魅力。",
+      "whyThemeFit": "新しい始まりを感じる、移動の楽しさを表現。",
+      "year_guess": 2009
+    },
+    {
+      "title": "Ho Hey",
+      "artist": "The Lumineers",
+      "album": "The Lumineers",
+      "arc": "build",
+      "reason": "シンプルで心地よいメロディが、仲間との旅を演出。",
+      "whyPersonaFit": "フォークの魅力があり、日常を描写。",
+      "whyThemeFit": "心温まる雰囲気が、移動の楽しさを引き立てる。",
+      "year_guess": 2012
+    },
+    {
+      "title": "Sweet Disposition",
+      "artist": "The Temper Trap",
+      "album": "Conditions",
+      "arc": "cooldown",
+      "reason": "夢のようなメロディが、旅の余韻を残す。",
+      "whyPersonaFit": "インディポップの雰囲気があり、日常の美しさを感じる。",
+      "whyThemeFit": "移動の中での思い出を振り返るのにぴったり。",
+      "year_guess": 2009
+    },
+    {
+      "title": "Stolen Dance",
+      "artist": "Milky Chance",
+      "album": "Sadnecessary",
+      "arc": "peak",
+      "reason": "軽快なリズムが、楽しい旅の瞬間を引き立てる。",
+      "whyPersonaFit": "インディポップのスタイルが際立つ。",
+      "whyThemeFit": "移動中の楽しさを感じさせる楽曲。",
+      "year_guess": 2013
+    },
+    {
+      "title": "I Will Follow You Into the Dark",
+      "artist": "Death Cab for Cutie",
+      "album": "Plans",
+      "arc": "cooldown",
+      "reason": "静かな余韻が、旅の終わりを感じさせる。",
+      "whyPersonaFit": "シンガーソングライターの要素が強い。",
+      "whyThemeFit": "深い思索を促すような旅の締めくくり。",
+      "year_guess": 2005
+    },
+    {
+      "title": "Ain't No Mountain High Enough",
+      "artist": "Marvin Gaye & Tammi Terrell",
+      "album": "United",
+      "arc": "build",
+      "reason": "希望に満ちたメロディが、旅の途中のエネルギーを与える。",
+      "whyPersonaFit": "クラシックな要素があり、心に響くメッセージ。",
+      "whyThemeFit": "移動中の希望を感じさせる楽曲。",
+      "year_guess": 1967
+    },
+    {
+      "title": "Youth",
+      "artist": "Daughter",
+      "album": "If You Leave",
+      "arc": "cooldown",
+      "reason": "感情的なメロディが、旅の余韻を深める。",
+      "whyPersonaFit": "インディフォークの美しさが際立つ。",
+      "whyThemeFit": "移動中の思い出を振り返るのにぴったり。",
+      "year_guess": 2013
+    },
+    {
+      "title": "The Night We Met",
+      "artist": "Lord Huron",
+      "album": "Strange Trails",
+      "arc": "cooldown",
+      "reason": "ノスタルジックなメロディが、旅の思い出を思い起こさせる。",
+      "whyPersonaFit": "インディフォークの魅力を持つ。",
+      "whyThemeFit": "夜の移動を感じさせる深い感情がある。",
+      "year_guess": 2015
+    },
+    {
+      "title": "Somebody to Anybody",
+      "artist": "Margaret Glaspy",
+      "album": "Emotions and Math",
+      "arc": "build",
+      "reason": "心に響く歌詞が、旅の途中の思索を促す。",
+      "whyPersonaFit": "シンガーソングライターの要素が強い。",
+      "whyThemeFit": "移動中の感情を豊かに描写。",
+      "year_guess": 2016
+    },
+    {
+      "title": "Budapest",
+      "artist": "George Ezra",
+      "album": "Wanted on Voyage",
+      "arc": "build",
+      "reason": "リズミカルなメロディが、楽しい旅の雰囲気を演出する。",
+      "whyPersonaFit": "インディポップの代表的な楽曲。",
+      "whyThemeFit": "旅の途中の楽しさを感じさせる。",
+      "year_guess": 2014
+    },
+    {
+      "title": "New Slang",
+      "artist": "The Shins",
+      "album": "Oh, Inverted World",
+      "arc": "intro",
+      "reason": "穏やかなメロディが、旅の始まりを優しく包み込む。",
+      "whyPersonaFit": "インディロックの要素があり、日常を描写。",
+      "whyThemeFit": "移動中の期待感を高める。",
+      "year_guess": 2001
+    },
+    {
+      "title": "Cigarette Daydreams",
+      "artist": "Cage the Elephant",
+      "album": "Melophobia",
+      "arc": "cooldown",
+      "reason": "穏やかでメランコリックなメロディが、旅の余韻を残す。",
+      "whyPersonaFit": "インディロックの深みが感じられる。",
+      "whyThemeFit": "移動中の感情を振り返るのにぴったり。",
+      "year_guess": 2013
+    },
+    {
+      "title": "Slow Burn",
+      "artist": "Kacey Musgraves",
+      "album": "Golden Hour",
+      "arc": "build",
+      "reason": "心地よいリズムが、旅の途中の楽しさを引き立てる。",
+      "whyPersonaFit": "シンガーソングライターの魅力が際立つ。",
+      "whyThemeFit": "穏やかな移動の雰囲気を表現。",
+      "year_guess": 2018
+    },
+    {
+      "title": "Banana Pancakes",
+      "artist": "Jack Johnson",
+      "album": "In Between Dreams",
+      "arc": "intro",
+      "reason": "ゆったりとしたリズムが、旅の始まりを心地よく演出。",
+      "whyPersonaFit": "フォークの要素があり、日常を描写。",
+      "whyThemeFit": "リラックスした移動の雰囲気を表現。",
+      "year_guess": 2005
+    },
+    {
+      "title": "Slow Burn",
+      "artist": "Kacey Musgraves",
+      "album": "Golden Hour",
+      "arc": "build",
+      "reason": "心地よいメロディが、移動中の気持ちを和らげる。",
+      "whyPersonaFit": "シンガーソングライターの魅力が感じられる。",
+      "whyThemeFit": "リラックスした旅の雰囲気を演出。",
+      "year_guess": 2018
+    }
+  ]
+}

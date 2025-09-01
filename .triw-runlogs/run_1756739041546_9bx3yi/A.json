@@ -1,0 +1,19 @@
+{
+  "background": "インディポップとシンガーソングライター系の音楽を愛し、日常を切り取るような楽曲を好むDJ。",
+  "preferred_genres": [
+    "Indie Pop",
+    "Folk",
+    "Dream Pop"
+  ],
+  "avoid_genres": [
+    "ハードEDM",
+    "デスメタル",
+    "演歌"
+  ],
+  "flow_habits": [
+    "穏やかなOP",
+    "中盤で明るさ",
+    "余韻で締める物語構成"
+  ],
+  "persona_notes": []
+}
