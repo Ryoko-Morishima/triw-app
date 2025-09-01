@@ -1,0 +1,50 @@
+{
+  "theme_direction": "1980年代に前を向いて進んでいた人たちを特集し、希望とエネルギーを感じさせる選曲。",
+  "hard_constraints": {
+    "required_genres": [
+      "UKインディ",
+      "USインディ",
+      "オルタナティブ",
+      "ポストパンク・リバイバル",
+      "ブリットポップ"
+    ],
+    "exclude_genres": [
+      "バイラル狙いのポップ",
+      "EDM大箱アンセム"
+    ],
+    "eras": {
+      "min": 1980,
+      "max": 1989
+    },
+    "regions": [
+      "UK",
+      "US"
+    ],
+    "languages": [
+      "日本語",
+      "英語"
+    ],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "希望",
+      "エネルギー",
+      "前向き"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [
+      "1980年代"
+    ],
+    "notes": [
+      "ギター主体の質感を重視",
+      "歌詞や歴史的脈絡を考慮した流れ"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

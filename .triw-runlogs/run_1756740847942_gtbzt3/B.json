@@ -1,0 +1,37 @@
+{
+  "theme_direction": "夜の温度感を大切にした、ジャズのセッション感覚を活かした楽曲の流れ",
+  "hard_constraints": {
+    "required_genres": [
+      "Jazz",
+      "Jazz-Funk",
+      "Fusion"
+    ],
+    "exclude_genres": [
+      "EDM大箱系",
+      "大衆歌謡",
+      "ハードコアパンク"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "リラックス",
+      "穏やか",
+      "心地よい"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [],
+    "notes": [
+      "セッション感を大切にする"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

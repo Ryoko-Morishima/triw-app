@@ -1,0 +1,54 @@
+{
+  "candidates": [
+    {
+      "title": "So What",
+      "artist": "Miles Davis",
+      "album": "Kind of Blue",
+      "arc": "intro",
+      "reason": "この曲の静かなイントロは、ジャズのセッション感を感じさせ、リスナーを引き込む。",
+      "whyPersonaFit": "ジャズの代表作であり、インスト系の流れを大切にしている。",
+      "whyThemeFit": "夜の温度感を感じさせるメロディーが、リラックスした雰囲気を演出する。",
+      "year_guess": 1959
+    },
+    {
+      "title": "Cantaloupe Island",
+      "artist": "Herbie Hancock",
+      "album": "Empyrean Isles",
+      "arc": "build",
+      "reason": "リズミカルなビートが心地よく、セッション感が強い。",
+      "whyPersonaFit": "ジャズファンクの名曲で、流れを大切にするスタイルに合う。",
+      "whyThemeFit": "穏やかな夜の雰囲気を演出し、聴く人をリラックスさせる。",
+      "year_guess": 1964
+    },
+    {
+      "title": "Chameleon",
+      "artist": "Herbie Hancock",
+      "album": "Head Hunters",
+      "arc": "peak",
+      "reason": "ダイナミックな展開があり、聴く人を惹きつける力がある。",
+      "whyPersonaFit": "フュージョンの要素が強く、セッション感が感じられる。",
+      "whyThemeFit": "夜の高揚感を感じさせ、心地よいエネルギーを提供する。",
+      "year_guess": 1973
+    },
+    {
+      "title": "Take Five",
+      "artist": "Dave Brubeck",
+      "album": "Time Out",
+      "arc": "cooldown",
+      "reason": "独特なリズムとメロディが心地よく、リラックスできる。",
+      "whyPersonaFit": "ジャズの名曲であり、インストとしてのセッション感が強い。",
+      "whyThemeFit": "穏やかな夜の雰囲気を持ち、聴く人を和ませる。",
+      "year_guess": 1959
+    },
+    {
+      "title": "Watermelon Man",
+      "artist": "Herbie Hancock",
+      "album": "Takin' Off",
+      "arc": "other",
+      "reason": "リズムが心地よく、セッション感を強く感じることができる。",
+      "whyPersonaFit": "ジャズファンクの要素があり、流れを大切にするスタイルに適している。",
+      "whyThemeFit": "夜の温度感を醸し出し、リラックスした雰囲気を演出する。",
+      "year_guess": 1962
+    }
+  ]
+}

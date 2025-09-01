@@ -1,0 +1,54 @@
+{
+  "candidates": [
+    {
+      "title": "Such a Simple Thing",
+      "artist": "Ray LaMontagne",
+      "album": null,
+      "arc": "intro",
+      "reason": "穏やかなメロディが心を落ち着かせ、勉強に最適です。",
+      "whyPersonaFit": "日常の小さな幸せを歌った歌詞が共鳴します。",
+      "whyThemeFit": "邪魔にならず、集中力を高めてくれる雰囲気があります。",
+      "year_guess": 2018
+    },
+    {
+      "title": "Peach",
+      "artist": "Kevin Abstract",
+      "album": null,
+      "arc": "build",
+      "reason": "軽快なリズムがやる気を引き出しつつ、心地よいサウンドが印象的です。",
+      "whyPersonaFit": "インディポップの要素が満載で、リラックスできます。",
+      "whyThemeFit": "勉強の合間の気分転換にもぴったりです。",
+      "year_guess": 2019
+    },
+    {
+      "title": "Home",
+      "artist": "Edward Sharpe & The Magnetic Zeros",
+      "album": null,
+      "arc": "peak",
+      "reason": "明るいサウンドが心を弾ませ、集中力を持続させます。",
+      "whyPersonaFit": "日常の大切さを歌った作品で、共感を呼び起こします。",
+      "whyThemeFit": "エネルギーが高まり、やる気を引き出します。",
+      "year_guess": 2009
+    },
+    {
+      "title": "Ophelia",
+      "artist": "The Lumineers",
+      "album": null,
+      "arc": "cooldown",
+      "reason": "心地よいリズムで、余韻を残しつつも落ち着かせてくれる一曲。",
+      "whyPersonaFit": "シンプルで温かいメロディが共感を誘います。",
+      "whyThemeFit": "集中した後のクールダウンに最適です。",
+      "year_guess": 2016
+    },
+    {
+      "title": "Budapest",
+      "artist": "George Ezra",
+      "album": null,
+      "arc": "other",
+      "reason": "軽快で楽しいメロディが、ずっと聴いていたくなる魅力があります。",
+      "whyPersonaFit": "シンガーソングライターらしい親しみやすさが魅力的です。",
+      "whyThemeFit": "勉強中の気分を明るくする一曲です。",
+      "year_guess": 2014
+    }
+  ]
+}

@@ -158,7 +158,13 @@ export default function MixtapePage() {
 
       {resp && (
         <div className="space-y-2">
-          <div className="text-sm text-gray-600">runId: {resp.runId}</div>
+          <div className="text-sm text-gray-600">
+            runId: {resp.runId}
+            <a className="underline ml-2" href={`/mixtape/log/${resp.runId}`}>
+              ログを見る
+            </a>
+          </div>
+          
           <div className="overflow-x-auto">
             <table className="w-full border text-sm">
               <thead>

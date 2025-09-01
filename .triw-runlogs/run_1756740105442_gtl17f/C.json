@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "This Charming Man",
+      "artist": "The Smiths",
+      "album": "The Smiths",
+      "arc": "intro",
+      "reason": "爽やかでリズミカルなギターリフが印象的なトラック。",
+      "whyPersonaFit": "UKインディの象徴的存在であり、論理的な構成が魅力。",
+      "whyThemeFit": "希望に満ちた歌詞が、前向きなエネルギーを感じさせる。",
+      "year_guess": 1983
+    },
+    {
+      "title": "Just Like Heaven",
+      "artist": "The Cure",
+      "album": "Kiss Me, Kiss Me, Kiss Me",
+      "arc": "build",
+      "reason": "高揚感のあるメロディとドリーミーな雰囲気。",
+      "whyPersonaFit": "オルタナティブの先駆けとして、深い感情を引き出す。",
+      "whyThemeFit": "愛と希望をテーマにした歌詞がエネルギーを与える。",
+      "year_guess": 1987
+    },
+    {
+      "title": "There Is a Light That Never Goes Out",
+      "artist": "The Smiths",
+      "album": "Meat Is Murder",
+      "arc": "peak",
+      "reason": "情熱的な歌詞とメロディが心を打つ名曲。",
+      "whyPersonaFit": "歌詞の深さとギターの美しさが完璧に融合。",
+      "whyThemeFit": "希望と永遠を感じさせる内容がテーマに合致。",
+      "year_guess": 1985
+    },
+    {
+      "title": "Here Comes Your Man",
+      "artist": "Pixies",
+      "album": "Doolittle",
+      "arc": "cooldown",
+      "reason": "軽快なリズムとキャッチーなメロディで心地よい。",
+      "whyPersonaFit": "USインディの象徴的なトラックで、独自のスタイル。",
+      "whyThemeFit": "前向きなエネルギーと希望を感じさせる。",
+      "year_guess": 1989
+    },
+    {
+      "title": "Girls & Boys",
+      "artist": "Blur",
+      "album": "Parklife",
+      "arc": "build",
+      "reason": "アップビートなリズムが活気を与える。",
+      "whyPersonaFit": "ブリットポップの代表作で、楽しさが溢れる。",
+      "whyThemeFit": "明るい未来を感じさせる歌詞がエネルギーを注入。",
+      "year_guess": 1994
+    },
+    {
+      "title": "The Boy With the Thorn in His Side",
+      "artist": "The Smiths",
+      "album": "The Queen Is Dead",
+      "arc": "cooldown",
+      "reason": "メロディの美しさが心に残る名曲。",
+      "whyPersonaFit": "論理的な構成と感情のバランスが絶妙。",
+      "whyThemeFit": "希望を失わない力強いメッセージがテーマに合致。",
+      "year_guess": 1986
+    },
+    {
+      "title": "I Want to Break Free",
+      "artist": "Queen",
+      "album": "The Works",
+      "arc": "peak",
+      "reason": "力強いメッセージとキャッチーなメロディ。",
+      "whyPersonaFit": "ポストパンク・リバイバルの流れを汲む楽曲。",
+      "whyThemeFit": "自由を求めるテーマが前向きなエネルギーを与える。",
+      "year_guess": 1984
+    }
+  ]
+}
