@@ -33,9 +33,14 @@ export default function MixtapeHome() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 結果
+  // 結果（候補）
   const [runId, setRunId] = useState<string | null>(null);
   const [candidates, setCandidates] = useState<Candidate[] | null>(null);
+
+  // プレイリスト作成結果
+  const [creating, setCreating] = useState(false);
+  const [playlistUrl, setPlaylistUrl] = useState<string | null>(null);
+  const [playlistError, setPlaylistError] = useState<string | null>(null);
 
   async function fetchStatus() {
     const r = await fetch("/api/auth/status", {
@@ -62,6 +67,8 @@ export default function MixtapeHome() {
     setError(null);
     setRunId(null);
     setCandidates(null);
+    setPlaylistUrl(null);
+    setPlaylistError(null);
 
     if (!title.trim() || !description.trim() || !djId.trim()) {
       setError("番組タイトル／概要／DJ は必須です。");
@@ -97,6 +104,46 @@ export default function MixtapeHome() {
       setError(err?.message || "送信に失敗しました。");
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  // 目標7曲（mode=duration のときはだいたい4分/曲として概算）
+  function targetCount(): number {
+    if (mode === "count") return Math.max(1, Math.min(50, count || 7));
+    const est = Math.round(Math.max(10, duration || 30) / 4);
+    return Math.max(3, Math.min(50, est));
+  }
+
+  async function createPlaylistFromCandidates() {
+    if (!candidates || candidates.length === 0) return;
+    setCreating(true);
+    setPlaylistUrl(null);
+    setPlaylistError(null);
+
+    try {
+      const res = await fetch("/api/mixtape/playlist", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          description,
+          djId,
+          targetCount: targetCount(),
+          candidates,
+          runId, // 任意：サーバ側でログに紐づけるときに使える
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json?.ok) {
+        setPlaylistError(json?.error || `Playlist API error: ${res.status}`);
+        return;
+      }
+      setPlaylistUrl(json.playlistUrl || null);
+    } catch (err: any) {
+      setPlaylistError(err?.message || "プレイリスト作成に失敗しました。");
+    } finally {
+      setCreating(false);
     }
   }
 
@@ -261,7 +308,40 @@ export default function MixtapeHome() {
             ))}
           </ol>
 
-          {runId && (
+          <div style={{ marginTop: 16, display: "flex", gap: 12, alignItems: "center" }}>
+            <button
+              type="button"
+              onClick={createPlaylistFromCandidates}
+              disabled={creating}
+              style={{
+                padding: "10px 16px",
+                borderRadius: 8,
+                border: "1px solid #0a5",
+                background: creating ? "#eafff3" : "#fff",
+              }}
+            >
+              {creating ? "Spotifyに作成中…" : `この候補からプレイリスト作成（${targetCount()}曲）`}
+            </button>
+
+            {playlistUrl && (
+              <a
+                href={playlistUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ textDecoration: "underline" }}
+              >
+                作成したプレイリストを開く
+              </a>
+            )}
+          </div>
+
+          {playlistError && (
+            <p style={{ color: "crimson", fontWeight: 600, marginTop: 8 }}>
+              {playlistError}
+            </p>
+          )}
+
+          {runId && !playlistUrl && (
             <div style={{ marginTop: 12 }}>
               <a
                 href={`/mixtape/log/${encodeURIComponent(runId)}`}
