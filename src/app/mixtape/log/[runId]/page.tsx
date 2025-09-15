@@ -1,7 +1,7 @@
 // /src/app/mixtape/log/[runId]/page.tsx
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { RunLogDE } from "@/components/RunLogDE";
+import { RunLogDE, RunLogView } from "@/components/RunLogView";
 import { getRunLogById } from "@/lib/runlog"; // 既存の取得関数を想定
 
 type Props = { params: { runId: string } };
@@ -19,8 +19,8 @@ export default async function RunLogPage({ params }: Props) {
         <Link href="/mixtape" className="underline">← 戻る</Link>
       </header>
 
-      {/* D/E 専用ビュー */}
-      <RunLogDE log={log} />
+      {/* A〜E の統合ビュー */}
+      <RunLogView log={log} />
     </main>
   );
 }
