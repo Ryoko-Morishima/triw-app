@@ -1,0 +1,139 @@
+{
+  "resolved": [
+    {
+      "title": "Titanium",
+      "artist": "David Guetta ft. Sia",
+      "album": "Nothing but the Beat",
+      "arc": "peak",
+      "year_guess": 2011,
+      "spotify": {
+        "id": "60wwxj6Dd9NJlirf84wr2c",
+        "uri": "spotify:track:60wwxj6Dd9NJlirf84wr2c",
+        "name": "Clarity",
+        "artists": [
+          "Zedd",
+          "Foxes"
+        ],
+        "popularity": 77
+      }
+    },
+    {
+      "title": "Wake Me Up",
+      "artist": "Avicii",
+      "album": "True",
+      "arc": "build",
+      "year_guess": 2013,
+      "spotify": {
+        "id": "3ZffCQKLFLUvYM59XKLbVm",
+        "uri": "spotify:track:3ZffCQKLFLUvYM59XKLbVm",
+        "name": "Wake Me up When September Ends",
+        "artists": [
+          "Green Day"
+        ],
+        "popularity": 81
+      }
+    },
+    {
+      "title": "Don't You Worry Child",
+      "artist": "Swedish House Mafia",
+      "album": "Until Now",
+      "arc": "peak",
+      "year_guess": 2012,
+      "spotify": {
+        "id": "2V65y3PX4DkRhy1djlxd9p",
+        "uri": "spotify:track:2V65y3PX4DkRhy1djlxd9p",
+        "name": "Don't You Worry Child - Radio Edit",
+        "artists": [
+          "Swedish House Mafia",
+          "John Martin"
+        ],
+        "popularity": 81
+      }
+    },
+    {
+      "title": "Uptown Funk",
+      "artist": "Mark Ronson ft. Bruno Mars",
+      "album": "Uptown Special",
+      "arc": "cooldown",
+      "year_guess": 2014,
+      "spotify": {
+        "id": "7hCNBVRhHzcsRAv0TQnOzq",
+        "uri": "spotify:track:7hCNBVRhHzcsRAv0TQnOzq",
+        "name": "Runaway Baby",
+        "artists": [
+          "Bruno Mars"
+        ],
+        "popularity": 73
+      }
+    },
+    {
+      "title": "Levels",
+      "artist": "Avicii",
+      "album": null,
+      "arc": "intro",
+      "year_guess": 2011,
+      "spotify": {
+        "id": "5UqCQaDshqbIk3pkhy4Pjg",
+        "uri": "spotify:track:5UqCQaDshqbIk3pkhy4Pjg",
+        "name": "Levels - Radio Edit",
+        "artists": [
+          "Avicii"
+        ],
+        "popularity": 75
+      }
+    },
+    {
+      "title": "We Found Love",
+      "artist": "Rihanna ft. Calvin Harris",
+      "album": "Talk That Talk",
+      "arc": "build",
+      "year_guess": 2011,
+      "spotify": {
+        "id": "1VMNFLpA6vDoBumvAGnJmf",
+        "uri": "spotify:track:1VMNFLpA6vDoBumvAGnJmf",
+        "name": "We Found Love",
+        "artists": [
+          "Rihanna",
+          "Calvin Harris"
+        ],
+        "popularity": 41
+      }
+    },
+    {
+      "title": "Shut Up and Dance",
+      "artist": "WALK THE MOON",
+      "album": "Talking Is Hard",
+      "arc": "peak",
+      "year_guess": 2014,
+      "spotify": {
+        "id": "04khRrAUOH5l0sC2eg0eiG",
+        "uri": "spotify:track:04khRrAUOH5l0sC2eg0eiG",
+        "name": "Shut Up and Dance",
+        "artists": [
+          "WALK THE MOON"
+        ],
+        "popularity": 40
+      }
+    },
+    {
+      "title": "I Gotta Feeling",
+      "artist": "The Black Eyed Peas",
+      "album": "The E.N.D.",
+      "arc": "cooldown",
+      "year_guess": 2009,
+      "spotify": {
+        "id": "3gwRWIbr5ycEVLIAXrWaw7",
+        "uri": "spotify:track:3gwRWIbr5ycEVLIAXrWaw7",
+        "name": "I've Got A Feeling - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "popularity": 55
+      }
+    }
+  ],
+  "targetCount": 8,
+  "title": "ハイウェイドライビング３",
+  "djId": "Blaze",
+  "debug": []
+}

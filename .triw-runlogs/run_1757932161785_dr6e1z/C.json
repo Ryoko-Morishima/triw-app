@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Don't Stop Believin'",
+      "artist": "Journey",
+      "album": "Escape",
+      "arc": "peak",
+      "reason": "この曲はドライブ中の高揚感を極限まで引き上げてくれるエネルギーに満ちた一曲。",
+      "whyPersonaFit": "映画『ザ・シンプソンズ MOVIE』などで使用され、映画音楽好きにも刺さる。",
+      "whyThemeFit": "高速道路を駆け抜ける爽快感があり、まさにドライブにぴったり。",
+      "year_guess": 1981
+    },
+    {
+      "title": "Shut Up and Dance",
+      "artist": "WALK THE MOON",
+      "album": "Talking Is Hard",
+      "arc": "build",
+      "reason": "ノリの良いビートが運転中のテンションを上げてくれる。",
+      "whyPersonaFit": "映画に出てきそうな青春の一瞬を感じさせるポップなサウンド。",
+      "whyThemeFit": "車の中で思いっきり歌いたくなる一曲で、ドライブにぴったり。",
+      "year_guess": 2014
+    },
+    {
+      "title": "Uptown Funk",
+      "artist": "Mark Ronson ft. Bruno Mars",
+      "album": "Uptown Special",
+      "arc": "peak",
+      "reason": "この曲はそのキャッチーさで、ドライブをさらに楽しいものにしてくれる。",
+      "whyPersonaFit": "映画『アメリカン・スナイパー』での使用が印象的で、映画音楽好きにも響く。",
+      "whyThemeFit": "エネルギッシュで爽快な雰囲気がドライブにぴったり。",
+      "year_guess": 2014
+    },
+    {
+      "title": "Eye of the Tiger",
+      "artist": "Survivor",
+      "album": "Rocky III Soundtrack",
+      "arc": "build",
+      "reason": "この曲はモチベーションを高める力があり、ドライブに最適。",
+      "whyPersonaFit": "映画『ロッキー』のテーマソングで、映画音楽の象徴とも言える。",
+      "whyThemeFit": "運転中に気分を盛り上げてくれる爽快感がある。",
+      "year_guess": 1982
+    },
+    {
+      "title": "Take On Me",
+      "artist": "a-ha",
+      "album": "Hunting High and Low",
+      "arc": "cooldown",
+      "reason": "この曲の爽やかなメロディーは、ドライブの余韻を楽しむのにぴったり。",
+      "whyPersonaFit": "映画『シックス・センス』などで使われ、映画音楽ファンにも親しまれている。",
+      "whyThemeFit": "景色を楽しむドライブに合う、心地よいリズムが魅力。",
+      "year_guess": 1985
+    },
+    {
+      "title": "Summer of '69",
+      "artist": "Bryan Adams",
+      "album": "Bryan Adams",
+      "arc": "peak",
+      "reason": "ノスタルジックでエネルギッシュなこの曲は、ドライブの思い出を彩る。",
+      "whyPersonaFit": "映画『バーレスク』などで使われ、映画音楽ファンにも響く。",
+      "whyThemeFit": "爽快感があり、開放感を感じるドライブには最適。",
+      "year_guess": 1984
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "album": "Hot Fuss",
+      "arc": "build",
+      "reason": "この曲はドライブ中に思わず口ずさんでしまうような中毒性を持っている。",
+      "whyPersonaFit": "映画『500日のサマー』で使用され、映画音楽好きにも響く。",
+      "whyThemeFit": "エネルギッシュで爽快なメロディーがドライブをさらに楽しいものにしてくれる。",
+      "year_guess": 2003
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "resolved": [
+    {
+      "title": "Wake Me Up",
+      "artist": "Avicii",
+      "album": "True",
+      "arc": "build",
+      "year_guess": 2013,
+      "spotify": {
+        "id": "3ZffCQKLFLUvYM59XKLbVm",
+        "uri": "spotify:track:3ZffCQKLFLUvYM59XKLbVm",
+        "name": "Wake Me up When September Ends",
+        "artists": [
+          "Green Day"
+        ],
+        "popularity": 81
+      }
+    },
+    {
+      "title": "Titanium",
+      "artist": "David Guetta ft. Sia",
+      "album": "Nothing but the Beat",
+      "arc": "peak",
+      "year_guess": 2011,
+      "spotify": {
+        "id": "60wwxj6Dd9NJlirf84wr2c",
+        "uri": "spotify:track:60wwxj6Dd9NJlirf84wr2c",
+        "name": "Clarity",
+        "artists": [
+          "Zedd",
+          "Foxes"
+        ],
+        "popularity": 77
+      }
+    },
+    {
+      "title": "Don't You Worry Child",
+      "artist": "Swedish House Mafia",
+      "album": "Until Now",
+      "arc": "peak",
+      "year_guess": 2012,
+      "spotify": {
+        "id": "2V65y3PX4DkRhy1djlxd9p",
+        "uri": "spotify:track:2V65y3PX4DkRhy1djlxd9p",
+        "name": "Don't You Worry Child - Radio Edit",
+        "artists": [
+          "Swedish House Mafia",
+          "John Martin"
+        ],
+        "popularity": 81
+      }
+    },
+    {
+      "title": "Blinding Lights",
+      "artist": "The Weeknd",
+      "album": "After Hours",
+      "arc": "build",
+      "year_guess": 2019,
+      "spotify": {
+        "id": "39LLxExYz6ewLAcYrzQQyP",
+        "uri": "spotify:track:39LLxExYz6ewLAcYrzQQyP",
+        "name": "Levitating",
+        "artists": [
+          "Dua Lipa"
+        ],
+        "popularity": 80
+      }
+    },
+    {
+      "title": "Uptown Funk",
+      "artist": "Mark Ronson ft. Bruno Mars",
+      "album": "Uptown Special",
+      "arc": "peak",
+      "year_guess": 2014,
+      "spotify": {
+        "id": "7hCNBVRhHzcsRAv0TQnOzq",
+        "uri": "spotify:track:7hCNBVRhHzcsRAv0TQnOzq",
+        "name": "Runaway Baby",
+        "artists": [
+          "Bruno Mars"
+        ],
+        "popularity": 73
+      }
+    },
+    {
+      "title": "Wake Up",
+      "artist": "Krewella",
+      "album": "Get Wet",
+      "arc": "build",
+      "year_guess": 2013,
+      "spotify": {
+        "id": "4keuUM29CtIWgsPRzRhXoW",
+        "uri": "spotify:track:4keuUM29CtIWgsPRzRhXoW",
+        "name": "WOKE UP",
+        "artists": [
+          "XG"
+        ],
+        "popularity": 70
+      }
+    },
+    {
+      "title": "Animals",
+      "artist": "Martin Garrix",
+      "album": "Animals",
+      "arc": "peak",
+      "year_guess": 2013,
+      "spotify": {
+        "id": "3QKXo5IoMxnVwNm2bMRiVc",
+        "uri": "spotify:track:3QKXo5IoMxnVwNm2bMRiVc",
+        "name": "Animals (Pt. I) [with Eminem]",
+        "artists": [
+          "JID",
+          "Eminem"
+        ],
+        "popularity": 61
+      }
+    },
+    {
+      "title": "Shut Up and Dance",
+      "artist": "WALK THE MOON",
+      "album": "Talking Is Hard",
+      "arc": "cooldown",
+      "year_guess": 2014,
+      "spotify": {
+        "id": "04khRrAUOH5l0sC2eg0eiG",
+        "uri": "spotify:track:04khRrAUOH5l0sC2eg0eiG",
+        "name": "Shut Up and Dance",
+        "artists": [
+          "WALK THE MOON"
+        ],
+        "popularity": 40
+      }
+    }
+  ],
+  "targetCount": 8,
+  "title": "ハイウェイドライビング３",
+  "djId": "Blaze",
+  "debug": []
+}

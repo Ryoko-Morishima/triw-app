@@ -1,0 +1,35 @@
+{
+  "theme_direction": "高速道路を流すときに聞きたい、眠気をぶっとばす楽曲で周りの景色を素敵に見せる。",
+  "hard_constraints": {
+    "required_genres": [
+      "EDM",
+      "Big Room",
+      "Pop Remixes",
+      "Rock Anthems"
+    ],
+    "exclude_genres": [
+      "繊細アコースティック",
+      "実験音楽",
+      "即興ジャズ"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "エネルギッシュ",
+      "アップビート"
+    ],
+    "tempo_trend": "rise",
+    "preferred_eras": [],
+    "notes": []
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

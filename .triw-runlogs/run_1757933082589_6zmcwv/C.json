@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Time",
+      "artist": "Hans Zimmer",
+      "album": "Inception (Music from the Motion Picture)",
+      "arc": "build",
+      "reason": "この曲は徐々に盛り上がり、聴く人を引き込む力があります。",
+      "whyPersonaFit": "映画音楽の名手、ハンス・ジマーの作品で、映画の世界観を感じさせる。",
+      "whyThemeFit": "高速道路の風景にぴったりなエネルギーを持っている。",
+      "year_guess": 2010
+    },
+    {
+      "title": "He's a Pirate",
+      "artist": "Klaus Badelt",
+      "album": "Pirates of the Caribbean: The Curse of the Black Pearl (Soundtrack)",
+      "arc": "peak",
+      "reason": "冒険心を掻き立てるメロディが、ドライブを一層刺激的にしてくれる。",
+      "whyPersonaFit": "映画音楽の中でも特に人気のあるトラックで、知らない人はいない。",
+      "whyThemeFit": "ドライブ中の高揚感を味わうのに最適。",
+      "year_guess": 2003
+    },
+    {
+      "title": "Now We Are Free",
+      "artist": "Lisa Gerrard and Hans Zimmer",
+      "album": "Gladiator (Soundtrack)",
+      "arc": "cooldown",
+      "reason": "壮大なフィナーレを感じさせる美しい楽曲で、心を落ち着かせる。",
+      "whyPersonaFit": "映画『グラディエーター』の感動的なシーンを思い出させる。",
+      "whyThemeFit": "ドライブの終わりに心を洗うような、穏やかな雰囲気が漂う。",
+      "year_guess": 2000
+    },
+    {
+      "title": "The Avengers",
+      "artist": "Alan Silvestri",
+      "album": "The Avengers (Original Motion Picture Soundtrack)",
+      "arc": "build",
+      "reason": "力強いビートが、ドライブ中のテンションを引き上げてくれる。",
+      "whyPersonaFit": "スーパーヒーロー映画の象徴的な曲で、誰もが興奮する。",
+      "whyThemeFit": "ダイナミックな展開が、高速道路での疾走感にマッチする。",
+      "year_guess": 2012
+    },
+    {
+      "title": "Let It Go",
+      "artist": "Idina Menzel",
+      "album": "Frozen (Original Motion Picture Soundtrack)",
+      "arc": "peak",
+      "reason": "力強く感情的な歌声が、運転中の心に響く。",
+      "whyPersonaFit": "映画『アナと雪の女王』の名曲で、幅広い世代に愛されている。",
+      "whyThemeFit": "ドライブ中の解放感を感じさせるメッセージがある。",
+      "year_guess": 2013
+    },
+    {
+      "title": "Gonna Fly Now",
+      "artist": "Bill Conti",
+      "album": "Rocky (Soundtrack)",
+      "arc": "peak",
+      "reason": "スポーツ映画のテーマソングとして知られ、エネルギーを与えてくれる。",
+      "whyPersonaFit": "映画音楽のクラシックで、誰もが知る名曲。",
+      "whyThemeFit": "運転中の気分を高め、周りの景色をより美しく感じさせる。",
+      "year_guess": 1976
+    },
+    {
+      "title": "Interstellar Main Theme",
+      "artist": "Hans Zimmer",
+      "album": "Interstellar (Original Motion Picture Soundtrack)",
+      "arc": "build",
+      "reason": "壮大なスケール感が、ドライブの旅にぴったり。",
+      "whyPersonaFit": "再びハンス・ジマーが登場。映画音楽の真髄を感じる。",
+      "whyThemeFit": "広大な風景の中を走る感じを引き立ててくれる。",
+      "year_guess": 2014
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "candidates": [
+    {
+      "title": "Titanium",
+      "artist": "David Guetta ft. Sia",
+      "album": "Nothing but the Beat",
+      "arc": "peak",
+      "reason": "エネルギッシュなビートが心を掴むアッパーチューン。",
+      "whyPersonaFit": "EDMの王道であり、パーティーの盛り上がりに最適。",
+      "whyThemeFit": "高揚感を与え、景色を明るく彩る。",
+      "year_guess": 2011
+    },
+    {
+      "title": "Wake Me Up",
+      "artist": "Avicii",
+      "album": "True",
+      "arc": "build",
+      "reason": "キャッチーなメロディが車の中での一体感を生む。",
+      "whyPersonaFit": "ポップとEDMの融合で、幅広い層にアピール。",
+      "whyThemeFit": "ドライブのお供にぴったりなエネルギーを提供。",
+      "year_guess": 2013
+    },
+    {
+      "title": "Don't You Worry Child",
+      "artist": "Swedish House Mafia",
+      "album": "Until Now",
+      "arc": "peak",
+      "reason": "大合唱必至のアンセムで、一体感を生む。",
+      "whyPersonaFit": "大ネタ系のパーティーには欠かせないトラック。",
+      "whyThemeFit": "ドライブ中の盛り上がりを一層引き立てる。",
+      "year_guess": 2012
+    },
+    {
+      "title": "Uptown Funk",
+      "artist": "Mark Ronson ft. Bruno Mars",
+      "album": "Uptown Special",
+      "arc": "cooldown",
+      "reason": "ノスタルジックかつキャッチーなメロディが心を和ませる。",
+      "whyPersonaFit": "ポップリミックスの要素があり、誰もが楽しめる。",
+      "whyThemeFit": "ドライブの終わりにふさわしい、爽やかな余韻を残す。",
+      "year_guess": 2014
+    },
+    {
+      "title": "Levels",
+      "artist": "Avicii",
+      "album": null,
+      "arc": "intro",
+      "reason": "イントロからの高揚感がドライブを刺激する。",
+      "whyPersonaFit": "EDMの名曲として、パーティーに華を添える。",
+      "whyThemeFit": "シンプルながらも力強いビートで、景色を楽しむ気分を盛り上げる。",
+      "year_guess": 2011
+    },
+    {
+      "title": "We Found Love",
+      "artist": "Rihanna ft. Calvin Harris",
+      "album": "Talk That Talk",
+      "arc": "build",
+      "reason": "キャッチーなフックで、ドライブ中のテンションを上げる。",
+      "whyPersonaFit": "ポップリミックスの魅力で幅広い層にアプローチ。",
+      "whyThemeFit": "愛とエネルギーに満ちた楽曲で、景色を美しく見せる。",
+      "year_guess": 2011
+    },
+    {
+      "title": "Shut Up and Dance",
+      "artist": "WALK THE MOON",
+      "album": "Talking Is Hard",
+      "arc": "peak",
+      "reason": "ダンスしたくなるビートで、盛り上がりを最高潮に。",
+      "whyPersonaFit": "ロックアンセムとしての要素もあり、パーティーに活気を与える。",
+      "whyThemeFit": "ドライブ中の楽しさを引き立てるエネルギーを持つ。",
+      "year_guess": 2014
+    },
+    {
+      "title": "I Gotta Feeling",
+      "artist": "The Black Eyed Peas",
+      "album": "The E.N.D.",
+      "arc": "cooldown",
+      "reason": "一体感を生むアッパーチューンで、ドライブを締めくくる。",
+      "whyPersonaFit": "大ネタ系のパーティーには欠かせないトラック。",
+      "whyThemeFit": "楽しい思い出を振り返るのにぴったりな曲。",
+      "year_guess": 2009
+    }
+  ]
+}

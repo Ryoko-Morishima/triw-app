@@ -1,3 +1,41 @@
+// --- Minimal JSON caller for OpenAI Chat Completions ---
+// 環境変数: OPENAI_API_KEY / OPENAI_MODEL（例: gpt-4o-mini）
+async function callOpenAIJSON(prompt) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
+  if (!apiKey) throw new Error("OPENAI_API_KEY is missing");
+
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model,
+      temperature: 0.7,
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: "You are a helpful assistant that always responds in pure JSON." },
+        { role: "user", content: prompt },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    const t = await res.text().catch(() => "");
+    throw new Error(`OpenAI API error ${res.status} ${t}`.slice(0, 300));
+  }
+
+  const data = await res.json();
+  const content = data?.choices?.[0]?.message?.content ?? "{}";
+  try {
+    return JSON.parse(content);
+  } catch {
+    return {};
+  }
+}
+
 export type Arc = "intro" | "build" | "peak" | "cooldown" | "other";
 
 export type PersonaA = {
@@ -87,36 +125,57 @@ export function estimateTargetCount(mode: "count" | "duration", count?: number, 
   return Math.max(3, est);
 }
 
-export async function runPersonaA(params: {
+export async function runPersonaA({
+  dj,
+  title,
+  description,
+}: {
   dj: { id: string; name?: string; description?: string; profile?: string };
   title: string;
   description: string;
-}): Promise<PersonaA> {
-  const { dj, title, description } = params;
-  const system =
-    "あなたはラジオ番組の選曲ディレクター。与えられたDJの素性をもとに、背景・好むジャンル・避けるジャンル・流れの癖・キャラメモを日本語で簡潔に要約し、JSONで出力します。";
+}) {
+  // あなたの環境にある “JSONで返すOpenAI呼び出し関数” 名はそのままでOK
+  // 例: callOpenAIJSON / callOpenAIJson / askJSON など
+  const res = await callOpenAIJSON(`
+あなたはラジオ番組の選曲DJのペルソナを定義するアシスタントです。
+与えられたDJ情報（プリセット/カスタムのどちらでも）と番組情報を踏まえ、次のJSONで出力してください。
+数値スコアは禁止。自然言語の短い段落と最小限の配列のみ。
 
-  const user = `# DJ基本情報
-- id: ${dj.id}
-- name: ${dj.name || dj.id}
-- description: ${dj.description || ""}
-- profile_notes: ${dj.profile || ""}
+【入力】
+- DJ: ${dj.name ?? dj.id}
+- DJの特徴: ${dj.description ?? ""}
+- 番組タイトル: ${title}
+- 番組概要: ${description}
 
-# 番組テーマ（参照のみ）
-- title: ${title}
-- description: ${description}
+【重要な方針】
+- 「完全に避ける」ものと「基本は避けるが文脈次第で採用もあり」を分けてください。
+- 例：「映画音楽が得意」なら、ロック/ポップも **映画音楽として機能するなら採用余地あり**。
+- クリシェを避け、DJの個性がにじむ自然文にする。
 
-# JSONスキーマ
+【出力フォーマット（必ずJSONのみ）】
 {
-  "background": string,
-  "preferred_genres": string[],
-  "avoid_genres": string[],
-  "flow_habits": string[],
-  "persona_notes": string[]
-}`;
-
-  return (await requestJson({ system, user, schemaName: "PersonaA" })) as PersonaA;
+  "name": "…",
+  "background": "経歴や志向（自然文100〜160字）",
+  "likes": ["好むジャンルや質感", "…"],
+  "hard_avoids": ["絶対に使わないジャンルや条件（放送不可/倫理NGなど）"],
+  "soft_avoids": ["基本は避けるが文脈で許容し得るもの"],
+  "flow_habits": "曲順や起伏の付け方（自然文60〜120字）",
+  "voice_tone": "語り口・キャラ（自然文40〜80字）",
+  "notes": "このDJがジャンルを文脈で使い分ける具体例（自然文80〜140字）"
 }
+※余計な説明や前置きは不要。必ず上記のJSONだけを返してください。
+  `);
+
+  // 後方互換: 旧コードが 'avoids' を読むかもしれないので残す
+  if (res && typeof res === "object") {
+    if (!Array.isArray(res.hard_avoids)) res.hard_avoids = [];
+    if (!Array.isArray(res.soft_avoids)) res.soft_avoids = [];
+    if (!Array.isArray(res.avoids)) res.avoids = [...res.hard_avoids];
+  }
+
+  return res;
+}
+// ←ここまで！入れ替え終わり
 
 export async function runInterpretB(params: {
   persona: PersonaA;

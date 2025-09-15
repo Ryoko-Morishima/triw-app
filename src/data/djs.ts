@@ -136,4 +136,11 @@ export const DJ_PRESETS: DJPreset[] = [
       "癖: 異文化の橋渡しで旅の物語を描く。",
     ].join("\n"),
   },
+   // ユーザーのオリジナルＤＪ
+  {
+    id: "custom",
+    name: "カスタムDJ",
+    shortName: "Custom",
+    description: "ユーザーが入力する名前と概要からAIがペルソナを生成します。",
+  }
 ];

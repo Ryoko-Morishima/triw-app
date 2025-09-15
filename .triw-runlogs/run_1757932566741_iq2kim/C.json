@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Time",
+      "artist": "Hans Zimmer",
+      "album": "Inception (Music from the Motion Picture)",
+      "arc": "build",
+      "reason": "壮大なスケール感があり、高速道路を駆け抜ける気分を高めてくれる。",
+      "whyPersonaFit": "映画音楽の巨匠による名曲で、映画の世界観を感じさせる。",
+      "whyThemeFit": "エネルギッシュで、流れる景色と共に心を躍らせる。",
+      "year_guess": 2010
+    },
+    {
+      "title": "He's a Pirate",
+      "artist": "Klaus Badelt",
+      "album": "Pirates of the Caribbean: The Curse of the Black Pearl (Soundtrack)",
+      "arc": "peak",
+      "reason": "冒険心を刺激するメロディーが、ドライブをさらに楽しいものにする。",
+      "whyPersonaFit": "映画音楽の代表作で、キャッチーなテーマが印象的。",
+      "whyThemeFit": "爽快感があり、ドライブ中のテンションを上げてくれる。",
+      "year_guess": 2003
+    },
+    {
+      "title": "The Dark Knight Suite",
+      "artist": "Hans Zimmer & James Newton Howard",
+      "album": "The Dark Knight (Soundtrack)",
+      "arc": "cooldown",
+      "reason": "緊張感と高揚感が交錯する曲調で、景色を楽しむ時間を演出する。",
+      "whyPersonaFit": "映画の深い世界観を表現している。",
+      "whyThemeFit": "エネルギッシュでありながらも、ドライブのクールダウンにもぴったり。",
+      "year_guess": 2008
+    },
+    {
+      "title": "Gonna Fly Now",
+      "artist": "Bill Conti",
+      "album": "Rocky (Original Motion Picture Soundtrack)",
+      "arc": "build",
+      "reason": "力強いメロディーが、ドライブ中の自信を引き出してくれる。",
+      "whyPersonaFit": "映画音楽のクラシックで、感情を揺さぶる。",
+      "whyThemeFit": "爽快感があり、ドライブをさらにエネルギッシュにする。",
+      "year_guess": 1976
+    },
+    {
+      "title": "Now We Are Free",
+      "artist": "Lisa Gerrard & Hans Zimmer",
+      "album": "Gladiator (Music from the Motion Picture)",
+      "arc": "cooldown",
+      "reason": "感動的なメロディーが、ドライブの終わりを美しく飾る。",
+      "whyPersonaFit": "映画の感情を伝える名曲で、心に響く。",
+      "whyThemeFit": "エネルギッシュなドライブの後に、心を落ち着ける。",
+      "year_guess": 2000
+    },
+    {
+      "title": "The Avengers",
+      "artist": "Alan Silvestri",
+      "album": "The Avengers (Original Motion Picture Soundtrack)",
+      "arc": "peak",
+      "reason": "力強いリズムが、ドライブの高揚感を引き立てる。",
+      "whyPersonaFit": "映画音楽の中でも特にエネルギッシュなトラック。",
+      "whyThemeFit": "爽快感があり、周りの景色を引き立てる。",
+      "year_guess": 2012
+    },
+    {
+      "title": "Concerning Hobbits",
+      "artist": "Howard Shore",
+      "album": "The Lord of the Rings: The Fellowship of the Ring (Original Motion Picture Soundtrack)",
+      "arc": "intro",
+      "reason": "穏やかで心が和むメロディーが、ドライブの始まりにぴったり。",
+      "whyPersonaFit": "映画の情景を思い起こさせるような美しい音楽。",
+      "whyThemeFit": "爽快感があり、ドライブのスタートを心地よく演出する。",
+      "year_guess": 2001
+    }
+  ]
+}

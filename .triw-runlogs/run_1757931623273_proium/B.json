@@ -1,0 +1,37 @@
+{
+  "theme_direction": "高速道路を流すときに聞きたい曲を集めたリストで、眠気をぶっとばし、周りの景色を楽しむ雰囲気を演出する。",
+  "hard_constraints": {
+    "required_genres": [
+      "ロック",
+      "エレクトロニカ",
+      "ポップ"
+    ],
+    "exclude_genres": [
+      "クラシック",
+      "ジャズ",
+      "アコースティック"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "エネルギッシュ",
+      "ノリが良い"
+    ],
+    "tempo_trend": "rise",
+    "preferred_eras": [],
+    "notes": [
+      "ドライブ中のリスナーを意識した選曲",
+      "景色を楽しむ雰囲気を大切にする"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}
