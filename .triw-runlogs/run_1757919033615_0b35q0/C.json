@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Song 2",
+      "artist": "Blur",
+      "album": "Blur",
+      "arc": "peak",
+      "reason": "エネルギッシュでドライブ感のあるギターロックの代表曲。",
+      "whyPersonaFit": "ブリットポップの重要な一曲で、90年代のインディシーンを象徴。",
+      "whyThemeFit": "高速道路を飛ばすのにぴったりなアッパーチューン。",
+      "year_guess": 1997
+    },
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "album": "Is This It",
+      "arc": "build",
+      "reason": "シンプルながらもキャッチーなリフが印象的な曲。",
+      "whyPersonaFit": "ポストパンク・リバイバルの重要なバンドで、質感が魅力的。",
+      "whyThemeFit": "ドライブ中の気分を高めるのに最適なテンポ。",
+      "year_guess": 2001
+    },
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "album": "Franz Ferdinand",
+      "arc": "build",
+      "reason": "リズミカルでダンスしやすいメロディが特徴。",
+      "whyPersonaFit": "オルタナのエッセンスを持ちつつ、聴きやすさも兼ね備えている。",
+      "whyThemeFit": "ドライブのスピード感を盛り上げる一曲。",
+      "year_guess": 2004
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "album": "Hot Fuss",
+      "arc": "peak",
+      "reason": "感情的な歌詞とキャッチーなサウンドが印象的。",
+      "whyPersonaFit": "2000年代のインディロックの代表曲で、歌詞が深い。",
+      "whyThemeFit": "ドライブ中に盛り上がる瞬間を演出する。",
+      "year_guess": 2003
+    },
+    {
+      "title": "Time Is on My Side",
+      "artist": "The Rolling Stones",
+      "album": "12 X 5",
+      "arc": "cooldown",
+      "reason": "リラックスした雰囲気で、ドライブのクールダウンに最適。",
+      "whyPersonaFit": "クラシックなロックの要素があり、構成美が際立っている。",
+      "whyThemeFit": "長いドライブの終わりにぴったりな落ち着いたトーン。",
+      "year_guess": 1964
+    },
+    {
+      "title": "The Boy Is Mine",
+      "artist": "Brandy & Monica",
+      "album": null,
+      "arc": "other",
+      "reason": "90年代のR&Bを代表するデュエット曲。",
+      "whyPersonaFit": "過度に派手ではないが、音楽性が高い。",
+      "whyThemeFit": "ドライブ中の会話を盛り上げるのに適した一曲。",
+      "year_guess": 1998
+    },
+    {
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "album": "Elephant",
+      "arc": "peak",
+      "reason": "印象的なリフとリズムが特徴のロックアンセム。",
+      "whyPersonaFit": "オルタナティブロックの重要な一曲で、ギター主体の質感が魅力。",
+      "whyThemeFit": "ドライブのテンションを一気に上げる。",
+      "year_guess": 2003
+    }
+  ]
+}

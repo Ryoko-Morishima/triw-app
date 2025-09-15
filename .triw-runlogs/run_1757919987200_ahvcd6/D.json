@@ -1,0 +1,63 @@
+{
+  "resolved": [
+    {
+      "title": "Song 2",
+      "artist": "Blur",
+      "album": "Blur",
+      "arc": "peak",
+      "year_guess": 1997,
+      "spotify": null
+    },
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "album": "Is This It",
+      "arc": "build",
+      "year_guess": 2001,
+      "spotify": null
+    },
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "album": "Franz Ferdinand",
+      "arc": "build",
+      "year_guess": 2004,
+      "spotify": null
+    },
+    {
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "album": "Elephant",
+      "arc": "peak",
+      "year_guess": 2003,
+      "spotify": null
+    },
+    {
+      "title": "Time Is on My Side",
+      "artist": "The Rolling Stones",
+      "album": "12 X 5",
+      "arc": "cooldown",
+      "year_guess": 1964,
+      "spotify": null
+    },
+    {
+      "title": "Pumped Up Kicks",
+      "artist": "Foster the People",
+      "album": "Torches",
+      "arc": "build",
+      "year_guess": 2011,
+      "spotify": null
+    },
+    {
+      "title": "No Cars Go",
+      "artist": "Arcade Fire",
+      "album": "Neon Bible",
+      "arc": "intro",
+      "year_guess": 2007,
+      "spotify": null
+    }
+  ],
+  "targetCount": 7,
+  "title": "ハイウェイドライビング",
+  "djId": "analyst"
+}

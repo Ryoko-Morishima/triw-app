@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "album": "Is This It",
+      "arc": "peak",
+      "reason": "この曲はエネルギーに満ちており、ドライブ中の高揚感を引き立てる。",
+      "whyPersonaFit": "ギター主体のサウンドが特徴で、インディロックの代表的存在。",
+      "whyThemeFit": "高速道路を走るときの心地よいリズム感がある。",
+      "year_guess": 2001
+    },
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "album": "Franz Ferdinand",
+      "arc": "peak",
+      "reason": "リズムが心地よく、ドライブのスピード感を増幅させる。",
+      "whyPersonaFit": "ポストパンク・リバイバルの典型であり、構成が緻密。",
+      "whyThemeFit": "エネルギッシュであり、景色を楽しむのにぴったり。",
+      "year_guess": 2004
+    },
+    {
+      "title": "Boys Don't Cry",
+      "artist": "The Cure",
+      "album": "Three Imaginary Boys",
+      "arc": "build",
+      "reason": "ノスタルジックなメロディが心に響き、感情を揺さぶる。",
+      "whyPersonaFit": "オルタナティブの金字塔で、歌詞も深い意味を持つ。",
+      "whyThemeFit": "思い出と共に流れる景色を彩る。",
+      "year_guess": 1980
+    },
+    {
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "album": "Elephant",
+      "arc": "build",
+      "reason": "印象的なリフが特徴で、ドライブのテンションを上げる。",
+      "whyPersonaFit": "ギターの質感が強調されており、インディの要素を持つ。",
+      "whyThemeFit": "景色を駆け抜ける感覚を演出する。",
+      "year_guess": 2003
+    },
+    {
+      "title": "Time Is Running Out",
+      "artist": "Muse",
+      "album": "Absolution",
+      "arc": "build",
+      "reason": "高揚感のあるサウンドが、ドライブを一層刺激的にする。",
+      "whyPersonaFit": "構成美がありつつもエネルギッシュな一曲。",
+      "whyThemeFit": "風景と共に流れる時間を感じさせる。",
+      "year_guess": 2003
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "album": "Hot Fuss",
+      "arc": "peak",
+      "reason": "キャッチーなメロディがドライブを盛り上げる。",
+      "whyPersonaFit": "インディロックのアイコン的存在で、歌詞も印象的。",
+      "whyThemeFit": "感情を揺さぶるストーリーが、景色を一層美しく見せる。",
+      "year_guess": 2003
+    },
+    {
+      "title": "Chelsea Dagger",
+      "artist": "The Fratellis",
+      "album": "Costello Music",
+      "arc": "peak",
+      "reason": "軽快なリズムがドライブを楽しくし、テンションを上げる。",
+      "whyPersonaFit": "インディロックのエネルギーが詰まった楽曲。",
+      "whyThemeFit": "爽快な気分を味わえる一曲。",
+      "year_guess": 2006
+    }
+  ]
+}

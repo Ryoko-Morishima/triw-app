@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "album": "Is This It",
+      "arc": "intro",
+      "reason": "イントロのギターリフが印象的で、爽快感を引き出す。",
+      "whyPersonaFit": "ギター主体の質感があり、オルタナティブの代表格として選曲に説得力を与える。",
+      "whyThemeFit": "高速道路でのドライブにぴったりなエネルギー感。",
+      "year_guess": 2001
+    },
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "album": "Franz Ferdinand",
+      "arc": "build",
+      "reason": "サビに向かうビルドアップが絶妙で、ドライブ感を高める。",
+      "whyPersonaFit": "ポストパンク・リバイバルの典型で、構成美が際立つ。",
+      "whyThemeFit": "エネルギッシュで爽快な雰囲気がドライブに最適。",
+      "year_guess": 2004
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "album": "Hot Fuss",
+      "arc": "peak",
+      "reason": "キャッチーなメロディと疾走感が、ピークに相応しい。",
+      "whyPersonaFit": "ブリットポップの影響を受けたアメリカのバンドで、質感が合致する。",
+      "whyThemeFit": "ドライブ中にテンションを上げるのに最適な一曲。",
+      "year_guess": 2003
+    },
+    {
+      "title": "Time Is on My Side",
+      "artist": "The Rolling Stones",
+      "album": "12 X 5",
+      "arc": "cooldown",
+      "reason": "落ち着いた雰囲気で、リズムに乗りながらも心地よい。",
+      "whyPersonaFit": "ビートとギターの質感があり、歴史的な脈絡が選曲に深みを与える。",
+      "whyThemeFit": "ドライブの終わりにふさわしい余韻を残す。",
+      "year_guess": 1964
+    },
+    {
+      "title": "Chelsea Dagger",
+      "artist": "The Fratellis",
+      "album": "Costello Music",
+      "arc": "build",
+      "reason": "ノスタルジックでありながらエネルギッシュなサウンドが特徴。",
+      "whyPersonaFit": "UKインディの要素が強く、選曲全体に活力を与える。",
+      "whyThemeFit": "ドライブ中に盛り上がるのに最適で、気分を高揚させる。",
+      "year_guess": 2006
+    },
+    {
+      "title": "Pumped Up Kicks",
+      "artist": "Foster the People",
+      "album": "Torches",
+      "arc": "peak",
+      "reason": "リズムの心地よさとキャッチーなメロディが特徴。",
+      "whyPersonaFit": "アメリカのインディポップとして、選曲に新鮮さを加える。",
+      "whyThemeFit": "ドライブ中のテンションを上げる要素が豊富。",
+      "year_guess": 2010
+    },
+    {
+      "title": "I Bet You Look Good on the Dancefloor",
+      "artist": "Arctic Monkeys",
+      "album": "Whatever People Say I Am, That's What I'm Not",
+      "arc": "build",
+      "reason": "エネルギッシュなビートとギターが特徴で、流れを作る。",
+      "whyPersonaFit": "UKインディの代表的なバンドであり、構成美が際立つ。",
+      "whyThemeFit": "ドライブ中の高揚感を助長する。",
+      "year_guess": 2006
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "theme_direction": "高速道路を流すときに聞きたい曲を集めたセレクション。眠気をぶっとばすエネルギーと、周りの景色を美しく感じさせる音楽を選ぶ。",
+  "hard_constraints": {
+    "required_genres": [
+      "インディ",
+      "オルタナ",
+      "ポストパンク・リバイバル",
+      "ブリットポップ"
+    ],
+    "exclude_genres": [
+      "バイラル狙いのポップ",
+      "EDM大箱アンセム"
+    ],
+    "eras": {
+      "min": 1990,
+      "max": 2010
+    },
+    "regions": [
+      "UK",
+      "US"
+    ],
+    "languages": [
+      "英語"
+    ],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "エネルギッシュ",
+      "爽快",
+      "心躍る"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [
+      "1990年代",
+      "2000年代"
+    ],
+    "notes": [
+      "ギター主体の質感を重視する"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

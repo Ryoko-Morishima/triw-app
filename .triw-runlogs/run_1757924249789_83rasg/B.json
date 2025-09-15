@@ -1,0 +1,40 @@
+{
+  "theme_direction": "ノンストップで高速道路を走るのにぴったりな、心が躍るメロディと物語性のある曲を選びます。ミニクーパーの運転を楽しむための、リラックスしつつもエネルギーを感じるセットリストです。",
+  "hard_constraints": {
+    "required_genres": [
+      "フォーク",
+      "インディ・ポップ",
+      "シンガーソングライター",
+      "オルタナR&B",
+      "モダンCity Pop"
+    ],
+    "exclude_genres": [
+      "アグレッシブなノイジー曲",
+      "器楽中心の曲"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "リラックス",
+      "楽しい",
+      "心地よい"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [],
+    "notes": [
+      "歌詞やモチーフの連続性を大切にする",
+      "ウォームなトーン",
+      "メロディ際立つ曲を優先"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

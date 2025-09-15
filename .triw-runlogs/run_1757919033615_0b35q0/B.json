@@ -1,0 +1,45 @@
+{
+  "theme_direction": "高速道路を流すときに聞きたい曲を集めたドライブ向けのプレイリスト",
+  "hard_constraints": {
+    "required_genres": [
+      "インディ",
+      "オルタナ",
+      "ポストパンク・リバイバル",
+      "ブリットポップ"
+    ],
+    "exclude_genres": [
+      "バイラル狙いのポップ",
+      "過度に派手なEDM"
+    ],
+    "eras": {
+      "min": 1990,
+      "max": 2010
+    },
+    "regions": [
+      "UK",
+      "US"
+    ],
+    "languages": [
+      "英語"
+    ],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "エネルギッシュ",
+      "リフレッシュ"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [
+      "1990年代",
+      "2000年代"
+    ],
+    "notes": []
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

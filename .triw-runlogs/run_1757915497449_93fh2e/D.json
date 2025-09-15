@@ -1,0 +1,63 @@
+{
+  "resolved": [
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "album": "Is This It",
+      "arc": "peak",
+      "year_guess": 2001,
+      "spotify": null
+    },
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "album": "Franz Ferdinand",
+      "arc": "peak",
+      "year_guess": 2004,
+      "spotify": null
+    },
+    {
+      "title": "Boys Don't Cry",
+      "artist": "The Cure",
+      "album": "Three Imaginary Boys",
+      "arc": "build",
+      "year_guess": 1980,
+      "spotify": null
+    },
+    {
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "album": "Elephant",
+      "arc": "build",
+      "year_guess": 2003,
+      "spotify": null
+    },
+    {
+      "title": "Time Is Running Out",
+      "artist": "Muse",
+      "album": "Absolution",
+      "arc": "build",
+      "year_guess": 2003,
+      "spotify": null
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "album": "Hot Fuss",
+      "arc": "peak",
+      "year_guess": 2003,
+      "spotify": null
+    },
+    {
+      "title": "Chelsea Dagger",
+      "artist": "The Fratellis",
+      "album": "Costello Music",
+      "arc": "peak",
+      "year_guess": 2006,
+      "spotify": null
+    }
+  ],
+  "targetCount": 7,
+  "title": "ハイウェイドライビング",
+  "djId": "analyst"
+}

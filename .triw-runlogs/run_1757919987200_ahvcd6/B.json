@@ -1,0 +1,50 @@
+{
+  "theme_direction": "高速道路を流すときに聞きたい曲を集めたセレクションで、眠気をぶっとばし、周りの景色を素敵に見せる。",
+  "hard_constraints": {
+    "required_genres": [
+      "UKインディ",
+      "USインディ",
+      "オルタナティブロック",
+      "ポストパンク",
+      "ブリットポップ"
+    ],
+    "exclude_genres": [
+      "バイラルポップ",
+      "EDM"
+    ],
+    "eras": {
+      "min": 1980,
+      "max": 2023
+    },
+    "regions": [
+      "UK",
+      "US"
+    ],
+    "languages": [
+      "英語"
+    ],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "エネルギッシュ",
+      "爽快"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [
+      "1990年代",
+      "2000年代",
+      "2010年代"
+    ],
+    "notes": [
+      "ギター主体の質感を重視",
+      "歌詞や歴史的脈絡を考慮した流れ"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

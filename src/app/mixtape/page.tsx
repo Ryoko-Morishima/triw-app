@@ -341,13 +341,15 @@ export default function MixtapeHome() {
             </p>
           )}
 
-          {runId && !playlistUrl && (
+          {runId && (
             <div style={{ marginTop: 12 }}>
               <a
                 href={`/mixtape/log/${encodeURIComponent(runId)}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ textDecoration: "underline" }}
               >
-                詳細ログを見る
+                詳細ログを別タブで開く
               </a>
             </div>
           )}

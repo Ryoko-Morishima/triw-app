@@ -1,0 +1,120 @@
+{
+  "resolved": [
+    {
+      "title": "Cantaloupe Island",
+      "artist": "Herbie Hancock",
+      "album": "Empyrean Isles",
+      "arc": "build",
+      "year_guess": 1964,
+      "spotify": {
+        "id": "0sCeNwt8xRCMR4NhKpMyBe",
+        "uri": "spotify:track:0sCeNwt8xRCMR4NhKpMyBe",
+        "name": "Cantaloupe Island - Remastered 1999/Rudy Van Gelder Edition",
+        "artists": [
+          "Herbie Hancock"
+        ],
+        "popularity": 61
+      }
+    },
+    {
+      "title": "Love Is the Message",
+      "artist": "MFSB",
+      "album": "Love Is the Message",
+      "arc": "peak",
+      "year_guess": 1973,
+      "spotify": {
+        "id": "1GbBfA4tgiCpNXHIEogoJP",
+        "uri": "spotify:track:1GbBfA4tgiCpNXHIEogoJP",
+        "name": "Love Is the Message",
+        "artists": [
+          "MFSB"
+        ],
+        "popularity": 20
+      }
+    },
+    {
+      "title": "Get Down On It",
+      "artist": "Kool & The Gang",
+      "album": "Celebrate!",
+      "arc": "build",
+      "year_guess": 1981,
+      "spotify": {
+        "id": "4Cv6ongCvJy9JfSkWVnb5D",
+        "uri": "spotify:track:4Cv6ongCvJy9JfSkWVnb5D",
+        "name": "Get Down On It",
+        "artists": [
+          "Kool & The Gang"
+        ],
+        "popularity": 68
+      }
+    },
+    {
+      "title": "I Wanna Be Your Lover",
+      "artist": "Prince",
+      "album": "Prince",
+      "arc": "peak",
+      "year_guess": 1979,
+      "spotify": {
+        "id": "4yrM5BVyJzy5Ed4GPO6e8j",
+        "uri": "spotify:track:4yrM5BVyJzy5Ed4GPO6e8j",
+        "name": "I Wanna Be Your Lover",
+        "artists": [
+          "Prince"
+        ],
+        "popularity": 58
+      }
+    },
+    {
+      "title": "Keep On Jumpin'",
+      "artist": "Todd Terry",
+      "album": "To The Batmobile",
+      "arc": "build",
+      "year_guess": 1996,
+      "spotify": {
+        "id": "6J9rBgsm9USju9PkLf2exF",
+        "uri": "spotify:track:6J9rBgsm9USju9PkLf2exF",
+        "name": "Keep On Jumpin'",
+        "artists": [
+          "Musique"
+        ],
+        "popularity": 42
+      }
+    },
+    {
+      "title": "Street Life",
+      "artist": "The Crusaders",
+      "album": "Street Life",
+      "arc": "cooldown",
+      "year_guess": 1979,
+      "spotify": {
+        "id": "4CWUGKyUi4aJOq7tF6HAIF",
+        "uri": "spotify:track:4CWUGKyUi4aJOq7tF6HAIF",
+        "name": "Street Life",
+        "artists": [
+          "Randy Crawford"
+        ],
+        "popularity": 57
+      }
+    },
+    {
+      "title": "Rock Your Body",
+      "artist": "Marvin Gaye",
+      "album": "Here, My Dear",
+      "arc": "peak",
+      "year_guess": 1978,
+      "spotify": {
+        "id": "74hXqhE6afQeZFPNcG0M6Q",
+        "uri": "spotify:track:74hXqhE6afQeZFPNcG0M6Q",
+        "name": "Rock That Body",
+        "artists": [
+          "Black Eyed Peas"
+        ],
+        "popularity": 63
+      }
+    }
+  ],
+  "targetCount": 7,
+  "title": "ハイウェイドリーム",
+  "djId": "crate_digger",
+  "debug": []
+}

@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Cosmic Slop",
+      "artist": "Parliament",
+      "album": "Mothership Connection",
+      "arc": "intro",
+      "reason": "ファンキーなリズムが心を躍らせる、ドライブの始まりにぴったり。",
+      "whyPersonaFit": "掘り師気質が喜ぶ、70年代のレアグルーヴの代表曲。",
+      "whyThemeFit": "エネルギッシュなビートが眠気を吹き飛ばす。",
+      "year_guess": 1975
+    },
+    {
+      "title": "I Can Make You Dance",
+      "artist": "George McCrae",
+      "album": "George McCrae",
+      "arc": "build",
+      "reason": "ディスコの王道、リズムに乗せて盛り上がる。",
+      "whyPersonaFit": "ディスコの魅力を感じさせる、レアな一曲。",
+      "whyThemeFit": "ダンスしたくなるテンポで眠気を遠ざける。",
+      "year_guess": 1974
+    },
+    {
+      "title": "Love Is the Message",
+      "artist": "MFSB",
+      "album": "Love Is the Message",
+      "arc": "peak",
+      "reason": "グルーヴの頂点で、心を掴むサウンド。",
+      "whyPersonaFit": "ジャズファンクのエッセンスが詰まった名曲。",
+      "whyThemeFit": "ドライブ中に最高のエネルギーを与えてくれる。",
+      "year_guess": 1973
+    },
+    {
+      "title": "Let's Groove",
+      "artist": "Earth, Wind & Fire",
+      "album": "Raise!",
+      "arc": "peak",
+      "reason": "ノスタルジックながらも新鮮、全体を盛り上げる力がある。",
+      "whyPersonaFit": "掘り師が見逃せない、アフロビートの影響を受けたディスコ。",
+      "whyThemeFit": "ドライブのクライマックスに最適な一曲。",
+      "year_guess": 1981
+    },
+    {
+      "title": "Dancing in the Moonlight",
+      "artist": "King Harvest",
+      "album": null,
+      "arc": "cooldown",
+      "reason": "心地よいメロディが、ドライブの終わりにぴったり。",
+      "whyPersonaFit": "隠れた名曲として掘り起こされた一曲。",
+      "whyThemeFit": "リラックスしつつも爽やかな気分にしてくれる。",
+      "year_guess": 1972
+    },
+    {
+      "title": "Get Down On It",
+      "artist": "Kool & The Gang",
+      "album": "Something Special",
+      "arc": "build",
+      "reason": "グルーヴ感満載で、ドライブを盛り上げる。",
+      "whyPersonaFit": "レアグルーヴの要素を取り入れたファンクトラック。",
+      "whyThemeFit": "心を躍らせて、眠気を吹き飛ばす。",
+      "year_guess": 1981
+    },
+    {
+      "title": "Street Life",
+      "artist": "The Crusaders",
+      "album": "Street Life",
+      "arc": "intro",
+      "reason": "ジャズファンクの心地よいスタートで、ドライブを始める。",
+      "whyPersonaFit": "掘り師にとっての隠れた名曲、グルーヴが心地良い。",
+      "whyThemeFit": "エネルギーを注入し、ドライブを楽しくする。",
+      "year_guess": 1979
+    }
+  ]
+}

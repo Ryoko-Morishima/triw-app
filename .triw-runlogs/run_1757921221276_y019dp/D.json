@@ -1,0 +1,119 @@
+{
+  "resolved": [
+    {
+      "title": "Song 2",
+      "artist": "Blur",
+      "album": "Blur",
+      "arc": "peak",
+      "year_guess": 1997,
+      "spotify": {
+        "id": "1FTSo4v6BOZH9QxKc3MbVM",
+        "uri": "spotify:track:1FTSo4v6BOZH9QxKc3MbVM",
+        "name": "Song 2 - 2012 Remaster",
+        "artists": [
+          "Blur"
+        ],
+        "popularity": 78
+      }
+    },
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "album": "Franz Ferdinand",
+      "arc": "build",
+      "year_guess": 2004,
+      "spotify": {
+        "id": "20I8RduZC2PWMWTDCZuuAN",
+        "uri": "spotify:track:20I8RduZC2PWMWTDCZuuAN",
+        "name": "Take Me Out",
+        "artists": [
+          "Franz Ferdinand"
+        ],
+        "popularity": 83
+      }
+    },
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "album": "Is This It",
+      "arc": "peak",
+      "year_guess": 2001,
+      "spotify": {
+        "id": "7kzKAuUzOITUauHAhoMoxA",
+        "uri": "spotify:track:7kzKAuUzOITUauHAhoMoxA",
+        "name": "Last Nite",
+        "artists": [
+          "The Strokes"
+        ],
+        "popularity": 72
+      }
+    },
+    {
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "album": "Elephant",
+      "arc": "build",
+      "year_guess": 2003,
+      "spotify": {
+        "id": "3dPQuX8Gs42Y7b454ybpMR",
+        "uri": "spotify:track:3dPQuX8Gs42Y7b454ybpMR",
+        "name": "Seven Nation Army",
+        "artists": [
+          "The White Stripes"
+        ],
+        "popularity": 83
+      }
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "album": "Hot Fuss",
+      "arc": "peak",
+      "year_guess": 2003,
+      "spotify": {
+        "id": "003vvx7Niy0yvhvHt4a68B",
+        "uri": "spotify:track:003vvx7Niy0yvhvHt4a68B",
+        "name": "Mr. Brightside",
+        "artists": [
+          "The Killers"
+        ],
+        "popularity": 87
+      }
+    },
+    {
+      "title": "I Bet You Look Good on the Dancefloor",
+      "artist": "Arctic Monkeys",
+      "album": "Whatever People Say I Am, That's What I'm Not",
+      "arc": "build",
+      "year_guess": 2006,
+      "spotify": {
+        "id": "3DQVgcqaP3iSMbaKsd57l5",
+        "uri": "spotify:track:3DQVgcqaP3iSMbaKsd57l5",
+        "name": "I Bet You Look Good On The Dancefloor",
+        "artists": [
+          "Arctic Monkeys"
+        ],
+        "popularity": 72
+      }
+    },
+    {
+      "title": "Chelsea Dagger",
+      "artist": "The Fratellis",
+      "album": "Costello Music",
+      "arc": "cooldown",
+      "year_guess": 2006,
+      "spotify": {
+        "id": "52fnLN02thRhTnbzVZzdqq",
+        "uri": "spotify:track:52fnLN02thRhTnbzVZzdqq",
+        "name": "Chelsea Dagger",
+        "artists": [
+          "The Fratellis"
+        ],
+        "popularity": 58
+      }
+    }
+  ],
+  "targetCount": 7,
+  "title": "ハイウェイドライビング",
+  "djId": "analyst"
+}

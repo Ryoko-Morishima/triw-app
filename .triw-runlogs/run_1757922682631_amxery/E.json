@@ -1,0 +1,40 @@
+{
+  "playlistUrl": "https://open.spotify.com/playlist/0myaORNuEVSBjTVur8hlI6",
+  "picked": [
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "uri": "spotify:track:20I8RduZC2PWMWTDCZuuAN"
+    },
+    {
+      "title": "Chelsea Dagger",
+      "artist": "The Fratellis",
+      "uri": "spotify:track:52fnLN02thRhTnbzVZzdqq"
+    },
+    {
+      "title": "Song 2",
+      "artist": "Blur",
+      "uri": "spotify:track:1FTSo4v6BOZH9QxKc3MbVM"
+    },
+    {
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "uri": "spotify:track:3dPQuX8Gs42Y7b454ybpMR"
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "uri": "spotify:track:003vvx7Niy0yvhvHt4a68B"
+    },
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "uri": "spotify:track:7kzKAuUzOITUauHAhoMoxA"
+    },
+    {
+      "title": "Float On",
+      "artist": "Modest Mouse",
+      "uri": "spotify:track:2lwwrWVKdf3LR9lbbhnr6R"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "theme_direction": "高速道路を流すときに聞きたい曲を集めたよ。眠気をぶっとばすし周りの景色も素敵に見えちゃう！",
+  "hard_constraints": {
+    "required_genres": [
+      "インディ",
+      "オルタナ",
+      "ポストパンク・リバイバル",
+      "ブリットポップ"
+    ],
+    "exclude_genres": [
+      "バイラル狙いのポップ",
+      "派手なEDM大箱アンセム"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "エネルギッシュ",
+      "爽快感"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [],
+    "notes": [
+      "中速BPM",
+      "ギター主体の質感",
+      "歌詞や歴史的脈絡を考慮した流れ"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

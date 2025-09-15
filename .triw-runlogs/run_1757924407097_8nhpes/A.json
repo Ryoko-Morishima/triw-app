@@ -1,0 +1,18 @@
+{
+  "background": "エレクトロニック/テクノ系。構築美とミニマリズムを重視。",
+  "preferred_genres": [
+    "Minimal Techno",
+    "Detroit Techno",
+    "Deep House",
+    "Electro"
+  ],
+  "avoid_genres": [
+    "演歌",
+    "民謡",
+    "カントリー"
+  ],
+  "flow_habits": [
+    "BPMを段階的に積み上げてピークを迎え、その後深みに落とす"
+  ],
+  "persona_notes": []
+}

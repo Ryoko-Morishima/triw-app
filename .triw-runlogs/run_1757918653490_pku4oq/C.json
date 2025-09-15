@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "album": "Franz Ferdinand",
+      "arc": "peak",
+      "reason": "キャッチーながらもインディーのエッジが効いている名曲。",
+      "whyPersonaFit": "UKインディの代表的バンドの一つで、構成が緻密なトラック。",
+      "whyThemeFit": "ドライブ中の高揚感を生むリズムが最高。",
+      "year_guess": 2004
+    },
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "album": "Is This It",
+      "arc": "peak",
+      "reason": "シンプルなギターリフが印象的で、エネルギーを感じる一曲。",
+      "whyPersonaFit": "オルタナティブロックの金字塔で、歌詞の深さも魅力。",
+      "whyThemeFit": "ドライブ中の爽快感を引き立てる。",
+      "year_guess": 2001
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "album": "Hot Fuss",
+      "arc": "build",
+      "reason": "感情の高まりを感じさせるサビが特徴的。",
+      "whyPersonaFit": "ブリットポップの影響を感じさせるサウンド。",
+      "whyThemeFit": "ドライブのテンションを盛り上げるのに最適。",
+      "year_guess": 2003
+    },
+    {
+      "title": "Time Is on My Side",
+      "artist": "The Rolling Stones",
+      "album": "12 X 5",
+      "arc": "cooldown",
+      "reason": "心地よいリズムと歌詞が、ドライブの余韻を楽しませる。",
+      "whyPersonaFit": "クラシックなロックの要素がしっかりと反映されている。",
+      "whyThemeFit": "ドライブの終わりにふさわしい落ち着いた雰囲気。",
+      "year_guess": 1964
+    },
+    {
+      "title": "I Bet You Look Good on the Dancefloor",
+      "artist": "Arctic Monkeys",
+      "album": "Whatever People Say I Am, That's What I'm Not",
+      "arc": "peak",
+      "reason": "エネルギッシュでリズミカルなギターが印象的。",
+      "whyPersonaFit": "現代のインディロックの象徴的な存在感。",
+      "whyThemeFit": "ドライブ中のテンションを引き上げる。",
+      "year_guess": 2005
+    },
+    {
+      "title": "Take Off Your Pants and Jacket",
+      "artist": "Blink-182",
+      "album": "Take Off Your Pants and Jacket",
+      "arc": "build",
+      "reason": "青春のエネルギーを感じるトラック。",
+      "whyPersonaFit": "ポストパンク・リバイバルの影響を受けたサウンド。",
+      "whyThemeFit": "ドライブ中の爽快感を増す。",
+      "year_guess": 2001
+    },
+    {
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "album": "Elephant",
+      "arc": "peak",
+      "reason": "印象的なリフが特徴で、誰もが口ずさむ名曲。",
+      "whyPersonaFit": "シンプルさと強烈な個性が共存するトラック。",
+      "whyThemeFit": "ドライブのテンションを一気に引き上げる。",
+      "year_guess": 2003
+    }
+  ]
+}

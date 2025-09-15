@@ -1,0 +1,30 @@
+{
+  "playlistUrl": "https://open.spotify.com/playlist/4AvnujdBesBi03c9FQ2DEX",
+  "picked": [
+    {
+      "title": "Home",
+      "artist": "Edward Sharpe & The Magnetic Zeros",
+      "uri": "spotify:track:0Cu8JdYvV9DdmzLzhxaZLH"
+    },
+    {
+      "title": "Peach",
+      "artist": "Broods",
+      "uri": "spotify:track:72UVMFjUAL6KJvwi36VBiz"
+    },
+    {
+      "title": "Dog Days Are Over",
+      "artist": "Florence + The Machine",
+      "uri": "spotify:track:4X6aeSW2bhlbm7YyEstj6Y"
+    },
+    {
+      "title": "Electric Feel",
+      "artist": "MGMT",
+      "uri": "spotify:track:3FtYbEfBqAlGO46NUDQSAt"
+    },
+    {
+      "title": "Riptide",
+      "artist": "Vance Joy",
+      "uri": "spotify:track:7yq4Qj7cqayVTp3FF9CWbm"
+    }
+  ]
+}

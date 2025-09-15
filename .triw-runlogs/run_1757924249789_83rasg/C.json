@@ -1,0 +1,54 @@
+{
+  "candidates": [
+    {
+      "title": "Home",
+      "artist": "Edward Sharpe & The Magnetic Zeros",
+      "album": "Up From Below",
+      "arc": "intro",
+      "reason": "心地よいフォークサウンドが心を和ませ、物語性を感じさせる。",
+      "whyPersonaFit": "ウォームなトーンで、メロディが際立つ曲。ストーリーを紡ぐのに最適。",
+      "whyThemeFit": "リラックスしつつもエネルギーを感じるスタートにぴったり。",
+      "year_guess": 2009
+    },
+    {
+      "title": "Peach",
+      "artist": "Broods",
+      "album": "Evergreen",
+      "arc": "build",
+      "reason": "キャッチーなメロディが心を躍らせ、徐々に盛り上がる構成が魅力。",
+      "whyPersonaFit": "歌心のある編曲が豊かで、聴く者を引き込む。",
+      "whyThemeFit": "心が躍るメロディで、高速道路を走る感覚を演出。",
+      "year_guess": 2014
+    },
+    {
+      "title": "Japanese Denim",
+      "artist": "Daniel Caesar",
+      "album": "Freudian",
+      "arc": "peak",
+      "reason": "深い歌詞と心地よいメロディが絶妙に組み合わさっている。",
+      "whyPersonaFit": "シンガーソングライターのテイストが豊かで、物語性が強い。",
+      "whyThemeFit": "リラックスしつつも、エネルギーを感じる瞬間を提供。",
+      "year_guess": 2017
+    },
+    {
+      "title": "Lover is a Day",
+      "artist": "Khruangbin",
+      "album": "Mordechai",
+      "arc": "cooldown",
+      "reason": "心地よいリズムが心を穏やかにし、優しいメロディが心に残る。",
+      "whyPersonaFit": "ウォームなトーンが特徴で、メロディが際立つ。",
+      "whyThemeFit": "リラックスしつつも楽しい気分を演出する完璧なクールダウントラック。",
+      "year_guess": 2020
+    },
+    {
+      "title": "Shiver",
+      "artist": "Lucy Dacus",
+      "album": "Historian",
+      "arc": "other",
+      "reason": "感情豊かな歌詞とメロディが絶妙に絡み合い、深い印象を与える。",
+      "whyPersonaFit": "物語性が強く、聴く者を引き込む力がある。",
+      "whyThemeFit": "心地よくもエネルギーを感じる、ドライブにぴったりの曲。",
+      "year_guess": 2018
+    }
+  ]
+}

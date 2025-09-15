@@ -1,0 +1,171 @@
+{
+  "resolved": [
+    {
+      "title": "Home",
+      "artist": "Edward Sharpe & The Magnetic Zeros",
+      "album": null,
+      "arc": "intro",
+      "year_guess": 2009,
+      "spotify": {
+        "id": "0Cu8JdYvV9DdmzLzhxaZLH",
+        "uri": "spotify:track:0Cu8JdYvV9DdmzLzhxaZLH",
+        "name": "HOME SWEET HOME (feat. TAEYANG & DAESUNG)",
+        "artists": [
+          "G-DRAGON",
+          "TAEYANG",
+          "DAESUNG"
+        ],
+        "popularity": 65
+      }
+    },
+    {
+      "title": "Peach",
+      "artist": "Broods",
+      "album": null,
+      "arc": "build",
+      "year_guess": 2016,
+      "spotify": {
+        "id": "72UVMFjUAL6KJvwi36VBiz",
+        "uri": "spotify:track:72UVMFjUAL6KJvwi36VBiz",
+        "name": "peach eyes",
+        "artists": [
+          "wave to earth"
+        ],
+        "popularity": 68
+      }
+    },
+    {
+      "title": "Electric Feel",
+      "artist": "MGMT",
+      "album": null,
+      "arc": "peak",
+      "year_guess": 2007,
+      "spotify": {
+        "id": "3FtYbEfBqAlGO46NUDQSAt",
+        "uri": "spotify:track:3FtYbEfBqAlGO46NUDQSAt",
+        "name": "Electric Feel",
+        "artists": [
+          "MGMT"
+        ],
+        "popularity": 79
+      }
+    },
+    {
+      "title": "Landslide",
+      "artist": "Fleetwood Mac",
+      "album": null,
+      "arc": "cooldown",
+      "year_guess": 1975,
+      "spotify": {
+        "id": "5ihS6UUlyQAfmp48eSkxuQ",
+        "uri": "spotify:track:5ihS6UUlyQAfmp48eSkxuQ",
+        "name": "Landslide",
+        "artists": [
+          "Fleetwood Mac"
+        ],
+        "popularity": 82
+      }
+    },
+    {
+      "title": "Sunday Morning",
+      "artist": "Maroon 5",
+      "album": null,
+      "arc": "other",
+      "year_guess": 2002,
+      "spotify": {
+        "id": "11607FzqoipskTsXrwEHnJ",
+        "uri": "spotify:track:11607FzqoipskTsXrwEHnJ",
+        "name": "Sunday Morning",
+        "artists": [
+          "The Velvet Underground",
+          "Nico"
+        ],
+        "popularity": 62
+      }
+    },
+    {
+      "title": "Lost Cause",
+      "artist": "Beck",
+      "album": null,
+      "arc": "intro",
+      "year_guess": 2021,
+      "spotify": {
+        "id": "4191RXFPa7Ge9XkA4cWlna",
+        "uri": "spotify:track:4191RXFPa7Ge9XkA4cWlna",
+        "name": "Lost Cause",
+        "artists": [
+          "Billie Eilish"
+        ],
+        "popularity": 70
+      }
+    },
+    {
+      "title": "Dog Days Are Over",
+      "artist": "Florence + The Machine",
+      "album": null,
+      "arc": "build",
+      "year_guess": 2008,
+      "spotify": {
+        "id": "4X6aeSW2bhlbm7YyEstj6Y",
+        "uri": "spotify:track:4X6aeSW2bhlbm7YyEstj6Y",
+        "name": "Rivers and Roads",
+        "artists": [
+          "The Head And The Heart"
+        ],
+        "popularity": 57
+      }
+    },
+    {
+      "title": "Riptide",
+      "artist": "Vance Joy",
+      "album": null,
+      "arc": "peak",
+      "year_guess": 2013,
+      "spotify": {
+        "id": "7yq4Qj7cqayVTp3FF9CWbm",
+        "uri": "spotify:track:7yq4Qj7cqayVTp3FF9CWbm",
+        "name": "Riptide",
+        "artists": [
+          "Vance Joy"
+        ],
+        "popularity": 81
+      }
+    },
+    {
+      "title": "Come Away With Me",
+      "artist": "Norah Jones",
+      "album": null,
+      "arc": "cooldown",
+      "year_guess": 2002,
+      "spotify": {
+        "id": "1zNXF2svmdlNxfS5XeNUgr",
+        "uri": "spotify:track:1zNXF2svmdlNxfS5XeNUgr",
+        "name": "Don't Know Why",
+        "artists": [
+          "Norah Jones"
+        ],
+        "popularity": 76
+      }
+    },
+    {
+      "title": "Budapest",
+      "artist": "George Ezra",
+      "album": null,
+      "arc": "other",
+      "year_guess": 2014,
+      "spotify": {
+        "id": "6hs3SDnbO3f6VQuPO4KBEb",
+        "uri": "spotify:track:6hs3SDnbO3f6VQuPO4KBEb",
+        "name": "Send Me on My Way",
+        "artists": [
+          "Rusted Root"
+        ],
+        "popularity": 67
+      }
+    }
+  ],
+  "targetCount": 5,
+  "title": "ハイウェイドリーム",
+  "djId": "storyteller",
+  "debug": []
+}

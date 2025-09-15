@@ -1,0 +1,40 @@
+{
+  "theme_direction": "高速道路を走るミニクーパーにぴったりな、心地よく流れるメロディのセットリスト。物語を感じさせる曲が、ドライブの楽しさを引き立てる。",
+  "hard_constraints": {
+    "required_genres": [
+      "フォーク",
+      "インディ・ポップ",
+      "シンガーソングライター",
+      "オルタナR&B",
+      "モダンCity Pop"
+    ],
+    "exclude_genres": [
+      "アグレッシブなノイジー曲",
+      "器楽中心の曲"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "リラックス",
+      "爽快",
+      "心地よい"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [],
+    "notes": [
+      "ウォームなトーン",
+      "メロディ際立つ曲",
+      "歌心のある編曲を優先"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

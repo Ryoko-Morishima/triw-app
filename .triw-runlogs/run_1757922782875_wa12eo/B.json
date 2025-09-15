@@ -1,0 +1,39 @@
+{
+  "theme_direction": "高速道路を流すときに聞きたい曲を集めたプレイリスト。眠気をぶっとばし、周りの景色を美しく感じさせる音楽を選びます。",
+  "hard_constraints": {
+    "required_genres": [
+      "フォーク",
+      "インディ・ポップ",
+      "シンガーソングライター",
+      "オルタナR&B",
+      "モダンCity Pop"
+    ],
+    "exclude_genres": [
+      "アグレッシブなノイジー曲",
+      "器楽中心の曲"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "リラックス",
+      "エネルギッシュ",
+      "ノスタルジック"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [],
+    "notes": [
+      "歌詞やモチーフの連続性を重視",
+      "曲間の温度変化を意識"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

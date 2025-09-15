@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "album": "Franz Ferdinand",
+      "arc": "peak",
+      "reason": "ギターリフが強烈で、ドライブのテンションを一気に引き上げる。",
+      "whyPersonaFit": "ポストパンク・リバイバルの代表曲で、構成美を感じさせる。",
+      "whyThemeFit": "エネルギッシュで爽快感があり、ドライブにぴったり。",
+      "year_guess": 2004
+    },
+    {
+      "title": "Last Nite",
+      "artist": "The Strokes",
+      "album": "Is This It",
+      "arc": "peak",
+      "reason": "シンプルながらキャッチーなメロディが心を掴む。",
+      "whyPersonaFit": "インディロックの象徴的な曲で、ギター主体の質感が強い。",
+      "whyThemeFit": "高揚感があり、ドライブを盛り上げる。",
+      "year_guess": 2001
+    },
+    {
+      "title": "Mr. Brightside",
+      "artist": "The Killers",
+      "album": "Hot Fuss",
+      "arc": "build",
+      "reason": "感情的な歌詞と力強いビートが印象的。",
+      "whyPersonaFit": "ブリットポップの影響を受けたサウンドで、構成が緻密。",
+      "whyThemeFit": "ドライブ中の高揚感を引き出す曲。",
+      "year_guess": 2003
+    },
+    {
+      "title": "Time Is on My Side",
+      "artist": "The Rolling Stones",
+      "album": "12 X 5",
+      "arc": "cooldown",
+      "reason": "心地よいリズムで、ドライブの余韻を楽しむのに最適。",
+      "whyPersonaFit": "インディのルーツを感じさせるクラシックな曲。",
+      "whyThemeFit": "リラックスしたい瞬間にぴったり。",
+      "year_guess": 1964
+    },
+    {
+      "title": "Take Off Your Pants and Jacket",
+      "artist": "Blink-182",
+      "album": "Take Off Your Pants and Jacket",
+      "arc": "intro",
+      "reason": "軽快なギターが印象的で、ドライブの始まりにぴったり。",
+      "whyPersonaFit": "オルタナティブのエッセンスを感じさせる。",
+      "whyThemeFit": "爽快感があり、ドライブのスタートに最適。",
+      "year_guess": 2001
+    },
+    {
+      "title": "Electric Feel",
+      "artist": "MGMT",
+      "album": "Oracular Spectacular",
+      "arc": "build",
+      "reason": "独特のビートがあり、ドライブ中の気分を盛り上げる。",
+      "whyPersonaFit": "インディの新しい波を感じさせるサウンド。",
+      "whyThemeFit": "エネルギッシュな雰囲気で、景色を楽しむのにぴったり。",
+      "year_guess": 2007
+    },
+    {
+      "title": "No Cars Go",
+      "artist": "Arcade Fire",
+      "album": "Neon Bible",
+      "arc": "build",
+      "reason": "壮大なサウンドスケープが心を掴む。",
+      "whyPersonaFit": "インディロックの深い側面を持ち、構成が美しい。",
+      "whyThemeFit": "ドライブの高揚感を引き立てる楽曲。",
+      "year_guess": 2007
+    }
+  ]
+}

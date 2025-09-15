@@ -1,0 +1,35 @@
+{
+  "theme_direction": "高速道路を流すときに聞きたい曲たち眠気をぶっとばすし周りの景色も素敵に見えちゃう！",
+  "hard_constraints": {
+    "required_genres": [
+      "Minimal Techno",
+      "Detroit Techno",
+      "Deep House",
+      "Electro"
+    ],
+    "exclude_genres": [
+      "演歌",
+      "民謡",
+      "カントリー"
+    ],
+    "eras": null,
+    "regions": [],
+    "languages": [],
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "エネルギッシュ",
+      "リフレッシング"
+    ],
+    "tempo_trend": "rise",
+    "preferred_eras": [],
+    "notes": []
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}

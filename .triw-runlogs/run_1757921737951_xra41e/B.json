@@ -1,0 +1,40 @@
+{
+  "theme_direction": "高速道路でのドライブにぴったりな曲を選び、眠気を吹き飛ばしつつ景色を楽しめるような選曲を目指す。",
+  "hard_constraints": {
+    "required_genres": [
+      "インディ",
+      "オルタナティブ",
+      "ポストパンク・リバイバル",
+      "ブリットポップ"
+    ],
+    "exclude_genres": [
+      "バイラルポップ",
+      "EDM"
+    ],
+    "eras": null,
+    "regions": null,
+    "languages": null,
+    "other_musts": []
+  },
+  "soft_preferences": {
+    "mood": [
+      "爽快",
+      "エネルギッシュ"
+    ],
+    "tempo_trend": "steady",
+    "preferred_eras": [
+      "2000年代",
+      "2010年代"
+    ],
+    "notes": [
+      "ギター主体のサウンドを意識する",
+      "歌詞や歴史的脈絡を考慮した流れ作り"
+    ]
+  },
+  "flow_style": [
+    "intro",
+    "build",
+    "peak",
+    "cooldown"
+  ]
+}
