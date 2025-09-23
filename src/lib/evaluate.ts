@@ -1,0 +1,256 @@
+// src/lib/evaluate.ts
+import type { CandidateC } from "@/lib/openai";
+import type { RunMeta } from "@/lib/runlog";
+
+// D.json の resolved の想定型
+type DResolved = {
+  title: string;
+  artist: string;
+  year_guess?: number | null;
+  intended_role?: "anchor" | "deep" | "wildcard";
+  popularity_hint?: "high" | "mid" | "low"; // ← 互換のため残すが使わない
+  spotify?: {
+    id: string;
+    uri: string;
+    name: string;
+    artists: string[];
+    // 原盤年がある場合は original_release_year を優先
+    release_year?: number | null;
+    popularity?: number | null; // ← 互換のため残すが使わない
+    preview_url?: string | null;
+    album_image_url?: string | null;
+    tempo?: number | null;
+    energy?: number | null;
+
+    // 型に無いことがあるので any で拾う
+    // @ts-ignore
+    original_release_year?: number | null;
+  };
+};
+
+export type Evaluated = {
+  title: string;
+  artist: string;
+  uri?: string | null;
+  confidence: number;
+  reason: string;
+  accepted: boolean;
+
+  // ★ デバッグ用（UI無視でOK）
+  debug?: {
+    match_kind: "exact" | "fuzzy" | "none";
+    resolved_title?: string;
+    resolved_artist0?: string;
+
+    // ↓ 互換のために残すが常に未使用（0 / null）
+    popularity?: number | null;
+    popularity_hint?: "high" | "mid" | "low";
+    popularity_score: number;
+
+    role?: "anchor" | "deep" | "wildcard";
+    role_ok: boolean;   // ← 互換のため true 固定（評価に使わない）
+    role_score: number; // ← 常に 0（評価に使わない）
+
+    year_gate: boolean;
+    year_guess?: number | null;
+    release_year?: number | null;
+    year_score: number;
+
+    exists: boolean;
+    exist_score: number;
+
+    match_score: number; // 新規: 表記マッチの加点
+    total_before_round: number;
+  };
+};
+
+// ---- ユーティリティ ----
+function norm(s: string) {
+  return (s || "").toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+function findResolvedRowDetailed(
+  c: CandidateC,
+  resolved: DResolved[]
+): { row?: DResolved; kind: "exact" | "fuzzy" | "none" } {
+  const t = norm(c.title);
+  const a = norm(c.artist);
+
+  // 1) 完全一致
+  let row = resolved.find((r) => norm(r.title) === t && norm(r.artist) === a);
+  if (row) return { row, kind: "exact" };
+
+  // 2) タイトル一致 & アーティスト部分一致（表記ゆれ対策）
+  row = resolved.find((r) => {
+    const rt = norm(r.title);
+    const ra = norm(r.artist);
+    return (
+      (rt === t || rt.startsWith(t) || t.startsWith(rt)) &&
+      (ra.includes(a) || a.includes(ra))
+    );
+  });
+  if (row) return { row, kind: "fuzzy" };
+
+  return { kind: "none" };
+}
+
+// ===== スコア設計（popularity は不使用） =====
+// ・存在確認（exists）: +0.40
+// ・表記マッチ精度（exact / fuzzy）: +0.25 / +0.15
+// ・年代一致（year_gate 有効時・原盤年優先・±3年）: +0.25
+// 合格閾値: 0.50
+const EXIST_SCORE = 0.40;
+const MATCH_SCORE_EXACT = 0.25;
+const MATCH_SCORE_FUZZY = 0.15;
+const YEAR_SCORE_ON_MATCH = 0.25;
+const YEAR_TOLERANCE = 3;
+const ACCEPT_THRESHOLD = 0.50;
+
+export function evaluateTracks(
+  _meta: RunMeta,
+  candidates: CandidateC[],
+  resolved: DResolved[],
+  opts?: { year_gate?: boolean }
+): { picked: Evaluated[]; rejected: Evaluated[] } {
+  const picked: Evaluated[] = [];
+  const rejected: Evaluated[] = [];
+
+  const yearGate = !!(opts && opts.year_gate);
+
+  for (const c of candidates) {
+    const { row, kind } = findResolvedRowDetailed(c, resolved);
+    if (!row || !row.spotify) {
+      rejected.push({
+        title: c.title,
+        artist: c.artist,
+        uri: null,
+        confidence: 0,
+        reason: "Spotifyで未解決",
+        accepted: false,
+        debug: {
+          match_kind: "none",
+          resolved_title: undefined,
+          resolved_artist0: undefined,
+
+          popularity: null,
+          popularity_hint: (c as any)?.popularity_hint ?? undefined,
+          popularity_score: 0,
+
+          role: (c as any)?.intended_role ?? undefined,
+          role_ok: true,
+          role_score: 0,
+
+          year_gate: yearGate,
+          year_guess: (c as any)?.year_guess ?? (c as any)?.year ?? null,
+          release_year: null,
+          year_score: 0,
+
+          exists: false,
+          exist_score: 0,
+
+          match_score: 0,
+          total_before_round: 0,
+        },
+      });
+      continue;
+    }
+
+    let conf = 0;
+    const reasons: string[] = [];
+
+    // ---- A) 存在確認（最優先）
+    const exists = !!row.spotify.id;
+    if (exists) {
+      conf += EXIST_SCORE;
+      reasons.push("Spotifyで実在確認済み");
+    }
+    const exist_score = exists ? EXIST_SCORE : 0;
+
+    // ---- B) 表記マッチ（exact / fuzzy）
+    let match_score = 0;
+    if (kind === "exact") {
+      conf += MATCH_SCORE_EXACT;
+      match_score = MATCH_SCORE_EXACT;
+      reasons.push("表記一致（exact）");
+    } else if (kind === "fuzzy") {
+      conf += MATCH_SCORE_FUZZY;
+      match_score = MATCH_SCORE_FUZZY;
+      reasons.push("表記一致（fuzzy）");
+    } else {
+      reasons.push("表記不一致");
+    }
+
+    // ---- C) 年代（ゲートONのときだけ評価） — 原盤年優先
+    let year_score = 0;
+    const yearGuess: number | null =
+      (c as any)?.year_guess ?? (c as any)?.year ?? null;
+    const release: number | null =
+      (row.spotify as any)?.original_release_year ??
+      row.spotify.release_year ??
+      null;
+
+    if (yearGate) {
+      if (yearGuess && release) {
+        const diff = Math.abs(release - yearGuess);
+        if (diff <= YEAR_TOLERANCE) {
+          conf += YEAR_SCORE_ON_MATCH;
+          year_score = YEAR_SCORE_ON_MATCH;
+          reasons.push("年代推定と一致（原盤年優先）");
+        } else if (diff <= 10) {
+          reasons.push("年代おおむね近似（再発の可能性）");
+        } else {
+          reasons.push("年代推定とズレ");
+        }
+      } else {
+        reasons.push("年代情報不十分");
+      }
+    } else {
+      reasons.push("年代ゲートOFF");
+    }
+
+    // ---- 互換: role/popularity は評価に使わない（0固定）
+    const role = (c as any)?.intended_role ?? undefined;
+
+    const total_before_round = conf;
+    const confidence = Number(conf.toFixed(2));
+    const accepted = confidence >= ACCEPT_THRESHOLD;
+
+    const out: Evaluated = {
+      title: c.title,
+      artist: c.artist,
+      uri: row.spotify.uri ?? null,
+      confidence,
+      reason: reasons.join(" / "),
+      accepted,
+      debug: {
+        match_kind: kind,
+        resolved_title: row.spotify?.name ?? undefined,
+        resolved_artist0: row.spotify?.artists?.[0] ?? undefined,
+
+        popularity: null,
+        popularity_hint: (c as any)?.popularity_hint ?? undefined,
+        popularity_score: 0,
+
+        role,
+        role_ok: true,
+        role_score: 0,
+
+        year_gate: yearGate,
+        year_guess: yearGuess ?? null,
+        release_year: release ?? null,
+        year_score,
+
+        exists,
+        exist_score,
+
+        match_score,
+        total_before_round,
+      },
+    };
+
+    if (accepted) picked.push(out);
+    else rejected.push(out);
+  }
+
+  return { picked, rejected };
+}
