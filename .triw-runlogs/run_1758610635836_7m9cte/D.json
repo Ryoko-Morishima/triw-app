@@ -1,0 +1,328 @@
+{
+  "resolved": [
+    {
+      "title": "Plastic Love",
+      "artist": "Mariya Takeuchi",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1Z1fN0KFNu0aG2EpbBVwvN",
+        "uri": "spotify:track:1Z1fN0KFNu0aG2EpbBVwvN",
+        "name": "プラスティック・ラブ",
+        "artists": [
+          "Mariya Takeuchi"
+        ],
+        "release_year": 1984,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 47,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27387828495cbe9ed95f3fee3f6",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "Miki Matsubara",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7xmkcZJJsT1san7GjuksE6",
+        "uri": "spotify:track:7xmkcZJJsT1san7GjuksE6",
+        "name": "Stay With Me",
+        "artists": [
+          "Shane Mesa",
+          "Miki Matsubara"
+        ],
+        "release_year": 2022,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 23,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730d7925a25c0aae26d9fc4d06",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kimi wa Tennen Shoku",
+      "artist": "Yasuko Agawa",
+      "year_guess": 1982,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "74gqxJd5aWf8v02egRFjZC",
+        "uri": "spotify:track:74gqxJd5aWf8v02egRFjZC",
+        "name": "誰かのクラクション",
+        "artists": [
+          "Yutaka Ozaki"
+        ],
+        "release_year": 1985,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 31,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2733670479b27936d95aa39ea06",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Talkin'",
+      "artist": "Mariya Takeuchi",
+      "year_guess": 1984,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3igzzZE41AOz8aHFMGRsqi",
+        "uri": "spotify:track:3igzzZE41AOz8aHFMGRsqi",
+        "name": "元気を出して",
+        "artists": [
+          "Mariya Takeuchi"
+        ],
+        "release_year": 1987,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 51,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273676ca4dc8c635709448286ef",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Sweet Memories",
+      "artist": "Mariya Takeuchi",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4bgVk4itt6wPVrJJwh5vyp",
+        "uri": "spotify:track:4bgVk4itt6wPVrJJwh5vyp",
+        "name": "SWEET MEMORIES",
+        "artists": [
+          "Seiko Matsuda"
+        ],
+        "release_year": 1980,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 49,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e17f9ba29e61f30bbf6cf8bd",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Aozora",
+      "artist": "Kiyotaka Sugiyama & Omega Tribe",
+      "year_guess": 1984,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "2tdWMnWkBnqF608krvH1fx",
+        "uri": "spotify:track:2tdWMnWkBnqF608krvH1fx",
+        "name": "君は1000%",
+        "artists": [
+          "1986 OMEGA TRIBE"
+        ],
+        "release_year": 1986,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 42,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2733e6c3999ad72dd2da94643f6",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kimi wa Daitai Daisuki",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1983,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0aRPz0c89bqxTA5spi8iZ7",
+        "uri": "spotify:track:0aRPz0c89bqxTA5spi8iZ7",
+        "name": "守ってあげたい",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1981,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737ab51915bbd165b7081bf56f",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kaze ni Naru",
+      "artist": "Ayano Tsuji",
+      "year_guess": 2000,
+      "intended_role": "wildcard",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "1BMYkyKXS6UfnJteWN7nSD",
+        "uri": "spotify:track:1BMYkyKXS6UfnJteWN7nSD",
+        "name": "風になる",
+        "artists": [
+          "Tsuji Ayano"
+        ],
+        "release_year": 2003,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 57,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2739385cab000124c1c28004e1d",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "City Lights",
+      "artist": "Yasuko Agawa",
+      "year_guess": 1985,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6d94YFZZAKIije4lCZCGJy",
+        "uri": "spotify:track:6d94YFZZAKIije4lCZCGJy",
+        "name": "CITY LIGHTS - Remastered 2022",
+        "artists": [
+          "Eikichi Yazawa"
+        ],
+        "release_year": 1990,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 18,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b8fae10e659d8ca4fef1fca0",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Koi wa Sora no Kagami",
+      "artist": "Kiyotaka Sugiyama",
+      "year_guess": 1986,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6nQDTM6Mg3xd0On9FAj0St",
+        "uri": "spotify:track:6nQDTM6Mg3xd0On9FAj0St",
+        "name": "風のLONELY WAY - 2022 Remaster",
+        "artists": [
+          "Kiyotaka Sugiyama"
+        ],
+        "release_year": 1987,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 38,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27318b8d334743a5dd0316e1f71",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Goodbye Days",
+      "artist": "Yui",
+      "year_guess": 2006,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1K8yPXTn0ijWY1sFGf6mjq",
+        "uri": "spotify:track:1K8yPXTn0ijWY1sFGf6mjq",
+        "name": "Good-bye days",
+        "artists": [
+          "YUI for 雨音 薫"
+        ],
+        "release_year": 2006,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 43,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273fa69ce4658b16a20a9571bbf",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Natsu no Hi no 2000",
+      "artist": "Kiyotaka Sugiyama",
+      "year_guess": 1985,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6PwxxvYA36bPYDEq75wBfM",
+        "uri": "spotify:track:6PwxxvYA36bPYDEq75wBfM",
+        "name": "最後のHoly Night - 2022 Remaster",
+        "artists": [
+          "Kiyotaka Sugiyama"
+        ],
+        "release_year": 1986,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 31,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273f1cb153f8c401ca4a4e0f40d",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Shiawase ni Naritai",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1983,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0aRPz0c89bqxTA5spi8iZ7",
+        "uri": "spotify:track:0aRPz0c89bqxTA5spi8iZ7",
+        "name": "守ってあげたい",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1981,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737ab51915bbd165b7081bf56f",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Koi ni Ochite",
+      "artist": "Aiko",
+      "year_guess": 2000,
+      "intended_role": "wildcard",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "4R6JzGgj4gbflBhtnDCN0x",
+        "uri": "spotify:track:4R6JzGgj4gbflBhtnDCN0x",
+        "name": "愛の病",
+        "artists": [
+          "aiko"
+        ],
+        "release_year": 2000,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 40,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732d10769ad060ad70b5ebe0c2",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

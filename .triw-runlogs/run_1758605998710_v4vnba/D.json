@@ -1,0 +1,278 @@
+{
+  "resolved": [
+    {
+      "title": "Plastic Love",
+      "artist": "竹内まりや",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2qxTmEfGbBGMSJrwu4Ez1v",
+        "uri": "spotify:track:2qxTmEfGbBGMSJrwu4Ez1v",
+        "name": "Plastic Love",
+        "artists": [
+          "Friday Night Plans"
+        ],
+        "release_year": 2018,
+        "popularity": 41,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e1751c9aee471a40f86601d7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "君の瞳に恋してる",
+      "artist": "大貫妙子",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7hwAHflHUeKqH9lunn9wI6",
+        "uri": "spotify:track:7hwAHflHUeKqH9lunn9wI6",
+        "name": "君の瞳に恋してる",
+        "artists": [
+          "フランキー・ヴァリ"
+        ],
+        "release_year": 2020,
+        "popularity": 24,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732b494d3e58ef4a6c3976027f",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Summer Connection",
+      "artist": "南佳孝",
+      "year_guess": 1983,
+      "intended_role": "deep",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "4MghcTKk0rLdBuiEOuY77j",
+        "uri": "spotify:track:4MghcTKk0rLdBuiEOuY77j",
+        "name": "Summer Connection",
+        "artists": [
+          "Taeko Onuki"
+        ],
+        "release_year": 1977,
+        "popularity": 29,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27341e51cc1cccfbea1a181b432",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "恋の予感",
+      "artist": "南野陽子",
+      "year_guess": 1986,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "2qSVC0gIr19tIPUddnDEwG",
+        "uri": "spotify:track:2qSVC0gIr19tIPUddnDEwG",
+        "name": "恋の予感",
+        "artists": [
+          "Anzen Chitai"
+        ],
+        "release_year": 1984,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27355930e7a92ae06d6018bc9bc",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "運命の人",
+      "artist": "中森明菜",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "579dz9kA4mqrxFZC0B3YSB",
+        "uri": "spotify:track:579dz9kA4mqrxFZC0B3YSB",
+        "name": "運命の人",
+        "artists": [
+          "SPITZ"
+        ],
+        "release_year": 2006,
+        "popularity": 44,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273bf76c7c7f3217586af58580e",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "青い珊瑚礁",
+      "artist": "松田聖子",
+      "year_guess": 1980,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6uPyPOSTwYCgPjYINvXUKl",
+        "uri": "spotify:track:6uPyPOSTwYCgPjYINvXUKl",
+        "name": "青い珊瑚礁",
+        "artists": [
+          "Seiko Matsuda"
+        ],
+        "release_year": 1980,
+        "popularity": 54,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b79afe59d746a0b8bec9541e",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Bye Bye My Love",
+      "artist": "山下達郎",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "00pvqfgOrDfrrpyNZUYGPO",
+        "uri": "spotify:track:00pvqfgOrDfrrpyNZUYGPO",
+        "name": "Bye Bye My Love（U are the one）",
+        "artists": [
+          "サザンオールスターズ"
+        ],
+        "release_year": 1985,
+        "popularity": 51,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273cd9ae0938b0c0f77947205b9",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Trip",
+      "artist": "藤井フミヤ",
+      "year_guess": 1990,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1Jq89qHEa2S1bu9ah1wavm",
+        "uri": "spotify:track:1Jq89qHEa2S1bu9ah1wavm",
+        "name": "LOVE TRIP",
+        "artists": [
+          "間宮貴子"
+        ],
+        "release_year": 1982,
+        "popularity": 47,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273201e417b261e3e65ecff9681",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "夜明けのスキャット",
+      "artist": "加藤和彦",
+      "year_guess": 1981,
+      "intended_role": "deep",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "5EWqdfxKvQxnfE9DTh7mRU",
+        "uri": "spotify:track:5EWqdfxKvQxnfE9DTh7mRU",
+        "name": "夜明けのスキャット",
+        "artists": [
+          "Saori Yuki"
+        ],
+        "release_year": 2012,
+        "popularity": 25,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b7076fccb9efbcf254b0e687",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love is the Name of the Game",
+      "artist": "山下達郎",
+      "year_guess": 1980,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "50D2X5Hbv0iNhE16tsdiEz",
+        "uri": "spotify:track:50D2X5Hbv0iNhE16tsdiEz",
+        "name": "Love Is the Name of the Game",
+        "artists": [
+          "Patty Ryan"
+        ],
+        "release_year": 2006,
+        "popularity": 45,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27397d3d4acbf98a1a8a4c84df5",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "君といつまでも",
+      "artist": "加山雄三",
+      "year_guess": 1983,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7Gt2fajkBhBhQnurVzu3Vj",
+        "uri": "spotify:track:7Gt2fajkBhBhQnurVzu3Vj",
+        "name": "君といつまでも",
+        "artists": [
+          "加山雄三 with さだまさし"
+        ],
+        "release_year": 2010,
+        "popularity": 10,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732c0c503e1125323cd530dbd3",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "冬のリヴィエラ",
+      "artist": "森進一",
+      "year_guess": 1980,
+      "intended_role": "deep",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "6fv4x1MAbJHNmWVFzgoMMM",
+        "uri": "spotify:track:6fv4x1MAbJHNmWVFzgoMMM",
+        "name": "冬のリヴィエラ",
+        "artists": [
+          "Shinichi Mori"
+        ],
+        "release_year": 2014,
+        "popularity": 28,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732b5e92a1269c15a749bd92e8",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "青い影",
+      "artist": "フライング・キッズ",
+      "year_guess": 1990,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "2c1G2YwSF7cRdFxEHd6H8N",
+        "uri": "spotify:track:2c1G2YwSF7cRdFxEHd6H8N",
+        "name": "青い影",
+        "artists": [
+          "プロコル・ハルム"
+        ],
+        "release_year": 1995,
+        "popularity": 32,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735fbd3025e30963ba6291d6ff",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

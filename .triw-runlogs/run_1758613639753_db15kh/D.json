@@ -1,0 +1,331 @@
+{
+  "resolved": [
+    {
+      "title": "Helter Skelter",
+      "artist": "The Beatles (covered by The Who)",
+      "year_guess": 1968,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0Bs0hUYxz7REyIHH7tRhL2",
+        "uri": "spotify:track:0Bs0hUYxz7REyIHH7tRhL2",
+        "name": "Helter Skelter - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1968,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 60,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2734ce8b4e42588bf18182a1ad2",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Come Together",
+      "artist": "The Muffs",
+      "year_guess": 1995,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3BoaxsnW2bALumEPkEtSPn",
+        "uri": "spotify:track:3BoaxsnW2bALumEPkEtSPn",
+        "name": "Come Together",
+        "artists": [
+          "SHANK"
+        ],
+        "release_year": 2013,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 14,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273207592bf1b7d50d69e45774a",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "All My Loving",
+      "artist": "The Black Angels",
+      "year_guess": 2013,
+      "intended_role": "deep",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "4BguxPKygliNCIkzwWlYxU",
+        "uri": "spotify:track:4BguxPKygliNCIkzwWlYxU",
+        "name": "All My Loving (Original Version)",
+        "artists": [
+          "Masaharu Fukuyama"
+        ],
+        "release_year": 1993,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 21,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273fd5ffa298b9a2329f6a2eab0",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "A Day in the Life",
+      "artist": "The 69 Eyes",
+      "year_guess": 2000,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "2Bg26rSIRuXa2FS67jcgs5",
+        "uri": "spotify:track:2Bg26rSIRuXa2FS67jcgs5",
+        "name": "CB750",
+        "artists": [
+          "The Mackshow"
+        ],
+        "release_year": 2003,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 21,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273184f57aa8620d7b7398a474e",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "I Want to Hold Your Hand",
+      "artist": "The Ramones",
+      "year_guess": 1995,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4pbG9SUmWIvsROVLF0zF9s",
+        "uri": "spotify:track:4pbG9SUmWIvsROVLF0zF9s",
+        "name": "I Want To Hold Your Hand - Remastered 2015",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 2000,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 64,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Lucy in the Sky with Diamonds",
+      "artist": "The Black Keys",
+      "year_guess": 2011,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0RNockNqurXLch6HQpnefG",
+        "uri": "spotify:track:0RNockNqurXLch6HQpnefG",
+        "name": "Lucy in the Sky With Diamonds",
+        "artists": [
+          "Easy Star All-Stars",
+          "Frankie Paul"
+        ],
+        "release_year": 2009,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 29,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273f288751883e1a93b3a2da489",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Can't Buy Me Love",
+      "artist": "The Dickies",
+      "year_guess": 1979,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "38Vb1J5W5LOs0i7SAF76pa",
+        "uri": "spotify:track:38Vb1J5W5LOs0i7SAF76pa",
+        "name": "Can't Buy Me Love - Remastered 2015",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 2000,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Help!",
+      "artist": "The Offspring",
+      "year_guess": 1998,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0bGiTPrxCIFs7lZS9knvRS",
+        "uri": "spotify:track:0bGiTPrxCIFs7lZS9knvRS",
+        "name": "Help! - 2023 Mix",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 2023,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 43,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2734a4c7445df9b3719a60eb53b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Eleanor Rigby",
+      "artist": "The Ruts",
+      "year_guess": 1980,
+      "intended_role": "deep",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "15TFWodeijYuSZ6G5ea2YO",
+        "uri": "spotify:track:15TFWodeijYuSZ6G5ea2YO",
+        "name": "Eleanor Rigby (Take 14 - Strings Only - Remastered)",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1996,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 17,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735a99eacecb2e00411040279b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "We Can Work It Out",
+      "artist": "Screeching Weasel",
+      "year_guess": 1995,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7gsAzeAY7SZXcHbfGg9X0J",
+        "uri": "spotify:track:7gsAzeAY7SZXcHbfGg9X0J",
+        "name": "We Can Work it Out",
+        "artists": [
+          "Scary Pockets",
+          "Judith Hill"
+        ],
+        "release_year": 2021,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 19,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273c754840df71b2e5e2dba1c8a",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "While My Guitar Gently Weeps",
+      "artist": "The Flaming Lips",
+      "year_guess": 2002,
+      "intended_role": "deep",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "1t4maY50O8CG3zEmDcvAUC",
+        "uri": "spotify:track:1t4maY50O8CG3zEmDcvAUC",
+        "name": "While My Guitar Gently Weeps",
+        "artists": [
+          "AM",
+          "Tina Dico",
+          "Tina Dickow"
+        ],
+        "release_year": 2008,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 10,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27355922de88fdbc56ddd9c6c2c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ticket to Ride",
+      "artist": "Stevie Ray Vaughan",
+      "year_guess": 1992,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0jlLHrrb4aR9evd3ZwNs5I",
+        "uri": "spotify:track:0jlLHrrb4aR9evd3ZwNs5I",
+        "name": "Crossfire",
+        "artists": [
+          "Stevie Ray Vaughan"
+        ],
+        "release_year": 1989,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 53,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273fb58ea8f6d1a6d3ac6ee9731",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Yesterday",
+      "artist": "The Dickies",
+      "year_guess": 1998,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "37XhGIbYYGoQOE5wfObrRJ",
+        "uri": "spotify:track:37XhGIbYYGoQOE5wfObrRJ",
+        "name": "Yesterday",
+        "artists": [
+          "The Grey Gentleman"
+        ],
+        "release_year": 2025,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 32,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273cda6d20a8b9056093676a248",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "You’ve Got to Hide Your Love Away",
+      "artist": "The Offspring",
+      "year_guess": 1998,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5FqtrIkw1Zg8iQL0Ay64B5",
+        "uri": "spotify:track:5FqtrIkw1Zg8iQL0Ay64B5",
+        "name": "You've Got To Hide Your Love Away (Take 5 - Remastered)",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1996,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 18,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735a99eacecb2e00411040279b",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

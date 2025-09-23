@@ -1,0 +1,100 @@
+{
+  "picked": [],
+  "rejected": [
+    {
+      "title": "Plastic Love",
+      "artist": "Mariya Takeuchi",
+      "uri": "spotify:track:2qxTmEfGbBGMSJrwu4Ez1v",
+      "confidence": 0.25,
+      "reason": "人気度と狙いがずれ / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "Miki Matsubara",
+      "uri": "spotify:track:5r7TNpLRQgSxe41xEaz3fF",
+      "confidence": 0.25,
+      "reason": "人気度と狙いがずれ / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Kimi wa Tennen Shounen",
+      "artist": "Taeko Ohnuki",
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false
+    },
+    {
+      "title": "Love Trip",
+      "artist": "Yumi Matsutoya",
+      "uri": "spotify:track:1Jq89qHEa2S1bu9ah1wavm",
+      "confidence": 0.5,
+      "reason": "中堅狙い→一致 / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Fly Me to the Moon",
+      "artist": "Frank Sinatra",
+      "uri": "spotify:track:7FXj7Qg3YorUxdrzvrcY25",
+      "confidence": 0.25,
+      "reason": "人気度と狙いがずれ / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Plastic Love (Remix)",
+      "artist": "Mariya Takeuchi",
+      "uri": "spotify:track:2qxTmEfGbBGMSJrwu4Ez1v",
+      "confidence": 0.5,
+      "reason": "中堅狙い→一致 / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Bay City",
+      "artist": "Anri",
+      "uri": "spotify:track:2nM3twDqsctAIi5gtd5ie8",
+      "confidence": 0.4,
+      "reason": "人気度と狙いがずれ / 年代推定と一致 / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Goodbye Party",
+      "artist": "Yumi Matsutoya",
+      "uri": "spotify:track:2qtuBpjcFb3S3QBdSH0oRt",
+      "confidence": 0.25,
+      "reason": "人気度と狙いがずれ / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "In the City",
+      "artist": "The Rascals",
+      "uri": "spotify:track:250dZY8xYbhHGQpM6bgL52",
+      "confidence": 0.25,
+      "reason": "人気度と狙いがずれ / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Summer Breeze",
+      "artist": "The Isley Brothers",
+      "uri": "spotify:track:2fiMQ44VojtY1IODTpRlnh",
+      "confidence": 0.5,
+      "reason": "中堅狙い→一致 / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Night Owl",
+      "artist": "Kensuke Ushio",
+      "uri": "spotify:track:5tuhOP6bY3NlwTHghY5MbN",
+      "confidence": 0.5,
+      "reason": "掘り狙い→一致 / Spotifyで実在確認済み",
+      "accepted": false
+    },
+    {
+      "title": "Sukiyaki",
+      "artist": "Kyu Sakamoto",
+      "uri": "spotify:track:0EYKtEb2mKXxlnMD6aqYig",
+      "confidence": 0.25,
+      "reason": "人気度と狙いがずれ / Spotifyで実在確認済み",
+      "accepted": false
+    }
+  ]
+}

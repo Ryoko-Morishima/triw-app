@@ -1,0 +1,282 @@
+{
+  "resolved": [
+    {
+      "title": "Rock Around the Clock",
+      "artist": "Bill Haley & His Comets",
+      "year_guess": 1954,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1uRKT2LRANv4baowBWHfDS",
+        "uri": "spotify:track:1uRKT2LRANv4baowBWHfDS",
+        "name": "(We're Gonna) Rock Around The Clock",
+        "artists": [
+          "Bill Haley & His Comets"
+        ],
+        "release_year": 1955,
+        "original_release_year": 1955,
+        "is_reissue": false,
+        "popularity": 64,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2739060a2c0a01366ee03274597",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Take Five",
+      "artist": "Dave Brubeck",
+      "year_guess": 1959,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1YQWosTIljIvxAgHWTp7KP",
+        "uri": "spotify:track:1YQWosTIljIvxAgHWTp7KP",
+        "name": "Take Five",
+        "artists": [
+          "The Dave Brubeck Quartet"
+        ],
+        "release_year": 1959,
+        "original_release_year": 1959,
+        "is_reissue": false,
+        "popularity": 69,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27300ace5d3c5bffc123ef1eb51",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Hound Dog",
+      "artist": "Elvis Presley",
+      "year_guess": 1956,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "64Ny7djQ6rNJspquof2KoX",
+        "uri": "spotify:track:64Ny7djQ6rNJspquof2KoX",
+        "name": "Hound Dog",
+        "artists": [
+          "Elvis Presley"
+        ],
+        "release_year": 1958,
+        "original_release_year": 1958,
+        "is_reissue": false,
+        "popularity": 68,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27320ee3e86e17f17239bef1f76",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "The Thrill Is Gone",
+      "artist": "B.B. King",
+      "year_guess": 1959,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4NQfrmGs9iQXVQI9IpRhjM",
+        "uri": "spotify:track:4NQfrmGs9iQXVQI9IpRhjM",
+        "name": "The Thrill Is Gone",
+        "artists": [
+          "B.B. King"
+        ],
+        "release_year": 1969,
+        "original_release_year": 1969,
+        "is_reissue": false,
+        "popularity": 65,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2731a04649cc2ddb348a9e08f23",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Unchained Melody",
+      "artist": "The Righteous Brothers",
+      "year_guess": 1955,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2qhASBzpbFhPRtrnZ5lLnz",
+        "uri": "spotify:track:2qhASBzpbFhPRtrnZ5lLnz",
+        "name": "Unchained Melody",
+        "artists": [
+          "The Righteous Brothers"
+        ],
+        "release_year": 1965,
+        "original_release_year": 1965,
+        "is_reissue": false,
+        "popularity": 76,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273cd7530409d09802935c840f9",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Blueberry Hill",
+      "artist": "Fats Domino",
+      "year_guess": 1956,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "06PdA0DLgF4BfAeUNZAbFG",
+        "uri": "spotify:track:06PdA0DLgF4BfAeUNZAbFG",
+        "name": "Blueberry Hill",
+        "artists": [
+          "Fats Domino"
+        ],
+        "release_year": 1959,
+        "original_release_year": 1959,
+        "is_reissue": false,
+        "popularity": 58,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27374e3823e9643fabc830851dd",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Jailhouse Rock",
+      "artist": "Elvis Presley",
+      "year_guess": 1957,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4gphxUgq0JSFv2BCLhNDiE",
+        "uri": "spotify:track:4gphxUgq0JSFv2BCLhNDiE",
+        "name": "Jailhouse Rock",
+        "artists": [
+          "Elvis Presley"
+        ],
+        "release_year": 1958,
+        "original_release_year": 1958,
+        "is_reissue": false,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27320ee3e86e17f17239bef1f76",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "My Blue Heaven",
+      "artist": "Gene Austin",
+      "year_guess": 1950,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "2fQAIVpOKn6ov5LJr9SNIx",
+        "uri": "spotify:track:2fQAIVpOKn6ov5LJr9SNIx",
+        "name": "My Blue Heaven",
+        "artists": [
+          "Gene Austin"
+        ],
+        "release_year": 1957,
+        "original_release_year": 1957,
+        "is_reissue": false,
+        "popularity": 35,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27339e3eb67d02c6ef9016b8a3e",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ain't That a Shame",
+      "artist": "Fats Domino",
+      "year_guess": 1955,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6Ez3PFQUoVWAsWCTdbPphQ",
+        "uri": "spotify:track:6Ez3PFQUoVWAsWCTdbPphQ",
+        "name": "Ain't That a Shame?",
+        "artists": [
+          "Fats Domino"
+        ],
+        "release_year": 1956,
+        "original_release_year": 1956,
+        "is_reissue": false,
+        "popularity": 1,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2738f785d9db3dcccbd75325890",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love and Marriage",
+      "artist": "Frank Sinatra",
+      "year_guess": 1955,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4lZo31VihgAR8sO2H2yOR7",
+        "uri": "spotify:track:4lZo31VihgAR8sO2H2yOR7",
+        "name": "Love And Marriage",
+        "artists": [
+          "Frank Sinatra"
+        ],
+        "release_year": 1965,
+        "original_release_year": 1965,
+        "is_reissue": false,
+        "popularity": 17,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732da5c7f20a33bf0d4d048ae3",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Summertime Blues",
+      "artist": "Eddie Cochran",
+      "year_guess": 1958,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3oAWTk92mZBxKBOKf8mR5v",
+        "uri": "spotify:track:3oAWTk92mZBxKBOKf8mR5v",
+        "name": "Summertime Blues",
+        "artists": [
+          "Eddie Cochran"
+        ],
+        "release_year": 1960,
+        "original_release_year": 1960,
+        "is_reissue": false,
+        "popularity": 61,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27324c50e31cea9cf898d05448c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Why Do Fools Fall in Love",
+      "artist": "Frankie Lymon & The Teenagers",
+      "year_guess": 1956,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "2EvosnrEiYx6WC0ZxOnOSy",
+        "uri": "spotify:track:2EvosnrEiYx6WC0ZxOnOSy",
+        "name": "Why Do Fools Fall in Love",
+        "artists": [
+          "Frankie Lymon",
+          "The Teenagers"
+        ],
+        "release_year": 1956,
+        "original_release_year": 1956,
+        "is_reissue": false,
+        "popularity": 49,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273c34ee329a40443453799a1ba",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

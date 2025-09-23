@@ -1,0 +1,241 @@
+{
+  "resolved": [
+    {
+      "title": "Plastic Love",
+      "artist": "Mariya Takeuchi",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2qxTmEfGbBGMSJrwu4Ez1v",
+        "uri": "spotify:track:2qxTmEfGbBGMSJrwu4Ez1v",
+        "name": "Plastic Love",
+        "artists": [
+          "Friday Night Plans"
+        ],
+        "release_year": 2018,
+        "popularity": 41,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e1751c9aee471a40f86601d7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "Miki Matsubara",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5r7TNpLRQgSxe41xEaz3fF",
+        "uri": "spotify:track:5r7TNpLRQgSxe41xEaz3fF",
+        "name": "真夜中のドア〜stay with me",
+        "artists": [
+          "Miki Matsubara"
+        ],
+        "release_year": 2008,
+        "popularity": 51,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27387a9458833df6cea79713fc7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Shinunoga E-Wa",
+      "artist": "Fujii Kaze",
+      "year_guess": 2020,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6vyNVdruxS0NRiNTosilUI",
+        "uri": "spotify:track:6vyNVdruxS0NRiNTosilUI",
+        "name": "Shinunoga E-Wa",
+        "artists": [
+          "Fujii Kaze"
+        ],
+        "release_year": 2022,
+        "popularity": 34,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2738e7a1ecd7187af1074b33434",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Bye Bye",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1985,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6VoIo76iI8ATaEunyCT4AU",
+        "uri": "spotify:track:6VoIo76iI8ATaEunyCT4AU",
+        "name": "Bye bye boy",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1994,
+        "popularity": 14,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273204d37d5927e143fe9d2255b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Lemon",
+      "artist": "Kenshi Yonezu",
+      "year_guess": 2018,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7Cd17G3oNQ34OWUwS8ZxfR",
+        "uri": "spotify:track:7Cd17G3oNQ34OWUwS8ZxfR",
+        "name": "Lemon",
+        "artists": [
+          "Kenshi Yonezu"
+        ],
+        "release_year": 2018,
+        "popularity": 59,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735f02011d74e86bf0a88d37a7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Funky Nassau",
+      "artist": "The Beginning",
+      "year_guess": 2020,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6OymZ7ZOficHvs1GTJXsGg",
+        "uri": "spotify:track:6OymZ7ZOficHvs1GTJXsGg",
+        "name": "Funky Nassau, Pt. 1",
+        "artists": [
+          "The Beginning Of The End"
+        ],
+        "release_year": 2017,
+        "popularity": 51,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273284af40b44c3a7ff32bb3258",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Dancing in the Moonlight",
+      "artist": "Toploader",
+      "year_guess": 2000,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3Fzlg5r1IjhLk2qRw667od",
+        "uri": "spotify:track:3Fzlg5r1IjhLk2qRw667od",
+        "name": "Dancing in the Moonlight",
+        "artists": [
+          "Toploader"
+        ],
+        "release_year": 2000,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e16a6534cd5a968a5b725d03",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Yume no Naka e",
+      "artist": "Toshiki Kadomatsu",
+      "year_guess": 1986,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0jzz8LjiYvscT2xiVmnOea",
+        "uri": "spotify:track:0jzz8LjiYvscT2xiVmnOea",
+        "name": "yume",
+        "artists": [
+          "SEKAI NO OWARI"
+        ],
+        "release_year": 2012,
+        "popularity": 37,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735d3b99b1cd550ce5d83bfbd2",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Koi wa Nara",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1981,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4s6ZktLNLZnk1osl3Vf1ZO",
+        "uri": "spotify:track:4s6ZktLNLZnk1osl3Vf1ZO",
+        "name": "Koi",
+        "artists": [
+          "androp"
+        ],
+        "release_year": 2019,
+        "popularity": 40,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273117fcfd707bd980ed95dbd82",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Midnight City",
+      "artist": "M83",
+      "year_guess": 2011,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6GyFP1nfCDB8lbD2bG0Hq9",
+        "uri": "spotify:track:6GyFP1nfCDB8lbD2bG0Hq9",
+        "name": "Midnight City",
+        "artists": [
+          "M83"
+        ],
+        "release_year": 2011,
+        "popularity": 79,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27362100064780b1d919a95fcf4",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ain't Nobody",
+      "artist": "Chaka Khan",
+      "year_guess": 1983,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2NVpYQqdraEcQwqT7GhUkh",
+        "uri": "spotify:track:2NVpYQqdraEcQwqT7GhUkh",
+        "name": "Ain't Nobody",
+        "artists": [
+          "Chaka Khan"
+        ],
+        "release_year": 1996,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2734c5fac07f80bad278dfbad1e",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": [
+    {
+      "title": "Kimi wa 1000%",
+      "artist": "Kiyotaka Sugiyama & Omega Tribe"
+    }
+  ]
+}

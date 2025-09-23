@@ -1,0 +1,74 @@
+{
+  "candidates": [
+    {
+      "title": "Plastic Love",
+      "artist": "竹内まりや",
+      "album": null,
+      "arc": "intro",
+      "reason": "この曲のイントロは穏やかで、心地よいシティポップの世界へと誘います。",
+      "whyPersonaFit": "竹内まりやのメロディは、落ち着いた夜の雰囲気にぴったり。",
+      "whyThemeFit": "都会の夜を彩るシティポップの代表曲で、聴く人を夢中にさせます。",
+      "year_guess": 1984
+    },
+    {
+      "title": "Cruisin'",
+      "artist": "山下達郎",
+      "album": null,
+      "arc": "build",
+      "reason": "リズム感が心地よく、聴く人を徐々に盛り上げてくれる楽曲です。",
+      "whyPersonaFit": "アーバンな雰囲気があり、夜のドライブにぴったりな選曲。",
+      "whyThemeFit": "シティポップの真髄を感じさせるメロディが魅力的。",
+      "year_guess": 1982
+    },
+    {
+      "title": "Love Talkin'",
+      "artist": "シーナ＆ロケッツ",
+      "album": null,
+      "arc": "peak",
+      "reason": "この曲のエネルギーは、聴く人の期待感を高めるのに最適です。",
+      "whyPersonaFit": "メロディックでありながら、少しエッジの効いたサウンドが特徴。",
+      "whyThemeFit": "都会的な雰囲気を持つシティポップの名曲。",
+      "year_guess": 1980
+    },
+    {
+      "title": "Summer Breeze",
+      "artist": "大貫妙子",
+      "album": null,
+      "arc": "build",
+      "reason": "穏やかなメロディが、聴く人をリラックスさせてくれます。",
+      "whyPersonaFit": "大貫妙子の音楽は、心に響くメロディが特徴的。",
+      "whyThemeFit": "夏の夜を感じさせるシティポップの名曲。",
+      "year_guess": 1982
+    },
+    {
+      "title": "君の瞳に恋してる",
+      "artist": "小泉今日子",
+      "album": null,
+      "arc": "cooldown",
+      "reason": "優しいメロディで、心地よいクールダウンを提供します。",
+      "whyPersonaFit": "小泉今日子の声は、穏やかで心温まる雰囲気を持っています。",
+      "whyThemeFit": "シティポップの中でも特に親しみやすい楽曲です。",
+      "year_guess": 1986
+    },
+    {
+      "title": "風の谷のナウシカ",
+      "artist": "久石譲",
+      "album": null,
+      "arc": "other",
+      "reason": "美しいメロディが、都会の夜の静けさと調和します。",
+      "whyPersonaFit": "シティポップの枠を超えた、心に響く楽曲。",
+      "whyThemeFit": "映画音楽としても知られるが、シティポップ的な要素を感じさせる。",
+      "year_guess": 1984
+    },
+    {
+      "title": "LOVER'S ROCK",
+      "artist": "竹内まりや",
+      "album": null,
+      "arc": "cooldown",
+      "reason": "リラクゼーションを促すメロディが、夜の終わりにぴったり。",
+      "whyPersonaFit": "竹内まりやの音楽は、夜の静けさを感じさせます。",
+      "whyThemeFit": "シティポップの美しさを再確認させてくれる楽曲。",
+      "year_guess": 1985
+    }
+  ]
+}

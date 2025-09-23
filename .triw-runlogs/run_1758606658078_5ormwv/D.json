@@ -1,0 +1,175 @@
+{
+  "resolved": [
+    {
+      "title": "Plastic Love",
+      "artist": "竹内まりや",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4BUWz7BLWrdfJftyPkAjap",
+        "uri": "spotify:track:4BUWz7BLWrdfJftyPkAjap",
+        "name": "Plastic Love (From \"Mariya Takeuchi\")",
+        "artists": [
+          "Nattalia Sarria"
+        ],
+        "release_year": 2021,
+        "popularity": 18,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273a1584bb3ab15a637f9c65914",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "松原みき",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7xmkcZJJsT1san7GjuksE6",
+        "uri": "spotify:track:7xmkcZJJsT1san7GjuksE6",
+        "name": "Stay With Me",
+        "artists": [
+          "Shane Mesa",
+          "Miki Matsubara"
+        ],
+        "release_year": 2022,
+        "popularity": 23,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730d7925a25c0aae26d9fc4d06",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Trip",
+      "artist": "小林麻美",
+      "year_guess": null,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4dxRUlwCaI9nHUGrfWbLqT",
+        "uri": "spotify:track:4dxRUlwCaI9nHUGrfWbLqT",
+        "name": "Love Trip",
+        "artists": [
+          "Miki Asakura"
+        ],
+        "release_year": 1983,
+        "popularity": 27,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b82e49998725026481658586",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Desire",
+      "artist": "中森明菜",
+      "year_guess": 1986,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7mGrHfdQmP4ChPzrpCUF5B",
+        "uri": "spotify:track:7mGrHfdQmP4ChPzrpCUF5B",
+        "name": "DESIRE -情熱- - 30th anniversary mix",
+        "artists": [
+          "Akina Nakamori"
+        ],
+        "release_year": 2012,
+        "popularity": 48,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2739a332fa3f31d368932d36442",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ue o Muite Arukou",
+      "artist": "坂本九",
+      "year_guess": 1961,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3UVC6gZhU95sX15cHkkyt5",
+        "uri": "spotify:track:3UVC6gZhU95sX15cHkkyt5",
+        "name": "Ue O Muite Aruko",
+        "artists": [
+          "Traditional",
+          "Carl Doy"
+        ],
+        "release_year": 2023,
+        "popularity": 11,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735712f7844d49aaa24c0f91a5",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kimi no Shiranai Monogatari",
+      "artist": "supercell",
+      "year_guess": 2009,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1C95FknCsIYiWDOGBpYgTh",
+        "uri": "spotify:track:1C95FknCsIYiWDOGBpYgTh",
+        "name": "Kimi no Shiranai Monogatari - Alice Thymefield Version",
+        "artists": [
+          "Diana Garnet"
+        ],
+        "release_year": 2025,
+        "popularity": 9,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2734eb4afed03d5c637023c0f04",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Sukiyaki",
+      "artist": "Kyu Sakamoto",
+      "year_guess": 1961,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0EYKtEb2mKXxlnMD6aqYig",
+        "uri": "spotify:track:0EYKtEb2mKXxlnMD6aqYig",
+        "name": "Sukiyaki",
+        "artists": [
+          "Kyu Sakamoto"
+        ],
+        "release_year": 2014,
+        "popularity": 42,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273449e044308981945660f6494",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": [
+    {
+      "title": "Mizu no Naka no Suna",
+      "artist": "大貫妙子"
+    },
+    {
+      "title": "Kimi ni Mune Kyun",
+      "artist": "Yumi Matsutoya"
+    },
+    {
+      "title": "Kaze ni Naru",
+      "artist": "Yumi Matsutoya"
+    },
+    {
+      "title": "Futari no Sekai",
+      "artist": "Kenshi Yonezu"
+    },
+    {
+      "title": "Kimi ni Aitakute",
+      "artist": "Yumi Matsutoya"
+    }
+  ]
+}

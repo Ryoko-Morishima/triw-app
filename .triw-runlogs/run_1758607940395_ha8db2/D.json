@@ -1,0 +1,306 @@
+{
+  "resolved": [
+    {
+      "title": "Plastic Love",
+      "artist": "Mariya Takeuchi",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1Z1fN0KFNu0aG2EpbBVwvN",
+        "uri": "spotify:track:1Z1fN0KFNu0aG2EpbBVwvN",
+        "name": "プラスティック・ラブ",
+        "artists": [
+          "Mariya Takeuchi"
+        ],
+        "release_year": 1984,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 47,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27387828495cbe9ed95f3fee3f6",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "Miki Matsubara",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7xmkcZJJsT1san7GjuksE6",
+        "uri": "spotify:track:7xmkcZJJsT1san7GjuksE6",
+        "name": "Stay With Me",
+        "artists": [
+          "Shane Mesa",
+          "Miki Matsubara"
+        ],
+        "release_year": 2022,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 23,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730d7925a25c0aae26d9fc4d06",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Trip",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1986,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0GlBch8nzT4GqrAkgVZCbI",
+        "uri": "spotify:track:0GlBch8nzT4GqrAkgVZCbI",
+        "name": "リフレインが叫んでる",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1988,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 51,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273d827860cfe19a17d11f62643",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Koi wa Timing",
+      "artist": "Yoshiko Matsumura",
+      "year_guess": 1985,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "359IiO08eIz2kcwoS74EkD",
+        "uri": "spotify:track:359IiO08eIz2kcwoS74EkD",
+        "name": "ようこそ輝く時間へ",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1982,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 30,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273c2910b6fbf18dab6e6f1844c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Get Wild",
+      "artist": "TM Network",
+      "year_guess": 1987,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7MBCVS5iqoAY6F106jdLOb",
+        "uri": "spotify:track:7MBCVS5iqoAY6F106jdLOb",
+        "name": "Get Wild",
+        "artists": [
+          "TM NETWORK"
+        ],
+        "release_year": 1984,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 56,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b04e8ab312028a90e920b327",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Aitai",
+      "artist": "Anri",
+      "year_guess": 1985,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1XdbHXybUQQGdfCqgkDH6t",
+        "uri": "spotify:track:1XdbHXybUQQGdfCqgkDH6t",
+        "name": "あなたに逢いたい",
+        "artists": [
+          "Anri Kumaki"
+        ],
+        "release_year": 2005,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 3,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27391791cd2f6398333ed4da56d",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Yume no Naka e",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1980,
+      "intended_role": "deep",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "6nNNPGkGbE1S8JsCK65UQm",
+        "uri": "spotify:track:6nNNPGkGbE1S8JsCK65UQm",
+        "name": "夢の中で ～ We are not alone, forever - 映画バージョン",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1997,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 6,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273041a0b6ddd7a063f13b36b5f",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Shinzo e Suzukake",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1986,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6UOAdIrMRnGli0VFHxeJnv",
+        "uri": "spotify:track:6UOAdIrMRnGli0VFHxeJnv",
+        "name": "ノーサイド",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1984,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 45,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27363bcc2884c5430c0465a1e92",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kimi ni Mune Kyun",
+      "artist": "Yoko Oginome",
+      "year_guess": 1986,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0dzBEek5ytjNV98y9zmHmD",
+        "uri": "spotify:track:0dzBEek5ytjNV98y9zmHmD",
+        "name": "さよならの果実たち",
+        "artists": [
+          "Yoko Oginome"
+        ],
+        "release_year": 1987,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 32,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732e7ab6c44ed612235f570690",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Sukiyaki",
+      "artist": "Kyu Sakamoto",
+      "year_guess": 1961,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6ldy2GNFHcL9kxv0fD5jpy",
+        "uri": "spotify:track:6ldy2GNFHcL9kxv0fD5jpy",
+        "name": "Sukiyaki",
+        "artists": [
+          "Kyu Sakamoto"
+        ],
+        "release_year": 1960,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 14,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2733abeba9e8f30a27a087f67d6",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Dance With Me",
+      "artist": "Kiyotaka Sugiyama",
+      "year_guess": 1988,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4dZbiGtVeD9S2DmwM3Jzxg",
+        "uri": "spotify:track:4dZbiGtVeD9S2DmwM3Jzxg",
+        "name": "Dance With Me",
+        "artists": [
+          "Ciara",
+          "Tyga"
+        ],
+        "release_year": 2025,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 64,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2734f82ff55e17b29fab6e227cc",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Aozora no Sora",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1984,
+      "intended_role": "deep",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "0aRPz0c89bqxTA5spi8iZ7",
+        "uri": "spotify:track:0aRPz0c89bqxTA5spi8iZ7",
+        "name": "守ってあげたい",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1981,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737ab51915bbd165b7081bf56f",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Sora ni Utaeba",
+      "artist": "Anri",
+      "year_guess": 1986,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "20JcU4ZiYAuKE4oIal8WoV",
+        "uri": "spotify:track:20JcU4ZiYAuKE4oIal8WoV",
+        "name": "DRIVING MY LOVE",
+        "artists": [
+          "Anri"
+        ],
+        "release_year": 1983,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 54,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273cfd93d36fe2365f9436587d1",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

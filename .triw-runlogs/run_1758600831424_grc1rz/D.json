@@ -1,0 +1,278 @@
+{
+  "resolved": [
+    {
+      "title": "The Thrill Is Gone",
+      "artist": "B.B. King",
+      "year_guess": 1969,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4NQfrmGs9iQXVQI9IpRhjM",
+        "uri": "spotify:track:4NQfrmGs9iQXVQI9IpRhjM",
+        "name": "The Thrill Is Gone",
+        "artists": [
+          "B.B. King"
+        ],
+        "release_year": 1969,
+        "popularity": 65,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2731a04649cc2ddb348a9e08f23",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ain't No Sunshine",
+      "artist": "Bill Withers",
+      "year_guess": 1971,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1k1Bqnv2R0uJXQN4u6LKYt",
+        "uri": "spotify:track:1k1Bqnv2R0uJXQN4u6LKYt",
+        "name": "Ain't No Sunshine",
+        "artists": [
+          "Bill Withers"
+        ],
+        "release_year": 1971,
+        "popularity": 81,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e1e350d06ffebd2e19e047ce",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Don't Let Me Be Misunderstood",
+      "artist": "Nina Simone",
+      "year_guess": 1964,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7M9pPyt8Gr41THLhbz4NSB",
+        "uri": "spotify:track:7M9pPyt8Gr41THLhbz4NSB",
+        "name": "Don't Let Me Be Misunderstood",
+        "artists": [
+          "Nina Simone"
+        ],
+        "release_year": 1964,
+        "popularity": 62,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2731bc47b0dbddd7142c9a2ebf0",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "River",
+      "artist": "Joni Mitchell",
+      "year_guess": 1971,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0DAmSYQW9kq9gQNDI002KP",
+        "uri": "spotify:track:0DAmSYQW9kq9gQNDI002KP",
+        "name": "River",
+        "artists": [
+          "Joni Mitchell"
+        ],
+        "release_year": 1971,
+        "popularity": 54,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e79dc1438d650f426b5e99a7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Back to Black",
+      "artist": "Amy Winehouse",
+      "year_guess": 2006,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "30FURVTCpbKyykjSEQzGkH",
+        "uri": "spotify:track:30FURVTCpbKyykjSEQzGkH",
+        "name": "Back To Black",
+        "artists": [
+          "Amy Winehouse"
+        ],
+        "release_year": 2006,
+        "popularity": 72,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2738f52f321140e4a76ea720c52",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "If I Had a Hammer",
+      "artist": "Trini Lopez",
+      "year_guess": 1963,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1eQEde8YymLpz3LVcgOIaj",
+        "uri": "spotify:track:1eQEde8YymLpz3LVcgOIaj",
+        "name": "If I Had a Hammer",
+        "artists": [
+          "Trini Lopez"
+        ],
+        "release_year": 1958,
+        "popularity": 43,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273f612e127a7b53822d9ab2e28",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "I Can't Quit You Baby",
+      "artist": "Otis Rush",
+      "year_guess": 1956,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1TVtYIucWI5fqdQwwlZFR3",
+        "uri": "spotify:track:1TVtYIucWI5fqdQwwlZFR3",
+        "name": "I Can't Quit You Baby",
+        "artists": [
+          "Otis Rush"
+        ],
+        "release_year": 1956,
+        "popularity": 32,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732992c8ece39acfe61fe3aebb",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Hurt",
+      "artist": "Johnny Cash",
+      "year_guess": 2002,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "28cnXtME493VX9NOw9cIUh",
+        "uri": "spotify:track:28cnXtME493VX9NOw9cIUh",
+        "name": "Hurt",
+        "artists": [
+          "Johnny Cash"
+        ],
+        "release_year": 2002,
+        "popularity": 73,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2736f4f62da3d811b6501a69ffa",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Nobody Knows You When You're Down and Out",
+      "artist": "Bessie Smith",
+      "year_guess": 1929,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3ru8IZrBxuFFHOFKEvvpFP",
+        "uri": "spotify:track:3ru8IZrBxuFFHOFKEvvpFP",
+        "name": "Nobody Knows You When You're Down and Out - 78rpm Version",
+        "artists": [
+          "Bessie Smith"
+        ],
+        "release_year": 1997,
+        "popularity": 38,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27342d93283590f758aad83807e",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "I’d Rather Go Blind",
+      "artist": "Etta James",
+      "year_guess": 1968,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1kPBT8S2wJFNAyBMnGVZgL",
+        "uri": "spotify:track:1kPBT8S2wJFNAyBMnGVZgL",
+        "name": "I'd Rather Go Blind",
+        "artists": [
+          "Etta James"
+        ],
+        "release_year": 1968,
+        "popularity": 75,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737649604d1b27be1c78c466e9",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "The Sky Is Crying",
+      "artist": "Elmore James",
+      "year_guess": 1959,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7mW3XmWeDUo02M4GbO0fiC",
+        "uri": "spotify:track:7mW3XmWeDUo02M4GbO0fiC",
+        "name": "The Sky Is Crying",
+        "artists": [
+          "Elmore James"
+        ],
+        "release_year": 1963,
+        "popularity": 49,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273c0029557e9ebc603b47c37a5",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love in Vain",
+      "artist": "Robert Johnson",
+      "year_guess": 1937,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6xvY8RthrKhbkY3lxxH752",
+        "uri": "spotify:track:6xvY8RthrKhbkY3lxxH752",
+        "name": "Love in Vain - Take 1",
+        "artists": [
+          "Robert Johnson"
+        ],
+        "release_year": 1936,
+        "popularity": 34,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2731dbb341963b1e8bd7eb57885",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Blues Before Sunrise",
+      "artist": "John Lee Hooker",
+      "year_guess": 1962,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0gHeDEGKk5Pnm3LfgrY9tG",
+        "uri": "spotify:track:0gHeDEGKk5Pnm3LfgrY9tG",
+        "name": "Blues Before Sunrise",
+        "artists": [
+          "John Lee Hooker"
+        ],
+        "release_year": 1962,
+        "popularity": 33,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273a359e57b14e2961fd4b9764c",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

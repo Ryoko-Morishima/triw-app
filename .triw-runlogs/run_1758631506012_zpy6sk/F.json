@@ -1,0 +1,151 @@
+{
+  "program_duration_ms": 2700000,
+  "tracks": [
+    {
+      "title": "Hey Jude",
+      "artist": "The Beatles",
+      "uri": "spotify:track:3m7V717IKZqZLW5qUIOxdD",
+      "index": 1,
+      "start_at_ms": 0,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代近似",
+      "confidence": 0.65
+    },
+    {
+      "title": "Mr. Blue Sky",
+      "artist": "Electric Light Orchestra",
+      "uri": "spotify:track:2RlgNHKcydI9sayD2Df2xp",
+      "index": 2,
+      "start_at_ms": 225000,
+      "duration_ms": 225000,
+      "role": "deep",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "Love You To",
+      "artist": "The Beatles",
+      "uri": "spotify:track:4RdJFhfLQcezwN5LsXl4qP",
+      "index": 3,
+      "start_at_ms": 450000,
+      "duration_ms": 225000,
+      "role": "wildcard",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "A Day in the Life",
+      "artist": "The Beatles",
+      "uri": "spotify:track:0hKRSZhUGEhKU6aNSPBACZ",
+      "index": 4,
+      "start_at_ms": 675000,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "Time of the Season",
+      "artist": "The Zombies",
+      "uri": "spotify:track:3vMfr8H7hGbOLoddLdCQU4",
+      "index": 5,
+      "start_at_ms": 900000,
+      "duration_ms": 225000,
+      "role": "deep",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "Here Comes the Sun",
+      "artist": "The Beatles",
+      "uri": "spotify:track:6dGnYIeXmHdcikdzNNDMm2",
+      "index": 6,
+      "start_at_ms": 1125000,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "God Only Knows",
+      "artist": "The Beach Boys",
+      "uri": "spotify:track:17QTsL4K9B9v4rI8CAIdfC",
+      "index": 7,
+      "start_at_ms": 1350000,
+      "duration_ms": 225000,
+      "role": "deep",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "For No One",
+      "artist": "The Beatles",
+      "uri": "spotify:track:1kDkaFlmkdEZiVUogaP9OZ",
+      "index": 8,
+      "start_at_ms": 1575000,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "Wild World",
+      "artist": "Cat Stevens",
+      "uri": "spotify:track:7mjSHL2Eb0kAwiKbvNNyD9",
+      "index": 9,
+      "start_at_ms": 1800000,
+      "duration_ms": 225000,
+      "role": "deep",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "Come Together",
+      "artist": "The Beatles",
+      "uri": "spotify:track:2EqlS6tkEnglzr7tkKAAYD",
+      "index": 10,
+      "start_at_ms": 2025000,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "All Along the Watchtower",
+      "artist": "Bob Dylan",
+      "uri": "spotify:track:0Fnb2pfBfu0ka33d6Yki17",
+      "index": 11,
+      "start_at_ms": 2250000,
+      "duration_ms": 225000,
+      "role": "deep",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    },
+    {
+      "title": "In My Life",
+      "artist": "The Beatles",
+      "uri": "spotify:track:3KfbEIOC7YIv90FIfNSZpo",
+      "index": 12,
+      "start_at_ms": 2475000,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代一致",
+      "confidence": 0.9
+    }
+  ],
+  "stats": {
+    "total_candidates": 20,
+    "accepted_count": 12,
+    "unique_artists": 6,
+    "per_role": {
+      "anchor": 6,
+      "deep": 5,
+      "wildcard": 1,
+      "unknown": 0
+    },
+    "artist_policy_effective": "none",
+    "focus_artist_auto": "ビートルズ",
+    "focus_reason": "title/overview パターン: ビートルズ 特集"
+  }
+}

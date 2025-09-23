@@ -1,0 +1,306 @@
+{
+  "resolved": [
+    {
+      "title": "Plastic Love",
+      "artist": "竹内まりや",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1Z1fN0KFNu0aG2EpbBVwvN",
+        "uri": "spotify:track:1Z1fN0KFNu0aG2EpbBVwvN",
+        "name": "プラスティック・ラブ",
+        "artists": [
+          "Mariya Takeuchi"
+        ],
+        "release_year": 1984,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 47,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27387828495cbe9ed95f3fee3f6",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "松原みき",
+      "year_guess": 1986,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7xmkcZJJsT1san7GjuksE6",
+        "uri": "spotify:track:7xmkcZJJsT1san7GjuksE6",
+        "name": "Stay With Me",
+        "artists": [
+          "Shane Mesa",
+          "Miki Matsubara"
+        ],
+        "release_year": 2022,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 23,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730d7925a25c0aae26d9fc4d06",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "愛は勝つ",
+      "artist": "KAN",
+      "year_guess": 1990,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7MqaQIHyo7Ud1QzDSmWpQ0",
+        "uri": "spotify:track:7MqaQIHyo7Ud1QzDSmWpQ0",
+        "name": "愛は勝つ",
+        "artists": [
+          "KAN"
+        ],
+        "release_year": 1990,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273a5dba50181f5fc2ea2dd45ce",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "君がいるだけで",
+      "artist": "米米CLUB",
+      "year_guess": 1992,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3gWJIQefaaSuOU6RJlDLm9",
+        "uri": "spotify:track:3gWJIQefaaSuOU6RJlDLm9",
+        "name": "君がいるだけで",
+        "artists": [
+          "Kome Kome Club"
+        ],
+        "release_year": 1991,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 61,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b75e3a008636d59b3cdb9576",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Lovin' You",
+      "artist": "山下達郎",
+      "year_guess": 1982,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6JNS0hnCexNDxUyE4U5Kzb",
+        "uri": "spotify:track:6JNS0hnCexNDxUyE4U5Kzb",
+        "name": "Lovin' you",
+        "artists": [
+          "Misato Watanabe"
+        ],
+        "release_year": 1985,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 34,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732126f65e7af65399b24555df",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Sweet Memories",
+      "artist": "松田聖子",
+      "year_guess": 1983,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4bgVk4itt6wPVrJJwh5vyp",
+        "uri": "spotify:track:4bgVk4itt6wPVrJJwh5vyp",
+        "name": "SWEET MEMORIES",
+        "artists": [
+          "Seiko Matsuda"
+        ],
+        "release_year": 1980,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 49,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e17f9ba29e61f30bbf6cf8bd",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Midnight Shuffle",
+      "artist": "大貫妙子",
+      "year_guess": 1981,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4c0aVMcoBWVnxDsKmE84V1",
+        "uri": "spotify:track:4c0aVMcoBWVnxDsKmE84V1",
+        "name": "MIDNIGHT SHUFFLE",
+        "artists": [
+          "THE MODS"
+        ],
+        "release_year": 2006,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 1,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273d9c50ea6c023dd54ee1bc740",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Summer Breeze",
+      "artist": "サーカス",
+      "year_guess": 1982,
+      "intended_role": "wildcard",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "4CycqwibYuv1vYPrtkNHj6",
+        "uri": "spotify:track:4CycqwibYuv1vYPrtkNHj6",
+        "name": "SUMMER BREEZE",
+        "artists": [
+          "go!go!vanillas"
+        ],
+        "release_year": 2019,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 42,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2736ad4c38c584d2b7629fc2fd5",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Trip",
+      "artist": "中原めいこ",
+      "year_guess": 1985,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1Jq89qHEa2S1bu9ah1wavm",
+        "uri": "spotify:track:1Jq89qHEa2S1bu9ah1wavm",
+        "name": "LOVE TRIP",
+        "artists": [
+          "間宮貴子"
+        ],
+        "release_year": 1982,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 47,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273201e417b261e3e65ecff9681",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "ルビーの指環",
+      "artist": "寺尾聰",
+      "year_guess": 1981,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0d44Njo4glyy97W6AvvMLT",
+        "uri": "spotify:track:0d44Njo4glyy97W6AvvMLT",
+        "name": "ルビーの指環",
+        "artists": [
+          "Akira Terao"
+        ],
+        "release_year": 1981,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2738b5c74c4167a9c6494475d4c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "愛の休日",
+      "artist": "山下達郎",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "65byhZ5ZXDoNm0EnskedHr",
+        "uri": "spotify:track:65byhZ5ZXDoNm0EnskedHr",
+        "name": "丘の上の愛",
+        "artists": [
+          "Shogo Hamada"
+        ],
+        "release_year": 1975,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 41,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27373f3fde0e4a8c4e9a0a767b9",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "真夏の夜の夢",
+      "artist": "松田聖子",
+      "year_guess": 1983,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6xDRwhmX72GTVpJCPNsYz4",
+        "uri": "spotify:track:6xDRwhmX72GTVpJCPNsYz4",
+        "name": "真夏の夜の夢",
+        "artists": [
+          "Seiko Matsuda",
+          "Takashi Fujii"
+        ],
+        "release_year": 2007,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 5,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732d63cce24dc99b634313f47d",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "月のあかり",
+      "artist": "荻野目洋子",
+      "year_guess": 1988,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "5FTG9yTXV68vSkih9jqS1I",
+        "uri": "spotify:track:5FTG9yTXV68vSkih9jqS1I",
+        "name": "月のあかり",
+        "artists": [
+          "Masahiro Kuwana"
+        ],
+        "release_year": 2012,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 36,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27379337897bc1d904830323abd",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

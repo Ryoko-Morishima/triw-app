@@ -40,11 +40,13 @@ export async function getMe(token: string) {
   return sFetch("/me", token);
 }
 
+// ---------- 正規化 & ユーティリティ ----------
 function normTitle(s: string) {
   return (s || "")
     .toLowerCase()
-    .replace(/\s*\(.*?(remaster|remastered|live|acoustic|edit|version).*?\)\s*/g, "")
-    .replace(/\s*-\s*(remaster|remastered|live|acoustic|edit|version).*?$/g, "")
+    // カッコ内のRemix/Version系は落とす（副題は可能な限り保持）
+    .replace(/\s*\(([^)]*?(remaster|remastered|live|acoustic|edit|version|remix|re[-\s]?recorded)[^)]*?)\)\s*/gi, " ")
+    .replace(/\s*-\s*(remaster|remastered|live|acoustic|edit|version|remix|re[-\s]?recorded).*?$/gi, "")
     .replace(/[“”"’']/g, "")
     .replace(/\s+/g, " ")
     .trim();
@@ -65,78 +67,188 @@ function overlap(a: Set<string>, b: Set<string>) {
   for (const t of a) if (b.has(t)) n++;
   return n;
 }
+function releaseYearFrom(dateStr?: string | null): number | null {
+  if (!dateStr) return null;
+  const m = String(dateStr).match(/^\d{4}/);
+  return m ? Number(m[0]) : null;
+}
+export { releaseYearFrom };
 
+// ---------- スコアリング（オリジナル優先 / エイリアス無し） ----------
+function artistScore(candArtists: string[], targetArtistRaw: string): { exact: boolean; score: number } {
+  const target = normArtist(targetArtistRaw);
+  const targetTok = tokenSet(target);
+  let partial = 0;
+  for (const a of candArtists) {
+    const na = normArtist(a);
+    if (na === target || na.includes(target) || target.includes(na)) {
+      return { exact: true, score: 2 };
+    }
+    const sc = overlap(tokenSet(na), targetTok);
+    if (sc > 0) partial = 1;
+  }
+  return { exact: false, score: partial };
+}
+
+// タイトル一致: 2=完全一致 / 1.5=部分一致（含む） / 1=前方・後方一致 / 0=不一致
+function titleMatchScore(candTitle: string, targetTitleNorm: string): number {
+  const nt = normTitle(candTitle);
+  if (!targetTitleNorm) return 0;
+  if (nt === targetTitleNorm) return 2;
+  if (nt.startsWith(targetTitleNorm) || targetTitleNorm.startsWith(nt)) return 1;
+  if (nt.includes(targetTitleNorm) || targetTitleNorm.includes(nt)) return 1.5;
+  return 0;
+}
+
+function yearProximityScore(candYear: number | null, yearGuess?: number | null): number {
+  if (!candYear || !yearGuess) return 0;
+  const d = Math.abs(candYear - yearGuess);
+  if (d <= 3) return 3;
+  if (d <= 6) return 2;
+  if (d <= 10) return 1;
+  return 0;
+}
+
+function looksLikeCoverOrRemix(name?: string | null): boolean {
+  const s = String(name || "");
+  const en = /\b(remix|cover|tribute|mix|re[-\s]?recorded)\b/i;
+  const ja = /(カバー|リミックス|ベスト|トリビュート)/;
+  return en.test(s) || ja.test(s);
+}
+
+function coverPenalty(cand: any, targetArtistRaw: string, yearGuess?: number | null): number {
+  const artists = (cand.artists || []).map((a: any) => a.name);
+  const aScore = artistScore(artists, targetArtistRaw);
+  const artistExact = aScore.exact;
+  const y = releaseYearFrom(cand?.album?.release_date);
+  const yearDiff = yearGuess && y ? Math.abs(y - yearGuess) : null;
+  const nameBad = looksLikeCoverOrRemix(cand?.name) || looksLikeCoverOrRemix(cand?.album?.name);
+
+  let pen = 0;
+  if (!artistExact) pen -= 4;
+  if (nameBad) pen -= 5;
+  if (!artistExact && yearDiff !== null) {
+    if (yearDiff >= 15) pen -= 3;
+    else if (yearDiff >= 10) pen -= 2;
+  }
+  return pen;
+}
+
+function scoreOne(
+  it: any,
+  titleNorm: string,
+  targetArtistRaw: string,
+  yearGuess?: number | null,
+  requireTitle: boolean = true
+): number {
+  const tScore = titleMatchScore(it.name, titleNorm);
+  if (requireTitle && tScore === 0) return Number.NEGATIVE_INFINITY;
+
+  const artists = (it.artists || []).map((a: any) => a.name);
+  const aMeta = artistScore(artists, targetArtistRaw);
+  const y = releaseYearFrom(it?.album?.release_date);
+  const yScore = yearProximityScore(y, yearGuess ?? null);
+  const pop = typeof it?.popularity === "number" ? it.popularity : 0;
+  const pen = coverPenalty(it, targetArtistRaw, yearGuess ?? null);
+
+  return (
+    (tScore || 0) * 3 +
+    aMeta.score * 4 +
+    yScore * 5 +
+    pop / 200 +
+    pen
+  );
+}
+
+function rerankCandidatesStrict(
+  items: any[],
+  titleNorm: string,
+  targetArtistRaw: string,
+  yearGuess?: number | null
+): any | null {
+  if (!Array.isArray(items) || items.length === 0) return null;
+  let best: any = null;
+  let bestScore = Number.NEGATIVE_INFINITY;
+  for (const it of items) {
+    const s = scoreOne(it, titleNorm, targetArtistRaw, yearGuess, true);
+    if (s > bestScore) {
+      best = it;
+      bestScore = s;
+    }
+  }
+  return bestScore === Number.NEGATIVE_INFINITY ? null : best;
+}
+
+function rerankCandidatesLoose(
+  items: any[],
+  titleNorm: string,
+  targetArtistRaw: string,
+  yearGuess?: number | null
+): any | null {
+  if (!Array.isArray(items) || items.length === 0) return null;
+  let best: any = null;
+  let bestScore = Number.NEGATIVE_INFINITY;
+  for (const it of items) {
+    const s = scoreOne(it, titleNorm, targetArtistRaw, yearGuess, false);
+    if (s > bestScore) {
+      best = it;
+      bestScore = s;
+    }
+  }
+  return best;
+}
+
+// ---------- 検索（クエリ多段 + 再ランキング + フォールバック） ----------
 export async function searchTrackBestEffort(
   token: string,
   titleRaw: string,
-  artistRaw: string
+  artistRaw: string,
+  yearGuess?: number | null
 ): Promise<FoundTrack | null> {
   const t0 = normTitle(titleRaw);
-  const a0 = normArtist(artistRaw);
 
-  // Try1: 厳密（ANDクエリ + from_token）
-  const q1 = `type=track&limit=10&market=from_token&q=${encodeURIComponent(`track:"${titleRaw}" artist:"${artistRaw}"`)}`;
-  const hit1 = await pick(token, q1, t0, a0);
-  if (hit1) return hit1;
+  async function searchPick(q: string): Promise<FoundTrack | null> {
+    const json = await sFetch(`/search?${q}`, token);
+    const items = (json?.tracks?.items ?? []) as any[];
+    let best = rerankCandidatesStrict(items, t0, artistRaw, yearGuess);
+    if (!best) best = rerankCandidatesLoose(items, t0, artistRaw, yearGuess);
+    if (!best) return null;
+    return { id: best.id, uri: best.uri, name: best.name, artists: best.artists.map((x: any) => x.name) };
+  }
 
-  // Try2: 正規化後
-  const q2 = `type=track&limit=10&market=from_token&q=${encodeURIComponent(`track:"${t0}" artist:"${a0}"`)}`;
-  const hit2 = await pick(token, q2, t0, a0);
-  if (hit2) return hit2;
+  const queries: string[] = [
+    `type=track&limit=20&market=from_token&q=${encodeURIComponent(`track:"${titleRaw}" artist:"${artistRaw}"`)}`,
+    `type=track&limit=20&market=from_token&q=${encodeURIComponent(`track:"${t0}" artist:"${artistRaw}"`)}`,
+    `type=track&limit=20&market=from_token&q=${encodeURIComponent(`${titleRaw} ${artistRaw}`)}`,
+    `type=track&limit=20&market=from_token&q=${encodeURIComponent(titleRaw)}`,
+    `type=track&limit=20&market=JP&q=${encodeURIComponent(titleRaw)}`,
+    `type=track&limit=20&q=${encodeURIComponent(titleRaw)}`,
+    `type=track&limit=20&q=${encodeURIComponent(t0)}`,
+  ];
 
-  // Try3: タイトル+アーティストの素検索（引用なし）
-  const q3 = `type=track&limit=20&market=from_token&q=${encodeURIComponent(`${titleRaw} ${artistRaw}`)}`;
-  const hit3 = await pickLoose(token, q3, t0, a0);
-  if (hit3) return hit3;
-
-  // Try4: タイトル単独検索→アーティストのトークン重なりで最大を選ぶ
-  const q4 = `type=track&limit=20&market=from_token&q=${encodeURIComponent(titleRaw)}`;
-  const hit4 = await pickBestByArtistOverlap(token, q4, t0, a0);
-  if (hit4) return hit4;
-
-  return null;
-}
-
-async function pick(token: string, query: string, t0: string, a0: string): Promise<FoundTrack | null> {
-  const json = await sFetch(`/search?${query}`, token);
-  const items = (json?.tracks?.items ?? []) as any[];
-  for (const it of items) {
-    const nt = normTitle(it.name);
-    const na = normArtist((it.artists?.[0]?.name ?? "") as string);
-    if ((nt === t0 || nt.startsWith(t0) || t0.startsWith(nt)) && (na === a0 || a0.includes(na) || na.includes(a0))) {
-      return { id: it.id, uri: it.uri, name: it.name, artists: it.artists.map((x: any) => x.name) };
-    }
+  for (const q of queries) {
+    const hit = await searchPick(q);
+    if (hit) return hit;
   }
   return null;
 }
-async function pickLoose(token: string, query: string, t0: string, a0: string): Promise<FoundTrack | null> {
-  const json = await sFetch(`/search?${query}`, token);
-  const items = (json?.tracks?.items ?? []) as any[];
-  for (const it of items) {
-    const nt = normTitle(it.name);
-    const na = normArtist((it.artists?.[0]?.name ?? "") as string);
-    if ((nt.includes(t0) || t0.includes(nt)) && (na === a0 || a0.includes(na) || na.includes(a0))) {
-      return { id: it.id, uri: it.uri, name: it.name, artists: it.artists.map((x: any) => x.name) };
-    }
-  }
-  return null;
-}
-async function pickBestByArtistOverlap(token: string, query: string, t0: string, a0: string): Promise<FoundTrack | null> {
-  const json = await sFetch(`/search?${query}`, token);
-  const items = (json?.tracks?.items ?? []) as any[];
-  const at = tokenSet(a0);
-  let best: any = null;
-  let bestScore = 0;
-  for (const it of items) {
-    const nt = normTitle(it.name);
-    if (!(nt === t0 || nt.startsWith(t0) || t0.startsWith(nt))) continue;
-    const na = tokenSet(normArtist((it.artists?.[0]?.name ?? "") as string));
-    const score = overlap(at, na);
-    if (score > bestScore) { best = it; bestScore = score; }
-  }
-  return best ? { id: best.id, uri: best.uri, name: best.name, artists: best.artists.map((x: any) => x.name) } : null;
+
+// ---------- ★ 追加：ISRC 検索 ----------
+/**
+ * 指定した ISRC を持つトラックを Spotify 検索APIで取得します。
+ * resolve.ts 側は { tracks: { items: [...] } } 形式を想定しているため、
+ * 生の検索レスポンスをそのまま返します。
+ */
+export async function searchTracksByISRC(
+  token: string,
+  isrc: string,
+  limit: number = 50
+): Promise<any> {
+  const q = `type=track&market=from_token&limit=${Math.max(1, Math.min(limit, 50))}&q=${encodeURIComponent(`isrc:${isrc}`)}`;
+  return sFetch(`/search?${q}`, token);
 }
 
+// ---------- プレイリスト ----------
 export async function createPlaylist(token: string, userId: string, name: string, description: string) {
   return sFetch(`/users/${encodeURIComponent(userId)}/playlists`, token, {
     method: "POST",
@@ -150,4 +262,15 @@ export async function addTracks(token: string, playlistId: string, uris: string[
     method: "POST",
     body: JSON.stringify({ uris }),
   });
+}
+
+// ---------- 詳細取得 / Audio Features ----------
+export async function getTrack(token: string, trackId: string) {
+  return sFetch(`/tracks/${encodeURIComponent(trackId)}`, token);
+}
+
+export async function getAudioFeatures(token: string, ids: string[]) {
+  if (!ids || ids.length === 0) return { audio_features: [] };
+  const q = ids.map(encodeURIComponent).join(",");
+  return sFetch(`/audio-features?ids=${q}`, token);
 }

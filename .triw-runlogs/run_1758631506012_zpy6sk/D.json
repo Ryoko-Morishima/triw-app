@@ -1,0 +1,465 @@
+{
+  "resolved": [
+    {
+      "title": "Hey Jude",
+      "artist": "The Beatles",
+      "year_guess": 1968,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3m7V717IKZqZLW5qUIOxdD",
+        "uri": "spotify:track:3m7V717IKZqZLW5qUIOxdD",
+        "name": "Hey Jude - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1973,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 57,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2736e3d3c964df32136fb1cd594",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "A Day in the Life",
+      "artist": "The Beatles",
+      "year_guess": 1967,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0hKRSZhUGEhKU6aNSPBACZ",
+        "uri": "spotify:track:0hKRSZhUGEhKU6aNSPBACZ",
+        "name": "A Day In The Life - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1967,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 62,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27334ef8f7d06cf2fc2146f420a",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Mr. Blue Sky",
+      "artist": "Electric Light Orchestra",
+      "year_guess": 1977,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "2RlgNHKcydI9sayD2Df2xp",
+        "uri": "spotify:track:2RlgNHKcydI9sayD2Df2xp",
+        "name": "Mr. Blue Sky",
+        "artists": [
+          "Electric Light Orchestra"
+        ],
+        "release_year": 1977,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 79,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273ae954a17f0cfa013c364bb06",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Here Comes the Sun",
+      "artist": "The Beatles",
+      "year_guess": 1969,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6dGnYIeXmHdcikdzNNDMm2",
+        "uri": "spotify:track:6dGnYIeXmHdcikdzNNDMm2",
+        "name": "Here Comes The Sun - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1969,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 82,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "For No One",
+      "artist": "The Beatles",
+      "year_guess": 1966,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1kDkaFlmkdEZiVUogaP9OZ",
+        "uri": "spotify:track:1kDkaFlmkdEZiVUogaP9OZ",
+        "name": "For No One - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1966,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 63,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27328b8b9b46428896e6491e97a",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Time of the Season",
+      "artist": "The Zombies",
+      "year_guess": 1968,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3vMfr8H7hGbOLoddLdCQU4",
+        "uri": "spotify:track:3vMfr8H7hGbOLoddLdCQU4",
+        "name": "Time Of The Season",
+        "artists": [
+          "The Zombies"
+        ],
+        "release_year": 1968,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 60,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27398ce064ab1bb36180d1b02ea",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "God Only Knows",
+      "artist": "The Beach Boys",
+      "year_guess": 1966,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "17QTsL4K9B9v4rI8CAIdfC",
+        "uri": "spotify:track:17QTsL4K9B9v4rI8CAIdfC",
+        "name": "God Only Knows - Remastered 1996",
+        "artists": [
+          "The Beach Boys"
+        ],
+        "release_year": 1966,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27350eb0c521d2d3b2f599bff04",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Come Together",
+      "artist": "The Beatles",
+      "year_guess": 1969,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2EqlS6tkEnglzr7tkKAAYD",
+        "uri": "spotify:track:2EqlS6tkEnglzr7tkKAAYD",
+        "name": "Come Together - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1969,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 77,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "In My Life",
+      "artist": "The Beatles",
+      "year_guess": 1965,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3KfbEIOC7YIv90FIfNSZpo",
+        "uri": "spotify:track:3KfbEIOC7YIv90FIfNSZpo",
+        "name": "In My Life - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1965,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 76,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273ed801e58a9ababdea6ac7ce4",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Wild World",
+      "artist": "Cat Stevens",
+      "year_guess": 1970,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7mjSHL2Eb0kAwiKbvNNyD9",
+        "uri": "spotify:track:7mjSHL2Eb0kAwiKbvNNyD9",
+        "name": "Wild World",
+        "artists": [
+          "Yusuf / Cat Stevens"
+        ],
+        "release_year": 1970,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e7248738c2f7ce3b5584b15d",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Let It Be",
+      "artist": "The Beatles",
+      "year_guess": 1970,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7iN1s7xHE4ifF5povM6A48",
+        "uri": "spotify:track:7iN1s7xHE4ifF5povM6A48",
+        "name": "Let It Be - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1970,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27384243a01af3c77b56fe01ab1",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Something",
+      "artist": "The Beatles",
+      "year_guess": 1969,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0pNeVovbiZHkulpGeOx1Gj",
+        "uri": "spotify:track:0pNeVovbiZHkulpGeOx1Gj",
+        "name": "Something - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1969,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 75,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "All Along the Watchtower",
+      "artist": "Bob Dylan",
+      "year_guess": 1967,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0Fnb2pfBfu0ka33d6Yki17",
+        "uri": "spotify:track:0Fnb2pfBfu0ka33d6Yki17",
+        "name": "All Along the Watchtower",
+        "artists": [
+          "Bob Dylan"
+        ],
+        "release_year": 1967,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 55,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27381efb7dfa40bbfa10a199e38",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Good Day Sunshine",
+      "artist": "The Beatles",
+      "year_guess": 1966,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7HTH1ppjkkOe7RLoBDKXYJ",
+        "uri": "spotify:track:7HTH1ppjkkOe7RLoBDKXYJ",
+        "name": "Good Day Sunshine - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1966,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 54,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27328b8b9b46428896e6491e97a",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Across the Universe",
+      "artist": "The Beatles",
+      "year_guess": 1970,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4dkoqJrP0L8FXftrMZongF",
+        "uri": "spotify:track:4dkoqJrP0L8FXftrMZongF",
+        "name": "Across The Universe - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1970,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27384243a01af3c77b56fe01ab1",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Take It Easy",
+      "artist": "Eagles",
+      "year_guess": 1972,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4yugZvBYaoREkJKtbG08Qr",
+        "uri": "spotify:track:4yugZvBYaoREkJKtbG08Qr",
+        "name": "Take It Easy - 2013 Remaster",
+        "artists": [
+          "Eagles"
+        ],
+        "release_year": 1972,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273c13acd642ba9f6f5f127aa1b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Yesterday",
+      "artist": "The Beatles",
+      "year_guess": 1965,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3BQHpFgAp4l80e1XslIjNI",
+        "uri": "spotify:track:3BQHpFgAp4l80e1XslIjNI",
+        "name": "Yesterday - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1965,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 75,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e3e3b64cea45265469d4cafa",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Dreams",
+      "artist": "Fleetwood Mac",
+      "year_guess": 1977,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5HY7oAMG0FSMewubwIf3iS",
+        "uri": "spotify:track:5HY7oAMG0FSMewubwIf3iS",
+        "name": "Dreams - Live 1977",
+        "artists": [
+          "Fleetwood Mac"
+        ],
+        "release_year": 1977,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 45,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e52a59a28efa4773dd2bfe1b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "We Can Work It Out",
+      "artist": "The Beatles",
+      "year_guess": 1965,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7LNiAjyg9P2GKINTtN6Yt8",
+        "uri": "spotify:track:7LNiAjyg9P2GKINTtN6Yt8",
+        "name": "We Can Work It Out - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1973,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 55,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735ef4660298ae29ee18799fc2",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love You To",
+      "artist": "The Beatles",
+      "year_guess": 1966,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4RdJFhfLQcezwN5LsXl4qP",
+        "uri": "spotify:track:4RdJFhfLQcezwN5LsXl4qP",
+        "name": "Love You To - Remastered 2009",
+        "artists": [
+          "The Beatles"
+        ],
+        "release_year": 1966,
+        "original_release_year": null,
+        "is_reissue": false,
+        "popularity": 51,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27328b8b9b46428896e6491e97a",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

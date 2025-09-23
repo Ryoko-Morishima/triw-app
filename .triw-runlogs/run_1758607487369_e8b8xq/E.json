@@ -1,0 +1,287 @@
+{
+  "picked": [],
+  "rejected": [
+    {
+      "title": "Plastic Love",
+      "artist": "Mariya Takeuchi",
+      "uri": null,
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false,
+      "debug": {
+        "match_kind": "none",
+        "popularity_score": 0,
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_score": 0,
+        "exists": false,
+        "exist_score": 0,
+        "total_before_round": 0
+      }
+    },
+    {
+      "title": "Koi wa Katsu",
+      "artist": "Yumi Matsutoya",
+      "uri": null,
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false,
+      "debug": {
+        "match_kind": "none",
+        "popularity_score": 0,
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_score": 0,
+        "exists": false,
+        "exist_score": 0,
+        "total_before_round": 0
+      }
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "Miki Matsubara",
+      "uri": "spotify:track:7xmkcZJJsT1san7GjuksE6",
+      "confidence": 0.3,
+      "reason": "人気度と狙いがずれ / Spotifyで実在確認済み",
+      "accepted": false,
+      "debug": {
+        "match_kind": "exact",
+        "resolved_title": "Stay With Me",
+        "resolved_artist0": "Shane Mesa",
+        "popularity": 23,
+        "popularity_hint": "high",
+        "popularity_score": 0,
+        "role": "anchor",
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_guess": 1982,
+        "release_year": 2022,
+        "year_score": 0,
+        "exists": true,
+        "exist_score": 0.3,
+        "total_before_round": 0.3
+      }
+    },
+    {
+      "title": "Love Talkin'",
+      "artist": "Anri",
+      "uri": "spotify:track:3IVnyUFJM070JT8f0NCJJr",
+      "confidence": 0.4,
+      "reason": "人気度と狙いがずれ / 役割(deep)と人気度の整合OK / Spotifyで実在確認済み",
+      "accepted": false,
+      "debug": {
+        "match_kind": "exact",
+        "resolved_title": "Love Talkin (City Pop) - Remix",
+        "resolved_artist0": "Jackson Porciúncula",
+        "popularity": 20,
+        "popularity_hint": "mid",
+        "popularity_score": 0,
+        "role": "deep",
+        "role_ok": true,
+        "role_score": 0.1,
+        "year_gate": false,
+        "year_guess": 2020,
+        "release_year": 2017,
+        "year_score": 0,
+        "exists": true,
+        "exist_score": 0.3,
+        "total_before_round": 0.4
+      }
+    },
+    {
+      "title": "Kimi wa 1000%",
+      "artist": "Kiyotaka Sugiyama",
+      "uri": null,
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false,
+      "debug": {
+        "match_kind": "none",
+        "popularity_score": 0,
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_score": 0,
+        "exists": false,
+        "exist_score": 0,
+        "total_before_round": 0
+      }
+    },
+    {
+      "title": "Shinunoga E-Wa",
+      "artist": "Fujii Kaze",
+      "uri": "spotify:track:6vyNVdruxS0NRiNTosilUI",
+      "confidence": 0.4,
+      "reason": "人気度と狙いがずれ / 役割(wildcard)と人気度の整合OK / Spotifyで実在確認済み",
+      "accepted": false,
+      "debug": {
+        "match_kind": "exact",
+        "resolved_title": "Shinunoga E-Wa",
+        "resolved_artist0": "Fujii Kaze",
+        "popularity": 34,
+        "popularity_hint": "high",
+        "popularity_score": 0,
+        "role": "wildcard",
+        "role_ok": true,
+        "role_score": 0.1,
+        "year_gate": false,
+        "year_guess": 2020,
+        "release_year": 2020,
+        "year_score": 0,
+        "exists": true,
+        "exist_score": 0.3,
+        "total_before_round": 0.4
+      }
+    },
+    {
+      "title": "Futari no Sekai",
+      "artist": "Yumi Matsutoya",
+      "uri": null,
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false,
+      "debug": {
+        "match_kind": "none",
+        "popularity_score": 0,
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_score": 0,
+        "exists": false,
+        "exist_score": 0,
+        "total_before_round": 0
+      }
+    },
+    {
+      "title": "Blue Light Yokohama",
+      "artist": "Ayumi Ishida",
+      "uri": null,
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false,
+      "debug": {
+        "match_kind": "none",
+        "popularity_score": 0,
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_score": 0,
+        "exists": false,
+        "exist_score": 0,
+        "total_before_round": 0
+      }
+    },
+    {
+      "title": "Yume no Naka e",
+      "artist": "Masaki Ueda",
+      "uri": null,
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false,
+      "debug": {
+        "match_kind": "none",
+        "popularity_score": 0,
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_score": 0,
+        "exists": false,
+        "exist_score": 0,
+        "total_before_round": 0
+      }
+    },
+    {
+      "title": "Lover's Rock",
+      "artist": "Tatsuro Yamashita",
+      "uri": "spotify:track:4A8jvQQ5EnKlTJIirMhgfA",
+      "confidence": 0.4,
+      "reason": "人気度と狙いがずれ / 役割(deep)と人気度の整合OK / Spotifyで実在確認済み",
+      "accepted": false,
+      "debug": {
+        "match_kind": "exact",
+        "resolved_title": "Lover's Rock - Remastered",
+        "resolved_artist0": "The Clash",
+        "popularity": 41,
+        "popularity_hint": "high",
+        "popularity_score": 0,
+        "role": "deep",
+        "role_ok": true,
+        "role_score": 0.1,
+        "year_gate": false,
+        "year_guess": 1982,
+        "release_year": 1979,
+        "year_score": 0,
+        "exists": true,
+        "exist_score": 0.3,
+        "total_before_round": 0.4
+      }
+    },
+    {
+      "title": "Ame ni Utaeba",
+      "artist": "Kiyotaka Sugiyama",
+      "uri": null,
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false,
+      "debug": {
+        "match_kind": "none",
+        "popularity_score": 0,
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_score": 0,
+        "exists": false,
+        "exist_score": 0,
+        "total_before_round": 0
+      }
+    },
+    {
+      "title": "Natsu no Hi no Yume",
+      "artist": "Anri",
+      "uri": null,
+      "confidence": 0,
+      "reason": "Spotifyで未解決",
+      "accepted": false,
+      "debug": {
+        "match_kind": "none",
+        "popularity_score": 0,
+        "role_ok": false,
+        "role_score": 0,
+        "year_gate": false,
+        "year_score": 0,
+        "exists": false,
+        "exist_score": 0,
+        "total_before_round": 0
+      }
+    },
+    {
+      "title": "Kaze ni Naru",
+      "artist": "Masaki Ueda",
+      "uri": "spotify:track:6vdb0nKY541PkYbPg9j57c",
+      "confidence": 0.4,
+      "reason": "人気度と狙いがずれ / 役割(deep)と人気度の整合OK / Spotifyで実在確認済み",
+      "accepted": false,
+      "debug": {
+        "match_kind": "exact",
+        "resolved_title": "KAZE",
+        "resolved_artist0": "EXILE ATSUSHI",
+        "popularity": 25,
+        "popularity_hint": "mid",
+        "popularity_score": 0,
+        "role": "deep",
+        "role_ok": true,
+        "role_score": 0.1,
+        "year_gate": false,
+        "year_guess": 2021,
+        "release_year": 2021,
+        "year_score": 0,
+        "exists": true,
+        "exist_score": 0.3,
+        "total_before_round": 0.4
+      }
+    }
+  ]
+}

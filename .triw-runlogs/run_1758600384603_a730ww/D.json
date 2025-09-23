@@ -1,0 +1,75 @@
+{
+  "resolved": [
+    {
+      "title": "Ain't Nobody",
+      "artist": "Chaka Khan",
+      "year_guess": null,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2NVpYQqdraEcQwqT7GhUkh",
+        "uri": "spotify:track:2NVpYQqdraEcQwqT7GhUkh",
+        "name": "Ain't Nobody",
+        "artists": [
+          "Chaka Khan"
+        ],
+        "release_year": 1996,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2734c5fac07f80bad278dfbad1e",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": [
+    {
+      "title": "Plastic Love",
+      "artist": "竹内まりや"
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "松原みき"
+    },
+    {
+      "title": "Kimi wa Tennen Shoku",
+      "artist": "大貫妙子"
+    },
+    {
+      "title": "Yume no Naka e",
+      "artist": "杏里"
+    },
+    {
+      "title": "Boys & Girls",
+      "artist": "Mariya Takeuchi"
+    },
+    {
+      "title": "City Lights",
+      "artist": "鈴木雅之"
+    },
+    {
+      "title": "Love Trip",
+      "artist": "石井明美"
+    },
+    {
+      "title": "Koi wa Lullaby",
+      "artist": "中原めいこ"
+    },
+    {
+      "title": "Goodbye, My Love",
+      "artist": "山下達郎"
+    },
+    {
+      "title": "Shiki no Uta",
+      "artist": "久保田利伸"
+    },
+    {
+      "title": "Kimi no Shiranai Monogatari",
+      "artist": "supercell"
+    },
+    {
+      "title": "Aozora no Kumo",
+      "artist": "小泉今日子"
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "resolved": [
+    {
+      "title": "Plastic Love",
+      "artist": "Mariya Takeuchi",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1Z1fN0KFNu0aG2EpbBVwvN",
+        "uri": "spotify:track:1Z1fN0KFNu0aG2EpbBVwvN",
+        "name": "プラスティック・ラブ",
+        "artists": [
+          "Mariya Takeuchi"
+        ],
+        "release_year": 1984,
+        "original_release_year": 1984,
+        "is_reissue": false,
+        "popularity": 47,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27387828495cbe9ed95f3fee3f6",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kimi wa Tennen Shounen",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1981,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0aRPz0c89bqxTA5spi8iZ7",
+        "uri": "spotify:track:0aRPz0c89bqxTA5spi8iZ7",
+        "name": "守ってあげたい",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1981,
+        "original_release_year": 1981,
+        "is_reissue": false,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737ab51915bbd165b7081bf56f",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "Miki Matsubara",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7xmkcZJJsT1san7GjuksE6",
+        "uri": "spotify:track:7xmkcZJJsT1san7GjuksE6",
+        "name": "Stay With Me",
+        "artists": [
+          "Shane Mesa",
+          "Miki Matsubara"
+        ],
+        "release_year": 2022,
+        "original_release_year": 2022,
+        "is_reissue": false,
+        "popularity": 23,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730d7925a25c0aae26d9fc4d06",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kaze ni Naru",
+      "artist": "Ayano Tsuji",
+      "year_guess": 1999,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7i5Ul3MROib4glCt1jbZq0",
+        "uri": "spotify:track:7i5Ul3MROib4glCt1jbZq0",
+        "name": "風になる（Acoustic Version)",
+        "artists": [
+          "Tsuji Ayano"
+        ],
+        "release_year": 2002,
+        "original_release_year": 2002,
+        "is_reissue": false,
+        "popularity": 47,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273765c71c0fbea21a81a581ded",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Talkin'",
+      "artist": "Yasuko Agawa",
+      "year_guess": 2021,
+      "intended_role": "wildcard",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "3IVnyUFJM070JT8f0NCJJr",
+        "uri": "spotify:track:3IVnyUFJM070JT8f0NCJJr",
+        "name": "Love Talkin (City Pop) - Remix",
+        "artists": [
+          "Jackson Porciúncula"
+        ],
+        "release_year": 2017,
+        "original_release_year": 2017,
+        "is_reissue": false,
+        "popularity": 20,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273679ab62b7117c5a8e6412ce2",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Bye Bye",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1981,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6VoIo76iI8ATaEunyCT4AU",
+        "uri": "spotify:track:6VoIo76iI8ATaEunyCT4AU",
+        "name": "Bye bye boy",
+        "artists": [
+          "Yumi Matsutoya"
+        ],
+        "release_year": 1994,
+        "original_release_year": 1994,
+        "is_reissue": false,
+        "popularity": 14,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273204d37d5927e143fe9d2255b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Blue Light Yokohama",
+      "artist": "Ayumi Ishida",
+      "year_guess": 1979,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "18djqpleUjBr6zO6tW3HSM",
+        "uri": "spotify:track:18djqpleUjBr6zO6tW3HSM",
+        "name": "ブルー・ライト・ヨコハマ",
+        "artists": [
+          "Ayumi Ishida"
+        ],
+        "release_year": 2012,
+        "original_release_year": 1969,
+        "is_reissue": true,
+        "popularity": 28,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2731e6f79100e33002639496de4",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Midnight Pretenders",
+      "artist": "Tomoko Aran",
+      "year_guess": 1983,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0JUWF44gfMszGNhjCF7Ufs",
+        "uri": "spotify:track:0JUWF44gfMszGNhjCF7Ufs",
+        "name": "Midnight Pretenders",
+        "artists": [
+          "Tomoko Aran"
+        ],
+        "release_year": 1983,
+        "original_release_year": 1983,
+        "is_reissue": false,
+        "popularity": 62,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273138d0143d948a5314d1aea19",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Natsu no Hi no 2000-nen",
+      "artist": "Kiyotaka Sugiyama",
+      "year_guess": 1986,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "65lD7kSyIK7WakLglh7IlD",
+        "uri": "spotify:track:65lD7kSyIK7WakLglh7IlD",
+        "name": "2000",
+        "artists": [
+          "DAB"
+        ],
+        "release_year": 2023,
+        "original_release_year": 2023,
+        "is_reissue": false,
+        "popularity": 38,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2733d835189f9d594c110f90027",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kaze ni Naru",
+      "artist": "Ayano Tsuji",
+      "year_guess": 1999,
+      "intended_role": "wildcard",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "7i5Ul3MROib4glCt1jbZq0",
+        "uri": "spotify:track:7i5Ul3MROib4glCt1jbZq0",
+        "name": "風になる（Acoustic Version)",
+        "artists": [
+          "Tsuji Ayano"
+        ],
+        "release_year": 2002,
+        "original_release_year": 2002,
+        "is_reissue": false,
+        "popularity": 47,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273765c71c0fbea21a81a581ded",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

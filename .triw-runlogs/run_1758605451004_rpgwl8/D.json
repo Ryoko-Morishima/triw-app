@@ -1,0 +1,213 @@
+{
+  "resolved": [
+    {
+      "title": "Plastic Love",
+      "artist": "Mariya Takeuchi",
+      "year_guess": 1984,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2qxTmEfGbBGMSJrwu4Ez1v",
+        "uri": "spotify:track:2qxTmEfGbBGMSJrwu4Ez1v",
+        "name": "Plastic Love",
+        "artists": [
+          "Friday Night Plans"
+        ],
+        "release_year": 2018,
+        "popularity": 41,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e1751c9aee471a40f86601d7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Stay With Me",
+      "artist": "Miki Matsubara",
+      "year_guess": 1982,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5r7TNpLRQgSxe41xEaz3fF",
+        "uri": "spotify:track:5r7TNpLRQgSxe41xEaz3fF",
+        "name": "真夜中のドア〜stay with me",
+        "artists": [
+          "Miki Matsubara"
+        ],
+        "release_year": 2008,
+        "popularity": 51,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27387a9458833df6cea79713fc7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Midnight Pretenders",
+      "artist": "Tomoko Aran",
+      "year_guess": 1983,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0JUWF44gfMszGNhjCF7Ufs",
+        "uri": "spotify:track:0JUWF44gfMszGNhjCF7Ufs",
+        "name": "Midnight Pretenders",
+        "artists": [
+          "Tomoko Aran"
+        ],
+        "release_year": 1983,
+        "popularity": 62,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273138d0143d948a5314d1aea19",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Talkin'",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1981,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3IVnyUFJM070JT8f0NCJJr",
+        "uri": "spotify:track:3IVnyUFJM070JT8f0NCJJr",
+        "name": "Love Talkin (City Pop) - Remix",
+        "artists": [
+          "Jackson Porciúncula"
+        ],
+        "release_year": 2017,
+        "popularity": 20,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273679ab62b7117c5a8e6412ce2",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Sayonara no Natsu",
+      "artist": "Yumi Matsutoya",
+      "year_guess": 1980,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "09Tgmk4qNyMPxjgPjqjV5b",
+        "uri": "spotify:track:09Tgmk4qNyMPxjgPjqjV5b",
+        "name": "Sayonara No Natsu",
+        "artists": [
+          "Cécile Corbel",
+          "Misaki Iwasa"
+        ],
+        "release_year": 2019,
+        "popularity": 26,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273656cdf9dcd9e17e33d414296",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ain't Nobody",
+      "artist": "Chaka Khan",
+      "year_guess": 1983,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2NVpYQqdraEcQwqT7GhUkh",
+        "uri": "spotify:track:2NVpYQqdraEcQwqT7GhUkh",
+        "name": "Ain't Nobody",
+        "artists": [
+          "Chaka Khan"
+        ],
+        "release_year": 1996,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2734c5fac07f80bad278dfbad1e",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Mikan",
+      "artist": "Kenshi Yonezu",
+      "year_guess": 2020,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6VOrdjftRFTcfMkFJSFHZ6",
+        "uri": "spotify:track:6VOrdjftRFTcfMkFJSFHZ6",
+        "name": "Mikan",
+        "artists": [
+          "Spirit Fest"
+        ],
+        "release_year": 2017,
+        "popularity": 0,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273fec647b82b98f635d993b1c7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ue o Muite Arukou",
+      "artist": "Kyu Sakamoto",
+      "year_guess": 1961,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3UVC6gZhU95sX15cHkkyt5",
+        "uri": "spotify:track:3UVC6gZhU95sX15cHkkyt5",
+        "name": "Ue O Muite Aruko",
+        "artists": [
+          "Traditional",
+          "Carl Doy"
+        ],
+        "release_year": 2023,
+        "popularity": 11,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735712f7844d49aaa24c0f91a5",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Blue Moon",
+      "artist": "Kiyotaka Sugiyama",
+      "year_guess": 1985,
+      "intended_role": "wildcard",
+      "popularity_hint": "low",
+      "spotify": {
+        "id": "47Yann2RUKWbjSIIjQadiC",
+        "uri": "spotify:track:47Yann2RUKWbjSIIjQadiC",
+        "name": "Blue Moon",
+        "artists": [
+          "Elvis Presley"
+        ],
+        "release_year": 1999,
+        "popularity": 39,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2733fa1809ae7f5b11ec4c02ce6",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": [
+    {
+      "title": "Kimi wa Tennen Shounen",
+      "artist": "Kiyotaka Sugiyama"
+    },
+    {
+      "title": "Kaze ni Naru",
+      "artist": "Kenshi Yonezu"
+    },
+    {
+      "title": "Blue Light Yokohama",
+      "artist": "Aki Yashiro"
+    },
+    {
+      "title": "Kimi to Kawaii Anoko no Uta",
+      "artist": "Takako Matsu"
+    }
+  ]
+}

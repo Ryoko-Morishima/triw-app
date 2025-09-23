@@ -1,0 +1,13 @@
+{
+  "runId": "run_1758631506012_zpy6sk",
+  "startedAt": "2025-09-23T12:45:06.012Z",
+  "title": "ビートルズ特集",
+  "description": "ビートルズを知らない人にこれぞという選曲でおとどけ",
+  "djId": "custom",
+  "mode": "duration",
+  "duration": 45,
+  "customDJ": {
+    "name": "やまだ",
+    "overview": "ビートルズにめっぽうくわしいよ。"
+  }
+}

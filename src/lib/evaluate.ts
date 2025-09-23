@@ -56,6 +56,11 @@ export type Evaluated = {
     release_year?: number | null;
     year_score: number;
 
+    // 追加: era ゲート情報
+    era_start?: number | null;
+    era_end?: number | null;
+    era_gate_applied?: boolean;
+
     exists: boolean;
     exist_score: number;
 
@@ -97,7 +102,7 @@ function findResolvedRowDetailed(
 // ===== スコア設計（popularity は不使用） =====
 // ・存在確認（exists）: +0.40
 // ・表記マッチ精度（exact / fuzzy）: +0.25 / +0.15
-// ・年代一致（year_gate 有効時・原盤年優先・±3年）: +0.25
+// ・年代一致（year_gate ON時）: +0.25（Era一致 または year_guess±3年一致）
 // 合格閾値: 0.50
 const EXIST_SCORE = 0.40;
 const MATCH_SCORE_EXACT = 0.25;
@@ -106,16 +111,24 @@ const YEAR_SCORE_ON_MATCH = 0.25;
 const YEAR_TOLERANCE = 3;
 const ACCEPT_THRESHOLD = 0.50;
 
+type EvalOpts = {
+  year_gate?: boolean;
+  // 追加: 番組レベルで抽出した時代（十年単位など）
+  era?: { start: number; end: number } | null;
+};
+
 export function evaluateTracks(
   _meta: RunMeta,
   candidates: CandidateC[],
   resolved: DResolved[],
-  opts?: { year_gate?: boolean }
+  opts?: EvalOpts
 ): { picked: Evaluated[]; rejected: Evaluated[] } {
   const picked: Evaluated[] = [];
   const rejected: Evaluated[] = [];
 
+  // ここが“スイッチ”
   const yearGate = !!(opts && opts.year_gate);
+  const era = opts?.era ?? null; // 例: {start:1990, end:1999}
 
   for (const c of candidates) {
     const { row, kind } = findResolvedRowDetailed(c, resolved);
@@ -144,6 +157,9 @@ export function evaluateTracks(
           year_guess: (c as any)?.year_guess ?? (c as any)?.year ?? null,
           release_year: null,
           year_score: 0,
+          era_start: era?.start ?? null,
+          era_end: era?.end ?? null,
+          era_gate_applied: !!era,
 
           exists: false,
           exist_score: 0,
@@ -180,7 +196,7 @@ export function evaluateTracks(
       reasons.push("表記不一致");
     }
 
-    // ---- C) 年代（ゲートONのときだけ評価） — 原盤年優先
+    // ---- C) 年代（ゲートON時は“ハード制約”）
     let year_score = 0;
     const yearGuess: number | null =
       (c as any)?.year_guess ?? (c as any)?.year ?? null;
@@ -189,20 +205,34 @@ export function evaluateTracks(
       row.spotify.release_year ??
       null;
 
+    let hardReject = false;
+
     if (yearGate) {
-      if (yearGuess && release) {
+      if (era && release) {
+        // Era 指定がある場合：範囲外は即不採用
+        if (release < era.start || release > era.end) {
+          hardReject = true;
+          reasons.push(`年代外（Era ${era.start}-${era.end}）`);
+        } else {
+          conf += YEAR_SCORE_ON_MATCH;
+          year_score = YEAR_SCORE_ON_MATCH;
+          reasons.push("Era一致");
+        }
+      } else if (yearGuess && release) {
         const diff = Math.abs(release - yearGuess);
         if (diff <= YEAR_TOLERANCE) {
           conf += YEAR_SCORE_ON_MATCH;
           year_score = YEAR_SCORE_ON_MATCH;
-          reasons.push("年代推定と一致（原盤年優先）");
-        } else if (diff <= 10) {
-          reasons.push("年代おおむね近似（再発の可能性）");
+          reasons.push(`年代推定と一致（±${YEAR_TOLERANCE}年）`);
         } else {
-          reasons.push("年代推定とズレ");
+          // Era 情報が無いケースは year_guess を厳格ゲートに使う
+          hardReject = true;
+          reasons.push("年代推定とズレ（ハードゲート）");
         }
       } else {
-        reasons.push("年代情報不十分");
+        // 判定材料が不足：ゲートONのときは安全側で reject
+        hardReject = true;
+        reasons.push("年代情報不足（ゲートON時は不採用）");
       }
     } else {
       reasons.push("年代ゲートOFF");
@@ -212,8 +242,15 @@ export function evaluateTracks(
     const role = (c as any)?.intended_role ?? undefined;
 
     const total_before_round = conf;
-    const confidence = Number(conf.toFixed(2));
-    const accepted = confidence >= ACCEPT_THRESHOLD;
+    let confidence = Number(conf.toFixed(2));
+    let accepted = confidence >= ACCEPT_THRESHOLD;
+
+    // ★ ハードゲート最終判定
+    if (hardReject) {
+      accepted = false;
+      // confidence は見やすさのため 0.49 に落として「閾値未満」を明示
+      confidence = Math.min(confidence, 0.49);
+    }
 
     const out: Evaluated = {
       title: c.title,
@@ -239,6 +276,10 @@ export function evaluateTracks(
         year_guess: yearGuess ?? null,
         release_year: release ?? null,
         year_score,
+
+        era_start: era?.start ?? null,
+        era_end: era?.end ?? null,
+        era_gate_applied: !!era,
 
         exists,
         exist_score,
