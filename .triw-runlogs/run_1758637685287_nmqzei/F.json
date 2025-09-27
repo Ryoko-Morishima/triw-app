@@ -1,0 +1,94 @@
+{
+  "program_duration_ms": 1575000,
+  "tracks": [
+    {
+      "title": "Creep",
+      "artist": "Radiohead",
+      "uri": "spotify:track:70LcF31zb1H0PyJoS1Sx1r",
+      "index": 1,
+      "start_at_ms": 0,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代推定と一致（±3年）",
+      "confidence": 0.9
+    },
+    {
+      "title": "First Day of My Life",
+      "artist": "Bright Eyes",
+      "uri": "spotify:track:0eBryM7ePQH3Klt3jz8xZd",
+      "index": 2,
+      "start_at_ms": 225000,
+      "duration_ms": 225000,
+      "role": "deep",
+      "reason": "実在OK / 表記=exact / 年代推定と一致（±3年）",
+      "confidence": 0.9
+    },
+    {
+      "title": "Take Me Out",
+      "artist": "Franz Ferdinand",
+      "uri": "spotify:track:20I8RduZC2PWMWTDCZuuAN",
+      "index": 3,
+      "start_at_ms": 450000,
+      "duration_ms": 225000,
+      "role": "wildcard",
+      "reason": "実在OK / 表記=exact / 年代推定と一致（±3年）",
+      "confidence": 0.9
+    },
+    {
+      "title": "There Is a Light That Never Goes Out",
+      "artist": "The Smiths",
+      "uri": "spotify:track:0WQiDwKJclirSYG9v5tayI",
+      "index": 4,
+      "start_at_ms": 675000,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代推定と一致（±3年）",
+      "confidence": 0.9
+    },
+    {
+      "title": "New Slang",
+      "artist": "The Shins",
+      "uri": "spotify:track:1wAqhAF1dynDjMy7m5CSSE",
+      "index": 5,
+      "start_at_ms": 900000,
+      "duration_ms": 225000,
+      "role": "deep",
+      "reason": "実在OK / 表記=exact / 年代推定と一致（±3年）",
+      "confidence": 0.9
+    },
+    {
+      "title": "Little Dark Age",
+      "artist": "MGMT",
+      "uri": "spotify:track:2Y0iGXY6m6immVb2ktbseM",
+      "index": 6,
+      "start_at_ms": 1125000,
+      "duration_ms": 225000,
+      "role": "wildcard",
+      "reason": "実在OK / 表記=exact / 年代推定と一致（±3年）",
+      "confidence": 0.9
+    },
+    {
+      "title": "Such Great Heights",
+      "artist": "The Postal Service",
+      "uri": "spotify:track:4G21jWo0Cm6lOIUNnZ2mUI",
+      "index": 7,
+      "start_at_ms": 1350000,
+      "duration_ms": 225000,
+      "role": "anchor",
+      "reason": "実在OK / 表記=exact / 年代推定と一致（±3年）",
+      "confidence": 0.9
+    }
+  ],
+  "stats": {
+    "total_candidates": 13,
+    "accepted_count": 7,
+    "unique_artists": 7,
+    "per_role": {
+      "anchor": 3,
+      "deep": 2,
+      "wildcard": 2,
+      "unknown": 0
+    },
+    "artist_policy_effective": "strict"
+  }
+}

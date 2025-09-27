@@ -1,0 +1,443 @@
+{
+  "resolved": [
+    {
+      "title": "Superstition",
+      "artist": "Stevie Wonder",
+      "year_guess": 1972,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4N0TP4Rmj6QQezWV88ARNJ",
+        "uri": "spotify:track:4N0TP4Rmj6QQezWV88ARNJ",
+        "name": "Superstition",
+        "artists": [
+          "Stevie Wonder"
+        ],
+        "release_year": 1972,
+        "original_release_year": 1972,
+        "is_reissue": false,
+        "popularity": 68,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273a14b08b9a6616e121df5e8b0",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Get Up (I Feel Like Being a) Sex Machine",
+      "artist": "James Brown",
+      "year_guess": 1970,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5O9HM7JI2ArZMnjK5c3ubg",
+        "uri": "spotify:track:5O9HM7JI2ArZMnjK5c3ubg",
+        "name": "Get Up (I Feel Like Being A) Sex Machine - Live 1977",
+        "artists": [
+          "James Brown"
+        ],
+        "release_year": 2022,
+        "original_release_year": 2022,
+        "is_reissue": false,
+        "popularity": 5,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2733b8a341010f4ec2eec1fa637",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Play That Funky Music",
+      "artist": "Wild Cherry",
+      "year_guess": 1976,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "5uuJruktM9fMdN9Va0DUMl",
+        "uri": "spotify:track:5uuJruktM9fMdN9Va0DUMl",
+        "name": "Play That Funky Music",
+        "artists": [
+          "Wild Cherry"
+        ],
+        "release_year": 1976,
+        "original_release_year": 1976,
+        "is_reissue": false,
+        "popularity": 73,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273d419ed4f1e89669ce14bd369",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "I Want You Back",
+      "artist": "The Jackson 5",
+      "year_guess": 1969,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5LxvwujISqiB8vpRYv887S",
+        "uri": "spotify:track:5LxvwujISqiB8vpRYv887S",
+        "name": "I Want You Back",
+        "artists": [
+          "The Jackson 5"
+        ],
+        "release_year": 1969,
+        "original_release_year": 1969,
+        "is_reissue": false,
+        "popularity": 76,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27316aaf05fe82237576a7d0e38",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "September",
+      "artist": "Earth, Wind & Fire",
+      "year_guess": 1978,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3kXoKlD84c6OmIcOLfrfEs",
+        "uri": "spotify:track:3kXoKlD84c6OmIcOLfrfEs",
+        "name": "September",
+        "artists": [
+          "Earth, Wind & Fire"
+        ],
+        "release_year": 1978,
+        "original_release_year": 1978,
+        "is_reissue": false,
+        "popularity": 82,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730faf2fc17446651865ce2282",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Shining Star",
+      "artist": "Earth, Wind & Fire",
+      "year_guess": 1975,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0RgcOUQg4qYAEt9RIdf3oB",
+        "uri": "spotify:track:0RgcOUQg4qYAEt9RIdf3oB",
+        "name": "Shining Star",
+        "artists": [
+          "Earth, Wind & Fire"
+        ],
+        "release_year": 1975,
+        "original_release_year": 1975,
+        "is_reissue": false,
+        "popularity": 63,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27330bb42e5271f2e046fd36972",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Le Freak",
+      "artist": "Chic",
+      "year_guess": 1978,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7Kszjzps0xbQXyo1pO4KfE",
+        "uri": "spotify:track:7Kszjzps0xbQXyo1pO4KfE",
+        "name": "Le Freak - 2018 Remaster",
+        "artists": [
+          "CHIC"
+        ],
+        "release_year": 1978,
+        "original_release_year": 1978,
+        "is_reissue": false,
+        "popularity": 68,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e37d5190acaf635f06cfcc4b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Good Times",
+      "artist": "Chic",
+      "year_guess": 1979,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0G3fbPbE1vGeABDEZF0jeG",
+        "uri": "spotify:track:0G3fbPbE1vGeABDEZF0jeG",
+        "name": "Good Times",
+        "artists": [
+          "CHIC"
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 65,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273d237a27633d01d25fdaa1c33",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Don't Stop 'Til You Get Enough",
+      "artist": "Michael Jackson",
+      "year_guess": 1979,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "46eu3SBuFCXWsPT39Yg3tJ",
+        "uri": "spotify:track:46eu3SBuFCXWsPT39Yg3tJ",
+        "name": "Don't Stop 'Til You Get Enough",
+        "artists": [
+          "Michael Jackson"
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737027294551db4fda68b5ddac",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Play That Funky Music",
+      "artist": "Wild Cherry",
+      "year_guess": 1976,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "5uuJruktM9fMdN9Va0DUMl",
+        "uri": "spotify:track:5uuJruktM9fMdN9Va0DUMl",
+        "name": "Play That Funky Music",
+        "artists": [
+          "Wild Cherry"
+        ],
+        "release_year": 1976,
+        "original_release_year": 1976,
+        "is_reissue": false,
+        "popularity": 73,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273d419ed4f1e89669ce14bd369",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Dance, Dance, Dance (Yowsah, Yowsah, Yowsah)",
+      "artist": "Chic",
+      "year_guess": 1977,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "1gHjPSEIKmFE9M8PAV2RyQ",
+        "uri": "spotify:track:1gHjPSEIKmFE9M8PAV2RyQ",
+        "name": "Dance, Dance, Dance (Yowsah, Yowsah, Yowsah) - 2018 Remaster",
+        "artists": [
+          "CHIC"
+        ],
+        "release_year": 1977,
+        "original_release_year": 1977,
+        "is_reissue": false,
+        "popularity": 38,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273ba10d60a14e68a58c7c9baec",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ain't No Stopping Us Now",
+      "artist": "McFadden & Whitehead",
+      "year_guess": 1979,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3F15H4kvJD53hj6kA8od85",
+        "uri": "spotify:track:3F15H4kvJD53hj6kA8od85",
+        "name": "Ain't No Stopping Us Now (In The Style Of 'McFadden And Whitehead')",
+        "artists": [
+          "Zoom Karaoke"
+        ],
+        "release_year": 2010,
+        "original_release_year": 2010,
+        "is_reissue": false,
+        "popularity": 5,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735067243e1b8996b34fc0ed86",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Rock With You",
+      "artist": "Michael Jackson",
+      "year_guess": 1979,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7oOOI85fVQvVnK5ynNMdW7",
+        "uri": "spotify:track:7oOOI85fVQvVnK5ynNMdW7",
+        "name": "Rock with You - Single Version",
+        "artists": [
+          "Michael Jackson"
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 80,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737027294551db4fda68b5ddac",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Let's Groove",
+      "artist": "Earth, Wind & Fire",
+      "year_guess": 1981,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3koCCeSaVUyrRo3N2gHrd8",
+        "uri": "spotify:track:3koCCeSaVUyrRo3N2gHrd8",
+        "name": "Let's Groove",
+        "artists": [
+          "Earth, Wind & Fire"
+        ],
+        "release_year": 1981,
+        "original_release_year": 1981,
+        "is_reissue": false,
+        "popularity": 80,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b30c8b93cef6fa26f8a7f17a",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "I Will Survive",
+      "artist": "Gloria Gaynor",
+      "year_guess": 1978,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7rIovIsXE6kMn629b7kDig",
+        "uri": "spotify:track:7rIovIsXE6kMn629b7kDig",
+        "name": "I Will Survive",
+        "artists": [
+          "Gloria Gaynor"
+        ],
+        "release_year": 1978,
+        "original_release_year": 1978,
+        "is_reissue": false,
+        "popularity": 75,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2732a1049b6d0d2b4c3c0abe7a8",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Boogie Wonderland",
+      "artist": "Earth, Wind & Fire with The Emotions",
+      "year_guess": 1979,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6ztstiyZL6FXzh4aG46ZPD",
+        "uri": "spotify:track:6ztstiyZL6FXzh4aG46ZPD",
+        "name": "Boogie Wonderland (with The Emotions)",
+        "artists": [
+          "Earth, Wind & Fire",
+          "The Emotions"
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 79,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735ccd022a69a4da9551efd988",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Train",
+      "artist": "The O'Jays",
+      "year_guess": 1973,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "28285KFbyCq8sJofn58qlD",
+        "uri": "spotify:track:28285KFbyCq8sJofn58qlD",
+        "name": "Love Train",
+        "artists": [
+          "The O'Jays"
+        ],
+        "release_year": 1972,
+        "original_release_year": 1972,
+        "is_reissue": false,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737bc09ea8d6c7db1993dfb77d",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Funkytown",
+      "artist": "Lipps Inc.",
+      "year_guess": 1980,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2XVQdI3m0giGxNrwUhV3yP",
+        "uri": "spotify:track:2XVQdI3m0giGxNrwUhV3yP",
+        "name": "Funkytown",
+        "artists": [
+          "Lipps Inc."
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 63,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273a5296d028b3e255aec56fc3c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Celebration",
+      "artist": "Kool & The Gang",
+      "year_guess": 1980,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3K7Q9PHUWPTaknlbFPThn2",
+        "uri": "spotify:track:3K7Q9PHUWPTaknlbFPThn2",
+        "name": "Celebration",
+        "artists": [
+          "Kool & The Gang"
+        ],
+        "release_year": 1980,
+        "original_release_year": 1980,
+        "is_reissue": false,
+        "popularity": 71,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273887b7c596249f628db6c6473",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

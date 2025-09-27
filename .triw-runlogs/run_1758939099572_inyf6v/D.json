@@ -1,0 +1,473 @@
+{
+  "resolved": [
+    {
+      "title": "Uptown Funk",
+      "artist": "Mark Ronson ft. Bruno Mars",
+      "year_guess": 2014,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4rmFRTmHa2bWUmMLIRVEXQ",
+        "uri": "spotify:track:4rmFRTmHa2bWUmMLIRVEXQ",
+        "name": "Uptown Funk",
+        "artists": [
+          "Mark Ronson",
+          "Bruno Mars"
+        ],
+        "release_year": 2017,
+        "original_release_year": 2014,
+        "is_reissue": true,
+        "popularity": 52,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273656e921d6769ba28a74acc17",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Shut Up and Dance",
+      "artist": "WALK THE MOON",
+      "year_guess": 2014,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4kbj5MwxO1bq9wjT5g9HaA",
+        "uri": "spotify:track:4kbj5MwxO1bq9wjT5g9HaA",
+        "name": "Shut Up and Dance",
+        "artists": [
+          "WALK THE MOON"
+        ],
+        "release_year": 2014,
+        "original_release_year": 2014,
+        "is_reissue": false,
+        "popularity": 83,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27343294cfa2688055c9d821bf3",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Blinding Lights",
+      "artist": "The Weeknd",
+      "year_guess": 2019,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0VjIjW4GlUZAMYd2vXMi3b",
+        "uri": "spotify:track:0VjIjW4GlUZAMYd2vXMi3b",
+        "name": "Blinding Lights",
+        "artists": [
+          "The Weeknd"
+        ],
+        "release_year": 2020,
+        "original_release_year": 2020,
+        "is_reissue": false,
+        "popularity": 89,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Can't Stop the Feeling!",
+      "artist": "Justin Timberlake",
+      "year_guess": 2016,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6JV2JOEocMgcZxYSZelKcc",
+        "uri": "spotify:track:6JV2JOEocMgcZxYSZelKcc",
+        "name": "CAN'T STOP THE FEELING! (from DreamWorks Animation's \"TROLLS\")",
+        "artists": [
+          "Justin Timberlake"
+        ],
+        "release_year": 2016,
+        "original_release_year": 2016,
+        "is_reissue": false,
+        "popularity": 76,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273ef37416970812293c08e8a78",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "I Gotta Feeling",
+      "artist": "The Black Eyed Peas",
+      "year_guess": 2009,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "4kLLWz7srcuLKA7Et40PQR",
+        "uri": "spotify:track:4kLLWz7srcuLKA7Et40PQR",
+        "name": "I Gotta Feeling",
+        "artists": [
+          "Black Eyed Peas"
+        ],
+        "release_year": 2009,
+        "original_release_year": 2009,
+        "is_reissue": false,
+        "popularity": 82,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730bd44f5ff9ecc99f7770acc5",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Levitating",
+      "artist": "Dua Lipa ft. DaBaby",
+      "year_guess": 2020,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7AOcgzVo2IUMDTFBJwAHBJ",
+        "uri": "spotify:track:7AOcgzVo2IUMDTFBJwAHBJ",
+        "name": "Levitating (feat. DaBaby)",
+        "artists": [
+          "Dua Lipa",
+          "DaBaby"
+        ],
+        "release_year": 2020,
+        "original_release_year": 2020,
+        "is_reissue": false,
+        "popularity": 22,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273a5570ca9d8fe6ae37b3f1fe4",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Dance Monkey",
+      "artist": "Tones and I",
+      "year_guess": 2019,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2XU0oxnq2qxCpomAAuJY8K",
+        "uri": "spotify:track:2XU0oxnq2qxCpomAAuJY8K",
+        "name": "Dance Monkey",
+        "artists": [
+          "Tones And I"
+        ],
+        "release_year": 2019,
+        "original_release_year": 2019,
+        "is_reissue": false,
+        "popularity": 74,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273c6f7af36ecdc3ed6e0a1f169",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Good as Hell",
+      "artist": "Lizzo",
+      "year_guess": 2016,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "6KgBpzTuTRPebChN0VTyzV",
+        "uri": "spotify:track:6KgBpzTuTRPebChN0VTyzV",
+        "name": "Good as Hell",
+        "artists": [
+          "Lizzo"
+        ],
+        "release_year": 2019,
+        "original_release_year": 2016,
+        "is_reissue": true,
+        "popularity": 69,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273bf7d271b8f3051af3cf0bf55",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Shake It Off",
+      "artist": "Taylor Swift",
+      "year_guess": 2014,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1CiVz2WkmZRwhU3A6J2Gjz",
+        "uri": "spotify:track:1CiVz2WkmZRwhU3A6J2Gjz",
+        "name": "Shake It Off",
+        "artists": [
+          "Taylor Swift"
+        ],
+        "release_year": 2014,
+        "original_release_year": 2014,
+        "is_reissue": false,
+        "popularity": 61,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730432bfd9e6adb616fd8bcc97",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Party in the USA",
+      "artist": "Miley Cyrus",
+      "year_guess": 2009,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7t5YIq57DS5djsaZJm1iyM",
+        "uri": "spotify:track:7t5YIq57DS5djsaZJm1iyM",
+        "name": "Party In The USA - Live",
+        "artists": [
+          "Miley Cyrus"
+        ],
+        "release_year": 2022,
+        "original_release_year": 2022,
+        "is_reissue": false,
+        "popularity": 37,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730cb72bf16e0692468d81465b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Don't Start Now",
+      "artist": "Dua Lipa",
+      "year_guess": 2019,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3PfIrDoz19wz7qK7tYeu62",
+        "uri": "spotify:track:3PfIrDoz19wz7qK7tYeu62",
+        "name": "Don't Start Now",
+        "artists": [
+          "Dua Lipa"
+        ],
+        "release_year": 2020,
+        "original_release_year": 2019,
+        "is_reissue": true,
+        "popularity": 82,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2734bc66095f8a70bc4e6593f4f",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Sweet but Psycho",
+      "artist": "Ava Max",
+      "year_guess": 2018,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7DnAm9FOTWE3cUvso43HhI",
+        "uri": "spotify:track:7DnAm9FOTWE3cUvso43HhI",
+        "name": "Sweet but Psycho",
+        "artists": [
+          "Ava Max"
+        ],
+        "release_year": 2020,
+        "original_release_year": 2020,
+        "is_reissue": false,
+        "popularity": 80,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2739a95e89d24214b94de36ccf7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Best Day of My Life",
+      "artist": "American Authors",
+      "year_guess": 2013,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5Hroj5K7vLpIG4FNCRIjbP",
+        "uri": "spotify:track:5Hroj5K7vLpIG4FNCRIjbP",
+        "name": "Best Day Of My Life",
+        "artists": [
+          "American Authors"
+        ],
+        "release_year": 2014,
+        "original_release_year": 2014,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273cc761ba55b0e7abad4539abe",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Young, Wild & Free",
+      "artist": "Snoop Dogg & Wiz Khalifa ft. Bruno Mars",
+      "year_guess": 2011,
+      "intended_role": "anchor",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "5H2PbrAw9ll9l2UX4K1I76",
+        "uri": "spotify:track:5H2PbrAw9ll9l2UX4K1I76",
+        "name": "Young, Wild and Free - Cover",
+        "artists": [
+          "LOVE BGM JPN",
+          "Snoop Dogg & Wiz Khalifa ft. Bruno Mars"
+        ],
+        "release_year": 2025,
+        "original_release_year": 2025,
+        "is_reissue": false,
+        "popularity": 0,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2731ff6f90d0043a0da293fd773",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Firework",
+      "artist": "Katy Perry",
+      "year_guess": 2010,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3lXbHd0EoryoQh3vpevNEP",
+        "uri": "spotify:track:3lXbHd0EoryoQh3vpevNEP",
+        "name": "Firework",
+        "artists": [
+          "Katy Perry"
+        ],
+        "release_year": 2010,
+        "original_release_year": 2010,
+        "is_reissue": false,
+        "popularity": 74,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2731d955011a3ed477dc77865ad",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Kiss Me More",
+      "artist": "Doja Cat ft. SZA",
+      "year_guess": 2021,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3DarAbFujv6eYNliUTyqtz",
+        "uri": "spotify:track:3DarAbFujv6eYNliUTyqtz",
+        "name": "Kiss Me More (feat. SZA)",
+        "artists": [
+          "Doja Cat",
+          "SZA"
+        ],
+        "release_year": 2021,
+        "original_release_year": 2021,
+        "is_reissue": false,
+        "popularity": 84,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273be841ba4bc24340152e3a79a",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Say So",
+      "artist": "Doja Cat",
+      "year_guess": 2019,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3Dv1eDb0MEgF93GpLXlucZ",
+        "uri": "spotify:track:3Dv1eDb0MEgF93GpLXlucZ",
+        "name": "Say So",
+        "artists": [
+          "Doja Cat"
+        ],
+        "release_year": 2019,
+        "original_release_year": 2019,
+        "is_reissue": false,
+        "popularity": 75,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273f14aa81116510d3a6df8432b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Havana",
+      "artist": "Camila Cabello ft. Young Thug",
+      "year_guess": 2017,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1rfofaqEpACxVEHIZBJe6W",
+        "uri": "spotify:track:1rfofaqEpACxVEHIZBJe6W",
+        "name": "Havana (feat. Young Thug)",
+        "artists": [
+          "Camila Cabello",
+          "Young Thug"
+        ],
+        "release_year": 2018,
+        "original_release_year": 2018,
+        "is_reissue": false,
+        "popularity": 81,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2736eb0b9e73adcf04e4ed3eca4",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "One Kiss",
+      "artist": "Calvin Harris & Dua Lipa",
+      "year_guess": 2018,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0pSKan4ixFKFhiK18aybPO",
+        "uri": "spotify:track:0pSKan4ixFKFhiK18aybPO",
+        "name": "One Kiss",
+        "artists": [
+          "Calvin Harris",
+          "Dua Lipa"
+        ],
+        "release_year": 2020,
+        "original_release_year": 2020,
+        "is_reissue": false,
+        "popularity": 0,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730c40089ed1b0e2c71c574cd7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "The Middle",
+      "artist": "Zedd, Maren Morris, Grey",
+      "year_guess": 2018,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "09IStsImFySgyp0pIQdqAc",
+        "uri": "spotify:track:09IStsImFySgyp0pIQdqAc",
+        "name": "The Middle",
+        "artists": [
+          "Zedd",
+          "Maren Morris",
+          "Grey"
+        ],
+        "release_year": 2018,
+        "original_release_year": 2018,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273fbe22d168a743b782a5e856a",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

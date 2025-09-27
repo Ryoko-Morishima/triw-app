@@ -1,0 +1,582 @@
+{
+  "resolved": [
+    {
+      "title": "Super Freak",
+      "artist": "Rick James",
+      "year_guess": 1981,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2dCmGcEOQrMQhMMS8Vj7Ca",
+        "uri": "spotify:track:2dCmGcEOQrMQhMMS8Vj7Ca",
+        "name": "Super Freak",
+        "artists": [
+          "Rick James"
+        ],
+        "release_year": 1981,
+        "original_release_year": 1981,
+        "is_reissue": false,
+        "popularity": 72,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27317f9e7e7784ed40b223e261c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ain't No Sunshine",
+      "artist": "Bill Withers",
+      "year_guess": 1971,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1k1Bqnv2R0uJXQN4u6LKYt",
+        "uri": "spotify:track:1k1Bqnv2R0uJXQN4u6LKYt",
+        "name": "Ain't No Sunshine",
+        "artists": [
+          "Bill Withers"
+        ],
+        "release_year": 1971,
+        "original_release_year": 1971,
+        "is_reissue": false,
+        "popularity": 81,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e1e350d06ffebd2e19e047ce",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "September",
+      "artist": "Earth, Wind & Fire",
+      "year_guess": 1978,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3kXoKlD84c6OmIcOLfrfEs",
+        "uri": "spotify:track:3kXoKlD84c6OmIcOLfrfEs",
+        "name": "September",
+        "artists": [
+          "Earth, Wind & Fire"
+        ],
+        "release_year": 1978,
+        "original_release_year": 1978,
+        "is_reissue": false,
+        "popularity": 82,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730faf2fc17446651865ce2282",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "I Want You Back",
+      "artist": "The Jackson 5",
+      "year_guess": 1969,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5LxvwujISqiB8vpRYv887S",
+        "uri": "spotify:track:5LxvwujISqiB8vpRYv887S",
+        "name": "I Want You Back",
+        "artists": [
+          "The Jackson 5"
+        ],
+        "release_year": 1969,
+        "original_release_year": 1969,
+        "is_reissue": false,
+        "popularity": 76,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27316aaf05fe82237576a7d0e38",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Le Freak",
+      "artist": "Chic",
+      "year_guess": 1978,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "7Kszjzps0xbQXyo1pO4KfE",
+        "uri": "spotify:track:7Kszjzps0xbQXyo1pO4KfE",
+        "name": "Le Freak - 2018 Remaster",
+        "artists": [
+          "CHIC"
+        ],
+        "release_year": 1978,
+        "original_release_year": 1978,
+        "is_reissue": false,
+        "popularity": 68,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e37d5190acaf635f06cfcc4b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Get Down Tonight",
+      "artist": "KC and the Sunshine Band",
+      "year_guess": 1975,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6zbFTYeqNvZdms60HouEFT",
+        "uri": "spotify:track:6zbFTYeqNvZdms60HouEFT",
+        "name": "Get Down Tonight - 2004 Remaster",
+        "artists": [
+          "KC & The Sunshine Band"
+        ],
+        "release_year": 1975,
+        "original_release_year": 1975,
+        "is_reissue": false,
+        "popularity": 60,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27390298163e25342e58d153899",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Let's Stay Together",
+      "artist": "Al Green",
+      "year_guess": 1972,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "63xdwScd1Ai1GigAwQxE8y",
+        "uri": "spotify:track:63xdwScd1Ai1GigAwQxE8y",
+        "name": "Let's Stay Together",
+        "artists": [
+          "Al Green"
+        ],
+        "release_year": 1972,
+        "original_release_year": 1972,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273a1fc113a6858d0824d9aaf38",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Disco Inferno",
+      "artist": "The Trammps",
+      "year_guess": 1976,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5jUA1njy3h6ynHLvPdEVHt",
+        "uri": "spotify:track:5jUA1njy3h6ynHLvPdEVHt",
+        "name": "Disco Inferno",
+        "artists": [
+          "The Trammps"
+        ],
+        "release_year": 1976,
+        "original_release_year": 1976,
+        "is_reissue": false,
+        "popularity": 60,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e5c01cbde6369d542033797c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Shining Star",
+      "artist": "Earth, Wind & Fire",
+      "year_guess": 1975,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0RgcOUQg4qYAEt9RIdf3oB",
+        "uri": "spotify:track:0RgcOUQg4qYAEt9RIdf3oB",
+        "name": "Shining Star",
+        "artists": [
+          "Earth, Wind & Fire"
+        ],
+        "release_year": 1975,
+        "original_release_year": 1975,
+        "is_reissue": false,
+        "popularity": 63,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27330bb42e5271f2e046fd36972",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Funky Town",
+      "artist": "Lipps Inc.",
+      "year_guess": 1980,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "2XVQdI3m0giGxNrwUhV3yP",
+        "uri": "spotify:track:2XVQdI3m0giGxNrwUhV3yP",
+        "name": "Funkytown",
+        "artists": [
+          "Lipps Inc."
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 63,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273a5296d028b3e255aec56fc3c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Rock Your Body",
+      "artist": "Justin Timberlake",
+      "year_guess": 2002,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1AWQoqb9bSvzTjaLralEkT",
+        "uri": "spotify:track:1AWQoqb9bSvzTjaLralEkT",
+        "name": "Rock Your Body",
+        "artists": [
+          "Justin Timberlake"
+        ],
+        "release_year": 2002,
+        "original_release_year": 2002,
+        "is_reissue": false,
+        "popularity": 82,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273346a5742374ab4cf9ed32dee",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Ain't Nobody",
+      "artist": "Chaka Khan",
+      "year_guess": 1983,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "53Za5vyGc1x7GxgJVRjRKc",
+        "uri": "spotify:track:53Za5vyGc1x7GxgJVRjRKc",
+        "name": "Ain't Nobody",
+        "artists": [
+          "Rufus",
+          "Chaka Khan"
+        ],
+        "release_year": 1983,
+        "original_release_year": 1983,
+        "is_reissue": false,
+        "popularity": 68,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2731ab2a1683ee8b7fcbc997510",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Good Times",
+      "artist": "Chic",
+      "year_guess": 1979,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0G3fbPbE1vGeABDEZF0jeG",
+        "uri": "spotify:track:0G3fbPbE1vGeABDEZF0jeG",
+        "name": "Good Times",
+        "artists": [
+          "CHIC"
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 65,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273d237a27633d01d25fdaa1c33",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Take Your Time (Do It Right)",
+      "artist": "S.O.S. Band",
+      "year_guess": 1980,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3DIe90xqHuUDtyuapTwCAR",
+        "uri": "spotify:track:3DIe90xqHuUDtyuapTwCAR",
+        "name": "Take Your Time (Do It Right)",
+        "artists": [
+          "The S.O.S Band"
+        ],
+        "release_year": 1980,
+        "original_release_year": 1980,
+        "is_reissue": false,
+        "popularity": 58,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b925b2f6cbcb04c4ff280eec",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Don't Stop 'Til You Get Enough",
+      "artist": "Michael Jackson",
+      "year_guess": 1979,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "46eu3SBuFCXWsPT39Yg3tJ",
+        "uri": "spotify:track:46eu3SBuFCXWsPT39Yg3tJ",
+        "name": "Don't Stop 'Til You Get Enough",
+        "artists": [
+          "Michael Jackson"
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737027294551db4fda68b5ddac",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "You're the First, the Last, My Everything",
+      "artist": "Barry White",
+      "year_guess": 1974,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "5dXJ1SoksFkgdx3yxIoYNO",
+        "uri": "spotify:track:5dXJ1SoksFkgdx3yxIoYNO",
+        "name": "You're The First, The Last, My Everything",
+        "artists": [
+          "Barry White"
+        ],
+        "release_year": 1974,
+        "original_release_year": 1974,
+        "is_reissue": false,
+        "popularity": 65,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273aa3252b7843a8a3426cc34bf",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Boogie Wonderland",
+      "artist": "Earth, Wind & Fire with The Emotions",
+      "year_guess": 1979,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6ztstiyZL6FXzh4aG46ZPD",
+        "uri": "spotify:track:6ztstiyZL6FXzh4aG46ZPD",
+        "name": "Boogie Wonderland (with The Emotions)",
+        "artists": [
+          "Earth, Wind & Fire",
+          "The Emotions"
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 79,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735ccd022a69a4da9551efd988",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Shake Your Groove Thing",
+      "artist": "Peaches & Herb",
+      "year_guess": 1978,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "5o89Bf80t8ko3uNXJkYoVs",
+        "uri": "spotify:track:5o89Bf80t8ko3uNXJkYoVs",
+        "name": "Shake Your Groove Thing",
+        "artists": [
+          "Peaches & Herb"
+        ],
+        "release_year": 1978,
+        "original_release_year": 1978,
+        "is_reissue": false,
+        "popularity": 61,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b25e0056227d071a2c7393b9",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Let’s Groove",
+      "artist": "Earth, Wind & Fire",
+      "year_guess": 1981,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3koCCeSaVUyrRo3N2gHrd8",
+        "uri": "spotify:track:3koCCeSaVUyrRo3N2gHrd8",
+        "name": "Let's Groove",
+        "artists": [
+          "Earth, Wind & Fire"
+        ],
+        "release_year": 1981,
+        "original_release_year": 1981,
+        "is_reissue": false,
+        "popularity": 80,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273b30c8b93cef6fa26f8a7f17a",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Hot Stuff",
+      "artist": "Donna Summer",
+      "year_guess": 1979,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "2zMJN9JvDlvGP4jB03l1Bz",
+        "uri": "spotify:track:2zMJN9JvDlvGP4jB03l1Bz",
+        "name": "Hot Stuff",
+        "artists": [
+          "Donna Summer"
+        ],
+        "release_year": 1979,
+        "original_release_year": 1979,
+        "is_reissue": false,
+        "popularity": 69,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730c3a44d76807bef665eacfa3",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "I Love the Nightlife",
+      "artist": "Alicia Bridges",
+      "year_guess": 1978,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "3ChXTNUIdmlFStxCtM3Q6a",
+        "uri": "spotify:track:3ChXTNUIdmlFStxCtM3Q6a",
+        "name": "I Love The Nightlife",
+        "artists": [
+          "Alicia Bridges"
+        ],
+        "release_year": 2008,
+        "original_release_year": 2008,
+        "is_reissue": false,
+        "popularity": 44,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2736dadeb7dc4df4bfe502b76e7",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Love Train",
+      "artist": "O'Jays",
+      "year_guess": 1973,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "28285KFbyCq8sJofn58qlD",
+        "uri": "spotify:track:28285KFbyCq8sJofn58qlD",
+        "name": "Love Train",
+        "artists": [
+          "The O'Jays"
+        ],
+        "release_year": 1972,
+        "original_release_year": 1972,
+        "is_reissue": false,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737bc09ea8d6c7db1993dfb77d",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Take Me Home",
+      "artist": "Phil Collins",
+      "year_guess": 1985,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0aekSck3lDazCyaYNJIiFE",
+        "uri": "spotify:track:0aekSck3lDazCyaYNJIiFE",
+        "name": "Take Me Home - Live 1990",
+        "artists": [
+          "Phil Collins"
+        ],
+        "release_year": 1985,
+        "original_release_year": 1985,
+        "is_reissue": false,
+        "popularity": 23,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27357480be4ce4fd7659a25b7d9",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "You Make Me Feel Brand New",
+      "artist": "The Stylistics",
+      "year_guess": 1973,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "73GR50SgGV5hybgWDSFWtD",
+        "uri": "spotify:track:73GR50SgGV5hybgWDSFWtD",
+        "name": "You Make Me Feel Brand New",
+        "artists": [
+          "The Stylistics"
+        ],
+        "release_year": 1973,
+        "original_release_year": 1973,
+        "is_reissue": false,
+        "popularity": 63,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27359def3163987209bdea8818b",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Got to Give It Up",
+      "artist": "Marvin Gaye",
+      "year_guess": 1977,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "12sRJfGKwQ3mWWECnZK0GE",
+        "uri": "spotify:track:12sRJfGKwQ3mWWECnZK0GE",
+        "name": "Got To Give It Up",
+        "artists": [
+          "Marvin Gaye"
+        ],
+        "release_year": 1977,
+        "original_release_year": 1977,
+        "is_reissue": false,
+        "popularity": 41,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273cd2cfd9d4279c2473ec5529b",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}

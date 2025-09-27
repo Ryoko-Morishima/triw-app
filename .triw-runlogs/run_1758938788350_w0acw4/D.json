@@ -1,0 +1,258 @@
+{
+  "resolved": [
+    {
+      "title": "No Rain",
+      "artist": "Blind Melon",
+      "year_guess": 1992,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6txWz9UapYHVxEd7dDIHXT",
+        "uri": "spotify:track:6txWz9UapYHVxEd7dDIHXT",
+        "name": "No Rain",
+        "artists": [
+          "Blind Melon"
+        ],
+        "release_year": 1992,
+        "original_release_year": 1992,
+        "is_reissue": false,
+        "popularity": 74,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b2737ed1df1690df31d094d7c2bc",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Fade Into You",
+      "artist": "Mazzy Star",
+      "year_guess": 1993,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1LzNfuep1bnAUR9skqdHCK",
+        "uri": "spotify:track:1LzNfuep1bnAUR9skqdHCK",
+        "name": "Fade Into You",
+        "artists": [
+          "Mazzy Star"
+        ],
+        "release_year": 1993,
+        "original_release_year": 1993,
+        "is_reissue": false,
+        "popularity": 85,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27389a392107ebd79818022b3ea",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Breathe",
+      "artist": "Faith Hill",
+      "year_guess": 1999,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3y4LxiYMgDl4RethdzpmNe",
+        "uri": "spotify:track:3y4LxiYMgDl4RethdzpmNe",
+        "name": "Breathe",
+        "artists": [
+          "Faith Hill"
+        ],
+        "release_year": 1999,
+        "original_release_year": 1999,
+        "is_reissue": false,
+        "popularity": 66,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273f4adbbdcd39b09e5f0b9e03e",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Into the Mystic",
+      "artist": "Van Morrison",
+      "year_guess": 1970,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "3lh3iiiJeiBXHSZw6u0kh6",
+        "uri": "spotify:track:3lh3iiiJeiBXHSZw6u0kh6",
+        "name": "Into the Mystic - 2013 Remaster",
+        "artists": [
+          "Van Morrison"
+        ],
+        "release_year": 1970,
+        "original_release_year": 1970,
+        "is_reissue": false,
+        "popularity": 73,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273d828b182ee9b7193a0f8b5d6",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Fade Away",
+      "artist": "The Beatles",
+      "year_guess": 1996,
+      "intended_role": "anchor",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "0Y572txlaSlssxigtGUBJy",
+        "uri": "spotify:track:0Y572txlaSlssxigtGUBJy",
+        "name": "FADE AWAY - Remastered 2022",
+        "artists": [
+          "Eikichi Yazawa"
+        ],
+        "release_year": 1984,
+        "original_release_year": 1984,
+        "is_reissue": false,
+        "popularity": 22,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273f2ed0424150eb241f7c4e672",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Torn",
+      "artist": "Natalie Imbruglia",
+      "year_guess": 1997,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "1Jaah2tmN9Hv81A87KZ1MU",
+        "uri": "spotify:track:1Jaah2tmN9Hv81A87KZ1MU",
+        "name": "Torn",
+        "artists": [
+          "Natalie Imbruglia"
+        ],
+        "release_year": 1997,
+        "original_release_year": 1997,
+        "is_reissue": false,
+        "popularity": 78,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b27384bb2b1e87d5ba0bac8871a2",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Dreams",
+      "artist": "The Cranberries",
+      "year_guess": 1993,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "4JGKZS7h4Qa16gOU3oNETV",
+        "uri": "spotify:track:4JGKZS7h4Qa16gOU3oNETV",
+        "name": "Dreams",
+        "artists": [
+          "The Cranberries"
+        ],
+        "release_year": 1993,
+        "original_release_year": 1993,
+        "is_reissue": false,
+        "popularity": 82,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273f6325f361d7803ad0d908451",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Bitter Sweet Symphony",
+      "artist": "The Verve",
+      "year_guess": 1997,
+      "intended_role": "wildcard",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "57iDDD9N9tTWe75x6qhStw",
+        "uri": "spotify:track:57iDDD9N9tTWe75x6qhStw",
+        "name": "Bitter Sweet Symphony - Remastered 2016",
+        "artists": [
+          "The Verve"
+        ],
+        "release_year": 1997,
+        "original_release_year": 1997,
+        "is_reissue": false,
+        "popularity": 83,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273707d13d3f87652e737e94d45",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Linger",
+      "artist": "The Cranberries",
+      "year_guess": 1993,
+      "intended_role": "deep",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "0gEyKnHvgkrkBM6fbeHdwK",
+        "uri": "spotify:track:0gEyKnHvgkrkBM6fbeHdwK",
+        "name": "Linger",
+        "artists": [
+          "The Cranberries"
+        ],
+        "release_year": 1993,
+        "original_release_year": 1993,
+        "is_reissue": false,
+        "popularity": 85,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273f6325f361d7803ad0d908451",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Breathe Me",
+      "artist": "Sia",
+      "year_guess": 2004,
+      "intended_role": "wildcard",
+      "popularity_hint": "mid",
+      "spotify": {
+        "id": "7jqzZyJJLrpkRFYGpkqSK6",
+        "uri": "spotify:track:7jqzZyJJLrpkRFYGpkqSK6",
+        "name": "Breathe Me",
+        "artists": [
+          "Sia"
+        ],
+        "release_year": 2004,
+        "original_release_year": 2004,
+        "is_reissue": false,
+        "popularity": 65,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273940e6dd89f311e726fb5687c",
+        "tempo": null,
+        "energy": null
+      }
+    },
+    {
+      "title": "Iris",
+      "artist": "Goo Goo Dolls",
+      "year_guess": 1998,
+      "intended_role": "deep",
+      "popularity_hint": "high",
+      "spotify": {
+        "id": "6Qyc6fS4DsZjB2mRW9DsQs",
+        "uri": "spotify:track:6Qyc6fS4DsZjB2mRW9DsQs",
+        "name": "Iris",
+        "artists": [
+          "The Goo Goo Dolls"
+        ],
+        "release_year": 1998,
+        "original_release_year": 1998,
+        "is_reissue": false,
+        "popularity": 92,
+        "preview_url": null,
+        "album_image_url": "https://i.scdn.co/image/ab67616d0000b273eda9478c39a21e1cdc6609ca",
+        "tempo": null,
+        "energy": null
+      }
+    }
+  ],
+  "notFound": []
+}
