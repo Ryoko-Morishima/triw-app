@@ -4,6 +4,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Balancer from "react-wrap-balancer";
 import { Sparkles } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { DJCard } from "@/components/DJCard";
 import { SaveToSpotifyButton } from "@/components/SaveToSpotifyButton";
@@ -82,8 +83,51 @@ function coversFrom(tracks: any[]) {
     .map((src: string) => ({ src }));
 }
 
+// ===== ここからソフトガード実装（ページは常に表示） =====
+function useAuthStatus() {
+  const [checking, setChecking] = useState(true);
+  const [authed, setAuthed] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/auth/status", { cache: "no-store" });
+        if (!alive) return;
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+        const json = await res.json();
+        setAuthed(Boolean(json?.authenticated));
+      } catch (e: any) {
+        setErr(e?.message || "auth check failed");
+        setAuthed(false);
+      } finally {
+        if (alive) setChecking(false);
+      }
+    })();
+    return () => { alive = false; };
+  }, []);
+
+  return { checking, authed, err };
+}
+
+function LoginButtonInline() {
+  const pathname = usePathname();
+  const loginUrl = `/api/auth/login?next=${encodeURIComponent(pathname || "/playlist")}`;
+  return (
+    <a
+      href={loginUrl}
+      className="rounded-2xl px-4 py-2 bg-black text-white text-sm hover:opacity-90"
+    >
+      Spotify でログイン
+    </a>
+  );
+}
+
 // ================== ページ本体 ==================
 export default function Page() {
+  const { checking, authed, err } = useAuthStatus();
+
   // --- 状態 ---
   const [djs, setDjs] = useState<DJItem[]>([]);
   const [djId, setDjId] = useState<string>("");
@@ -92,8 +136,8 @@ export default function Page() {
   const [customName, setCustomName] = useState("");
   const [customOverview, setCustomOverview] = useState("");
 
-  const [title, setTitle] = useState("DJがあなただけのMIXTAPEを作る");
-  const [desc, setDesc] = useState("気分やシーンを一言で。90s/平成などの年代語もOK。");
+  const [title, setTitle] = useState("MIXTAPEのタイトル");
+  const [desc, setDesc] = useState("聞きたいMIXのジャンルや気分、シーンを自由に書いて。90s/平成などの年代やアーティスト名もOK。");
   const [duration, setDuration] = useState<number>(90);
 
   const [loading, setLoading] = useState(false);
@@ -184,7 +228,6 @@ export default function Page() {
       setPlan(json!);     // 既存の状態更新
       setMemo(memoText);  // 生成メモを保存（表示用）
       setBuilderOpen(false); // 生成直後に畳む（念のため）
-
     } catch (e: any) {
       setError(String(e?.message || e));
     } finally {
@@ -196,15 +239,32 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       {/* Hero */}
-      <div className="mb-8">
+      <div className="mb-4">
         <h1 className="text-4xl font-bold tracking-tight">
           <Balancer>TRIW / MIXTAPE</Balancer>
         </h1>
         <p className="mt-2 text-zinc-600">
           <Balancer>
-            好きなDJを選んでテーマを一言。あなたのためにMIXTAPEを作ります。仕上げはSpotifyプレイリストで。
+            好きなDJを選んでテーマを一言。あなたのためにMIXTAPEを作ります。気に入ったらSpotifyプレイリストで聴いてみて!
           </Balancer>
         </p>
+      </div>
+
+      {/* 認証バナー（ページは見せつつ、未ログインをやんわり通知） */}
+      <div className="mb-6">
+        {checking ? (
+          <div className="rounded-xl border bg-white p-3 text-sm text-zinc-600">
+            ログイン状態を確認中…
+          </div>
+        ) : authed ? null : (
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-white p-4">
+            <div className="text-sm text-zinc-700">
+              保存（Spotifyプレイリスト作成）にはログインが必要です。
+              {err ? <span className="ml-2 text-xs text-red-500">({err})</span> : null}
+            </div>
+            <LoginButtonInline />
+          </div>
+        )}
       </div>
 
       {/* 1〜4: 設定（details/summary で折りたたみ） */}
@@ -226,24 +286,24 @@ export default function Page() {
           <section>
             <h2 className="mb-3 text-xl font-semibold">1. DJを選ぶ</h2>
             <div className="grid gap-4 sm:grid-cols-3">
-            {djs.map((dj) => {
-              // ★ 簡潔な一行に整形（tagline → description の順で利用）
-              const raw = (dj.tagline ?? dj.description ?? "").trim();
-              const firstSentence =
-                raw.split(/[。.!?]/)[0]?.replace(/\s+/g, " ").trim() ?? "";
-              const brief = firstSentence.length > 28 ? firstSentence.slice(0, 28) + "…" : firstSentence;
+              {djs.map((dj) => {
+                // ★ 簡潔な一行に整形（tagline → description の順で利用）
+                const raw = (dj.tagline ?? dj.description ?? "").trim();
+                const firstSentence =
+                  raw.split(/[。.!?]/)[0]?.replace(/\s+/g, " ").trim() ?? "";
+                const brief = firstSentence.length > 28 ? firstSentence.slice(0, 28) + "…" : firstSentence;
 
-              return (
-                <DJCard
-                  key={dj.id}
-                  name={dj.name}
-                  desc={brief} // ← ここを短い文に差し替え
-                  image={dj.image || `/dj/${dj.id}.png`}
-                  active={djId === dj.id}
-                  onClick={() => setDjId(dj.id)}
-                />
-              );
-            })}
+                return (
+                  <DJCard
+                    key={dj.id}
+                    name={dj.name}
+                    desc={brief} // ← ここを短い文に差し替え
+                    image={dj.image || `/dj/${dj.id}.png`}
+                    active={djId === dj.id}
+                    onClick={() => setDjId(dj.id)}
+                  />
+                );
+              })}
 
               {/* カスタムDJ */}
               <div
@@ -256,12 +316,12 @@ export default function Page() {
                 {djId === "custom" && (
                   <>
                     <Input
-                      placeholder="カスタムDJ名（必須）"
+                      placeholder="DJの名前（必須）"
                       value={customName}
                       onChange={(e) => setCustomName(e.target.value)}
                     />
                     <Input
-                      placeholder="このDJの雰囲気・得意分野（必須）"
+                      placeholder="DJのプロフ。雰囲気や得意分野、なんでもOK（必須）"
                       value={customOverview}
                       onChange={(e) => setCustomOverview(e.target.value)}
                     />
@@ -325,12 +385,12 @@ export default function Page() {
       </details>
 
       {/* 実行ボタン（detailsの外に配置） */}
-      <div className="mb-8">
+      <div className="mb-8 flex items-center gap-3">
         <Button onClick={handleGenerate} disabled={loading || !djId}>
           <Sparkles className="mr-2 h-4 w-4" />
           {loading ? "選曲中…" : "MIXTAPEを作る"}
         </Button>
-        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
       </div>
 
       {/* 出力（最終セットのみ表示） */}
@@ -358,11 +418,20 @@ export default function Page() {
               covers={covers}
             />
 
-            <SaveToSpotifyButton
-              uris={uris}
-              name={`TRIW - ${plan?.title ?? "Untitled"}`}
-              description={plan?.description ?? ""} // Spotify用の説明は維持
-            />
+            <div className="flex flex-wrap items-center gap-3">
+              <SaveToSpotifyButton
+                uris={uris}
+                name={`TRIW - ${plan?.title ?? "Untitled"}`}
+                description={plan?.description ?? ""} // Spotify用の説明は維持
+                disabled={!authed}                     // ★ 未ログインなら保存ボタンを無効化
+              />
+              {!authed && (
+                <div className="flex items-center gap-2 text-sm text-zinc-700">
+                  <span>保存するにはログインしてください</span>
+                  <LoginButtonInline />
+                </div>
+              )}
+            </div>
           </div>
         );
       })()}

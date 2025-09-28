@@ -101,6 +101,6 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "custom",
     name: "カスタムDJ",
     shortName: "Custom",
-    description: "ユーザーが入力する名前と概要からAIがペルソナを生成します。",
+    description: "好きなDJを呼んでみよう!",
   }
 ];

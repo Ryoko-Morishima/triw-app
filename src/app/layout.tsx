@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner"; // ★ 追加
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "TRIW",
