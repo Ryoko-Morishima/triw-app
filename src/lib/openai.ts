@@ -83,9 +83,9 @@ export type CandidateC = {
   year_guess?: number | null;
 
   // ★ 追加：C段階で“狙い”を明示（後段の popularity 実数と突合）
-  intended_role?: "anchor" | "deep" | "wildcard"; // 名曲(錨)/掘り/意外枠の狙い
-  popularity_hint?: "high" | "mid" | "low";       // 想定ヒット度のラベル
-  notes_for_scoring?: string;                     // 後段のスコアリング用メモ（任意）
+  intended_role?: "anchor" | "deep" | "wildcard";
+  popularity_hint?: "high" | "mid" | "low";
+  notes_for_scoring?: string;
 };
 export type CandidatesCResponse = { candidates: CandidateC[] };
 
@@ -319,4 +319,101 @@ reasonは中立＋少しだけキャラ味（※一人称は使わない）。`;
     }));
 
   return { candidates: sanitized.slice(0, outCount) };
+}
+
+/** ========= ここから：SDKなし版 runMemoNoteG =========
+ * OpenAI SDKを使わず fetch で実装（依存ゼロ）
+ */
+export async function runMemoNoteG({
+  persona,
+  title,
+  description,
+  vibeText,
+  tracks,
+}: {
+  persona: { id?: string; name?: string; description?: string; profile?: string };
+  title: string;
+  description?: string;
+  vibeText?: string;
+  tracks: { title?: string; artist?: string }[];
+}): Promise<string> {
+  const apiKey = process.env.OPENAI_API_KEY;
+  const model = OPENAI_MODEL;
+  if (!apiKey) throw new Error("OPENAI_API_KEY is missing");
+
+  const djName = (persona?.name || persona?.id || "DJ").trim();
+  const sample = tracks
+    .slice(0, 8)
+    .map((t, i) => `${i + 1}. ${t.title ?? "-"} / ${t.artist ?? "-"}`)
+    .join("\n");
+
+  const system = [
+    "あなたは日本語のコピーライター兼DJです。",
+    "MIXTAPEに同封する『受け取りメモ』を、温度感のある短い文章で作ります。",
+    "句読点は素直に。比喩は少量。相手に渡す丁寧さを保つ。",
+    "最後の行は必ず `by (DJ名)` で締める（例: by DJ Mellow）。",
+  ].join("\n");
+
+  const user = [
+    `タイトル: ${title}`,
+    description ? `リクエスト: ${description}` : null,
+    persona?.description ? `DJの雰囲気: ${persona.description}` : null,
+    vibeText ? `ミックス方針メモ: ${vibeText}` : null,
+    "代表的な曲（抜粋）:\n" + sample,
+    "",
+    "要件:",
+    "- 3〜6行程度。",
+    "- 1〜2行目でテーマの温度と使い所（時間帯/気分）をふわっと伝える。",
+    "- 中盤で流れや音の質感を簡潔に。",
+    "- 最後は必ず `by (DJ名)`。",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const res = await fetch(`${OPENAI_API_BASE}/v1/chat/completions`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model,
+      temperature: 0.7,
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: user },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    // フォールバック（APIエラー時でも壊れないように）
+    const fallback = [
+      `「${title}」をテーマにすてきな曲を選びました。`,
+      description ? String(description) : "",
+      "あなたに気に入ってもらえるといいな。",
+      `by ${djName}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+    return fallback;
+  }
+
+  const data = await res.json().catch(() => ({} as any));
+  let text: string = (data?.choices?.[0]?.message?.content || "").trim();
+
+  if (!text) {
+    // 念のためのフォールバック
+    text = [
+      `「${title}」をテーマにすてきな曲を選びました。`,
+      description ? String(description) : "",
+      "あなたに気に入ってもらえるといいな。",
+      `by ${djName}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  // by 行が無ければ強制付与
+  if (!/^\s*by\s+/mi.test(text)) {
+    text += `\nby ${djName}`;
+  }
+  return text;
 }

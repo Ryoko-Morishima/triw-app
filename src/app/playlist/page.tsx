@@ -1,157 +1,371 @@
+// src/app/playlist/page.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Balancer from "react-wrap-balancer";
+import { Sparkles } from "lucide-react";
+
 import { DJCard } from "@/components/DJCard";
 import { SaveToSpotifyButton } from "@/components/SaveToSpotifyButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Sparkles } from "lucide-react";
+import { CassetteIndexCard, IndexTrack } from "@/components/CassetteIndexCard";
+import { MixtapeSummarySheet } from "@/components/MixtapeSummarySheet";
 
-const DJ_PRESETS = [
-  { id: "mellow", name: "DJ Mellow", desc: "夜更けにそっと寄り添うチル担当", image: "/dj/mellow.png" },
-  { id: "groove", name: "DJ Groove", desc: "ダンサブルでハッピー", image: "/dj/groove.png" },
-  { id: "classic", name: "DJ Classic", desc: "黄金期の名曲案内人", image: "/dj/classic.png" },
-];
+// ----- 固定設定 -----
+const DURATION_OPTIONS = [45, 60, 90, 120, 240] as const;
+type Tone = "cream" | "blue" | "pink" | "slate" | "green";
 
+// ----- 型 -----
 type PlanResponse = {
-  runId: string; djId: string; title: string; description: string;
-  mode: "count" | "duration"; count?: number; duration?: number;
-  fallback?: boolean; E?: { picked: any[]; rejected: any[] }; F?: any; error?: string;
+  runId: string;
+  djId: string;
+  title: string;
+  description: string;
+  mode: "count" | "duration";
+  duration?: number;
+  djComment?: string | null;
+  memoText?: string | null; // ← AIメモ（旧トップレベル互換）
+  plan?: {                  // ← 新: planオブジェクト内にも入る場合あり
+    memoText?: string | null;
+    djComment?: string | null;
+  };
+  F?: any;
+  error?: string;
 };
 
-function collectUris(F: any, E: any): string[] {
-  const fromF = (F?.tracks ?? F?.items ?? F?.setlist ?? [])
-    .map((t: any) => t?.uri || t?.spotify?.uri).filter(Boolean);
-  if (fromF.length) return fromF;
-  const fromE = (E?.picked ?? [])
-    .map((t: any) => t?.uri || t?.spotify?.uri).filter(Boolean);
-  return fromE;
+type DJItem = {
+  id: string;
+  name: string;
+  description?: string;
+  image?: string | null;
+  tagline?: string; // ★ 短い紹介文（任意）
+};
+
+// ----- 小さなユーティリティ -----
+async function safeJson<T = any>(res: Response): Promise<T | null> {
+  const text = await res.text();
+  if (!text) return null;
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    return null;
+  }
 }
 
+function extractFinalTracks(F: any) {
+  const list: any[] = (F?.tracks ?? F?.setlist ?? F?.items ?? []) as any[];
+  return list.map((x) => ({
+    title: x?.title ?? x?.name ?? x?.spotify?.name ?? "-",
+    artist: x?.artist ?? x?.artists?.[0] ?? x?.spotify?.artists?.[0] ?? "-",
+    uri: x?.uri ?? x?.spotify?.uri ?? null,
+    cover:
+      x?.album_image_url ||
+      x?.spotify?.album_image_url ||
+      x?.image ||
+      x?.cover ||
+      x?.album?.images?.[0]?.url ||
+      null,
+  }));
+}
+
+function splitSides(tracks: IndexTrack[]) {
+  const mid = Math.ceil(tracks.length / 2);
+  return { A: tracks.slice(0, mid), B: tracks.slice(mid) };
+}
+
+function coversFrom(tracks: any[]) {
+  return tracks
+    .map((t) => t?.cover)
+    .filter(Boolean)
+    .map((src: string) => ({ src }));
+}
+
+// ================== ページ本体 ==================
 export default function Page() {
-  const [djId, setDjId] = useState(DJ_PRESETS[0].id);
-  const [title, setTitle] = useState("あなたの朝に寄り添う90sプレイリスト");
-  const [desc, setDesc] = useState("90年代の空気感で、静かに立ち上がっていく選曲にします。");
-  const [mode, setMode] = useState<"count" | "duration">("count");
-  const [count, setCount] = useState(10);
-  const [duration, setDuration] = useState(30);
+  // --- 状態 ---
+  const [djs, setDjs] = useState<DJItem[]>([]);
+  const [djId, setDjId] = useState<string>("");
+  const [tone, setTone] = useState<Tone>("cream");
+
+  const [customName, setCustomName] = useState("");
+  const [customOverview, setCustomOverview] = useState("");
+
+  const [title, setTitle] = useState("DJがあなただけのMIXTAPEを作る");
+  const [desc, setDesc] = useState("気分やシーンを一言で。90s/平成などの年代語もOK。");
+  const [duration, setDuration] = useState<number>(90);
+
   const [loading, setLoading] = useState(false);
   const [plan, setPlan] = useState<PlanResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [memo, setMemo] = useState<string>(""); // 生成されたAIメモ
 
-  const uris = useMemo(() => collectUris(plan?.F, plan?.E), [plan]);
+  // 設定（1〜4）の折りたたみ状態
+  const [builderOpen, setBuilderOpen] = useState(true);
 
+  // --- DJ一覧を /api/djs から取得 ---
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/api/djs", { cache: "no-store" });
+        const json = await safeJson<{ djs: DJItem[] }>(res);
+        const list: DJItem[] = Array.isArray(json?.djs) ? json!.djs : [];
+        setDjs(list);
+        if (!djId && list.length) setDjId(list[0].id);
+      } catch {
+        // フォールバック
+        const fallback: DJItem[] = [
+          { id: "mellow", name: "DJ Mellow", description: "夜更けにそっと寄り添うチル担当", tagline: "夜更けのチル", image: "/dj/mellow.png" },
+          { id: "groove", name: "DJ Groove", description: "ダンサブルでハッピー", tagline: "ダンサブル&ハッピー", image: "/dj/groove.png" },
+          { id: "classic", name: "DJ Classic", description: "黄金期の名曲案内人", tagline: "黄金期の名曲案内", image: "/dj/classic.png" },
+        ];
+        setDjs(fallback);
+        if (!djId) setDjId(fallback[0].id);
+      }
+    })();
+  }, []); // 一度だけ
+
+  const selectedIsCustom = djId === "custom";
+  const djDisplayName = selectedIsCustom
+    ? customName || "Custom DJ"
+    : djs.find((d) => d.id === djId)?.name || djId;
+
+  // --- 最終セットの整形（Cassette/Sheet用） ---
+  const finalRaw = useMemo(() => extractFinalTracks(plan?.F), [plan]);
+  const finalForIndex: IndexTrack[] = finalRaw.map((t) => ({ title: t.title, artist: t.artist }));
+  const sides = splitSides(finalForIndex);
+  const covers = coversFrom(finalRaw);
+  const uris: string[] = (plan?.F?.tracks ?? plan?.F?.setlist ?? plan?.F?.items ?? [])
+    .map((t: any) => t?.uri || t?.spotify?.uri)
+    .filter(Boolean);
+
+  // 生成後は設定(1〜4)を自動で畳む
+  useEffect(() => {
+    if (finalForIndex.length > 0) setBuilderOpen(false);
+  }, [finalForIndex.length]);
+
+  // --- 生成ハンドラ ---
   async function handleGenerate() {
-    setLoading(true);
     try {
-      const body: any = { title, description: desc, djId, mode, ...(mode === "count" ? { count } : { duration }) };
-      const res = await fetch("/api/mixtape/plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-      const json = (await res.json()) as PlanResponse;
-      if (!res.ok) throw new Error(json?.error || "failed");
-      setPlan(json);
+      setLoading(true);
+      setError(null);
+      setPlan(null);
+
+      const body: any = {
+        title,
+        description: desc,
+        djId,
+        mode: "duration",
+        duration,
+      };
+
+      if (selectedIsCustom) {
+        if (!customName.trim() || !customOverview.trim()) {
+          setError("カスタムDJ名と概要は必須です");
+          return;
+        }
+        body.customDJ = { name: customName.trim(), overview: customOverview.trim() };
+      }
+
+      const res = await fetch("/api/mixtape/plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      const json = await safeJson<PlanResponse>(res);
+      if (!res.ok) throw new Error((json && (json as any).error) || `${res.status} ${res.statusText}`);
+
+      // 受け取り形の差異（トップ/plan内）を吸収して AIメモを抽出
+      const planObj = (json as any)?.plan ?? (json as any);
+      const memoText = planObj?.memoText ?? planObj?.djComment ?? "";
+
+      setPlan(json!);     // 既存の状態更新
+      setMemo(memoText);  // 生成メモを保存（表示用）
+      setBuilderOpen(false); // 生成直後に畳む（念のため）
+
+    } catch (e: any) {
+      setError(String(e?.message || e));
     } finally {
       setLoading(false);
     }
   }
 
+  // ----------------- UI -----------------
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       {/* Hero */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold tracking-tight">
-          <Balancer>DJが選ぶ、あなただけのプレイリスト</Balancer>
+          <Balancer>TRIW / MIXTAPE</Balancer>
         </h1>
-        <p className="text-gray-600 mt-2"><Balancer>好きなDJを選んで、テーマを入れるだけ。年代指定（90s/平成）もOK。</Balancer></p>
+        <p className="mt-2 text-zinc-600">
+          <Balancer>
+            好きなDJを選んでテーマを一言。あなたのためにMIXTAPEを作ります。仕上げはSpotifyプレイリストで。
+          </Balancer>
+        </p>
       </div>
 
-      {/* DJ 選択 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-3">1. DJを選ぶ</h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {DJ_PRESETS.map((dj) => (
-            <DJCard key={dj.id} {...dj} active={djId === dj.id} onClick={() => setDjId(dj.id)} />
-          ))}
-          <div
-            className={`rounded-2xl border border-dashed p-4 grid place-items-center cursor-pointer ${djId === "custom" ? "border-black" : "border-gray-200"}`}
-            onClick={() => setDjId("custom")}
-          >
-            <div className="text-sm text-gray-500">＋ カスタムDJ（後で対応）</div>
-          </div>
-        </div>
-      </section>
+      {/* 1〜4: 設定（details/summary で折りたたみ） */}
+      <details
+        open={builderOpen}
+        onToggle={(e) => setBuilderOpen((e.currentTarget as HTMLDetailsElement).open)}
+        className="mb-6 rounded-xl border bg-white p-4 shadow-sm
+                   [&_summary::-webkit-details-marker]:hidden"
+      >
+        <summary className="flex cursor-pointer select-none items-center justify-between">
+          <span className="text-sm font-medium text-zinc-700">
+            {builderOpen ? "設定（とじる）" : "設定（ひらく）"}
+          </span>
+          <span className={`transition-transform ${builderOpen ? "rotate-180" : ""}`}>⌃</span>
+        </summary>
 
-      {/* 入力 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-3">2. プレイリスト情報</h2>
-        <div className="grid gap-3">
-          <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="プレイリスト名" />
-          <Textarea value={desc} onChange={(e) => setDesc(e.target.value)}
-            placeholder="どんな気分/シーン？（90s/平成/深夜など書くと年代ゲートが効くよ）" />
-        </div>
-      </section>
+        <div className="mt-4 space-y-8">
+          {/* 1. DJを選ぶ */}
+          <section>
+            <h2 className="mb-3 text-xl font-semibold">1. DJを選ぶ</h2>
+            <div className="grid gap-4 sm:grid-cols-3">
+            {djs.map((dj) => {
+              // ★ 簡潔な一行に整形（tagline → description の順で利用）
+              const raw = (dj.tagline ?? dj.description ?? "").trim();
+              const firstSentence =
+                raw.split(/[。.!?]/)[0]?.replace(/\s+/g, " ").trim() ?? "";
+              const brief = firstSentence.length > 28 ? firstSentence.slice(0, 28) + "…" : firstSentence;
 
-      {/* 曲数 or 分数 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-3">3. 曲数 or 分数</h2>
-        <div className="flex items-center gap-3">
-          <Button variant={mode === "count" ? "default" : "outline"} onClick={() => setMode("count")}>曲数で指定</Button>
-          <Button variant={mode === "duration" ? "default" : "outline"} onClick={() => setMode("duration")}>分数で指定</Button>
-          {mode === "count" ? (
-            <Input type="number" min={3} max={30} className="w-28" value={count} onChange={(e) => setCount(Number(e.target.value))} />
-          ) : (
-            <div className="flex items-center gap-2">
-              <Input type="number" min={10} max={120} className="w-28" value={duration}
-                     onChange={(e) => setDuration(Number(e.target.value))} />
-              <span className="text-sm text-gray-600">分</span>
+              return (
+                <DJCard
+                  key={dj.id}
+                  name={dj.name}
+                  desc={brief} // ← ここを短い文に差し替え
+                  image={dj.image || `/dj/${dj.id}.png`}
+                  active={djId === dj.id}
+                  onClick={() => setDjId(dj.id)}
+                />
+              );
+            })}
+
+              {/* カスタムDJ */}
+              <div
+                className={`grid cursor-pointer gap-2 rounded-2xl border border-dashed p-4 ${
+                  djId === "custom" ? "border-black" : "border-zinc-200"
+                }`}
+                onClick={() => setDjId("custom")}
+              >
+                <div className="text-sm text-zinc-500">＋ カスタムDJ</div>
+                {djId === "custom" && (
+                  <>
+                    <Input
+                      placeholder="カスタムDJ名（必須）"
+                      value={customName}
+                      onChange={(e) => setCustomName(e.target.value)}
+                    />
+                    <Input
+                      placeholder="このDJの雰囲気・得意分野（必須）"
+                      value={customOverview}
+                      onChange={(e) => setCustomOverview(e.target.value)}
+                    />
+                  </>
+                )}
+              </div>
             </div>
-          )}
-        </div>
-      </section>
+          </section>
 
-      {/* 生成 & 保存 */}
-      <div className="flex items-center gap-3">
-        <Button onClick={handleGenerate} disabled={loading}>
+          {/* 2. テーマ */}
+          <section>
+            <h2 className="mb-3 text-xl font-semibold">2. テーマ</h2>
+            <div className="grid gap-3">
+              <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="MIXTAPEのタイトル" />
+              <Textarea
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                placeholder="どんなMIXがいい? 気分/シーン、年代やジャンル、アーティスト名、なんでも自由にいれてみて！"
+              />
+            </div>
+          </section>
+
+          {/* 3. 分数（固定5択） */}
+          <section>
+            <h2 className="mb-3 text-xl font-semibold">3. 分数を選ぶ</h2>
+            <div className="flex flex-wrap items-center gap-2">
+              {DURATION_OPTIONS.map((m) => (
+                <Button key={m} variant={duration === m ? "default" : "outline"} onClick={() => setDuration(m)}>
+                  {m}分
+                </Button>
+              ))}
+            </div>
+          </section>
+
+          {/* 4. レーベル色 */}
+          <section>
+            <h2 className="mb-3 text-xl font-semibold">4. レーベルの色</h2>
+            <div className="flex flex-wrap items-center gap-2">
+              {(["cream", "blue", "pink", "slate", "green"] as Tone[]).map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setTone(t)}
+                  className={`h-8 w-8 rounded-full border bg-gradient-to-br ${
+                    t === "cream"
+                      ? "from-amber-50 to-amber-100"
+                      : t === "blue"
+                      ? "from-sky-50 to-blue-100"
+                      : t === "pink"
+                      ? "from-rose-50 to-pink-100"
+                      : t === "slate"
+                      ? "from-slate-50 to-slate-100"
+                      : "from-emerald-50 to-emerald-100"
+                  } ${tone === t ? "ring-2 ring-black" : ""}`}
+                  aria-label={t}
+                  title={t}
+                />
+              ))}
+            </div>
+          </section>
+        </div>
+      </details>
+
+      {/* 実行ボタン（detailsの外に配置） */}
+      <div className="mb-8">
+        <Button onClick={handleGenerate} disabled={loading || !djId}>
           <Sparkles className="mr-2 h-4 w-4" />
-          {loading ? "生成中..." : "プレイリストを生成"}
+          {loading ? "選曲中…" : "MIXTAPEを作る"}
         </Button>
-        {uris.length > 0 && (
-          <SaveToSpotifyButton
-            uris={uris}
-            name={`TRIW - ${plan?.title ?? "Untitled"}`}
-            description={plan?.description ?? ""}
-          />
-        )}
+        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
       </div>
 
-      {/* 結果（簡易） */}
-      {plan?.E?.picked?.length ? (
-        <div className="mt-8">
-          <h3 className="font-medium mb-2">採用曲</h3>
-          <div className="rounded-xl border overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="p-2 text-left">曲名</th>
-                  <th className="p-2 text-left">アーティスト</th>
-                  <th className="p-2 text-left">Confidence</th>
-                  <th className="p-2 text-left">理由</th>
-                </tr>
-              </thead>
-              <tbody>
-                {plan.E.picked.map((p: any, i: number) => (
-                  <tr key={i} className="border-t">
-                    <td className="p-2">{p.title}</td>
-                    <td className="p-2">{p.artist}</td>
-                    <td className="p-2 tabular-nums">{typeof p.confidence === "number" ? p.confidence.toFixed(2) : "-"}</td>
-                    <td className="p-2 text-gray-600">{p.reason}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      {/* 出力（最終セットのみ表示） */}
+      {finalForIndex.length > 0 && (() => {
+        // 受け取り形の差異（トップ/plan内）を吸収して AIメモを抽出
+        const planObj = (plan as any)?.plan ?? (plan as any) ?? {};
+        const memoText =
+          planObj?.memoText ??
+          planObj?.djComment ??
+          memo; // 念のため state も fallback
+
+        return (
+          <div className="mt-8 space-y-6">
+            <CassetteIndexCard
+              title={plan?.title ?? "Untitled Mixtape"}
+              djName={djDisplayName}
+              sideA={sides.A}
+              sideB={sides.B}
+              tone={tone}
+            />
+
+            <MixtapeSummarySheet
+              title={plan?.title ?? "Untitled Mixtape"}  // 見出しにタイトルだけ
+              memo={memoText}                              // 本文はAIメモだけ
+              covers={covers}
+            />
+
+            <SaveToSpotifyButton
+              uris={uris}
+              name={`TRIW - ${plan?.title ?? "Untitled"}`}
+              description={plan?.description ?? ""} // Spotify用の説明は維持
+            />
           </div>
-        </div>
-      ) : null}
+        );
+      })()}
     </main>
   );
 }

@@ -2,7 +2,13 @@
 export const runtime = "nodejs";
 
 import { NextRequest, NextResponse } from "next/server";
-import { estimateTargetCount, runCandidatesC, runInterpretB, runPersonaA } from "@/lib/openai";
+import {
+  estimateTargetCount,
+  runCandidatesC,
+  runInterpretB,
+  runPersonaA,
+  runMemoNoteG, // ← 追加：受け取りメモAI
+} from "@/lib/openai";
 import { initRun, saveRaw } from "@/lib/runlog";
 import { resolveCandidatesD } from "@/lib/resolve";
 import { evaluateTracks } from "@/lib/evaluate";
@@ -44,46 +50,45 @@ function hasDecadeHint(s: string): boolean {
   return en.test(text) || ja.test(text);
 }
 
-// ====== 年代パース（十年単位 Era を取り出す：1990s/90年代 等） ======
-function parseEra(text: string): { start: number; end: number } | null {
-  const s = (text || "").toLowerCase();
+// --- 受け取りメモ生成（AI優先・安全フォールバック付き / ソース可視化） ---
+async function buildRecipientMemo({
+  persona,
+  B,
+  title,
+  description,
+  F,
+}: any): Promise<{ text: string; source: "ai" | "fallback"; error?: string }> {
+  const djName = (persona?.name || persona?.id || "DJ").trim();
 
-  // 英語: 1990s / 2000s / 70s / 80s
-  const m1 = s.match(/\b(19[5-9]0|20[0-2]0)s\b/); // 1950s〜2020s
-  if (m1) {
-    const start = Number(m1[1]);
-    return { start, end: start + 9 };
-  }
-  const m2 = s.match(/\b([6-9]0)s\b/); // 60s〜90s → 1900年代に寄せる
-  if (m2) {
-    const d = Number(m2[1]); // 60,70,80,90
-    const start = 1900 + d;
-    return { start, end: start + 9 };
-  }
+  // B から“方針っぽい一文”を抽出（任意）
+  const vibe =
+    (B?.flow_style_paragraph && String(B.flow_style_paragraph)) ||
+    (B?.direction_note && String(B.direction_note)) ||
+    (B?.rationale && String(B.rationale)) ||
+    "";
 
-  // 日本語: 90年代 / 70年代 / 10年代 / 20年代
-  const m3 = s.match(/([5-9]0)年代/); // 50年代〜90年代 → 1900年代扱い
-  if (m3) {
-    const d = Number(m3[1]); // 50,60,70,80,90
-    const start = 1900 + d;
-    return { start, end: start + 9 };
-  }
-  const m4 = s.match(/([12]0)年代/); // 10年代 / 20年代 → 2000年代扱い
-  if (m4) {
-    const d = Number(m4[1]); // 10 or 20
-    const start = 2000 + d;
-    return { start, end: start + 9 };
-  }
+  // 最終セットから title/artist だけを抽出（AIへのヒント用）
+  const tracks = (F?.tracks ?? F?.setlist ?? F?.items ?? []) as any[];
+  const condensed = tracks.map((t: any) => ({
+    title: t?.title ?? t?.name ?? t?.spotify?.name ?? "-",
+    artist: t?.artist ?? t?.artists?.[0] ?? t?.spotify?.artists?.[0] ?? "-",
+  }));
 
-  // 元号はざっくり（必要になったら精密化）
-  if (/平成/.test(s)) return { start: 1989, end: 2019 };
-  if (/昭和/.test(s)) return { start: 1926, end: 1989 };
-  if (/令和/.test(s)) return { start: 2019, end: 2099 };
-
-  return null;
+  try {
+    const memo = await runMemoNoteG({
+      persona,
+      title,
+      description,
+      vibeText: vibe,
+      tracks: condensed,
+    });
+    const ensured = /\nby\s+/i.test(memo) ? memo : `${memo}\nby ${djName}`;
+    return { text: ensured, source: "ai" };
+  } catch (e: any) {
+  const text = `${title}をテーマに選曲しました。気に入ってくれるかな？ by ${djName}`;
+  return { text, source: "fallback", error: String(e?.message || e) };
 }
-
-
+}
 
 
 // ====== ハンドラ ======
@@ -97,10 +102,10 @@ export async function POST(req: NextRequest) {
       title,
       description,
       djId,
-      mode = "count",         // "count" | "duration"
-      count,                  // 曲数（mode=countのとき）
-      duration,               // 分数（mode=durationのとき）
-      customDJ,               // { name, overview }（Custom選択時のみ）
+      mode = "count", // "count" | "duration"
+      count, // 曲数（mode=countのとき）
+      duration, // 分数（mode=durationのとき）
+      customDJ, // { name, overview }（Custom選択時のみ）
       // 既に候補/解決がある場合の直渡しにも対応（任意）
       candidates: candidatesIn,
       resolved: resolvedIn,
@@ -205,88 +210,147 @@ export async function POST(req: NextRequest) {
     }
 
     // ========================
-    // D: Spotify解決（存在確認 & メタ取得）
+    // D〜F: 解決・評価・最終整形
     // ========================
-    let D: any;
     try {
-      D = resolvedIn ?? (await resolveCandidatesD(C?.candidates ?? []));
+      // D: Spotify解決（存在確認 & メタ取得）
+      const D = resolvedIn ?? (await resolveCandidatesD(C?.candidates ?? []));
       await saveRaw(runId, "D", D);
-// ========================
-// E: 採否（年代ゲート対応）
-// ========================
-const yearGate =
-  !!(B?.hard_constraints?.eras) ||
-  hasDecadeHint(String(title)) ||
-  hasDecadeHint(String(description));
 
-// Era を抽出（年代範囲を返す）
-const eraFromText =
-  parseEra(String(title)) ||
-  parseEra(String(description)) ||
-  null;
+      // E: 採否（年代ゲート対応）
+      const yearGate =
+        !!(B?.hard_constraints?.eras) ||
+        hasDecadeHint(String(title)) ||
+        hasDecadeHint(String(description));
 
-const E = evaluateTracks(
-  {
-    runId,
-    startedAt: new Date().toISOString(),
-    title,
-    description,
-    djId,
-    mode,
-    count,
-    duration,
-  } as any,
-  C?.candidates ?? [],
-  D.resolved ?? [],
-  { year_gate: yearGate, era: eraFromText }
-); // ← ここで呼び出しを閉じる！
-
-await saveRaw(runId, "E", E);
-
-      // ========================
-      // F: 最終整形（★ 統合ポイント）
-      // ========================
-      const isDuration = mode === "duration";
-      const minutes = Number(isDuration ? duration : 30) || 30;
-      const maxK = Number(!isDuration ? count : 12) || 12;
-
-      const F = await finalizeSetlist(E?.picked ?? [], {
-        mode: isDuration ? "duration" : "count",
-        ...(isDuration ? { targetDurationMin: minutes, maxTracksHardCap: 30 } : { maxTracks: maxK }),
-        artistPolicy: "auto",            // タイトル/概要から“特集”を自動判定
-        programTitle: title,
-        programOverview: description,
-        interleaveRoles: true,
-        shortReason: true,
-        // 必要に応じて: maxPerArtist: 2,
-      });
-
-      await saveRaw(runId, "F", F);
-
-      // レスポンス（A〜Fの要点を返す）
-      return NextResponse.json(
+      const E = evaluateTracks(
         {
           runId,
-          djId,
+          startedAt: new Date().toISOString(),
           title,
           description,
+          djId,
           mode,
           count,
           duration,
-          fallback: !!C?._error,
-          E: { picked: E?.picked ?? [], rejected: E?.rejected ?? [] },
-          F, // 最終プレイリスト
-        },
-        { status: 200 }
+        } as any,
+        C?.candidates ?? [],
+        D.resolved ?? [],
+        { year_gate: yearGate }
       );
+      await saveRaw(runId, "E", E);
+
+// F: 最終整形（★ 統合ポイント）
+const isDuration = mode === "duration";
+const minutes = Number(isDuration ? duration : 30) || 30;
+const maxK = Number(!isDuration ? count : 12) || 12;
+
+const F = await finalizeSetlist(E?.picked ?? [], {
+  mode: isDuration ? "duration" : "count",
+  ...(isDuration ? { targetDurationMin: minutes, maxTracksHardCap: 30 } : { maxTracks: maxK }),
+  artistPolicy: "auto",
+  programTitle: title,
+  programOverview: description,
+  interleaveRoles: true,
+  shortReason: true,
+});
+await saveRaw(runId, "F", F);
+
+// ★★★ ここから追加：カバー画像の埋め戻し ★★★
+const byUri = new Map<string, any>();
+// D.resolved から uri → 画像URL をマップ化
+(D?.resolved ?? []).forEach((r: any) => {
+  const uri = r?.uri ?? r?.spotify?.uri ?? r?.track?.uri;
+  const img =
+    r?.album_image_url ||
+    r?.image ||
+    r?.cover ||
+    r?.album?.images?.[0]?.url ||
+    r?.spotify?.album_image_url ||
+    null;
+  if (uri && img && !byUri.has(uri)) byUri.set(uri, img);
+});
+
+// F 内の各曲に cover が無ければ補完
+const fItems = (F?.tracks ?? F?.setlist ?? F?.items ?? []) as any[];
+fItems.forEach((t: any) => {
+  // 既に cover があれば尊重
+  if (t?.cover) return;
+
+  // 自身が持っている可能性のあるキーも一応みる
+  const selfImg =
+    t?.album_image_url ||
+    t?.image ||
+    t?.cover ||
+    t?.album?.images?.[0]?.url ||
+    null;
+
+  if (selfImg) {
+    t.cover = selfImg;
+    return;
+  }
+
+  // uri 経由で D.resolved から補完
+  const uri = t?.uri ?? t?.spotify?.uri ?? t?.track?.uri;
+  const img = uri ? byUri.get(uri) : null;
+  if (img) t.cover = img;
+});
+// ★★★ 追加ここまで ★★★
+
+// --- 追加: UI向けの短いDJコメント（参考メモとして残す）
+// ★ ここは “1回だけ” 宣言！ 既に上にあれば再宣言しないこと。
+const djNote =
+  (B?.flow_style_paragraph && String(B.flow_style_paragraph)) ||
+  (B?.direction_note && String(B.direction_note)) ||
+  (B?.rationale && String(B.rationale)) ||
+  "";
+
+// --- 受け取りメモ（AI or フォールバック判定つき）
+const memoRes = await buildRecipientMemo({ persona: A, B, title, description, F });
+const memoText = memoRes.text;
+const memoFrom = memoRes.source;
+
+// デバッグ保存（runlog で後から確認できる）
+await saveRaw(runId, "G", {
+  memoFrom,
+  memoPreview: memoText.slice(0, 200),
+  // error は fallback のときだけ入る
+});
+
+// ★ UI互換のために plan オブジェクトを追加（将来はこれに一本化推奨）
+const plan = {
+  memoText,          // UI: plan?.memoText || plan?.djComment || ""
+  djComment: djNote, // 互換: 旧 djComment 表示にも対応
+};
+
+return NextResponse.json(
+  {
+    runId,
+    djId,
+    title,
+    description,
+    mode,
+    count,
+    duration,
+    fallback: !!C?._error,
+
+    // ---- 新推奨
+    plan: { memoText, djComment: djNote },
+    memoText,             // 旧互換
+    djComment: djNote,    // 旧互換
+    memoFrom,             // ← 追加： "ai" か "fallback"
+    E: { picked: E?.picked ?? [], rejected: E?.rejected ?? [] },
+    F,
+  },
+  { status: 200 }
+);
+
+ 
     } catch (e: any) {
       await saveRaw(runId, "D", { error: String(e?.message || e) });
       await saveRaw(runId, "E", { error: String(e?.message || e) });
       await saveRaw(runId, "F", { error: String(e?.message || e) });
-      return NextResponse.json(
-        { runId, error: String(e?.message || e) },
-        { status: 500 }
-      );
+      return NextResponse.json({ runId, error: String(e?.message || e) }, { status: 500 });
     }
   } catch (err: any) {
     console.error("/api/mixtape/plan fatal error:", err);
