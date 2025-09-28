@@ -1,17 +1,18 @@
 export type DJPreset = {
   id: string;
-  name: string;       // UI表示名
-  shortName: string;  // 生成や文面で使う呼称
-  description: string;// Aパスへ渡す自由文（ジャンル/時代/地域/選曲姿勢）
+  name: string;        // UI表示名
+  shortName: string;   // 生成や文面で使う呼称
+  description: string; // Aパスへ渡す自由文（ジャンル/時代/地域/選曲姿勢）
+  profile?: string;    // ★ UI用の人間味プロフィール（1行・40〜60字目安）
 };
 
 export const DJ_PRESETS: DJPreset[] = [
-
   // 既定の8名（設計メモ準拠）
   {
     id: "Techne",
     name: "DJ Techne",
     shortName: "Techne",
+    profile: "構築美で踊らせる職人。無駄を削ぎ落とすミニマル担当。",
     description: [
       "エレクトロニック/テクノ系。構築美とミニマリズム。",
       "好む: Minimal Techno, Detroit Techno, Deep House, Electro",
@@ -23,6 +24,7 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "Haru",
     name: "DJ Haru",
     shortName: "Haru",
+    profile: "日常にそっと光を。やわらかな歌とギターで、忙しさの隙間に深呼吸を",
     description: [
       "インディポップ/シンガーソングライター系。日常を切り取る音楽を愛する。",
       "好む: Indie Pop, Folk, Dream Pop",
@@ -34,6 +36,7 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "Rio",
     name: "DJ Rio",
     shortName: "Rio",
+    profile: "掘って、踊らせる。70s～90sのグルーヴで、汗の匂いがする夜をもう一度。",
     description: [
       "ソウル/ファンク/レアグルーヴ系。70s〜90s研究肌の掘り師。",
       "好む: Soul, Funk, Rare Groove, Jazz-Funk, R&B",
@@ -45,6 +48,7 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "Sakura",
     name: "DJ Sakura",
     shortName: "Sakura",
+    profile: "懐かしさと今をブレンド。歌心で、黄昏からネオンへと景色を変える。",
     description: [
       "J-POP/シティポップ/歌もの。懐かしさ×新しさをブレンド。",
       "好む: City Pop, J-Pop, J-Rock, 良質アイドル, アニソン",
@@ -56,6 +60,7 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "Blaze",
     name: "DJ Blaze",
     shortName: "Blaze",
+    profile: "歓声がご褒美。アンセム連打でフロアを爆上げ。最後はみんなで大合唱。",
     description: [
       "大ネタ系パーティーメーカー。クラウド爆発命。",
       "好む: EDM, Big Room, Pop Remixes, Rock Anthems",
@@ -67,6 +72,7 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "Mist",
     name: "DJ Mist",
     shortName: "Mist",
+    profile: "音は空気。アンビエントで心拍をゆっくりに。",
     description: [
       "アンビエント/実験音響。瞑想/環境音のレイヤーで空間を作る。",
       "好む: Ambient, Drone, Experimental, New Age",
@@ -78,6 +84,7 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "BlueNote",
     name: "DJ Blue Note",
     shortName: "Blue Note",
+    profile: "夜更けの相棒。和和声と“間”で酔わせる、滑らかなジャズの旅。",
     description: [
       "ジャズ/インスト系。キー/リズムで繋ぎ、セッション感覚の流れ。",
       "好む: Jazz全般, Jazz-Funk, Fusion",
@@ -89,6 +96,7 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "Nomad",
     name: "DJ Nomad",
     shortName: "Nomad",
+    profile: "旅する耳。国境を越えるリズムで、見たことのない風景へ連れていく。",
     description: [
       "ワールド/グローバル。伝統音楽と現代の架橋。",
       "好む: Afrobeat, Latin, Reggae, Middle Eastern, Indian, Cumbia",
@@ -96,11 +104,13 @@ export const DJ_PRESETS: DJPreset[] = [
       "癖: 異文化の橋渡しで旅の物語を描く。",
     ].join("\n"),
   },
-   // ユーザーのオリジナルＤＪ
+
+  // ユーザーのオリジナルDJ
   {
     id: "custom",
     name: "カスタムDJ",
     shortName: "Custom",
+    profile: "あなたのDJを作ろう。名前と雰囲気/得意ジャンルを教えてね。",
     description: "好きなDJを呼んでみよう!",
-  }
+  },
 ];

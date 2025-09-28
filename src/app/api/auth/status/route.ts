@@ -5,7 +5,9 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 export async function GET() {
-  const jar = cookies();
+  // ★ await を付ける！
+  const jar = await cookies();
+
   const access = jar.get("spotify_access_token")?.value ?? null;
   const expStr = jar.get("spotify_access_token_expires")?.value ?? null;
 
@@ -15,12 +17,11 @@ export async function GET() {
 
   const loggedIn = !!access && notExpired;
 
-  // キャッシュさせない
-  const res = NextResponse.json(
+  return NextResponse.json(
     {
-      loggedIn,            // 既存互換
-      authenticated: loggedIn, // フロントが期待するキー
-      expiresAt,           // デバッグ・UI用
+      loggedIn,
+      authenticated: loggedIn, // フロント互換
+      expiresAt,
     },
     {
       headers: {
@@ -29,6 +30,4 @@ export async function GET() {
       },
     }
   );
-
-  return res;
 }

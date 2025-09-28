@@ -42,6 +42,7 @@ type DJItem = {
   description?: string;
   image?: string | null;
   tagline?: string; // ★ 短い紹介文（任意）
+  profile?: string; // ★ 追加
 };
 
 // ----- 小さなユーティリティ -----
@@ -137,7 +138,7 @@ export default function Page() {
   const [customOverview, setCustomOverview] = useState("");
 
   const [title, setTitle] = useState("MIXTAPEのタイトル");
-  const [desc, setDesc] = useState("聞きたいMIXのジャンルや気分、シーンを自由に書いて。90s/平成などの年代やアーティスト名もOK。");
+  const [desc, setDesc] = useState("気分や聞きたいシーンを自由に書いて。90s/平成などの年代やアーティスト名もOK。");
   const [duration, setDuration] = useState<number>(90);
 
   const [loading, setLoading] = useState(false);
@@ -156,6 +157,10 @@ export default function Page() {
         const json = await safeJson<{ djs: DJItem[] }>(res);
         const list: DJItem[] = Array.isArray(json?.djs) ? json!.djs : [];
         setDjs(list);
+
+      // ★ デバッグ追加
+      console.log("DJ list from API:", list);
+
         if (!djId && list.length) setDjId(list[0].id);
       } catch {
         // フォールバック
@@ -288,10 +293,17 @@ export default function Page() {
             <div className="grid gap-4 sm:grid-cols-3">
               {djs.map((dj) => {
                 // ★ 簡潔な一行に整形（tagline → description の順で利用）
-                const raw = (dj.tagline ?? dj.description ?? "").trim();
-                const firstSentence =
-                  raw.split(/[。.!?]/)[0]?.replace(/\s+/g, " ").trim() ?? "";
-                const brief = firstSentence.length > 28 ? firstSentence.slice(0, 28) + "…" : firstSentence;
+                  const raw =
+                 (dj.profile?.trim()) ||
+                 (dj.tagline?.trim()) ||
+                 (dj.description ?? "").trim();
+
+                 // ← ここを変更：1文だけにせず、最大2文・最大80文字に調整
+                 const sentences = raw.split(/[。.!?]/).filter(Boolean);
+                 const twoSentences = sentences.slice(0, 2).join("。"); // 2文まで
+                 const text = (twoSentences ? twoSentences + "。" : raw).replace(/\s+/g, " ").trim();
+                 const brief = text.length > 80 ? text.slice(0, 80) + "…" : text;
+
 
                 return (
                   <DJCard

@@ -1,7 +1,7 @@
+// src/app/api/djs/route.ts
 export const runtime = "nodejs";
 import { NextResponse } from "next/server";
 
-// route.ts にある実装を軽く流用（共有化してもOK）
 async function loadDJList(): Promise<any[]> {
   try {
     const mod: any = await import("@/data/djs");
@@ -14,10 +14,20 @@ async function loadDJList(): Promise<any[]> {
 function normalizeOne(dj: any) {
   const id = dj.id || dj.slug || dj.key;
   const name = dj.name || dj.displayName || dj.title || dj.shortName || id;
+
+  const profile =
+    (typeof dj.profile === "string" && dj.profile.trim()) ||
+    (typeof dj.tagline === "string" && dj.tagline.trim()) ||
+    "";
+
   const description = dj.description || dj.desc || dj.summary || "";
-  // 画像は data 側が持っていれば優先、無ければ /public/dj/<id>.png を想定
+  const shortName = dj.shortName || dj.short || name;
   const image = dj.image || dj.avatar || (id ? `/dj/${id}.png` : null);
-  return { id, name, description, image };
+
+  // ★ 後方互換: profile を tagline にも入れて返す（UIがtagline参照でも表示される）
+  const tagline = profile || undefined;
+
+  return { id, name, shortName, profile, tagline, description, image };
 }
 
 export async function GET() {
