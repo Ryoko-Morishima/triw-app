@@ -9,24 +9,56 @@ type TokenResponse = {
   refresh_token?: string;
 };
 
+// Base64URL → JSON へ復元
+function parseState(b64url: string | null): { next?: string; nonce?: string } | null {
+  if (!b64url) return null;
+  try {
+    const b64 = b64url.replace(/-/g, "+").replace(/_/g, "/");
+    const json = atob(b64);
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
+}
+
+// next の安全化（/ から始まるパスのみ許可）
+function sanitizeNext(next: string | undefined, fallback = "/playlist") {
+  if (!next || typeof next !== "string") return fallback;
+  if (!next.startsWith("/")) return fallback;
+  // 二重スラッシュなどの外部遷移を抑止（//evil など）
+  if (next.startsWith("//")) return fallback;
+  return next;
+}
+
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const code = url.searchParams.get("code");
-  const state = url.searchParams.get("state");
+  const stateParam = url.searchParams.get("state");
 
   const jar = await cookies();
   const savedState = jar.get("oauth_state")?.value ?? null;
+  const savedNonce = jar.get("oauth_nonce")?.value ?? null;
   const verifier = jar.get("pkce_verifier")?.value ?? null;
 
-  if (!code || !state || !savedState || !verifier || state !== savedState) {
+  // まずは従来通りの state 一致チェック
+  if (!code || !stateParam || !savedState || !verifier || stateParam !== savedState) {
     return html(400, `Auth error (state/verifier mismatch). <a href="/">Home</a>`);
+  }
+
+  // state の中身を復元（{ next, nonce } を想定）
+  const parsed = parseState(stateParam);
+  const nextPath = sanitizeNext(parsed?.next, "/playlist");
+
+  // 可能なら nonce も照合（任意強化）
+  if (parsed?.nonce && savedNonce && parsed.nonce !== savedNonce) {
+    return html(400, `Auth error (nonce mismatch). <a href="/">Home</a>`);
   }
 
   const body = new URLSearchParams({
     client_id: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!,
     grant_type: "authorization_code",
     code,
-    redirect_uri: process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI!, // /api/auth/callback で統一
+    redirect_uri: process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI!, // /api/auth/callback
     code_verifier: verifier,
   });
 
@@ -45,11 +77,10 @@ export async function GET(req: Request) {
   const expiresAt = Date.now() + json.expires_in * 1000;
 
   const isProd = process.env.NODE_ENV === "production";
-  const home = process.env.NEXT_PUBLIC_BASE_URL ?? "/";
 
-  // 200 + meta refresh で確実に Set-Cookie を反映させる
+  // メタリフレッシュで確実に Set-Cookie を効かせつつ、/playlist 等に戻す
   const res = new Response(
-    `<html><head><meta http-equiv="refresh" content="0; url=${home}" /></head><body>Redirecting…</body></html>`,
+    `<html><head><meta http-equiv="refresh" content="0; url=${nextPath}" /></head><body>Redirecting…</body></html>`,
     { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } }
   );
 
@@ -69,6 +100,7 @@ export async function GET(req: Request) {
   // 一時Cookie掃除
   res.headers.append("Set-Cookie", setCookie("pkce_verifier", "", { path: "/", maxAge: 0 }));
   res.headers.append("Set-Cookie", setCookie("oauth_state", "", { path: "/", maxAge: 0 }));
+  res.headers.append("Set-Cookie", setCookie("oauth_nonce", "", { path: "/", maxAge: 0 })); // ← 追加
 
   return res;
 }

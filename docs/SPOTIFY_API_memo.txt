@@ -1,0 +1,15 @@
+http://sortyourmusic.playlistmachinery.com/index.html
+
+Tap into the power of Spotify's song attributes
+Sort Your Music lets you sort your playlist based on a number of Spotify's song attributes including:
+
+Beats Per Minute (BPM) - The tempo of the song.
+Energy - The energy of a song - the higher the value, the more energtic. song
+Danceability - The higher the value, the easier it is to dance to this song.
+Loudness - The higher the value, the louder the song.
+Valence - The higher the value, the more positive mood for the song.
+Length - The duration of the song.
+Acoustic - The higher the value the more acoustic the song is.
+Popularity - The higher the value the more popular the song is.
+A.Sep - maximizes the artist separation in the set
+Rnd - A randon number. Sort by this column to shuffle your playlist.
