@@ -152,15 +152,19 @@ function normalizeResolved(d: any): any[] {
     });
 
     const E = { picked, rejected };
-/** ✅ outPath が未指定でも安全に書き出せるようにする */
+
+// outPath を安全に
 const resolvedOutPath = path.resolve(
   outPath ?? path.join(process.cwd(), "triw-runlogs", "E.json")
 );
-/** 出力先フォルダを作成（なければ） */
 fs.mkdirSync(path.dirname(resolvedOutPath), { recursive: true });
 
 fs.writeFileSync(resolvedOutPath, JSON.stringify(E, null, 2), "utf-8");
-
 console.log(`Wrote ${resolvedOutPath}`);
 console.log(`picked=${picked.length}, rejected=${rejected.length}`);
+} catch (err: any) {                         // ←これが抜けてる
+  console.error("\n[run-evaluate] ERROR:");
+  console.error(err?.stack ?? err?.message ?? String(err));
+  process.exit(1);
+}
 })();
