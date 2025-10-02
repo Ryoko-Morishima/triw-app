@@ -9,6 +9,43 @@ import {
 } from "@/lib/spotify";
 import type { CandidateC } from "@/lib/openai";
 
+/** ===========================================
+ *  補助: MusicBrainz から ISRC で原盤年の最古候補を取得（任意）
+ *  - ORIGIN_MB_ENABLE が truthy のときだけ実行
+ *  - 失敗時は静かに null
+ * =========================================== */
+async function originYearFromMusicBrainzByISRC(isrc: string): Promise<number | null> {
+  try {
+    if (!process.env.ORIGIN_MB_ENABLE) return null;
+    const url = `https://musicbrainz.org/ws/2/recording?query=isrc:${encodeURIComponent(isrc)}&fmt=json`;
+    const res = await fetch(url, {
+      headers: { "User-Agent": "TRIW/0.1 (year-origin-check)" },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const js: any = await res.json();
+
+    let minYear: number | null = null;
+    const recs = Array.isArray(js?.recordings) ? js.recordings : [];
+    for (const r of recs) {
+      const releases = Array.isArray(r?.releases) ? r.releases : [];
+      for (const rel of releases) {
+        const d: string | undefined = rel?.date;
+        if (!d) continue;
+        const m = /^\d{4}/.exec(d);
+        if (!m) continue;
+        const y = Number(m[0]);
+        if (y >= 1900 && y <= 2100) {
+          if (minYear === null || y < minYear) minYear = y;
+        }
+      }
+    }
+    return minYear;
+  } catch {
+    return null;
+  }
+}
+
 type ResolvedRow = {
   title: string;
   artist: string;
@@ -21,7 +58,7 @@ type ResolvedRow = {
     name: string;
     artists: string[];
     release_year?: number | null;             // その盤の年
-    original_release_year?: number | null;    // ISRCクラスターからの最古年（原盤年推定）
+    original_release_year?: number | null;    // ISRCクラスター(+MB任意)からの最古年（原盤年推定）
     is_reissue?: boolean | null;              // 原盤年と違えば true
     popularity?: number | null;
     preview_url?: string | null;
@@ -68,6 +105,7 @@ export async function resolveCandidatesD(
         return;
       }
       try {
+        // Spotify 内の同ISRCトラック群から最古年
         const js = await searchTracksByISRC(token, isrc);
         const items = (js?.tracks?.items ?? []) as any[];
         let minYear: number | null = null;
@@ -75,6 +113,13 @@ export async function resolveCandidatesD(
           const y = releaseYearFrom(it?.album?.release_date);
           if (y && (minYear === null || y < minYear)) minYear = y;
         }
+
+        // ★ MusicBrainz（任意）も参照して、より古ければ採用
+        const mbYear = await originYearFromMusicBrainzByISRC(isrc);
+        if (mbYear && (minYear === null || mbYear < minYear)) {
+          minYear = mbYear;
+        }
+
         originalYearById[t.id] = minYear ?? null;
       } catch {
         originalYearById[t.id] = null;

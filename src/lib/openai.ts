@@ -66,10 +66,10 @@ export type InterpretationB = {
   };
   flow_style: Arc[];
 
-  // ★ 追加：自然文強化
-  dj_deep_thought: string;        // 番組テーマの再解釈（言い換え禁止）
-  dj_flow_idea: string;           // 曲順・橋渡し・アンカー等の具体案
-  paraphrase_warning?: boolean;   // 言い換え寄りなら true
+  // ★ 自然文（エッセイ）
+  dj_deep_thought: string;        // テーマの再解釈（言い換え禁止）
+  dj_flow_idea: string;           // 並べ方の方針（固定点/橋渡しの手つき）
+  paraphrase_warning?: boolean;   // 言い換えに寄った危険シグナル
 };
 
 export type CandidateC = {
@@ -82,7 +82,7 @@ export type CandidateC = {
   whyThemeFit: string;
   year_guess?: number | null;
 
-  // ★ 追加：C段階で“狙い”を明示（後段の popularity 実数と突合）
+  // ★ “狙い”メタ（外部表示しない想定）
   intended_role?: "anchor" | "deep" | "wildcard";
   popularity_hint?: "high" | "mid" | "low";
   notes_for_scoring?: string;
@@ -134,7 +134,7 @@ export function estimateTargetCount(mode: "count" | "duration", count?: number, 
   if (mode === "count") return Math.max(1, count ?? 7);
   const avg = 4; // min/track
   const est = Math.round(Math.max(10, (duration ?? 30)) / avg);
-  return Math.max(3, est);
+  return Math.min(20, Math.max(3, est)); // ← 20曲上限を追加
 }
 
 export async function runPersonaA({
@@ -186,8 +186,10 @@ export async function runPersonaA({
   return res;
 }
 
+
+// ================== フェーズB直前：Interpretation（エッセイ強化） ==================
 export async function runInterpretB(params: {
-  persona: PersonaA;
+  persona: any; // PersonaA 相当（自由度確保のため any）
   title: string;
   description: string;
   mode: "count" | "duration";
@@ -196,22 +198,22 @@ export async function runInterpretB(params: {
 }): Promise<InterpretationB> {
   const { persona, title, description, mode, count, duration } = params;
 
-  // ★ system：自然文の深さを必須に
   const system =
     `あなたは番組のDJ本人です。ペルソナAの人物として一人称で“考える”が、出力は中立JSONのみ。
-単なる番組概要の言い換えを禁止。以下を満たしてください：
-- ペルソナAの「癖・習慣」を具体的に運用する
-- 番組テーマを“自分ならこう捉える”という再解釈を自然文で提示する
-- セットの起伏（曲順・橋渡し・アンカー配置）を具体例で示す
-- 余談や前置き、コードフェンスは禁止。必ずJSONのみを返す`;
+以下を満たす：
+- テーマとリクエスト文から「テーマ・シグナル」（3〜6語程度）を抽出（季節/場面/相手/感情/キーワード）
+- そのテーマを自分なら“どう届けたいか”を素直な言葉で述べる（専門用語よりも平易な表現を優先）
+- DJの美学とテーマ忠実度は**両立**させる（どちらかに従属させない）
+- Flow/Narrative は「今回はこう並べる」という方針として簡潔に言語化
+- 年代や言語などの強い限定は hard_constraints に落とす
+- JSON以外は出力しない`;
 
   const target = mode === "count" ? `${count ?? 7}曲` : `${duration ?? 30}分（±10%）`;
 
-  // ★ user：自然文フィールドを必須
   const user = `# 入力
 - 目標: ${target}
 - 番組: ${title} / ${description}
-- （あなた＝DJ本人の要約）ペルソナA: ${JSON.stringify(persona)}
+- ペルソナA（要約）: ${JSON.stringify(persona)}
 
 # 出力JSONスキーマ
 {
@@ -219,7 +221,7 @@ export async function runInterpretB(params: {
   "hard_constraints": {
     "required_genres"?: string[],
     "exclude_genres"?: string[],
-    "eras"?: { "min"?: number, "max"?: number } | null,
+    "eras"?: { "min"?: number; "max"?: number } | null,
     "regions"?: string[],
     "languages"?: string[],
     "other_musts"?: string[]
@@ -232,32 +234,36 @@ export async function runInterpretB(params: {
   },
   "flow_style": ["intro"|"build"|"peak"|"cooldown"|"other"],
 
-  // ★ 追加：自然文（必須）
-  "dj_deep_thought": "番組テーマを自分の視点で再解釈する自然文（120〜240字）。概要の言い換えは禁止。具体的な音の狙い・対比・橋渡しの意図を含める。",
-  "dj_flow_idea": "曲順の起伏・転換・アンカー配置・掘りの入れ方など“手つき”を自然文で（100〜200字）。以下の4要素を必ず含める：1)アンカー配置（例：2曲目に名曲の錨） 2)掘りブロック（例：3–4曲目で新鋭） 3)橋渡しの方法（BPM/年代/質感/キーのいずれか） 4)終盤の着地（例：アンビエントで余韻）。曲順の目安（○曲目）を最低1つ示す。",
-
-  // ★ 監視用
+  "dj_deep_thought": "DJの声でテーマを再解釈（120〜240字）。タイトル/概要のどの言葉や情景を拾ったかを明記し、誰とどんな場面でどう響かせたいかを素直に書く。",
+  "dj_flow_idea": "今回はこう並べる（100〜200字）。見せ場や落ち着きどころ、橋渡し（BPM/年代/質感/キーのどれか）を1つ以上含める。",
   "paraphrase_warning": boolean
-}
+
+  // 推奨（既存処理には影響しない）
+  "theme_signals"?: string[],   // 例: ["みんなで歌う","夜の街","余韻","雪","乾いた空気"]
+  "anti_examples"?: string[]    // 例: ["真夏のバカンス","祝祭性ゼロの無機質"]
+  }
 
 # 厳格ルール
-- JSON以外の文字を一切出さない
-- "dj_deep_thought" と "dj_flow_idea" は必須・空文字不可
-- ただの言い換えになっていると判断したら "paraphrase_warning": true とする`;
+- JSONのみを出力
+- "dj_deep_thought"/"dj_flow_idea" は必須・空文字不可
+- 言い換えっぽい場合は "paraphrase_warning": true
+- 「90s/1990年代」等が明示なら eras を設定。曖昧なら null
+- 「日本語だけ/○○限定」等は languages/regions に反映`;
 
   return (await requestJson({ system, user, schemaName: "InterpretationB" })) as InterpretationB;
 }
 
+// ================== フェーズB：DJが“直接”全曲セレクト ==================
 export async function runCandidatesC(params: {
-  persona: PersonaA;
+  persona: any;
   interpretation: InterpretationB;
   targetCount: number;
 }): Promise<CandidatesCResponse> {
   const { persona, interpretation, targetCount } = params;
-  const outCount = Math.max(2, targetCount * 2);
+  const outCount = Math.min( Math.max(2, targetCount * 2), 24 ); // ← 24件に上限
 
-  const system = `あなたはDJ本人として選曲します。候補をちょうど${outCount}件。
-reasonは中立＋少しだけキャラ味（※一人称は使わない）。`;
+  const system = `あなたはDJ本人として選曲します。候補ではなく“この回のための選曲”をちょうど${outCount}件出します。
+各曲はペルソナの個性と解釈Bの『テーマ・シグナル』に結びついていること。reasonは中立＋少しのキャラ味（※一人称は使わない）。`;
 
   const user = `# 参照（あなた＝DJ本人）
 - ペルソナA: ${JSON.stringify(persona)}
@@ -265,12 +271,12 @@ reasonは中立＋少しだけキャラ味（※一人称は使わない）。`;
 - 目標曲数: ${targetCount}
 
 # 重要方針
-- 「名曲（錨）／掘り（新鋭・深掘り）／ワイルドカード」を意図的に混ぜる。
-- 名曲（錨）は全体の 30〜50% 目安。掘りを中盤ブロックに配置。ワイルドカードは多くても 1〜2 枠。
-- 「名曲／新鋭」の厳密判定は後段（Spotify popularity 実数）で行うため、ここでは“狙い”をラベルで明示する。
-- 架空の曲やミススペルは避ける。不確かなら reason に但し書きを残し、後段で置換可能にする。
-- Bの "dj_flow_idea"（アンカー位置・掘りブロック・橋渡し方法）に矛盾しない配置・説明にする。
-- 各候補の "reason" または "whyThemeFit" に、橋渡しの方法（例：BPM 100→112、1982→2020の年代ブリッジ、質感の近似、キーの接続）を最低1つは明記。
+- すべての曲で "whyThemeFit" に**どのテーマ・シグナルに接続しているか**を具体に書く
+- 例：〈皆で歌う〉→サビの合唱フック／コール&レスポンス、〈冬〉→歌詞/タイトル/冷たい残響、〈友人と集う〉→明るいグルーヴ等
+- どうしても外部文脈（例：リミックス／ライブ）で採る場合は "whyPersonaFit" に“再文脈化の理由”を明記。理由が乏しければ採用しない。
+- 「名曲（錨）／掘り／ワイルドカード」を混ぜるが、**配分はエッセイの宣言に従う**（王道多め/発見多めなど）。
+- 架空や誤綴は不可。不確かなら reason に但し書きを残し、後段で置換可能にする。
+- "dj_flow_idea"（アンカー位置/橋渡し）に矛盾しない説明を "reason" か "whyThemeFit" に入れる（BPM/年代/質感/キーのどれか1つ以上）。
 
 # JSONスキーマ
 {
@@ -284,18 +290,16 @@ reasonは中立＋少しだけキャラ味（※一人称は使わない）。`;
     "whyThemeFit": string,
     "year_guess"?: number|null,
 
-    // ★ 追加：必須（後段の popularity 実数と突合するための“狙い”）
     "intended_role": "anchor"|"deep"|"wildcard",
     "popularity_hint": "high"|"mid"|"low",
 
-    // ★ 任意：後段のスコアリング補助
     "notes_for_scoring"?: string
   }]
 }
 
 # 出力規律
-- 候補はちょうど ${outCount} 件。
-- "intended_role" と "popularity_hint" は全ての候補で必須。`;
+- ちょうど ${outCount} 件。
+- すべて "intended_role" と "popularity_hint" を付ける（説明用ラベル。評価スコアには使わない）。`;
 
   const json = await requestJson({ system, user, schemaName: "CandidatesC" });
   const items = Array.isArray((json as any)?.candidates) ? (json as any).candidates : [];
@@ -312,7 +316,6 @@ reasonは中立＋少しだけキャラ味（※一人称は使わない）。`;
       whyThemeFit: String(it.whyThemeFit ?? ""),
       year_guess: typeof it.year_guess === "number" ? it.year_guess : null,
 
-      // ★ 追加項目（フォールバック安全）
       intended_role: (["anchor", "deep", "wildcard"] as const).includes(it.intended_role) ? it.intended_role : "deep",
       popularity_hint: (["high", "mid", "low"] as const).includes(it.popularity_hint) ? it.popularity_hint : "mid",
       notes_for_scoring: it.notes_for_scoring ? String(it.notes_for_scoring) : ""
@@ -321,9 +324,7 @@ reasonは中立＋少しだけキャラ味（※一人称は使わない）。`;
   return { candidates: sanitized.slice(0, outCount) };
 }
 
-/** ========= ここから：SDKなし版 runMemoNoteG =========
- * OpenAI SDKを使わず fetch で実装（依存ゼロ）
- */
+/** ========= 受け取りメモ ========= */
 export async function runMemoNoteG({
   persona,
   title,
@@ -341,7 +342,10 @@ export async function runMemoNoteG({
   const model = OPENAI_MODEL;
   if (!apiKey) throw new Error("OPENAI_API_KEY is missing");
 
-  const djName = (persona?.name || persona?.id || "DJ").trim();
+  // DJ名の決定（空文字もガード）
+  const djName =
+    ((persona?.name || persona?.id || "DJ") as string).toString().trim() || "DJ";
+
   const sample = tracks
     .slice(0, 8)
     .map((t, i) => `${i + 1}. ${t.title ?? "-"} / ${t.artist ?? "-"}`)
@@ -351,7 +355,8 @@ export async function runMemoNoteG({
     "あなたは日本語のコピーライター兼DJです。",
     "MIXTAPEに同封する『受け取りメモ』を、温度感のある短い文章で作ります。",
     "句読点は素直に。比喩は少量。相手に渡す丁寧さを保つ。",
-    "最後の行は必ず `by (DJ名)` で締める（例: by DJ Mellow）。",
+    // 本文では by を書かせず、最後の1行のみで締める（サニタイズでも保証）
+    "本文には `by` を書かない。最後の1行のみ `by (DJ名)` として締める。",
   ].join("\n");
 
   const user = [
@@ -360,12 +365,13 @@ export async function runMemoNoteG({
     persona?.description ? `DJの雰囲気: ${persona.description}` : null,
     vibeText ? `ミックス方針メモ: ${vibeText}` : null,
     "代表的な曲（抜粋）:\n" + sample,
+    `DJ名: ${djName}`,
     "",
     "要件:",
     "- 3〜6行程度。",
     "- 1〜2行目でテーマの温度と使い所（時間帯/気分）をふわっと伝える。",
     "- 中盤で流れや音の質感を簡潔に。",
-    "- 最後は必ず `by (DJ名)`。",
+    "- 本文には `by` を書かない。最後の1行だけ `by (DJ名)` として締める。",
   ]
     .filter(Boolean)
     .join("\n");
@@ -383,9 +389,9 @@ export async function runMemoNoteG({
     }),
   });
 
-  if (!res.ok) {
-    // フォールバック（APIエラー時でも壊れないように）
-    const fallback = [
+  // フォールバック共通関数
+  const fallback = () =>
+    [
       `「${title}」をテーマにすてきな曲を選びました。`,
       description ? String(description) : "",
       "あなたに気に入ってもらえるといいな。",
@@ -393,27 +399,110 @@ export async function runMemoNoteG({
     ]
       .filter(Boolean)
       .join("\n");
-    return fallback;
+
+  if (!res.ok) {
+    // APIエラー時はフォールバック
+    return fallback();
   }
 
   const data = await res.json().catch(() => ({} as any));
-  let text: string = (data?.choices?.[0]?.message?.content || "").trim();
+  const raw: string = (data?.choices?.[0]?.message?.content ?? "").toString();
 
-  if (!text) {
+  // --- ここからサニタイズ＆byline強制 ---
+  const stripCodeFences = (s: string) => {
+    let out = s.trim();
+    if (/^```/.test(out) && /```$/.test(out)) {
+      out = out.replace(/^```[a-zA-Z]*\n?/, "").replace(/\n?```$/, "");
+    }
+    return out.trim();
+  };
+
+  const normalizeByline = (s: string, name: string) => {
+    // 末尾空行を削除
+    let out = s.replace(/\s+$/g, "");
+    const lines = out.split(/\r?\n/);
+    // 末尾の空行除去
+    while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+
+    const bylineLastRe = /^\s*(?:—|–|-)?\s*by\s+.+\s*$/i;
+    if (lines.length && bylineLastRe.test(lines[lines.length - 1])) {
+      lines.pop(); // 既存の by 行を削除
+    } else if (lines.length) {
+      // 行末に " by XXX" がくっついている場合も除去
+      lines[lines.length - 1] = (lines[lines.length - 1] ?? "").replace(
+        /\s*(?:—|–|-)?\s*by\s+.+\s*$/i,
+        ""
+      );
+    }
+
+    // 最後に正規形で必ず付与
+    lines.push(`by ${name}`);
+    return lines.join("\n").trim();
+  };
+
+  let cleaned = stripCodeFences(raw);
+
+  if (!cleaned) {
     // 念のためのフォールバック
-    text = [
-      `「${title}」をテーマにすてきな曲を選びました。`,
-      description ? String(description) : "",
-      "あなたに気に入ってもらえるといいな。",
-      `by ${djName}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    return fallback();
   }
 
-  // by 行が無ければ強制付与
-  if (!/^\s*by\s+/mi.test(text)) {
-    text += `\nby ${djName}`;
-  }
-  return text;
+  cleaned = normalizeByline(cleaned, djName);
+  // --- ここまでサニタイズ＆byline強制 ---
+
+  return cleaned;
+}
+
+
+// ================== フェーズD：AI 自己点検（新規） ==================
+export type SelfAuditIssue = {
+  index: number;
+  title: string;
+  artist: string;
+  reason: string;
+  action: "drop" | "keep" | "replace";
+  replacement_hint?: string;
+};
+
+export type SelfAuditResult = {
+  summary: string;
+  issues: SelfAuditIssue[];
+  revised?: { title: string; artist: string }[];
+};
+
+export async function runSelfAuditD(params: {
+  persona: any;
+  interpretation: InterpretationB;
+  tracks: { title: string; artist: string; year_guess?: number | null }[];
+}): Promise<SelfAuditResult> {
+  const { persona, interpretation, tracks } = params;
+
+  const system = `あなたはこの番組のDJ本人です。自分が作った選曲表を“自分の美学”で監査します。数値ではなく審美眼で判断し、必要なら差し替え方針を述べます。JSONのみ。`;
+
+  const user = `# 参照
+- ペルソナA: ${JSON.stringify(persona)}
+- 解釈B: ${JSON.stringify(interpretation)}
+- 現在の選曲: ${JSON.stringify(tracks)}
+
+# やること
+- 「このDJなら選ばない（ジャンル違い）」「解釈Bに反する」「禁則に触れる」曲を具体に指摘
+- 1件ごとに action（drop/keep/replace）を決める。replaceなら置換のヒントを必ず書く
+- 年代チェックはここでは行わない（別段階）。音楽的文脈・質感・言語違反を中心
+- replacement_hint は「どのテーマ要素（signals）に接続し、どの質感/年代/言語で置くか」を短く具体に書く
+
+# JSONスキーマ
+{
+  "summary": string,
+  "issues": [{
+    "index": number,
+    "title": string,
+    "artist": string,
+    "reason": string,
+    "action": "drop"|"keep"|"replace",
+    "replacement_hint"?: string
+  }],
+  "revised"?: [{"title": string, "artist": string}]
+}`;
+
+  return (await requestJson({ system, user, schemaName: "SelfAuditResult" })) as SelfAuditResult;
 }
