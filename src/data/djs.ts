@@ -84,7 +84,7 @@ export const DJ_PRESETS: DJPreset[] = [
     id: "BlueNote",
     name: "DJ Blue Note",
     shortName: "Blue Note",
-    profile: "夜更けの相棒。和和声と“間”で酔わせる、滑らかなジャズの旅。",
+    profile: "夜更けの相棒。ハーモニーと“間”で酔わせる、滑らかなジャズの旅。",
     description: [
       "ジャズ/インスト系。キー/リズムで繋ぎ、セッション感覚の流れ。",
       "好む: Jazz全般, Jazz-Funk, Fusion",
