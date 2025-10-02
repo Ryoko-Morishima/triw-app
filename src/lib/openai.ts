@@ -202,7 +202,7 @@ export async function runInterpretB(params: {
     `あなたは番組のDJ本人です。ペルソナAの人物として一人称で“考える”が、出力は中立JSONのみ。
 以下を満たす：
 - テーマとリクエスト文から「テーマ・シグナル」（3〜6語程度）を抽出（季節/場面/相手/感情/キーワード）
-- そのテーマを“どう届けたいか”を素直な言葉で述べる（専門用語よりも平易な表現を優先）
+- そのテーマを自分なら“どう届けたいか”を素直な言葉で述べる（専門用語よりも平易な表現を優先）
 - DJの美学とテーマ忠実度は**両立**させる（どちらかに従属させない）
 - Flow/Narrative は「今回はこう並べる」という方針として簡潔に言語化
 - 年代や言語などの強い限定は hard_constraints に落とす
@@ -342,7 +342,10 @@ export async function runMemoNoteG({
   const model = OPENAI_MODEL;
   if (!apiKey) throw new Error("OPENAI_API_KEY is missing");
 
-  const djName = (persona?.name || persona?.id || "DJ").trim();
+  // DJ名の決定（空文字もガード）
+  const djName =
+    ((persona?.name || persona?.id || "DJ") as string).toString().trim() || "DJ";
+
   const sample = tracks
     .slice(0, 8)
     .map((t, i) => `${i + 1}. ${t.title ?? "-"} / ${t.artist ?? "-"}`)
@@ -352,7 +355,8 @@ export async function runMemoNoteG({
     "あなたは日本語のコピーライター兼DJです。",
     "MIXTAPEに同封する『受け取りメモ』を、温度感のある短い文章で作ります。",
     "句読点は素直に。比喩は少量。相手に渡す丁寧さを保つ。",
-    "最後の行は必ず `by (DJ名)` で締める（例: by DJ Mellow）。",
+    // 本文では by を書かせず、最後の1行のみで締める（サニタイズでも保証）
+    "本文には `by` を書かない。最後の1行のみ `by (DJ名)` として締める。",
   ].join("\n");
 
   const user = [
@@ -361,12 +365,13 @@ export async function runMemoNoteG({
     persona?.description ? `DJの雰囲気: ${persona.description}` : null,
     vibeText ? `ミックス方針メモ: ${vibeText}` : null,
     "代表的な曲（抜粋）:\n" + sample,
+    `DJ名: ${djName}`,
     "",
     "要件:",
     "- 3〜6行程度。",
     "- 1〜2行目でテーマの温度と使い所（時間帯/気分）をふわっと伝える。",
     "- 中盤で流れや音の質感を簡潔に。",
-    "- 最後は必ず `by (DJ名)`。",
+    "- 本文には `by` を書かない。最後の1行だけ `by (DJ名)` として締める。",
   ]
     .filter(Boolean)
     .join("\n");
@@ -384,8 +389,9 @@ export async function runMemoNoteG({
     }),
   });
 
-  if (!res.ok) {
-    const fallback = [
+  // フォールバック共通関数
+  const fallback = () =>
+    [
       `「${title}」をテーマにすてきな曲を選びました。`,
       description ? String(description) : "",
       "あなたに気に入ってもらえるといいな。",
@@ -393,29 +399,58 @@ export async function runMemoNoteG({
     ]
       .filter(Boolean)
       .join("\n");
-    return fallback;
+
+  if (!res.ok) {
+    // APIエラー時はフォールバック
+    return fallback();
   }
 
   const data = await res.json().catch(() => ({} as any));
-  let text: string = (data?.choices?.[0]?.message?.content || "").trim();
+  const raw: string = (data?.choices?.[0]?.message?.content ?? "").toString();
 
-  if (!text) {
+  // --- ここからサニタイズ＆byline強制 ---
+  const stripCodeFences = (s: string) => {
+    let out = s.trim();
+    if (/^```/.test(out) && /```$/.test(out)) {
+      out = out.replace(/^```[a-zA-Z]*\n?/, "").replace(/\n?```$/, "");
+    }
+    return out.trim();
+  };
+
+  const normalizeByline = (s: string, name: string) => {
+    // 末尾空行を削除
+    let out = s.replace(/\s+$/g, "");
+    const lines = out.split(/\r?\n/);
+    // 末尾の空行除去
+    while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+
+    const bylineLastRe = /^\s*(?:—|–|-)?\s*by\s+.+\s*$/i;
+    if (lines.length && bylineLastRe.test(lines[lines.length - 1])) {
+      lines.pop(); // 既存の by 行を削除
+    } else if (lines.length) {
+      // 行末に " by XXX" がくっついている場合も除去
+      lines[lines.length - 1] = (lines[lines.length - 1] ?? "").replace(
+        /\s*(?:—|–|-)?\s*by\s+.+\s*$/i,
+        ""
+      );
+    }
+
+    // 最後に正規形で必ず付与
+    lines.push(`by ${name}`);
+    return lines.join("\n").trim();
+  };
+
+  let cleaned = stripCodeFences(raw);
+
+  if (!cleaned) {
     // 念のためのフォールバック
-    text = [
-      `「${title}」をテーマにすてきな曲を選びました。`,
-      description ? String(description) : "",
-      "あなたに気に入ってもらえるといいな。",
-      `by ${djName}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    return fallback();
   }
 
-  // by 行が無ければ強制付与
-  if (!/^\s*by\s+/mi.test(text)) {
-    text += `\nby ${djName}`;
-  }
-  return text;
+  cleaned = normalizeByline(cleaned, djName);
+  // --- ここまでサニタイズ＆byline強制 ---
+
+  return cleaned;
 }
 
 
@@ -450,7 +485,7 @@ export async function runSelfAuditD(params: {
 - 現在の選曲: ${JSON.stringify(tracks)}
 
 # やること
-- 「このDJらしくない」「解釈Bに反する」「禁則に触れる」曲を具体に指摘
+- 「このDJなら選ばない（ジャンル違い）」「解釈Bに反する」「禁則に触れる」曲を具体に指摘
 - 1件ごとに action（drop/keep/replace）を決める。replaceなら置換のヒントを必ず書く
 - 年代チェックはここでは行わない（別段階）。音楽的文脈・質感・言語違反を中心
 - replacement_hint は「どのテーマ要素（signals）に接続し、どの質感/年代/言語で置くか」を短く具体に書く

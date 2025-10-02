@@ -70,33 +70,13 @@ export type Evaluated = {
 };
 
 // ---- ユーティリティ ----
-function norm(s: string) {
-  return (s || "").toLowerCase().replace(/\s+/g, " ").trim();
+function norm(s: any) {
+  return (s ?? "").toString().toLowerCase().replace(/\s+/g, " ").trim();
 }
 
-function findResolvedRowDetailed(
-  c: CandidateC,
-  resolved: DResolved[]
-): { row?: DResolved; kind: "exact" | "fuzzy" | "none" } {
-  const t = norm((c as any)?.title);
-  const a = norm((c as any)?.artist);
-
-  // 1) 完全一致
-  let row = resolved.find((r) => norm(r.title) === t && norm(r.artist) === a);
-  if (row) return { row, kind: "exact" };
-
-  // 2) タイトル一致 & アーティスト部分一致（表記ゆれ対策）
-  row = resolved.find((r) => {
-    const rt = norm(r.title);
-    const ra = norm(r.artist);
-    return (
-      (rt === t || rt.startsWith(t) || t.startsWith(rt)) &&
-      (ra.includes(a) || a.includes(ra))
-    );
-  });
-  if (row) return { row, kind: "fuzzy" };
-
-  return { kind: "none" };
+/** 先頭 n 文字のバケットキー（fuzzy 範囲を限定して線形走査を極小化） */
+function bucketKeyTitle(ntitle: string, n = 8) {
+  return ntitle.slice(0, n);
 }
 
 // ===== スコア設計（popularity は不使用） =====
@@ -117,6 +97,61 @@ type EvalOpts = {
   era?: { start: number; end: number } | null;
 };
 
+/** ==== 事前インデックス化 ==== */
+type ResIndexed = {
+  exact: Map<string, DResolved>;                   // key: "<t>\u0001<a>"
+  buckets: Map<string, { nt: string; na: string; row: DResolved }[]>; // key: bucket(title)
+};
+
+function buildResolvedIndex(resolved: DResolved[]): ResIndexed {
+  const exact = new Map<string, DResolved>();
+  const buckets = new Map<string, { nt: string; na: string; row: DResolved }[]>();
+
+  for (const r of resolved) {
+    const nt = norm(r.title);
+    const na = norm(r.artist);
+    const key = nt + "\u0001" + na;
+    if (!exact.has(key)) exact.set(key, r);
+
+    const b = bucketKeyTitle(nt);
+    const arr = buckets.get(b) ?? [];
+    arr.push({ nt, na, row: r });
+    buckets.set(b, arr);
+  }
+  return { exact, buckets };
+}
+
+function findResolvedRowDetailedFast(
+  c: CandidateC,
+  idx: ResIndexed
+): { row?: DResolved; kind: "exact" | "fuzzy" | "none" } {
+  const t = norm((c as any)?.title);
+  const a = norm((c as any)?.artist);
+
+  // 1) exact: タイトル & アーティスト完全一致
+  const exactKey = t + "\u0001" + a;
+  const exactHit = idx.exact.get(exactKey);
+  if (exactHit) return { row: exactHit, kind: "exact" };
+
+  // 2) fuzzy: 同バケット（タイトル先頭8文字一致）内だけを走査
+  const bucket = bucketKeyTitle(t);
+  const cand = idx.buckets.get(bucket);
+  if (cand && cand.length) {
+    // 元コードの条件:
+    // (rt === t || rt.startsWith(t) || t.startsWith(rt)) &&
+    // (ra.includes(a) || a.includes(ra))
+    for (const r of cand) {
+      const rt = r.nt;
+      const ra = r.na;
+      const titleOk = rt === t || rt.startsWith(t) || t.startsWith(rt);
+      const artistOk = ra.includes(a) || a.includes(ra);
+      if (titleOk && artistOk) return { row: r.row, kind: "fuzzy" };
+    }
+  }
+
+  return { kind: "none" };
+}
+
 export function evaluateTracks(
   _meta: RunMeta,
   candidates: CandidateC[],
@@ -130,8 +165,11 @@ export function evaluateTracks(
   const yearGate = !!(opts && opts.year_gate);
   const era = opts?.era ?? null; // 例: {start:1990, end:1999}
 
+  // ★ ここが高速化のキモ：resolved を一度だけインデックス化
+  const resIndex = buildResolvedIndex(resolved);
+
   for (const c of candidates) {
-    const { row, kind } = findResolvedRowDetailed(c, resolved);
+    const { row, kind } = findResolvedRowDetailedFast(c, resIndex);
     if (!row || !row.spotify) {
       rejected.push({
         title: (c as any).title,
@@ -208,7 +246,7 @@ export function evaluateTracks(
     let hardReject = false;
 
     if (yearGate) {
-      if (era && release) {
+      if (era && release != null) {
         // Era 指定がある場合：範囲外は即不採用
         if (release < era.start || release > era.end) {
           hardReject = true;
@@ -218,7 +256,7 @@ export function evaluateTracks(
           year_score = YEAR_SCORE_ON_MATCH;
           reasons.push("Era一致");
         }
-      } else if (yearGuess && release) {
+      } else if (yearGuess != null && release != null) {
         const diff = Math.abs(release - yearGuess);
         if (diff <= YEAR_TOLERANCE) {
           conf += YEAR_SCORE_ON_MATCH;

@@ -1,7 +1,7 @@
 // src/app/playlist/page.tsx
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Balancer from "react-wrap-balancer";
 import { Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -14,24 +14,75 @@ import { Textarea } from "@/components/ui/textarea";
 import { CassetteIndexCard, IndexTrack } from "@/components/CassetteIndexCard";
 import { MixtapeSummarySheet } from "@/components/MixtapeSummarySheet";
 
+/* ====================== 擬似進捗の設定 ====================== */
+// 見かけ時間（ms）※実時間に応じて自由に調整
+const PROGRESS_WEIGHTS_MS: Record<"A"|"B"|"C"|"D"|"E"|"F", number> = {
+  A: 10000,
+  B: 23000,
+  C: 30000,
+  D: 20000,
+  E: 70000, // 実際に重い工程に寄せる
+  F: 25000,
+};
+/* =========================================================== */
 
-// ----- 固定設定 -----
+const PROGRESS_STEPS = [
+  { key: "A", label: "ペルソナ生成" },
+  { key: "B", label: "テーマ解釈" },
+  { key: "C", label: "候補出し" },
+  { key: "D", label: "Spotify解決" },
+  { key: "E", label: "評価" },
+  { key: "F", label: "整形" },
+] as const; // Gは表示しない（完了時は非表示）
+
+const HOLD_IDX = PROGRESS_STEPS.length - 1; // Fで90%到達→完了時に非表示
+
+function InlineBuildProgress({
+  phaseIdx,
+}: {
+  phaseIdx: number;
+}) {
+  const clampedIdx = Math.max(0, Math.min(PROGRESS_STEPS.length - 1, phaseIdx));
+  const percent = Math.max(
+    5,
+    Math.min(95, Math.floor((clampedIdx / Math.max(1, HOLD_IDX)) * 90))
+  );
+
+  return (
+    <div className="w-full rounded-xl border p-4 bg-white shadow-sm">
+      <div className="mb-2 text-sm text-gray-600">
+        {PROGRESS_STEPS[clampedIdx].key}: {PROGRESS_STEPS[clampedIdx].label} 中…
+      </div>
+      <div className="h-2 w-full rounded-full bg-gray-200 overflow-hidden">
+        <div
+          className="h-full bg-gray-800 transition-all duration-500"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
+      <p className="mt-2 text-xs text-gray-500">しばらくお待ちください。完成までの目安を表示しています。</p>
+    </div>
+  );
+}
+
+/* ===== 固定設定 ===== */
 const DURATION_OPTIONS = [45, 60, 90, 120, 240] as const;
 type Tone = "cream" | "blue" | "pink" | "slate" | "green";
 
-// ----- 型 -----
+/* ===== 型 ===== */
 type PlanResponse = {
   runId: string;
-  djId: string;
-  title: string;
-  description: string;
-  mode: "count" | "duration";
+  djId?: string;
+  title?: string;
+  description?: string;
+  mode?: "count" | "duration";
   duration?: number;
+  dj?: { id?: string | null; displayName?: string | null } | null;
   djComment?: string | null;
   memoText?: string | null;
   plan?: {
     memoText?: string | null;
     djComment?: string | null;
+    dj?: { id?: string | null; displayName?: string | null } | null;
   };
   F?: any;
   error?: string;
@@ -46,7 +97,7 @@ type DJItem = {
   profile?: string;
 };
 
-// ----- 小さなユーティリティ -----
+/* ===== ユーティリティ ===== */
 async function safeJson<T = any>(res: Response): Promise<T | null> {
   const text = await res.text();
   if (!text) return null;
@@ -85,7 +136,7 @@ function coversFrom(tracks: any[]) {
     .map((src: string) => ({ src }));
 }
 
-// ===== ここからソフトガード実装（ページは常に表示） =====
+/* ===== 認証チェック ===== */
 function useAuthStatus() {
   const [checking, setChecking] = useState(true);
   const [authed, setAuthed] = useState(false);
@@ -107,7 +158,9 @@ function useAuthStatus() {
         if (alive) setChecking(false);
       }
     })();
-    return () => { alive = false; };
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return { checking, authed, err };
@@ -126,31 +179,63 @@ function LoginButtonInline() {
   );
 }
 
-// ================== ページ本体 ==================
+/* ================== ページ本体 ================== */
 export default function Page() {
   const { checking, authed, err } = useAuthStatus();
 
-  // --- 状態 ---
+  /* --- 状態 --- */
   const [djs, setDjs] = useState<DJItem[]>([]);
   const [djId, setDjId] = useState<string>("");
-  const [tone, setTone] = useState<Tone>("cream");
 
+  const [tone, setTone] = useState<Tone>("cream");
   const [customName, setCustomName] = useState("");
   const [customOverview, setCustomOverview] = useState("");
 
   const [title, setTitle] = useState("MIXTAPEのタイトル");
-  const [desc, setDesc] = useState("気分や聞きたいシーンを自由に書いて。90s/平成などの年代やアーティスト名もOK。");
+  const [desc, setDesc] = useState(
+    "気分や聞きたいシーンを自由に書いて。90s/平成などの年代やアーティスト名もOK。"
+  );
   const [duration, setDuration] = useState<number>(90);
 
   const [loading, setLoading] = useState(false);
+
+  // 進捗の可視/状態
+  const [showProgress, setShowProgress] = useState(false);
+  const [phaseIdx, setPhaseIdx] = useState(0);
+  const timersRef = useRef<number[]>([]);
+
+  function clearPhaseTimers() {
+    timersRef.current.forEach((id) => window.clearTimeout(id));
+    timersRef.current = [];
+  }
+  function startPhaseTimers() {
+    clearPhaseTimers();
+    setPhaseIdx(0);
+    setShowProgress(true);
+    // 累積スケジュールで A..F を進める
+    let acc = 0;
+    const keys: ("A"|"B"|"C"|"D"|"E"|"F")[] = ["A","B","C","D","E","F"];
+    for (let i = 0; i < keys.length; i++) {
+      acc += PROGRESS_WEIGHTS_MS[keys[i]];
+      const nextIdx = Math.min(HOLD_IDX, i + 1);
+      const id = window.setTimeout(() => setPhaseIdx(nextIdx), acc);
+      timersRef.current.push(id);
+    }
+  }
+  function finishProgress() {
+    clearPhaseTimers();
+    // 完了時は即座にまるっと非表示
+    setShowProgress(false);
+  }
+
   const [plan, setPlan] = useState<PlanResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [memo, setMemo] = useState<string>("");
 
-  // 設定（1〜4）の折りたたみ状態
+  /* 設定（1〜4）の折りたたみ状態 */
   const [builderOpen, setBuilderOpen] = useState(true);
 
-  // --- DJ一覧を /api/djs から取得 ---
+  /* --- DJ一覧取得 --- */
   useEffect(() => {
     (async () => {
       try {
@@ -158,13 +243,8 @@ export default function Page() {
         const json = await safeJson<{ djs: DJItem[] }>(res);
         const list: DJItem[] = Array.isArray(json?.djs) ? json!.djs : [];
         setDjs(list);
-
-        // ★ デバッグ追加
-        console.log("DJ list from API:", list);
-
         if (!djId && list.length) setDjId(list[0].id);
       } catch {
-        // フォールバック
         const fallback: DJItem[] = [
           { id: "mellow", name: "DJ Mellow", description: "夜更けにそっと寄り添うチル担当", tagline: "夜更けのチル", image: "/dj/mellow.png" },
           { id: "groove", name: "DJ Groove", description: "ダンサブルでハッピー", tagline: "ダンサブル&ハッピー", image: "/dj/groove.png" },
@@ -174,33 +254,47 @@ export default function Page() {
         if (!djId) setDjId(fallback[0].id);
       }
     })();
-  }, []); // 一度だけ
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const selectedIsCustom = djId === "custom";
-  const djDisplayName = selectedIsCustom
-    ? customName || "Custom DJ"
-    : djs.find((d) => d.id === djId)?.name || djId;
 
-  // --- 最終セットの整形（Cassette/Sheet用） ---
+  // サーバ返りのDJ表示名があれば優先
+  const serverDjDisplayName =
+    (plan?.plan?.dj as any)?.displayName ?? plan?.dj?.displayName ?? null;
+
+  const uiSelectedDjName =
+    selectedIsCustom
+      ? customName || "Custom DJ"
+      : djs.find((d) => d.id === djId)?.name || djId;
+
+  const cassetteDjDisplayName = serverDjDisplayName || uiSelectedDjName;
+
+  /* --- Cassette/Sheet 用 --- */
   const finalRaw = useMemo(() => extractFinalTracks(plan?.F), [plan]);
-  const finalForIndex: IndexTrack[] = finalRaw.map((t) => ({ title: t.title, artist: t.artist }));
+  const finalForIndex: IndexTrack[] = finalRaw.map((t) => ({
+    title: t.title,
+    artist: t.artist,
+  }));
   const sides = splitSides(finalForIndex);
   const covers = coversFrom(finalRaw);
   const uris: string[] = (plan?.F?.tracks ?? plan?.F?.setlist ?? plan?.F?.items ?? [])
     .map((t: any) => t?.uri || t?.spotify?.uri)
     .filter(Boolean);
 
-  // 生成後は設定(1〜4)を自動で畳む
+  /* 生成後は設定(1〜4)を自動で畳む */
   useEffect(() => {
     if (finalForIndex.length > 0) setBuilderOpen(false);
   }, [finalForIndex.length]);
 
-  // --- 生成ハンドラ ---
+  /* --- 生成ハンドラ（完了時は即非表示） --- */
   async function handleGenerate() {
     try {
       setLoading(true);
       setError(null);
       setPlan(null);
+      setMemo("");
+      startPhaseTimers();
 
       const body: any = {
         title,
@@ -213,9 +307,13 @@ export default function Page() {
       if (selectedIsCustom) {
         if (!customName.trim() || !customOverview.trim()) {
           setError("カスタムDJ名と概要は必須です");
+          finishProgress();
           return;
         }
-        body.customDJ = { name: customName.trim(), overview: customOverview.trim() };
+        body.customDJ = {
+          name: customName.trim(),
+          overview: customOverview.trim(),
+        };
       }
 
       const res = await fetch("/api/mixtape/plan", {
@@ -227,24 +325,24 @@ export default function Page() {
       const json = await safeJson<PlanResponse>(res);
       if (!res.ok) throw new Error((json && (json as any).error) || `${res.status} ${res.statusText}`);
 
-      const planObj = (json as any)?.plan ?? (json as any);
-      const memoText = planObj?.memoText ?? planObj?.djComment ?? "";
+      const planObj = (json as any)?.plan ?? (json as any) ?? {};
+      const memoText = (planObj?.memoText ?? planObj?.djComment ?? "") as string;
 
       setPlan(json!);
       setMemo(memoText);
       setBuilderOpen(false);
+      finishProgress(); // ← 完了したら即バーを消す
     } catch (e: any) {
       setError(String(e?.message || e));
+      finishProgress(); // ← 失敗時も即バーを消す
     } finally {
       setLoading(false);
     }
   }
 
-  // ----------------- UI -----------------
+  /* ----------------- UI ----------------- */
   return (
     <>
-
-
       <main className="mx-auto max-w-5xl px-4 py-10">
         {/* Hero */}
         <div className="mb-4">
@@ -296,13 +394,15 @@ export default function Page() {
               <div className="grid gap-4 sm:grid-cols-3">
                 {djs.map((dj) => {
                   const raw =
-                    (dj.profile?.trim()) ||
-                    (dj.tagline?.trim()) ||
+                    dj.profile?.trim() ||
+                    dj.tagline?.trim() ||
                     (dj.description ?? "").trim();
 
                   const sentences = raw.split(/[。.!?]/).filter(Boolean);
                   const twoSentences = sentences.slice(0, 2).join("。");
-                  const text = (twoSentences ? twoSentences + "。" : raw).replace(/\s+/g, " ").trim();
+                  const text = (twoSentences ? twoSentences + "。" : raw)
+                    .replace(/\s+/g, " ")
+                    .trim();
                   const brief = text.length > 80 ? text.slice(0, 80) + "…" : text;
 
                   return (
@@ -347,7 +447,11 @@ export default function Page() {
             <section>
               <h2 className="mb-3 text-xl font-semibold">2. テーマ</h2>
               <div className="grid gap-3">
-                <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="MIXTAPEのタイトル" />
+                <Input
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="MIXTAPEのタイトル"
+                />
                 <Textarea
                   value={desc}
                   onChange={(e) => setDesc(e.target.value)}
@@ -361,7 +465,11 @@ export default function Page() {
               <h2 className="mb-3 text-xl font-semibold">3. 分数を選ぶ</h2>
               <div className="flex flex-wrap items-center gap-2">
                 {DURATION_OPTIONS.map((m) => (
-                  <Button key={m} variant={duration === m ? "default" : "outline"} onClick={() => setDuration(m)}>
+                  <Button
+                    key={m}
+                    variant={duration === m ? "default" : "outline"}
+                    onClick={() => setDuration(m)}
+                  >
                     {m}分
                   </Button>
                 ))}
@@ -405,19 +513,23 @@ export default function Page() {
           {error && <p className="text-sm text-red-600">{error}</p>}
         </div>
 
+        {/* 進捗（実行中のみ表示。完了/失敗で即非表示） */}
+        {showProgress && (
+          <div className="mb-8">
+            <InlineBuildProgress phaseIdx={phaseIdx} />
+          </div>
+        )}
+
         {/* 出力 */}
         {finalForIndex.length > 0 && (() => {
           const planObj = (plan as any)?.plan ?? (plan as any) ?? {};
-          const memoText =
-            planObj?.memoText ??
-            planObj?.djComment ??
-            memo;
+          const memoText = planObj?.memoText ?? planObj?.djComment ?? memo;
 
           return (
             <div className="mt-8 space-y-6">
               <CassetteIndexCard
                 title={plan?.title ?? "Untitled Mixtape"}
-                djName={djDisplayName}
+                djName={cassetteDjDisplayName}
                 sideA={sides.A}
                 sideB={sides.B}
                 tone={tone}
