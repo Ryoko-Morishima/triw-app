@@ -185,6 +185,33 @@ export async function POST(req: NextRequest) {
 
     // runId 発行
     runId = `run_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    
+        // ⬇⬇⬇ ここに dedupeByTrack を定義 ⬇⬇⬇
+    function dedupeByTrack(arr: any[]) {
+      const seen = new Set<string>();
+      const removed: any[] = [];
+      const out: any[] = [];
+      for (const t of arr ?? []) {
+        const uri = t?.uri || t?.spotify?.uri || t?.spotify?.id || null;
+        const key = uri
+          ? `uri:${uri}`
+          : `ta:${(t?.title ?? "").toLowerCase().trim()}::${(t?.artist ?? "")
+              .toLowerCase()
+              .trim()}`;
+        if (seen.has(key)) {
+          removed.push({ title: t?.title, artist: t?.artist, uri });
+          continue;
+        }
+        seen.add(key);
+        out.push(t);
+      }
+      try {
+        if (removed.length) saveRaw(runId, "E.dedup.removed", removed);
+      } catch {}
+      return out;
+    }
+    // ⬆⬆⬆ ここまで ⬆⬆⬆
+
 
     // メタ保存
     await initRun({
@@ -319,110 +346,297 @@ export async function POST(req: NextRequest) {
         }
       );
       await saveRaw(runId, "E", E);
-// ========================
-// D2: AI自己点検（“このDJらしいか？テーマに沿うか？”）
-// ========================
-try {
-  const auditInput = (E?.picked ?? []).map((x: any) => ({
-    title: x?.title ?? "",
-    artist: x?.artist ?? "",
-    year_guess: x?.debug?.release_year ?? null,
-  }));
-  const D2 = await runSelfAuditD({ persona: A, interpretation: B, tracks: auditInput });
-  await saveRaw(runId, "D2.audit", D2);
 
 
 
-  // 1) drop/replace は一旦除去（← ここが今回のポイント）
-  const toRemove = new Set<number>(
-    (D2?.issues ?? [])
-      .filter((i: any) => i && (i.action === "drop" || i.action === "replace"))
-      .map((i: any) => i.index)
-  );
-  let kept = (E?.picked ?? []).filter((_: any, i: number) => !toRemove.has(i));
+    // 観測追加（D2実行“前”に、E.picked から監査入力のスナップだけ取る）
+    const auditInput = (E?.picked ?? []).map((x: any) => ({
+      title: x?.title ?? "",
+      artist: x?.artist ?? "",
+      year_guess: x?.debug?.release_year ?? null,
+    }));
+    await saveRaw(runId, "D2.audit.before", { tracksForAuditCount: auditInput.length, sample: auditInput.slice(0, 5) });
 
-  // 2) 欠落数を最小限補充（候補→解決→評価を“少量だけ”再実行）
-  const isDuration = mode === "duration";
-  const targetTracks = isDuration
-    ? Math.min(30, Math.round((Number(duration || 30) / 4)))  // 目安：4分/曲
-    : Number(count || 12);
+    // ========================
+    // D2: AI自己点検（“このDJらしいか？テーマに沿うか？”）
+    // ========================
+    try {
+      const D2 = await runSelfAuditD({ persona: A, interpretation: B, tracks: auditInput });
+      await saveRaw(runId, "D2.audit", D2);
 
-  const deficit = Math.max(0, targetTracks - kept.length);
+      // 表記ゆれ＆index正規化
+      type Issue = {
+        action?: string;           // "drop" | "replace" | ...
+        index?: number | string;   // 想定ズレを吸収
+        key?: string | null;       // 曲キー（なければ後段で補う）
+        note?: string;
+        replacement_hint?: string | null;
+      };
 
-  if (deficit > 0) {
-    // a) 置換ヒントをログ保存（将来のUI/意味解釈に使う）
-    await saveRaw(runId, "D2.replaceHints", (D2?.issues ?? [])
-      .filter((i: any) => i.action === "replace")
-      .map((i: any) => ({ index: i.index, hint: i.replacement_hint || "" })));
+      function normalizeD2Issues(raw: Issue[], universeKeys: string[]) {
+        const norm = raw.map((it, i) => {
+          const action = String(it.action ?? "").trim().toLowerCase();
+          // indexは number に落とす（NaNは -1 扱い）
+          const idx = typeof it.index === "number"
+            ? it.index
+            : Number(String(it.index ?? "").replace(/[^\d\-]/g, ""));
+          const key = it.key && String(it.key).trim()
+            ? String(it.key).trim()
+            : (idx >= 0 && idx < universeKeys.length ? universeKeys[idx] : null);
+          return { action, index: Number.isFinite(idx) ? idx : -1, key, replacement_hint: it.replacement_hint ?? null, note: it.note ?? null, _row: i };
+        });
 
-    // b) ちいさく候補補充（= deficit の 1.5倍まで、上限8）
-    const refillTarget = Math.min(8, Math.max(2, Math.ceil(deficit * 1.5)));
-
-    const C_refill = await runCandidatesC({
-      persona: A,
-      interpretation: B,
-      targetCount: refillTarget,
-    });
-    await saveRaw(runId, "C.refill", C_refill);
-
-    // c) 既出重複を除外
-    const existing = new Set(kept.map((t: any) => keyOf(t)));
-    const refillCandidates = (C_refill?.candidates ?? []).filter((c: any) => !existing.has(keyOf(c)));
-
-    // d) 解決（チャンク＆429対応）
-    const D_refill = await resolveWithChunks(refillCandidates, {
-      chunkSize: 12,
-      interChunkDelayMs: 800,
-      maxRetriesPerChunk: 2,
-    });
-    await saveRaw(runId, "D.refill", D_refill);
-
-    // e) 評価（同じ era スイッチで）
-    const E_refill = evaluateTracks(
-      {
-        runId,
-        startedAt: new Date().toISOString(),
-        title,
-        description,
-        djId,
-        mode,
-        count,
-        duration,
-      } as any,
-      refillCandidates,
-      D_refill.resolved ?? [],
-      {
-        year_gate: yearGate,
-        era,
+        const dropIdx = norm.filter(n => n.action === "drop" && n.index >= 0).map(n => n.index);
+        const dropKeys = norm.filter(n => n.action === "drop" && n.key).map(n => n.key as string);
+        return { normalizedIssues: norm, dropIdx, dropKeys };
       }
-    );
-    await saveRaw(runId, "E.refill", E_refill);
 
-    // f) 追加ピック（足りるまで頭から詰める）
-    const add = (E_refill?.picked ?? []).slice(0, deficit);
-    kept = kept.concat(add);
-  }
+      // 正規化＆保存（“監査対象の宇宙”は E.picked の pre-drop セットで作る）
+      const universeKeys: string[] = (E?.picked ?? []).map((r: any) =>
+        r?._key || r?.spotify?.id || `${r?.title ?? ""}::${r?.artist ?? ""}`
+      );
+      const norm = normalizeD2Issues((D2?.issues ?? []) as Issue[], universeKeys);
+      await saveRaw(runId, "D2.norm", {
+        dropIdx: norm.dropIdx,
+        dropKeys: norm.dropKeys,
+        normalizedIssuesSample: norm.normalizedIssues.slice(0, 10),
+      });
 
-  // g) E を更新
-  E = { ...E, picked: kept };
-  await saveRaw(runId, "E.afterAudit", E);
-} catch (auditErr: any) {
-  await saveRaw(runId, "D2.audit.error", { message: String(auditErr?.message || auditErr) });
-}
+        // 1) drop/replace の適用（キー優先、indexは0/1両対応）
+      const normIssues = (D2?.issues ?? []).map((i: any) => ({
+        action: String(i?.action ?? "").trim().toLowerCase(),
+        index: typeof i?.index === "number" ? i.index : Number(String(i?.index ?? "").replace(/[^\d\-]/g, "")),
+        key: i?.key ? String(i.key).trim() : null,
+        replacement_hint: i?.replacement_hint ?? null,
+      }));
+
+
+
+      // キー集合（lower/trim）
+      const dropKeySet = new Set(
+        (norm?.dropKeys ?? normIssues.filter(x => x.action === "drop" || x.action === "replace").map(x => x.key))
+          .filter(Boolean)
+          .map((s: string) => s.toLowerCase().trim())
+      );
+
+      // インデックス集合（0/1両対応で広めにマーク）
+      const idxRaw = (norm?.dropIdx ?? normIssues.filter(x => x.action === "drop" || x.action === "replace").map(x => x.index))
+        .filter((n: any) => Number.isFinite(n));
+      const idxSet = new Set<number>();
+      for (const n of idxRaw as number[]) {
+        if (n >= 0) idxSet.add(n);        // 0-based の可能性
+        if (n - 1 >= 0) idxSet.add(n - 1); // 1-based の可能性（-1して加える）
+      }
+
+      // どれが落ちるか先にログ（観測用）
+      const willDropSnapshot = (E?.picked ?? []).map((t: any, i: number) => {
+        const k = t?._key || t?.spotify?.id || `${(t?.title ?? "").toLowerCase().trim()}::${(t?.artist ?? "").toLowerCase().trim()}`;
+        return {
+          i,
+          key: k,
+          title: t?.title,
+          artist: t?.artist,
+          byKey: dropKeySet.has((k ?? "").toLowerCase()),
+          byIdx: idxSet.has(i),
+        };
+      }).filter(x => x.byKey || x.byIdx);
+      await saveRaw(runId, "D2.willDrop.snapshot", willDropSnapshot);
+
+      // 実際の除去（キー優先→インデックス）
+      let kept = (E?.picked ?? []).filter((t: any, i: number) => {
+        const k = t?._key || t?.spotify?.id || `${(t?.title ?? "").toLowerCase().trim()}::${(t?.artist ?? "").toLowerCase().trim()}`;
+        if (k && dropKeySet.has(String(k).toLowerCase())) return false;
+        if (idxSet.has(i)) return false;
+        return true;
+      });
+
+      // 2) 欠落数を最小限補充（候補→解決→評価を“少量だけ”再実行）
+      const isDuration = mode === "duration";
+      const targetTracks = isDuration
+        ? Math.min(30, Math.round((Number(duration || 30) / 4)))  // 目安：4分/曲
+        : Number(count || 12);
+
+      const deficit = Math.max(0, targetTracks - kept.length);
+
+      if (deficit > 0) {
+        // a) 置換ヒントをログ保存（将来のUI/意味解釈に使う）
+        await saveRaw(runId, "D2.replaceHints", (D2?.issues ?? [])
+          .filter((i: any) => String(i.action).trim().toLowerCase() === "replace")
+          .map((i: any) => ({ index: i.index, hint: i.replacement_hint || "" })));
+
+        // b) ちいさく候補補充（= deficit の 1.5倍まで、上限8）
+        const refillTarget = Math.min(8, Math.max(2, Math.ceil(deficit * 1.5)));
+
+        const C_refill = await runCandidatesC({
+          persona: A,
+          interpretation: B,
+          targetCount: refillTarget,
+        });
+        await saveRaw(runId, "C.refill", C_refill);
+
+        // c) 既出重複を除外
+        const existing = new Set(kept.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`));
+        const refillCandidates = (C_refill?.candidates ?? []).filter((c: any) => `${(c?.title ?? "").toLowerCase().trim()}__${(c?.artist ?? "").toLowerCase().trim()}` && !existing.has(`${(c?.title ?? "").toLowerCase().trim()}__${(c?.artist ?? "").toLowerCase().trim()}`));
+
+        // d) 解決（チャンク＆429対応）
+        const D_refill = await resolveWithChunks(refillCandidates, {
+          chunkSize: 12,
+          interChunkDelayMs: 800,
+          maxRetriesPerChunk: 2,
+        });
+        await saveRaw(runId, "D.refill", D_refill);
+
+        // e) 評価（同じ era スイッチで）
+        const E_refill = evaluateTracks(
+          {
+            runId,
+            startedAt: new Date().toISOString(),
+            title,
+            description,
+            djId,
+            mode,
+            count,
+            duration,
+          } as any,
+          refillCandidates,
+          D_refill.resolved ?? [],
+          {
+            year_gate: yearGate,
+            era,
+          }
+        );
+        await saveRaw(runId, "E.refill", E_refill);
+
+        // ★ 系譜ログ（finalizeに何を渡したかを記録するだけ・挙動は変えない）
+        await saveRaw(runId, "E.lineage", {
+          usedForFinalize: "picked",
+          beforeCount: refillCandidates.length,
+          afterCount: Array.isArray(E_refill.picked) ? E_refill.picked.length : null,
+        });
+
+        // f) 追加ピック（足りるまで頭から詰める）
+        const add = (E_refill?.picked ?? []).slice(0, deficit);
+        kept = kept.concat(add);
+        kept = dedupeByTrack(kept);
+      }
+
+      // g) E を更新
+      E = { ...E, picked: kept };
+      await saveRaw(runId, "E.afterAudit", E);
+    } catch (auditErr: any) {
+      await saveRaw(runId, "D2.audit.error", { message: String(auditErr?.message || auditErr) });
+    }
 
 
 
 
-      // ========================
+        // ========================
       // F: 最終整形（並べ方はBの方針に内包）
       // ========================
       const isDuration = mode === "duration";
       const minutes = Number(isDuration ? duration : 30) || 30;
       const maxK = Number(!isDuration ? count : 12) || 12;
 
-      const F = await finalizeSetlist(E?.picked ?? [], {
+      // ★ 系譜ログを追加（挙動は変えない）
+      saveRaw(runId, "E.lineage", {
+        usedForFinalize: "picked",
+        beforeCount: Array.isArray(E?.picked) ? E.picked.length : null,
+        afterCount: Array.isArray(E?.picked) ? E.picked.length : null,
+      });
+
+      // ★ finalize前にURI優先で重複除外
+      const beforeF = E?.picked ?? [];
+      const dedupedForF = dedupeByTrack(beforeF);
+      if (dedupedForF.length !== beforeF.length) {
+        try {
+          await saveRaw(runId, "E.dedup.stats", {
+            before: beforeF.length,
+            after: dedupedForF.length,
+            removed: beforeF.length - dedupedForF.length,
+          });
+        } catch {}
+      }
+
+      // === finalize 直前ガード: 目標との自己整合（不足分だけ小リフィル） ===
+      const MS_PER_MIN = 60_000;
+      const avgMs = 225_000; // 目安（duration_ms が無いときのフォールバック）
+      function sumDurMs(arr: any[]) {
+        return (arr ?? []).reduce((acc, t) => {
+          const d = t?.duration_ms ?? t?.spotify?.duration_ms ?? avgMs;
+          return acc + (Number.isFinite(d) ? d : avgMs);
+        }, 0);
+      }
+
+      let preF = dedupedForF.slice();
+
+      async function topUpIfNeeded() {
+        if (!preF) preF = [];
+        if (!Array.isArray(preF)) preF = [];
+
+        if (!isDuration) {
+          // count モード: 不足分だけ補充
+          const targetCount = Number(count || 12);
+          const need = Math.max(0, targetCount - preF.length);
+          if (need === 0) {
+            // 超過は finalize に任せるが、目標数に丸めておくと安定
+            preF = preF.slice(0, targetCount);
+            return;
+          }
+          const refillTarget = Math.min(8, Math.max(2, Math.ceil(need * 1.5)));
+          const C_refill2 = await runCandidatesC({ persona: A, interpretation: B, targetCount: refillTarget });
+          const existTA = new Set(
+            preF.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`)
+          );
+          const cand2 = (C_refill2?.candidates ?? []).filter(
+            (c: any) => !existTA.has(`${(c?.title ?? "").toLowerCase().trim()}__${(c?.artist ?? "").toLowerCase().trim()}`)
+          );
+          const D_refill2 = await resolveWithChunks(cand2, { chunkSize: 12, interChunkDelayMs: 800, maxRetriesPerChunk: 2 });
+          const E_refill2 = evaluateTracks(
+            { runId, startedAt: new Date().toISOString(), title, description, djId, mode, count, duration } as any,
+            cand2,
+            D_refill2.resolved ?? [],
+            { year_gate: !!era, era }
+          );
+          preF = dedupeByTrack(preF.concat((E_refill2?.picked ?? []).slice(0, need)));
+          return;
+        }
+
+        // duration モード: 目標±10%に収束するまで少しだけ補充（最大2回）
+        const targetMs = (Number(duration || 30) || 30) * MS_PER_MIN;
+        const lower = Math.floor(targetMs * 0.90);
+        const upper = Math.ceil(targetMs * 1.10);
+        let total = sumDurMs(preF);
+
+        for (let round = 0; round < 2 && total < lower; round++) {
+          const remainMs = Math.max(0, targetMs - total);
+          const need = Math.min(8, Math.max(2, Math.ceil(remainMs / avgMs))); // 目安で見積
+          const C_refill2 = await runCandidatesC({ persona: A, interpretation: B, targetCount: need });
+          const existTA = new Set(
+            preF.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`)
+          );
+          const cand2 = (C_refill2?.candidates ?? []).filter(
+            (c: any) => !existTA.has(`${(c?.title ?? "").toLowerCase().trim()}__${(c?.artist ?? "").toLowerCase().trim()}`)
+          );
+          const D_refill2 = await resolveWithChunks(cand2, { chunkSize: 12, interChunkDelayMs: 800, maxRetriesPerChunk: 2 });
+          const E_refill2 = evaluateTracks(
+            { runId, startedAt: new Date().toISOString(), title, description, djId, mode, count, duration } as any,
+            cand2,
+            D_refill2.resolved ?? [],
+            { year_gate: !!era, era }
+          );
+          preF = dedupeByTrack(preF.concat(E_refill2?.picked ?? []));
+          total = sumDurMs(preF);
+        }
+        // 超過は finalize に任せる
+      }
+
+      await topUpIfNeeded();
+
+      const F = await finalizeSetlist(preF, {
         mode: isDuration ? "duration" : "count",
-        ...(isDuration ? { targetDurationMin: minutes, maxTracksHardCap: 30 } : { maxTracks: maxK }),
+        ...(isDuration
+          ? { targetDurationMin: minutes, maxTracksHardCap: 30 }
+          : { maxTracks: maxK }),
         artistPolicy: "auto",
         programTitle: title,
         programOverview: description,
@@ -431,33 +645,41 @@ try {
       });
       await saveRaw(runId, "F", F);
 
-      // ★★★ カバー画像の埋め戻し（D.resolved→F） ★★★
-      const byUri = new Map<string, any>();
-      (D?.resolved ?? []).forEach((r: any) => {
-        const uri = r?.uri ?? r?.spotify?.uri ?? r?.track?.uri;
-        const img =
-          r?.album_image_url ||
-          r?.image ||
-          r?.cover ||
-          r?.album?.images?.[0]?.url ||
-          r?.spotify?.album_image_url ||
-          null;
-        if (uri && img && !byUri.has(uri)) byUri.set(uri, img);
-      });
-      const fItems = (F?.tracks ?? F?.setlist ?? F?.items ?? []) as any[];
-      fItems.forEach((t: any) => {
-        if (t?.cover) return;
-        const selfImg =
-          t?.album_image_url || t?.image || t?.cover || t?.album?.images?.[0]?.url || null;
-        if (selfImg) {
-          t.cover = selfImg;
-          return;
-        }
-        const uri = t?.uri ?? t?.spotify?.uri ?? t?.track?.uri;
-        const img = uri ? byUri.get(uri) : null;
-        if (img) t.cover = img;
-      });
-      // ★★★ ここまで ★★★
+
+      
+
+// ★★★ カバー画像の埋め戻し（D.resolved→F） ★★★
+const byUri = new Map<string, any>();
+(D?.resolved ?? []).forEach((r: any) => {
+  const uri = r?.uri ?? r?.spotify?.uri ?? r?.track?.uri;
+  const img =
+    r?.album_image_url ||
+    r?.image ||
+    r?.cover ||
+    r?.album?.images?.[0]?.url ||
+    r?.spotify?.album_image_url ||
+    null;
+  if (uri && img && !byUri.has(uri)) byUri.set(uri, img);
+});
+
+const fItems = (F?.tracks ?? F?.setlist ?? F?.items ?? []) as any[];
+
+fItems.forEach((t: any) => {
+  if (t?.cover) return;
+
+  const selfImg =
+    t?.album_image_url || t?.image || t?.cover || t?.album?.images?.[0]?.url || null;
+  if (selfImg) {
+    t.cover = selfImg;
+    return;
+  }
+
+  const uri = t?.uri ?? t?.spotify?.uri ?? t?.track?.uri;
+  const img = uri ? byUri.get(uri) : null;
+  if (img) t.cover = img;
+});
+// ★★★ ここまで ★★★
+
 
       // UI向けの短いDJコメント（参考メモとして残す）
       const djNote =
@@ -488,7 +710,7 @@ try {
           fallback: !!C?._error,
 
           // ---- 新推奨
-          plan: { memoText, djComment: djNote },
+          plan: { memoText, :djComment djNote },
           memoText, // 旧互換
           djComment: djNote, // 旧互換
           memoFrom, // "ai" | "fallback"
