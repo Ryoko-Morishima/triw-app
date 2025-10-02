@@ -69,7 +69,7 @@ export async function initRun(meta: RunMeta): Promise<void> {
 // ====== フェーズ保存（A〜F対応） ======
 export async function saveRaw(
   runId: string,
-  phase: "A" | "B" | "C" | "D" | "E" | "F",
+  phase: string,
   payload: unknown
 ): Promise<void> {
   const dir = path.join(BASE, runId);
