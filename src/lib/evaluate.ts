@@ -78,8 +78,8 @@ function findResolvedRowDetailed(
   c: CandidateC,
   resolved: DResolved[]
 ): { row?: DResolved; kind: "exact" | "fuzzy" | "none" } {
-  const t = norm(c.title);
-  const a = norm(c.artist);
+  const t = norm((c as any)?.title);
+  const a = norm((c as any)?.artist);
 
   // 1) 完全一致
   let row = resolved.find((r) => norm(r.title) === t && norm(r.artist) === a);
@@ -102,13 +102,13 @@ function findResolvedRowDetailed(
 // ===== スコア設計（popularity は不使用） =====
 // ・存在確認（exists）: +0.40
 // ・表記マッチ精度（exact / fuzzy）: +0.25 / +0.15
-// ・年代一致（year_gate ON時）: +0.25（Era一致 または year_guess±3年一致）
+// ・年代一致（year_gate ON時）: +0.25（Era一致 または year_guess±1年一致）
 // 合格閾値: 0.50
 const EXIST_SCORE = 0.40;
 const MATCH_SCORE_EXACT = 0.25;
 const MATCH_SCORE_FUZZY = 0.15;
 const YEAR_SCORE_ON_MATCH = 0.25;
-const YEAR_TOLERANCE = 3;
+const YEAR_TOLERANCE = 1;
 const ACCEPT_THRESHOLD = 0.50;
 
 type EvalOpts = {
@@ -126,7 +126,7 @@ export function evaluateTracks(
   const picked: Evaluated[] = [];
   const rejected: Evaluated[] = [];
 
-  // ここが“スイッチ”
+  // スイッチ
   const yearGate = !!(opts && opts.year_gate);
   const era = opts?.era ?? null; // 例: {start:1990, end:1999}
 
@@ -134,8 +134,8 @@ export function evaluateTracks(
     const { row, kind } = findResolvedRowDetailed(c, resolved);
     if (!row || !row.spotify) {
       rejected.push({
-        title: c.title,
-        artist: c.artist,
+        title: (c as any).title,
+        artist: (c as any).artist,
         uri: null,
         confidence: 0,
         reason: "Spotifyで未解決",
@@ -248,13 +248,12 @@ export function evaluateTracks(
     // ★ ハードゲート最終判定
     if (hardReject) {
       accepted = false;
-      // confidence は見やすさのため 0.49 に落として「閾値未満」を明示
-      confidence = Math.min(confidence, 0.49);
+      confidence = Math.min(confidence, 0.49); // 閾値未満を明示
     }
 
     const out: Evaluated = {
-      title: c.title,
-      artist: c.artist,
+      title: (c as any).title,
+      artist: (c as any).artist,
       uri: row.spotify.uri ?? null,
       confidence,
       reason: reasons.join(" / "),
