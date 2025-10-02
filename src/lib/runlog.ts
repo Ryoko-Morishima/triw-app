@@ -178,3 +178,13 @@ export async function getRunLogById(runId: string): Promise<UiLog> {
 
   return { meta, A, B, C, D, E, F };
 }
+// 型名は既存に合わせてください（UiLog が無いなら any でOK）
+export type UiLog = any;
+
+/** 
+ * 一覧取得の簡易版。まずはビルドを通すために空配列を返す。
+ * 後で実装する場合は、ストレージやDBから最新ログを配列で返す形に。
+ */
+export async function getLogs(): Promise<UiLog[]> {
+  return [];
+}
