@@ -662,7 +662,10 @@ const byUri = new Map<string, any>();
   if (uri && img && !byUri.has(uri)) byUri.set(uri, img);
 });
 
-const fItems = (F?.tracks ?? F?.setlist ?? F?.items ?? []) as any[];
+// F が FinalizeResult 型で setlist/items が未定義でも拾えるように局所的に緩める
+type FLike = { tracks?: any[]; setlist?: any[]; items?: any[] };
+const Fx = (F ?? {}) as FLike;
+const fItems = (Fx.tracks ?? Fx.setlist ?? Fx.items ?? []);
 
 fItems.forEach((t: any) => {
   if (t?.cover) return;
@@ -679,6 +682,7 @@ fItems.forEach((t: any) => {
   if (img) t.cover = img;
 });
 // ★★★ ここまで ★★★
+
 
 
       // UI向けの短いDJコメント（参考メモとして残す）
@@ -707,13 +711,16 @@ fItems.forEach((t: any) => {
           mode,
           count,
           duration,
-          fallback: !!C?._error,
+                   fallback: !!C?._error,
 
           // ---- 新推奨
-          plan: { memoText, :djComment djNote },
-          memoText, // 旧互換
-          djComment: djNote, // 旧互換
-          memoFrom, // "ai" | "fallback"
+          plan: { memoText, djComment: djNote },
+
+          // ---- 旧互換（移行期間中）
+          memoText,           // 旧互換
+          djComment: djNote,  // 旧互換
+          memoFrom,           // "ai" | "fallback"
+
 
           E: { picked: E?.picked ?? [], rejected: E?.rejected ?? [] },
           F,

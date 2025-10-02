@@ -8,8 +8,8 @@ import { headers } from "next/headers";
  * 2) 環境変数 (NEXT_PUBLIC_BASE_URL / BASE_URL / VERCEL_URL など)
  * 3) 最終フォールバック: http://127.0.0.1:{PORT}
  */
-export function getBaseUrl(): string {
-  const h = headers();
+export async function getBaseUrl(): Promise<string> {
+  const h = await headers(); // ← ここが await
 
   const xfProto = h.get("x-forwarded-proto");
   const xfHost  = h.get("x-forwarded-host");

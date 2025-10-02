@@ -1,13 +1,22 @@
-// src/app/api/mixtape/log/route.ts
-export const runtime = "nodejs";
-
-import { NextRequest, NextResponse } from "next/server";
+// src/app/mixtape/log/route.ts
+import { NextResponse } from "next/server";
 import { getLogs } from "@/lib/runlog";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const runId = searchParams.get("runId");
-  if (!runId) return NextResponse.json({ error: "runId is required" }, { status: 400 });
-  const logs = getLogs(runId);
-  return NextResponse.json({ runId, logs }, { status: 200 });
+
+  // getLogs は引数なし想定
+  const allLogs = getLogs() as any;
+
+  if (runId) {
+    const logs = allLogs?.[runId] ?? null;
+    if (!logs) {
+      return NextResponse.json({ error: "logs not found for runId", runId }, { status: 404 });
+    }
+    return NextResponse.json({ runId, logs }, { status: 200 });
+  }
+
+  // runId 未指定なら全件返す
+  return NextResponse.json({ logs: allLogs }, { status: 200 });
 }

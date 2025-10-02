@@ -541,20 +541,30 @@ export default function Page() {
                 covers={covers}
               />
 
-              <div className="flex flex-wrap items-center gap-3">
-                <SaveToSpotifyButton
-                  uris={uris}
-                  name={`TRIW - ${plan?.title ?? "Untitled"}`}
-                  description={plan?.description ?? ""}
-                  disabled={!authed}
-                />
-                {!authed && (
-                  <div className="flex items-center gap-2 text-sm text-zinc-700">
-                    <span>保存するにはログインしてください</span>
-                    <LoginButtonInline />
-                  </div>
-                )}
-              </div>
+<div className="flex flex-wrap items-center gap-3">
+  {authed ? (
+    <SaveToSpotifyButton
+      uris={uris}
+      name={`TRIW - ${plan?.title ?? "Untitled"}`}
+      description={plan?.description ?? ""}
+    />
+  ) : (
+    <div className="opacity-50 pointer-events-none">
+      <SaveToSpotifyButton
+        uris={uris}
+        name={`TRIW - ${plan?.title ?? "Untitled"}`}
+        description={plan?.description ?? ""}
+      />
+    </div>
+  )}
+  {!authed && (
+    <div className="flex items-center gap-2 text-sm text-zinc-700">
+      <span>保存するにはログインしてください</span>
+      <LoginButtonInline />
+    </div>
+  )}
+</div>
+
             </div>
           );
         })()}

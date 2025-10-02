@@ -45,18 +45,21 @@ type UiERejected = {
   reason: string;
 };
 
-type UiLog = {
-  meta: any;
-  A: any;
-  B: any;
-  C: any;
-  D: { matched?: UiDRow[]; notFound?: { title: string; artist: string }[] } | null;
-  E: {
+// ✅ 正準 UiLog 定義（1回だけ定義）。サブキー（"D2.audit" 等）も許容。
+export type UiLog = {
+  meta?: any;
+  A?: any;
+  B?: any;
+  C?: any;
+  D?: { matched?: UiDRow[]; notFound?: { title: string; artist: string }[] } | null;
+  E?: {
     accepted?: UiEAccepted[];
     rejected?: UiERejected[];
     playlistUrl?: string | null;
   } | null;
-  F: any;
+  F?: any;
+} & {
+  [key: string]: any; // "D2.audit" などのサブキーを許容
 };
 
 // ====== 初期化（meta.json 作成） ======
@@ -66,10 +69,10 @@ export async function initRun(meta: RunMeta): Promise<void> {
   await fs.writeFile(path.join(dir, "meta.json"), JSON.stringify(meta, null, 2), "utf8");
 }
 
-// ====== フェーズ保存（A〜F対応） ======
+// ====== フェーズ保存（A〜F対応 / サブキーOK） ======
 export async function saveRaw(
   runId: string,
-  phase: string,
+  phase: string, // 例: "D", "E", "F" | サブキー "D2.audit" なども可
   payload: unknown
 ): Promise<void> {
   const dir = path.join(BASE, runId);
@@ -97,7 +100,6 @@ function normalizeD(rawD: any): UiLog["D"] {
   const notFound: any[] = Array.isArray(rawD?.notFound) ? rawD.notFound : [];
 
   const matched: UiDRow[] = resolved.map((r: any) => {
-    // 例：r.spotify.uri / r.year / r.year_guess / r.spotify.preview_url / r.spotify.album_image_url
     const sp = r?.spotify ?? {};
     const uri = sp.uri ?? sp.trackUri ?? null;
     const year =
@@ -176,15 +178,36 @@ export async function getRunLogById(runId: string): Promise<UiLog> {
   const D = normalizeD(Draw);
   const E = normalizeE(Eraw);
 
+  // サブキー（例: "D2.audit.json"）は必要ならここで拾い足せる
+  // const D2audit = await safeRead(dir, "D2.audit.json");
+
   return { meta, A, B, C, D, E, F };
 }
-// 型名は既存に合わせてください（UiLog が無いなら any でOK）
-export type UiLog = any;
 
-/** 
- * 一覧取得の簡易版。まずはビルドを通すために空配列を返す。
- * 後で実装する場合は、ストレージやDBから最新ログを配列で返す形に。
+/**
+ * 一覧取得：全 runId をキーにしたマップを返す
+ * `/app/mixtape/log/route.ts` の呼び出し（getLogs()→allLogs[runId]）と整合させるため。
  */
-export async function getLogs(): Promise<UiLog[]> {
-  return [];
+export async function getLogs(): Promise<Record<string, UiLog>> {
+  await ensureDir(BASE);
+  let entries: string[] = [];
+  try {
+    const dirents = await fs.readdir(BASE, { withFileTypes: true as any });
+    entries = dirents
+      .filter((d: any) => d?.isDirectory?.())
+      .map((d: any) => d.name);
+  } catch {
+    // BASE がない等
+    return {};
+  }
+
+  const out: Record<string, UiLog> = {};
+  for (const runId of entries) {
+    try {
+      out[runId] = await getRunLogById(runId);
+    } catch {
+      // 壊れたログはスキップ
+    }
+  }
+  return out;
 }
