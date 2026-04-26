@@ -38,7 +38,7 @@ export function CassetteIndexCard({
 
       {/* タイトル＆DJ */}
       <div className="mb-3 flex items-center justify-between">
-        <div className="text-lg font-semibold">{title} MIXED by {djName}</div>
+        <div className="text-lg font-semibold">{title}: MIXED by {djName}</div>
       </div>
 
       {/* 罫線＋中央仕切り（用紙っぽく半透明ホワイトで面をつくる） */}
