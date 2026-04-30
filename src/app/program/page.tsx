@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function ProgramPage() {
   const [loading, setLoading] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [events, setEvents] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,6 +13,7 @@ export default function ProgramPage() {
 
   const current = events[currentIndex];
 
+  // 仮の自動進行（まだ本格じゃない）
   useEffect(() => {
     if (!events.length || !autoPlay) return;
 
@@ -65,8 +67,77 @@ export default function ProgramPage() {
     }
   }
 
-  function goNext() {
-    setCurrentIndex((i) => Math.min(i + 1, events.length - 1));
+  // エラーを人間用に変換（Day8）
+  function humanizeError(text: string) {
+    if (!text) return "不明なエラー";
+
+    if (text.includes("NO_ACTIVE_DEVICE")) {
+      return "Spotifyアプリで一度再生してください";
+    }
+    if (text.includes("Permissions")) {
+      return "Spotifyの権限が不足しています（再ログインしてください）";
+    }
+    if (text.includes("401")) {
+      return "ログインが切れています。再ログインしてください";
+    }
+
+    return text;
+  }
+
+  async function playTrackByUri(uri: string) {
+    setPlaying(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/spotify/play", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uri }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        const message =
+          data?.detail || data?.error || "再生に失敗しました";
+
+        setError(humanizeError(message));
+        return;
+      }
+
+      console.log("play ok");
+    } catch (e: any) {
+      setError(String(e?.message || e));
+    } finally {
+      setPlaying(false);
+    }
+  }
+
+  async function playCurrentTrack() {
+    if (current?.type !== "track" || !current.track?.uri) {
+      setError("再生できるtrack uriがありません。");
+      return;
+    }
+
+    await playTrackByUri(current.track.uri);
+  }
+
+  // Day7：次へ＋再生
+  async function goNextAndPlay() {
+    const nextIndex = Math.min(currentIndex + 1, events.length - 1);
+    const nextEvent = events[nextIndex];
+
+    setCurrentIndex(nextIndex);
+
+    if (nextEvent?.type === "track" && nextEvent.track?.uri) {
+      try {
+        await playTrackByUri(nextEvent.track.uri);
+      } catch {
+        // 失敗しても止まらない
+      }
+    }
   }
 
   function goPrev() {
@@ -121,6 +192,10 @@ export default function ProgramPage() {
                 👤 {current.track?.artist ?? "アーティスト不明"}
               </p>
 
+              <button onClick={playCurrentTrack} disabled={playing}>
+                {playing ? "再生リクエスト中..." : "▶ この曲を再生"}
+              </button>
+
               {current.track?.reason && (
                 <p style={{ marginTop: 16 }}>{current.track.reason}</p>
               )}
@@ -152,8 +227,11 @@ export default function ProgramPage() {
               ◀ 前へ
             </button>
 
-            <button onClick={goNext} disabled={currentIndex >= events.length - 1}>
-              次へ ▶
+            <button
+              onClick={goNextAndPlay}
+              disabled={playing || currentIndex >= events.length - 1}
+            >
+              次へ＆再生 ▶
             </button>
           </div>
         </section>
