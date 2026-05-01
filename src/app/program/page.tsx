@@ -197,9 +197,19 @@ export default function ProgramPage() {
               </button>
 
               {current.track?.reason && (
-                <p style={{ marginTop: 16 }}>{current.track.reason}</p>
+                <div
+                  style={{
+                    marginTop: 16,
+                    padding: 12,
+                    background: "#f5f5f5",
+                    borderRadius: 8,
+                    fontSize: 14,
+                  }}
+                >
+                  <strong>選曲理由</strong>
+                  <p style={{ marginTop: 8 }}>{current.track.reason}</p>
+                </div>
               )}
-
               {current.track?.uri && (
                 <p style={{ marginTop: 12, fontSize: 12, opacity: 0.7 }}>
                   {current.track.uri}
@@ -234,15 +244,71 @@ export default function ProgramPage() {
               次へ＆再生 ▶
             </button>
           </div>
+          <section style={{ marginTop: 40 }}>
+            <h2>Events一覧</h2>
+          
+            {events.map((e, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: 8,
+                  marginBottom: 4,
+                  background: i === currentIndex ? "#eef" : "#fafafa",
+                }}
+              >
+                {i + 1}. {e.type === "track"
+                  ? `🎵 ${e.track?.title} / ${e.track?.artist}`
+                  : e.type}
+              </div>
+            ))}
+          </section>
+
         </section>
       )}
 
-      {result && (
+            {result && (
         <section style={{ marginTop: 40 }}>
-          <h2>Raw Result</h2>
-          <pre style={{ whiteSpace: "pre-wrap", fontSize: 12 }}>
-            {JSON.stringify(result, null, 2)}
-          </pre>
+          <h2>Day9 Debug Log</h2>
+
+          <p>
+            <strong>runId:</strong>{" "}
+            <code>{result.runId ?? "runIdなし"}</code>
+          </p>
+
+          <details open>
+            <summary>入力内容 input</summary>
+            <pre style={{ whiteSpace: "pre-wrap", fontSize: 12 }}>
+              {JSON.stringify(result.input, null, 2)}
+            </pre>
+          </details>
+
+          <details>
+            <summary>E：Spotify解決あたり</summary>
+            <pre style={{ whiteSpace: "pre-wrap", fontSize: 12 }}>
+              {JSON.stringify(result.E, null, 2)}
+            </pre>
+          </details>
+
+          <details>
+            <summary>F：最終採用トラック</summary>
+            <pre style={{ whiteSpace: "pre-wrap", fontSize: 12 }}>
+              {JSON.stringify(result.F, null, 2)}
+            </pre>
+          </details>
+
+          <details open>
+            <summary>events：番組イベント</summary>
+            <pre style={{ whiteSpace: "pre-wrap", fontSize: 12 }}>
+              {JSON.stringify(result.events, null, 2)}
+            </pre>
+          </details>
+
+          <details>
+            <summary>Raw Result 全部</summary>
+            <pre style={{ whiteSpace: "pre-wrap", fontSize: 12 }}>
+              {JSON.stringify(result, null, 2)}
+            </pre>
+          </details>
         </section>
       )}
     </main>

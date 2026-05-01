@@ -43,6 +43,8 @@ if (!res.ok) {
 
   return NextResponse.json({
     ...data,
+    runId: data.runId ?? data.id ?? `program-${Date.now()}`,
+    input: body,
     events,
   });
 }
