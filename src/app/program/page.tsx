@@ -2,6 +2,25 @@
 
 import { useEffect, useState } from "react";
 
+type KeywordCard = {
+  id: string;
+  label: string;
+  group: string;
+};
+
+const keywordCards: KeywordCard[] = [
+  { id: "rain", label: "雨", group: "scene" },
+  { id: "summer", label: "夏", group: "season" },
+  { id: "night", label: "夜", group: "time" },
+  { id: "party", label: "パーティ", group: "mood" },
+  { id: "drive", label: "ドライブ", group: "scene" },
+  { id: "alt", label: "オルタナ", group: "genre" },
+  { id: "world", label: "ワールド", group: "genre" },
+  { id: "tea", label: "お茶会", group: "mood" },
+  { id: "happy", label: "ハッピー", group: "mood" },
+  { id: "gothic", label: "ゴシック", group: "mood" },
+  { id: "pops", label: "ポップス", group: "genre" },
+];
 export default function ProgramPage() {
   const [loading, setLoading] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -10,7 +29,12 @@ export default function ProgramPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(false);
   const [error, setError] = useState("");
-
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [decade, setDecade] = useState("1990s");
+  const [temperature, setTemperature] = useState(50);
+  const [popularity, setPopularity] = useState(50);
+  const [talkEnabled, setTalkEnabled] = useState(true);
+  const [inputMessage, setInputMessage] = useState("");
   const current = events[currentIndex];
 
   // 仮の自動進行（まだ本格じゃない）
@@ -26,29 +50,72 @@ export default function ProgramPage() {
 
     return () => clearTimeout(timer);
   }, [currentIndex, events, autoPlay]);
+  function toggleKeyword(card: KeywordCard) {
+  setInputMessage("");
 
+  setSelectedKeywords((prev) => {
+    if (prev.includes(card.id)) {
+      return prev.filter((id) => id !== card.id);
+    }
+
+    const hasSameGroup = prev.some((id) => {
+      const selectedCard = keywordCards.find((k) => k.id === id);
+      return selectedCard?.group === card.group;
+    });
+
+    if (hasSameGroup) {
+      setInputMessage("同じカテゴリのカードは1つまでです。");
+      return prev;
+    }
+
+    if (prev.length >= 3) {
+      setInputMessage("キーワードは最大3つまでです。");
+      return prev;
+    }
+
+    return [...prev, card.id];
+  });
+}
   async function createProgram() {
-    setLoading(true);
-    setError("");
-    setResult(null);
-    setEvents([]);
-    setCurrentIndex(0);
-    setAutoPlay(false);
+  setLoading(true);
+  setError("");
+  setResult(null);
+  setEvents([]);
+  setCurrentIndex(0);
+  setAutoPlay(false);
 
-    try {
-      const res = await fetch("/api/program/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: "テスト番組",
-          description: "夜に聴く少し落ち着いた曲",
-          djId: "Techne",
-          mode: "count",
-          count: 2,
-        }),
-      });
+  const keywordLabels = selectedKeywords
+    .map((id) => keywordCards.find((k) => k.id === id)?.label)
+    .filter(Boolean)
+    .join("、");
+
+  const description = `
+キーワード: ${keywordLabels || "なし"}
+年代: ${decade}
+温度: ${temperature}
+有名度: ${popularity}
+トーク: ${talkEnabled ? "あり" : "なし"}
+`;
+
+  try {
+    const res = await fetch("/api/program/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "TRIW チューニング番組",
+        description,
+        keywords: selectedKeywords,
+        decade,
+        temperature,
+        popularity,
+        talkEnabled,
+        djId: "Techne",
+        mode: "count",
+        count: 5,
+      }),
+    });
 
       const data = await res.json();
 
@@ -147,6 +214,94 @@ export default function ProgramPage() {
   return (
     <main style={{ padding: 24, maxWidth: 800 }}>
       <h1>TRIW Program Test</h1>
+      <section style={{ marginTop: 24, marginBottom: 24 }}>
+  <h2>Radio Tuning</h2>
+
+  <div style={{ marginBottom: 20 }}>
+    <h3>キーワード</h3>
+    <p style={{ fontSize: 13, opacity: 0.7 }}>
+      最大3つまで。同じカテゴリは1つまで。
+    </p>
+
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      {keywordCards.map((card) => {
+        const selected = selectedKeywords.includes(card.id);
+
+        return (
+          <button
+            key={card.id}
+            type="button"
+            onClick={() => toggleKeyword(card)}
+            style={{
+              padding: "8px 12px",
+              borderRadius: 999,
+              border: "1px solid #ccc",
+              background: selected ? "#dde7ff" : "#fff",
+              cursor: "pointer",
+            }}
+          >
+            {card.label}
+          </button>
+        );
+      })}
+    </div>
+
+    {inputMessage && (
+      <p style={{ color: "crimson", fontSize: 13 }}>{inputMessage}</p>
+    )}
+  </div>
+
+  <div style={{ marginBottom: 16 }}>
+    <label>
+      年代：{" "}
+      <select value={decade} onChange={(e) => setDecade(e.target.value)}>
+        <option value="1970s">1970s</option>
+        <option value="1980s">1980s</option>
+        <option value="1990s">1990s</option>
+        <option value="2000s">2000s</option>
+        <option value="2010s">2010s</option>
+        <option value="2020s">2020s</option>
+      </select>
+    </label>
+  </div>
+
+  <div style={{ marginBottom: 16 }}>
+    <label>
+      温度：{temperature}
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value={temperature}
+        onChange={(e) => setTemperature(Number(e.target.value))}
+        style={{ width: "100%" }}
+      />
+    </label>
+  </div>
+
+  <div style={{ marginBottom: 16 }}>
+    <label>
+      有名度：{popularity}
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value={popularity}
+        onChange={(e) => setPopularity(Number(e.target.value))}
+        style={{ width: "100%" }}
+      />
+    </label>
+  </div>
+
+  <label>
+    <input
+      type="checkbox"
+      checked={talkEnabled}
+      onChange={(e) => setTalkEnabled(e.target.checked)}
+    />{" "}
+    トークを入れる
+  </label>
+</section>
 
       <button onClick={createProgram} disabled={loading}>
         {loading ? "生成中..." : "番組生成テスト"}
