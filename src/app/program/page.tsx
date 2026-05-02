@@ -21,6 +21,43 @@ const keywordCards: KeywordCard[] = [
   { id: "gothic", label: "ゴシック", group: "mood" },
   { id: "pops", label: "ポップス", group: "genre" },
 ];
+function getSliderLevel(value: number) {
+  if (value < 20) return 1;
+  if (value < 40) return 2;
+  if (value < 60) return 3;
+  if (value < 80) return 4;
+  return 5;
+}
+
+function getEraText(value: number) {
+  const level = getSliderLevel(value);
+
+  if (level === 1) return "古い曲";
+  if (level === 2) return "やや古い曲";
+  if (level === 3) return "年代指定なし";
+  if (level === 4) return "やや新しい曲";
+  return "新しい曲";
+}
+
+function getTemperatureText(value: number) {
+  const level = getSliderLevel(value);
+
+  if (level === 1) return "クール";
+  if (level === 2) return "ややクール";
+  if (level === 3) return "温度指定なし";
+  if (level === 4) return "ややホット";
+  return "ホット";
+}
+
+function getPopularityText(value: number) {
+  const level = getSliderLevel(value);
+
+  if (level === 1) return "有名でない曲";
+  if (level === 2) return "ややマイナー";
+  if (level === 3) return "有名度指定なし";
+  if (level === 4) return "ややヒット曲";
+  return "ヒット曲・定番曲";
+}
 export default function ProgramPage() {
   const [loading, setLoading] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -30,7 +67,7 @@ export default function ProgramPage() {
   const [autoPlay, setAutoPlay] = useState(false);
   const [error, setError] = useState("");
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-  const [decade, setDecade] = useState("1990s");
+  const [era, setEra] = useState(50);
   const [temperature, setTemperature] = useState(50);
   const [popularity, setPopularity] = useState(50);
   const [talkEnabled, setTalkEnabled] = useState(true);
@@ -89,16 +126,51 @@ export default function ProgramPage() {
     .filter(Boolean)
     .join("、");
 
-  const description = `
+  const getSliderLevel = (value: number) => {
+  if (value < 20) return 1;
+  if (value < 40) return 2;
+  if (value < 60) return 3;
+  if (value < 80) return 4;
+  return 5;
+};
+
+const getEraText = (value: number) => {
+  const level = getSliderLevel(value);
+  if (level === 1) return "古い曲（かなりレトロ）";
+  if (level === 2) return "やや古い曲";
+  if (level === 3) return "年代指定なし";
+  if (level === 4) return "やや新しい曲";
+  return "新しい曲（モダン）";
+};
+
+const getTemperatureText = (value: number) => {
+  const level = getSliderLevel(value);
+  if (level === 1) return "クール（無機的・感情抑制）";
+  if (level === 2) return "ややクール";
+  if (level === 3) return "温度指定なし";
+  if (level === 4) return "ややホット";
+  return "ホット（生命感・感情量・身体性）";
+};
+
+const getPopularityText = (value: number) => {
+  const level = getSliderLevel(value);
+  if (level === 1) return "有名でない曲";
+  if (level === 2) return "ややマイナー";
+  if (level === 3) return "有名度指定なし";
+  if (level === 4) return "ややヒット曲";
+  return "ヒット曲・定番曲";
+};
+
+const description = `
 キーワード: ${keywordLabels || "なし"}
-年代: ${decade}
-温度: ${temperature}
-有名度: ${popularity}
+年代: ${era} / ${getEraText(era)}
+温度: ${temperature} / ${getTemperatureText(temperature)}
+有名度: ${popularity} / ${getPopularityText(popularity)}
 トーク: ${talkEnabled ? "あり" : "なし"}
 `;
 
   try {
-    const res = await fetch("/api/program/create", {
+    const res = await fetch("/api/program/tune", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -107,11 +179,10 @@ export default function ProgramPage() {
         title: "TRIW チューニング番組",
         description,
         keywords: selectedKeywords,
-        decade,
+        era,
         temperature,
         popularity,
         talkEnabled,
-        djId: "Techne",
         mode: "count",
         count: 5,
       }),
@@ -253,20 +324,6 @@ export default function ProgramPage() {
 
   <div style={{ marginBottom: 16 }}>
     <label>
-      年代：{" "}
-      <select value={decade} onChange={(e) => setDecade(e.target.value)}>
-        <option value="1970s">1970s</option>
-        <option value="1980s">1980s</option>
-        <option value="1990s">1990s</option>
-        <option value="2000s">2000s</option>
-        <option value="2010s">2010s</option>
-        <option value="2020s">2020s</option>
-      </select>
-    </label>
-  </div>
-
-  <div style={{ marginBottom: 16 }}>
-    <label>
       温度：{temperature}
       <input
         type="range"
@@ -292,7 +349,19 @@ export default function ProgramPage() {
       />
     </label>
   </div>
-
+  <div style={{ marginBottom: 16 }}>
+   <label>
+     年代：{getEraText(era)}
+     <input
+      type="range"
+      min="0"
+      max="100"
+      value={era}
+      onChange={(e) => setEra(Number(e.target.value))}
+      style={{ width: "100%" }}
+     />
+   </label>
+ </div>
   <label>
     <input
       type="checkbox"

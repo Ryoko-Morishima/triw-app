@@ -275,7 +275,25 @@ export function evaluateTracks(
     } else {
       reasons.push("年代ゲートOFF");
     }
+// ===== 年代判定ここまで =====
 
+// ===== 有名度フィルタ（追加） =====
+const inputPop = options?.popularity_input ?? 50;
+const pop = track?.spotify?.popularity ?? null;
+
+if (pop != null) {
+  if (inputPop < 30 && pop > 60) {
+    hardReject = true;
+    reasons.push(`有名度高すぎ（${pop}）`);
+  }
+
+  if (inputPop > 70 && pop < 40) {
+    hardReject = true;
+    reasons.push(`有名度低すぎ（${pop}）`);
+  }
+} else {
+  reasons.push("人気度不明");
+}
     // ---- 互換: role/popularity は評価に使わない（0固定）
     const role = (c as any)?.intended_role ?? undefined;
 
