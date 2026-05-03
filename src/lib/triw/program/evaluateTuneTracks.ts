@@ -110,15 +110,15 @@ export function evaluateTuneTracks(
     if (accepted && pop != null) {
       if (inputPop < 30 && pop > 60) {
         accepted = false;
-        reasons.push(`有名度高すぎ（${pop}）`);
+        reasons.push(`人気傾向が高すぎ（${pop}）`);
       } else if (inputPop > 70 && pop < 40) {
         accepted = false;
-        reasons.push(`有名度低すぎ（${pop}）`);
+        reasons.push(`人気傾向が低すぎ（${pop}）`);
       } else {
-        reasons.push(`有名度OK（${pop}）`);
+        reasons.push(`人気傾向OK（${pop}）`);
       }
     } else if (accepted) {
-      reasons.push("有名度不明");
+      reasons.push("人気傾向不明");
     }
 
     const evaluated: Evaluated = {

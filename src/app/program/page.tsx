@@ -52,11 +52,11 @@ function getTemperatureText(value: number) {
 function getPopularityText(value: number) {
   const level = getSliderLevel(value);
 
-  if (level === 1) return "有名でない曲";
-  if (level === 2) return "ややマイナー";
-  if (level === 3) return "有名度指定なし";
-  if (level === 4) return "ややヒット曲";
-  return "ヒット曲・定番曲";
+  if (level === 1) return "あまり再生されていない曲";
+  if (level === 2) return "ややひかえめ";
+  if (level === 3) return "指定なし";
+  if (level === 4) return "やや人気";
+  return "いま人気の曲";
 }
 export default function ProgramPage() {
   const [loading, setLoading] = useState(false);
@@ -154,18 +154,18 @@ const getTemperatureText = (value: number) => {
 
 const getPopularityText = (value: number) => {
   const level = getSliderLevel(value);
-  if (level === 1) return "有名でない曲";
-  if (level === 2) return "ややマイナー";
-  if (level === 3) return "有名度指定なし";
-  if (level === 4) return "ややヒット曲";
-  return "ヒット曲・定番曲";
+  if (level === 1) return "あまり再生されていない曲";
+  if (level === 2) return "ややひかえめ";
+  if (level === 3) return "指定なし";
+  if (level === 4) return "やや人気";
+  return "いま人気の曲";
 };
 
 const description = `
 キーワード: ${keywordLabels || "なし"}
 年代: ${era} / ${getEraText(era)}
 温度: ${temperature} / ${getTemperatureText(temperature)}
-有名度: ${popularity} / ${getPopularityText(popularity)}
+人気傾向: ${popularity} / ${getPopularityText(popularity)}
 トーク: ${talkEnabled ? "あり" : "なし"}
 `;
 
@@ -336,19 +336,35 @@ const description = `
     </label>
   </div>
 
-  <div style={{ marginBottom: 16 }}>
-    <label>
-      有名度：{popularity}
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={popularity}
-        onChange={(e) => setPopularity(Number(e.target.value))}
-        style={{ width: "100%" }}
-      />
-    </label>
+<div style={{ marginBottom: 16 }}>
+  <label>
+    人気傾向：{getPopularityText(popularity)}
+  </label>
+
+  {/* 左右ラベル */}
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: "#666",
+      marginBottom: 4,
+    }}
+  >
+    <span>深掘り</span>
+    <span>いま人気</span>
   </div>
+
+  {/* スライダー本体 */}
+  <input
+    type="range"
+    min="0"
+    max="100"
+    value={popularity}
+    onChange={(e) => setPopularity(Number(e.target.value))}
+    style={{ width: "100%" }}
+  />
+</div>
   <div style={{ marginBottom: 16 }}>
    <label>
      年代：{getEraText(era)}

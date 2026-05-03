@@ -2,7 +2,8 @@
 export const runtime = "nodejs";
 
 import { NextRequest, NextResponse } from "next/server";
-import { estimateTargetCount, runCandidatesC } from "@/lib/openai";
+import { estimateTargetCount } from "@/lib/openai";
+import { runTuneCandidatesC } from "@/lib/triw/selection/generateTuneCandidates";
 import { resolveCandidatesD } from "@/lib/resolve";
 import { finalizeSetlist } from "@/lib/finalize";
 import { buildEvents } from "@/lib/triw/program/buildEvents";
@@ -72,19 +73,19 @@ function getPopularityText(value: number) {
   const level = getSliderLevel(value);
 
   if (level === 1) {
-    return "有名じゃない曲：定番曲や大ヒット曲を避け、少し掘った曲を優先する";
+    return "深掘り:Spotify上で現在よく聴かれている大ヒット曲・超定番曲・代表曲を避け、テーマに合うが少し意外性のある曲、同ジャンル内の二番手・三番手の曲、アルバム曲寄りの曲を優先する";
   }
   if (level === 2) {
-    return "やや有名じゃない曲：有名すぎる曲を避ける";
+    return "やや深掘り：現在よく聴かれている大定番曲を少し避け、少し掘った曲を優先する";
   }
   if (level === 3) {
-    return "ニュートラル：有名度は特に指定しない";
+    return "ニュートラル：人気傾向は特に指定しない";
   }
   if (level === 4) {
-    return "ややヒット曲：ある程度知られている曲を優先する";
+    return "やや人気：Spotify上で比較的よく聴かれている曲を優先する";
   }
 
-  return "ヒット曲：有名曲・定番曲・広く知られている曲を優先する";
+  return "いま人気：Spotify上で現在よく聴かれている曲を優先する";
 }
 
 function buildDescription(input: any) {
@@ -96,7 +97,7 @@ function buildDescription(input: any) {
     `キーワード: ${labels || "なし"}`,
     `年代: ${input.era ?? 50} / ${getEraText(Number(input.era ?? 50))}`,
     `温度: ${input.temperature ?? 50} / ${getTemperatureText(Number(input.temperature ?? 50))}`,
-    `有名度: ${input.popularity ?? 50} / ${getPopularityText(Number(input.popularity ?? 50))}`,
+    `人気傾向: ${input.popularity ?? 50} / ${getPopularityText(Number(input.popularity ?? 50))}`,
     `トーク: ${input.talkEnabled ? "あり" : "なし"}`,
   ].join("\n");
 }
@@ -150,60 +151,73 @@ export async function POST(req: NextRequest) {
       soft_preferences_text: [
         `年代: ${getEraText(Number(era))}`,
         `温度: ${getTemperatureText(Number(temperature))}`,
-        `有名度: ${getPopularityText(Number(popularity))}`,
+        `人気傾向: ${getPopularityText(Number(popularity))}`,
       ].join("\n"),
       selection_rules: [
         "候補は実在する曲名とアーティスト名で出す。",
         "キーワードの雰囲気を強く反映する。",
         "年代スライダーがニュートラルの場合、年代は選曲条件にしない。",
         "年代スライダーが左寄りの場合は古い曲、右寄りの場合は新しい曲を優先する。",
-        "有名度スライダーがニュートラルの場合、有名度は選曲条件にしない。",
-        "有名度が低い場合は定番曲・大ヒット曲を避ける。",
-        "有名度が高い場合はヒット曲・定番曲・広く知られた曲を優先する。",
+        "人気傾向スライダーがニュートラルの場合、Spotify上の人気傾向は選曲条件にしない。",
+        "人気傾向が低い場合は、誰もが知っている代表曲リストを作らない。",
+        "人気傾向が低い場合は、有名アーティストを使う場合でも代表曲ではなく、Spotify上の人気度が比較的低い曲を選ぶ。",
+        "人気傾向が低い場合は、候補全体のSpotify人気度が高くなりすぎないように、最初から控えめな人気の曲を多めに出す。",        "人気傾向が高い場合は、Spotify上で現在よく聴かれている曲を優先する。",
         "温度指定は強く反映する。",
         "温度がニュートラルの場合、温度感は選曲条件にしない。",
         "ホット指定では、感情量・生命感・身体性・野性的なエネルギーのある曲を優先する。",
         "クール指定では、無機的・都会的・抑制された曲を優先する。",
       ].join("\n"),
     };
+const t0 = Date.now();
 
-    // C: 候補生成
-    const C = await runCandidatesC({
-      persona,
-      interpretation,
-      targetCount,
-    });
+// C: 候補生成
+const C = await runTuneCandidatesC({
+  persona,
+  interpretation,
+  targetCount,
+});
+const t1 = Date.now();
+console.log("[tune] C candidates", t1 - t0, "ms");
 
-    // D: Spotify解決
-    const D = await resolveCandidatesD(C?.candidates ?? []);
+// D: Spotify解決
+const D = await resolveCandidatesD(C?.candidates ?? []);
+const t2 = Date.now();
+console.log("[tune] D spotify resolve", t2 - t1, "ms");
 
-    // E: 軽量評価
-    const evaluated = evaluateTuneTracks(D?.resolved ?? [], {
-      popularity,
-      // 年代は今後 era スライダー評価にする。
-      // ここでは decade を渡さず、年代の厳格ゲートは使わない。
-    });
+// E: 軽量評価
+const evaluated = evaluateTuneTracks(D?.resolved ?? [], {
+  popularity: Number(popularity),
+});
+const t3 = Date.now();
+console.log("[tune] E evaluate", t3 - t2, "ms");
 
-    // F: 最終整形
-    const F = await finalizeSetlist(
-      evaluated.picked.map((t: any) => ({
-        title: t.title,
-        artist: t.artist,
-        uri: t.uri,
-        reason: t.reason ?? "チューニング条件に一致",
-      })),
-      {
-        mode,
-        ...(mode === "duration"
-          ? { targetDurationMin: Number(duration || 30), maxTracksHardCap: 30 }
-          : { maxTracks: Number(count || 5) }),
-        artistPolicy: "auto",
-        programTitle: title,
-        programOverview: description,
-        interleaveRoles: false,
-        shortReason: true,
-      }
-    );
+// F: 最終整形
+const F = await finalizeSetlist(
+  evaluated.picked.map((t: any) => ({
+    title: t.title,
+    artist: t.artist,
+    uri: t.uri,
+    reason: t.reason ?? "チューニング条件に一致",
+    accepted: t.accepted ?? true,
+    confidence: t.confidence ?? 1,
+    debug: t.debug,
+  })),
+  {
+    mode,
+    ...(mode === "duration"
+      ? { targetDurationMin: Number(duration || 30), maxTracksHardCap: 30 }
+      : { maxTracks: Number(count || 5) }),
+    artistPolicy: "auto",
+    programTitle: title,
+    programOverview: description,
+    interleaveRoles: false,
+    shortReason: true,
+  }
+);
+const t4 = Date.now();
+console.log("[tune] F finalize", t4 - t3, "ms");
+
+console.log("[tune] total", t4 - t0, "ms");
 
     const events = buildEvents(F as any);
 
