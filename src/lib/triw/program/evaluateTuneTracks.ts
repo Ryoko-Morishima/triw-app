@@ -107,19 +107,19 @@ export function evaluateTuneTracks(
       }
     }
 
-    if (accepted && pop != null) {
-      if (inputPop < 30 && pop > 60) {
-        accepted = false;
-        reasons.push(`人気傾向が高すぎ（${pop}）`);
-      } else if (inputPop > 70 && pop < 40) {
-        accepted = false;
-        reasons.push(`人気傾向が低すぎ（${pop}）`);
-      } else {
-        reasons.push(`人気傾向OK（${pop}）`);
-      }
-    } else if (accepted) {
-      reasons.push("人気傾向不明");
-    }
+if (accepted && pop != null) {
+  if (inputPop < 30 && pop > 80) {
+    accepted = false;
+    reasons.push(`人気傾向が高すぎ（${pop}）`);
+  } else if (inputPop > 70 && pop < 35) {
+    accepted = false;
+    reasons.push(`人気傾向が低すぎ（${pop}）`);
+  } else {
+    reasons.push(`人気傾向OK（${pop}）`);
+  }
+} else if (accepted) {
+  reasons.push("人気傾向不明");
+}
 
     const evaluated: Evaluated = {
       title,
