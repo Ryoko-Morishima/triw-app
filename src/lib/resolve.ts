@@ -7,7 +7,12 @@ import {
   releaseYearFrom,
   searchTracksByISRC,
 } from "@/lib/spotify";
-import type { CandidateC } from "@/lib/openai";
+
+export type ResolveCandidate = {
+  title: string;
+  artist: string;
+  year_guess?: number | null;
+};
 
 /** ===========================================
  *  補助: MusicBrainz から ISRC で原盤年の最古候補を取得（任意）
@@ -69,7 +74,7 @@ type ResolvedRow = {
 };
 
 export async function resolveCandidatesD(
-  candidates: CandidateC[]
+  candidates: ResolveCandidate[]
 ): Promise<{ resolved: ResolvedRow[]; notFound: { title: string; artist: string }[] }> {
   const token = await requireSpotifyToken();
 
@@ -86,7 +91,7 @@ export async function resolveCandidatesD(
 
   // 2) 詳細（popularity/preview/album.images/release_date/ISRC）を並列取得
   const found = hits.filter((h) => !!h.best) as {
-    c: CandidateC;
+    c: ResolveCandidate;
     best: { id: string; uri: string; name: string; artists: string[] };
   }[];
   const ids = found.map((h) => h.best.id);

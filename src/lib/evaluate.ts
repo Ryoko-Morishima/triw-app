@@ -95,6 +95,7 @@ type EvalOpts = {
   year_gate?: boolean;
   // 追加: 番組レベルで抽出した時代（十年単位など）
   era?: { start: number; end: number } | null;
+  popularity_input?: number;
 };
 
 /** ==== 事前インデックス化 ==== */
@@ -278,8 +279,8 @@ export function evaluateTracks(
 // ===== 年代判定ここまで =====
 
 // ===== 有名度フィルタ（追加） =====
-const inputPop = options?.popularity_input ?? 50;
-const pop = track?.spotify?.popularity ?? null;
+const inputPop = opts?.popularity_input ?? 50;
+const pop = row.spotify?.popularity ?? null;
 
 if (pop != null) {
   if (inputPop < 30 && pop > 60) {
