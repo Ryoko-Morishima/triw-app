@@ -3,6 +3,8 @@ import { buildSelectionPrompt } from "./buildSelectionPrompt";
 export type TuneCandidate = {
   title: string;
   artist: string;
+  whyKeywordFit?: string;
+  whyNotTooObvious?: string;
 };
 
 export type TuneCandidatesResponse = {
@@ -55,6 +57,9 @@ async function requestJson(prompt: { system: string; user: string }) {
 
   const data = await res.json();
   const text: string = data.choices?.[0]?.message?.content || "";
+
+  console.log("[tune] raw model response\n", text);
+
   return safeParseJson(text);
 }
 
@@ -65,10 +70,7 @@ export async function runTuneCandidatesC(params: {
 }): Promise<TuneCandidatesResponse> {
   const { interpretation, targetCount } = params;
 
-// Spotify解決・評価で一定数落ちる前提なので、必要数より多めに候補を出す。
-// 人気フィルタなどで落ちても十分な件数が残るようにする。
-// ただし多すぎるとOpenAIやSpotify解決が遅くなるため、最大24件に抑える。
-const outCount = Math.min(Math.max(targetCount * 3, 12), 24);
+  const outCount = Math.min(Math.max(targetCount * 3, 12), 24);
 
   const prompt = buildSelectionPrompt({ interpretation, outCount });
   console.log("[tune] prompt.system\n", prompt.system);
@@ -83,8 +85,16 @@ const outCount = Math.min(Math.max(targetCount * 3, 12), 24);
     .map((it: any) => ({
       title: String(it.title).trim(),
       artist: String(it.artist).trim(),
+      whyKeywordFit:
+        typeof it.whyKeywordFit === "string" ? it.whyKeywordFit.trim() : "",
+      whyNotTooObvious:
+        typeof it.whyNotTooObvious === "string"
+          ? it.whyNotTooObvious.trim()
+          : "",
     }))
     .filter((it: TuneCandidate) => it.title && it.artist);
+
+  console.log("[tune] sanitized candidates", sanitized);
 
   return { candidates: sanitized.slice(0, outCount) };
 }

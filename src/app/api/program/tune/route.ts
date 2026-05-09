@@ -9,7 +9,7 @@ import { finalizeSetlist } from "@/lib/finalize";
 import { buildEvents } from "@/lib/triw/program/buildEvents";
 import { evaluateTuneTracks } from "@/lib/triw/program/evaluateTuneTracks";
 import { buildDescription, getEraText, getPopularityText, getTemperatureText } from "@/lib/triw/program/buildTuneDescription";
-
+import { getKeywordPromptTexts } from "@/lib/triw/input/cards/keywordCards";
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,6 +40,8 @@ export async function POST(req: NextRequest) {
       talkEnabled,
     });
 
+    const keywordPromptText = getKeywordPromptTexts(keywords).join("\n");
+
     const targetCount = estimateTargetCount(mode, count, duration);
 
     const persona = {
@@ -52,7 +54,8 @@ export async function POST(req: NextRequest) {
     const interpretation = {
       direction_note:
         "DJ人格ではなく、カード・年代・温度・有名度を主な条件として選曲する。",
-      rationale: description,
+      rationale: [description, keywordPromptText].filter(Boolean).join("\n\n"),
+      keyword_prompt_text: keywordPromptText,
       flow_style_paragraph:
         "入力条件に合う曲を、なるべく重複せず、Spotifyで解決しやすい形で選ぶ。",
       hard_constraints_text:
@@ -63,10 +66,13 @@ export async function POST(req: NextRequest) {
         `人気傾向: ${getPopularityText(Number(popularity))}`,
       ].join("\n"),
 selection_rules: [
+  keywordPromptText
+    ? `選択されたキーワードの解釈:\n${keywordPromptText}`
+    : "",
   "候補は実在する曲名とアーティスト名で出す。",
   "Spotifyで検索しやすい正式な曲名とアーティスト名を使う。",
-  "キーワードは選曲の中心テーマとして扱い、各曲がそのテーマに自然につながるように選ぶ。",
-  "キーワードに対して、単語そのものが曲名に入っている必要はない。雰囲気・場面・季節感・身体感覚で解釈する。",
+  "季節・場面・時間帯系などのキーワードに対して、単語そのものが曲名に入っている必要はない。曲名一致だけを理由に選ばず、カードごとの解釈文に基づいて、雰囲気・場面・季節感・身体感覚・音像とのつながりを重視する。歌詞やテーマ、曲調などを考慮して選曲する",
+  "複数のキーワードがある場合は、それぞれを独立に満たすのではなく、複数条件が同時に成立している曲を優先する。",
   "年代スライダーがニュートラルの場合、年代は選曲条件にしない。",
   "年代スライダーが左寄りの場合は古い曲、右寄りの場合は新しい曲を優先する。",
   "人気傾向スライダーがニュートラルの場合、Spotify上の人気傾向は選曲条件にしない。",
@@ -78,7 +84,7 @@ selection_rules: [
   "ホット指定では、感情量・生命感・身体性・野性的なエネルギーのある曲を優先する。",
   "クール指定では、無機的・都会的・抑制された曲を優先する。",
   "複数条件がある場合は、キーワードを土台にし、年代・温度・人気傾向は味付けとして反映する。",
-].join("\n"),
+].filter(Boolean).join("\n"),
     };
 console.log("[interpretation]", interpretation);
 

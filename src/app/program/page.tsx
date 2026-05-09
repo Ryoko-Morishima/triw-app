@@ -9,17 +9,30 @@ type KeywordCard = {
 };
 
 const keywordCards: KeywordCard[] = [
-  { id: "rain", label: "雨", group: "scene" },
+  { id: "rain", label: "雨", group: "weather" },
   { id: "summer", label: "夏", group: "season" },
-  { id: "night", label: "夜", group: "time" },
-  { id: "party", label: "パーティ", group: "mood" },
-  { id: "drive", label: "ドライブ", group: "scene" },
-  { id: "alt", label: "オルタナ", group: "genre" },
-  { id: "world", label: "ワールド", group: "genre" },
-  { id: "tea", label: "お茶会", group: "mood" },
-  { id: "happy", label: "ハッピー", group: "mood" },
-  { id: "gothic", label: "ゴシック", group: "mood" },
-  { id: "pops", label: "ポップス", group: "genre" },
+  { id: "winter", label: "冬", group: "season" },
+
+  { id: "lateNight", label: "深夜", group: "time" },
+  { id: "evening", label: "夕方", group: "time" },
+
+  { id: "drive", label: "ドライブ", group: "action" },
+  { id: "walk", label: "散歩", group: "action" },
+
+  { id: "highway", label: "高速道路", group: "place" },
+  { id: "seaside", label: "海沿い", group: "place" },
+  { id: "room", label: "部屋", group: "place" },
+
+  { id: "loneliness", label: "孤独", group: "emotion" },
+  { id: "happiness", label: "多幸感", group: "emotion" },
+  { id: "bittersweet", label: "切なさ", group: "emotion" },
+  { id: "escape", label: "逃避", group: "emotion" },
+
+  { id: "alternative", label: "オルタナ", group: "culture" },
+
+  { id: "lofi", label: "ローファイ", group: "texture" },
+  { id: "floating", label: "浮遊感", group: "texture" },
+  { id: "humidity", label: "湿度", group: "texture" },
 ];
 function getSliderLevel(value: number) {
   if (value < 20) return 1;

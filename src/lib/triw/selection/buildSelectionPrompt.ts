@@ -6,7 +6,6 @@ export function buildSelectionPrompt(params: {
 }): { system: string; user: string } {
   const { interpretation, outCount } = params;
 
-  // --- interpretation整理（ここが今後の拡張ポイント）
   const rationale = interpretation?.rationale ?? "";
   const softPreferencesText = interpretation?.soft_preferences_text ?? "";
   const selectionRules = interpretation?.selection_rules ?? "";
@@ -23,31 +22,27 @@ export function buildSelectionPrompt(params: {
 
 ${rationale}
 
-# 条件の扱い方
-
-- スライダーは選曲傾向として扱う
-- 極端な値のスライダーほど強めに反映する
-- ニュートラルに近いスライダーは弱く扱う
-- キーワードは雰囲気・意味の方向性として扱う
-- どれか1つの条件だけで全体を支配しない
-- 条件が衝突する場合は、典型曲だけに逃げず、自然に両立する候補を探す
-
-# スライダー条件
+# 入力傾向
 
 ${softPreferencesText}
 
-# 選曲ルール
+# 選曲方針
 
 ${selectionRules}
 
-# 追加ルール
+# 固定ルール
 
-- 人気傾向が低い場合は、曲単位で現在よく聴かれている代表曲・大ヒット曲を避ける
-- 人気傾向が低い場合でも、アーティストが有名かどうかだけでは除外しない
-- 年代指定がある場合は、できるだけその時代感に合う曲を選ぶ
-- 温度指定がある場合は、できるだけその温度感に合う曲を選ぶ
+- 候補は実在する曲名とアーティスト名で出す
+- Spotifyで検索しやすい正式な曲名とアーティスト名を使う
+- アーティスト名や曲名に引用符（"）を含む候補は避ける
+- 同じ曲を重複して出さない
 - 同一アーティストに偏らない
 - 架空の曲名や曖昧な曲名は避ける
+- どれか1つの条件だけで全体を支配しない
+- 条件が衝突する場合は、典型曲だけに逃げず、自然に両立する候補を探す
+- 各候補には、なぜキーワードの組み合わせに合うのかを短く書く
+- 人気傾向が低い場合は、代表曲・最大ヒット曲・超定番曲に偏らない
+- whyKeywordFit では、曲名一致だけでなく、音像・テンポ・歌詞・演奏・録音質感・空気感のどれがキーワード解釈につながるかを短く説明する
 
 # 出力
 
@@ -57,7 +52,12 @@ JSONのみ：
 
 {
   "candidates": [
-    { "title": "曲名", "artist": "アーティスト名" }
+    {
+      "title": "曲名",
+      "artist": "アーティスト名",
+      "whyKeywordFit": "複数のキーワード解釈にどう合っているかを短く説明",
+      "whyNotTooObvious": "深掘り指定の場合、代表曲すぎない理由を短く説明"
+    }
   ]
 }
 `.trim();
