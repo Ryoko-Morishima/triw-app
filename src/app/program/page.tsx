@@ -9,30 +9,30 @@ type KeywordCard = {
 };
 
 const keywordCards: KeywordCard[] = [
-  { id: "rain", label: "雨", group: "weather" },
-  { id: "summer", label: "夏", group: "season" },
-  { id: "winter", label: "冬", group: "season" },
+  { id: "alternative", label: "オルタナ", group: "culture" },
+  { id: "mainstream", label: "王道性", group: "culture" },
+  { id: "world", label: "非英米中心", group: "culture" },
 
-  { id: "lateNight", label: "深夜", group: "time" },
-  { id: "evening", label: "夕方", group: "time" },
-
-  { id: "drive", label: "ドライブ", group: "action" },
-  { id: "walk", label: "散歩", group: "action" },
-
-  { id: "highway", label: "高速道路", group: "place" },
-  { id: "seaside", label: "海沿い", group: "place" },
-  { id: "room", label: "部屋", group: "place" },
+  { id: "lofi", label: "ローファイ", group: "texture" },
+  { id: "floating", label: "浮遊感", group: "texture" },
+  { id: "electronic", label: "電子音", group: "texture" },
+  { id: "jazz-like", label: "ジャズ感", group: "texture" },
 
   { id: "loneliness", label: "孤独", group: "emotion" },
   { id: "happiness", label: "多幸感", group: "emotion" },
   { id: "bittersweet", label: "切なさ", group: "emotion" },
   { id: "escape", label: "逃避", group: "emotion" },
 
-  { id: "alternative", label: "オルタナ", group: "culture" },
+  { id: "rain", label: "雨", group: "weather" },
+  { id: "summer", label: "夏", group: "season" },
+  { id: "winter", label: "冬", group: "season" },
 
-  { id: "lofi", label: "ローファイ", group: "texture" },
-  { id: "floating", label: "浮遊感", group: "texture" },
-  { id: "humidity", label: "湿度", group: "texture" },
+  { id: "lateNight", label: "深夜", group: "time" },
+  { id: "morning", label: "朝", group: "time" },
+
+  { id: "drive", label: "ドライブ", group: "action" },
+  { id: "walk", label: "散歩", group: "action" },
+  { id: "sleeping", label: "微睡み", group: "action" },
 ];
 function getSliderLevel(value: number) {
   if (value < 20) return 1;
