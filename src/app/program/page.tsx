@@ -7,33 +7,45 @@ type KeywordCard = {
   label: string;
   group: string;
 };
-
 const keywordCards: KeywordCard[] = [
   { id: "alternative", label: "オルタナ", group: "culture" },
-  { id: "mainstream", label: "王道性", group: "culture" },
-  { id: "world", label: "非英米中心", group: "culture" },
+  { id: "mainstream", label: "ポップ", group: "culture" },
+  { id: "world", label: "ローカルグルーヴ", group: "culture" },
+  { id: "asia", label: "アジア都市圏", group: "culture" },
 
   { id: "lofi", label: "ローファイ", group: "texture" },
-  { id: "floating", label: "浮遊感", group: "texture" },
   { id: "electronic", label: "電子音", group: "texture" },
   { id: "jazz-like", label: "ジャズ感", group: "texture" },
+  { id: "heavy", label: "ヘヴィ", group: "texture" },
 
   { id: "loneliness", label: "孤独", group: "emotion" },
   { id: "happiness", label: "多幸感", group: "emotion" },
   { id: "bittersweet", label: "切なさ", group: "emotion" },
-  { id: "escape", label: "逃避", group: "emotion" },
+  { id: "riot", label: "暴発", group: "emotion" },
+  { id: "euphoria", label: "陶酔", group: "emotion" },
 
-  { id: "rain", label: "雨", group: "weather" },
-  { id: "summer", label: "夏", group: "season" },
-  { id: "winter", label: "冬", group: "season" },
+  { id: "rain", label: "雨", group: "scene" },
+  { id: "summer-feeling", label: "夏", group: "scene" },
+  { id: "winter-feeling", label: "冬", group: "scene" },
+  { id: "late-night", label: "深夜", group: "scene" },
+  { id: "morning-light", label: "朝", group: "scene" },
+  { id: "festival", label: "フェス", group: "scene" },
+  { id: "drive", label: "ドライブ", group: "scene" },
+  { id: "walk", label: "散歩", group: "scene" },
+  { id: "sleeping", label: "まどろみ", group: "scene" },
 
-  { id: "lateNight", label: "深夜", group: "time" },
-  { id: "morning", label: "朝", group: "time" },
-
-  { id: "drive", label: "ドライブ", group: "action" },
-  { id: "walk", label: "散歩", group: "action" },
-  { id: "sleeping", label: "微睡み", group: "action" },
+  { id: "neon-chaos", label: "猥雑", group: "taste" },
+  { id: "rustic", label: "素朴", group: "taste" },
 ];
+
+const keywordGroups = [
+  { id: "culture", label: "文化" },
+  { id: "texture", label: "質感" },
+  { id: "emotion", label: "感情" },
+  { id: "scene", label: "場面" },
+  { id: "taste", label: "ムード" },
+];
+
 function getSliderLevel(value: number) {
   if (value < 20) return 1;
   if (value < 40) return 2;
@@ -308,26 +320,46 @@ const description = `
     </p>
 
     <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-      {keywordCards.map((card) => {
-        const selected = selectedKeywords.includes(card.id);
+     {keywordGroups.map((group) => {
+  const cards = keywordCards.filter((card) => card.group === group.id);
 
-        return (
-          <button
-            key={card.id}
-            type="button"
-            onClick={() => toggleKeyword(card)}
-            style={{
-              padding: "8px 12px",
-              borderRadius: 999,
-              border: "1px solid #ccc",
-              background: selected ? "#dde7ff" : "#fff",
-              cursor: "pointer",
-            }}
-          >
-            {card.label}
-          </button>
-        );
-      })}
+  return (
+    <div key={group.id} style={{ marginBottom: 16 }}>
+      <h4
+        style={{
+          fontSize: 13,
+          opacity: 0.7,
+          marginBottom: 8,
+        }}
+      >
+        {group.label}
+      </h4>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        {cards.map((card) => {
+          const selected = selectedKeywords.includes(card.id);
+
+          return (
+            <button
+              key={card.id}
+              type="button"
+              onClick={() => toggleKeyword(card)}
+              style={{
+                padding: "8px 12px",
+                borderRadius: 999,
+                border: "1px solid #ccc",
+                background: selected ? "#dde7ff" : "#fff",
+                cursor: "pointer",
+              }}
+            >
+              {card.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+})}
     </div>
 
     {inputMessage && (

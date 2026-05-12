@@ -1,15 +1,29 @@
 export const keywordLabels: Record<string, string> = {
+  alternative: "オルタナ",
+  mainstream: "王道性",
+  world: "非英米中心",
+
+  lofi: "ローファイ",
+  floating: "浮遊感",
+  electronic: "電子音",
+  "jazz-like": "ジャズ感",
+
+  loneliness: "孤独",
+  happiness: "多幸感",
+  bittersweet: "切なさ",
+  escape: "逃避",
+
   rain: "雨",
-  summer: "夏",
-  night: "夜",
-  party: "パーティ",
+  "summer-feeling": "夏",
+  "winter-feeling": "冬",
+  "late-night": "深夜",
+  "morning-light": "朝",
   drive: "ドライブ",
-  alt: "オルタナ",
-  world: "ワールド",
-  tea: "お茶会",
-  happy: "ハッピー",
-  gothic: "ゴシック",
-  pops: "ポップス",
+  walk: "散歩",
+  sleeping: "微睡み",
+
+  "neon-chaos": "猥雑",
+  rustic: "素朴",
 };
 
 export function getSliderLevel(value: number) {
