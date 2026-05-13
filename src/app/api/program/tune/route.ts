@@ -8,8 +8,15 @@ import { resolveCandidatesD } from "@/lib/resolve";
 import { finalizeSetlist } from "@/lib/finalize";
 import { buildEvents } from "@/lib/triw/program/buildEvents";
 import { evaluateTuneTracks } from "@/lib/triw/program/evaluateTuneTracks";
-import { buildDescription, getEraText, getPopularityText, getTemperatureText } from "@/lib/triw/program/buildTuneDescription";
+import type { ProgramState } from "@/lib/triw/program/types";
+import {
+  buildDescription,
+  getEraText,
+  getPopularityText,
+  getTemperatureText,
+} from "@/lib/triw/program/buildTuneDescription";
 import { getKeywordPromptTexts } from "@/lib/triw/input/cards/keywordCards";
+import { saveRunLog } from "@/lib/triw/logs/saveRunLog";
 
 export async function POST(req: NextRequest) {
   try {
@@ -65,67 +72,75 @@ export async function POST(req: NextRequest) {
         `温度: ${getTemperatureText(Number(temperature))}`,
         `人気傾向: ${getPopularityText(Number(popularity))}`,
       ].join("\n"),
-selection_rules: [
-  keywordPromptText
-    ? `選択されたキーワードの解釈:\n${keywordPromptText}`
-    : "",
-  "候補は実在する曲名とアーティスト名で出す。",
-  "Spotifyで検索しやすい正式な曲名とアーティスト名を使う。",
-  "季節・場面・時間帯系などのキーワードに対して、単語そのものが曲名に入っている必要はない。曲名一致だけを理由に選ばず、カードごとの解釈文に基づいて、雰囲気・場面・季節感・身体感覚・音像とのつながりを重視する。歌詞やテーマ、曲調などを考慮して選曲する",
-  "複数のキーワードがある場合は、それぞれを独立に満たすのではなく、複数条件が同時に成立している曲を優先する。",
-  "年代スライダーがニュートラルの場合、年代は選曲条件にしない。",
-  "年代スライダーが左寄りの場合は古い曲、右寄りの場合は新しい曲を優先する。",
-  "人気傾向スライダーがニュートラルの場合、Spotify上の人気傾向は選曲条件にしない。",
-  "人気傾向が低い場合は、誰もが知っている代表曲リストを作らない。",
-  "人気傾向が低い場合は、無名曲ではなく、テーマに合う少し深い曲・代表曲以外の有名アーティスト曲・同ジャンル内の二番手三番手の曲を優先する。",
-  "人気傾向が低い場合でも、Spotifyで検索しにくい極端にマイナーな曲や曖昧な曲名は避ける。",
-  "人気傾向が高い場合は、一般的にそのアーティストの代表曲・最大ヒット曲として知られている曲や、ヒット曲を優先する。",
-  "温度がニュートラルの場合、温度感は選曲条件にしない。",
-  "ホット指定では、感情量・生命感・身体性・野性的なエネルギーのある曲を優先する。",
-  "クール指定では、無機的・都会的・抑制された曲を優先する。",
-  "複数条件がある場合は、キーワードを土台にし、年代・温度・人気傾向は味付けとして反映する。",
-].filter(Boolean).join("\n"),
+      selection_rules: [
+        keywordPromptText
+          ? `選択されたキーワードの解釈:\n${keywordPromptText}`
+          : "",
+        "候補は実在する曲名とアーティスト名で出す。",
+        "Spotifyで検索しやすい正式な曲名とアーティスト名を使う。",
+        "季節・場面・時間帯系などのキーワードに対して、単語そのものが曲名に入っている必要はない。曲名一致だけを理由に選ばず、カードごとの解釈文に基づいて、雰囲気・場面・季節感・身体感覚・音像とのつながりを重視する。歌詞やテーマ、曲調などを考慮して選曲する。",
+        "複数のキーワードがある場合は、それぞれを独立に満たすのではなく、複数条件が同時に成立している曲を優先する。",
+        "年代スライダーがニュートラルの場合、年代は選曲条件にしない。",
+        "年代スライダーが左寄りの場合は古い曲、右寄りの場合は新しい曲を優先する。",
+        "人気傾向スライダーがニュートラルの場合、Spotify上の人気傾向は選曲条件にしない。",
+        "人気傾向が低い場合は、誰もが知っている代表曲リストを作らない。",
+        "人気傾向が低い場合は、無名曲ではなく、テーマに合う少し深い曲・代表曲以外の有名アーティスト曲・同ジャンル内の二番手三番手の曲を優先する。",
+        "人気傾向が低い場合でも、Spotifyで検索しにくい極端にマイナーな曲や曖昧な曲名は避ける。",
+        "人気傾向が高い場合は、一般的にそのアーティストの代表曲・最大ヒット曲として知られている曲や、ヒット曲を優先する。",
+        "温度がニュートラルの場合、温度感は選曲条件にしない。",
+        "ホット指定では、感情量・生命感・身体性・野性的なエネルギーのある曲を優先する。",
+        "クール指定では、無機的・都会的・抑制された曲を優先する。",
+        "複数条件がある場合は、キーワードを土台にし、年代・温度・人気傾向は味付けとして反映する。",
+      ]
+        .filter(Boolean)
+        .join("\n"),
     };
-console.log("[interpretation]", interpretation);
 
-const t0 = Date.now();
+    console.log("[interpretation]", interpretation);
 
-// C: 候補生成
-const C = await runTuneCandidatesC({
-  persona,
-  interpretation,
-  targetCount,
-});
-const t1 = Date.now();
-console.log("[tune] C candidates", t1 - t0, "ms");
+    const t0 = Date.now();
 
-// D: Spotify解決
-const D = await resolveCandidatesD(C?.candidates ?? []);
-const t2 = Date.now();
-console.log("[tune] D spotify resolve", t2 - t1, "ms");
+    // C: 候補生成
+    const C = await runTuneCandidatesC({
+      persona,
+      interpretation,
+      targetCount,
+    });
+    const t1 = Date.now();
+    console.log("[tune] C candidates", t1 - t0, "ms");
 
-// E: 軽量評価
-const evaluated = evaluateTuneTracks(D?.resolved ?? [], {
-  popularity: Number(popularity),
-});
-const t3 = Date.now();
-console.log("[tune] E evaluate", t3 - t2, "ms");
+    // D: Spotify解決
+    const D = await resolveCandidatesD(C?.candidates ?? []);
+    const t2 = Date.now();
+    console.log("[tune] D spotify resolve", t2 - t1, "ms");
 
-// F: 最終整形
+    // E: score / state 評価
+    const E = evaluateTuneTracks(D?.resolved ?? [], {
+      popularity: Number(popularity),
+      era: Number(era),
+    });
+    const t3 = Date.now();
+    console.log("[tune] E evaluate", t3 - t2, "ms");
+
+    // F: 最終整形
+    // 今回は finalize.ts をまだ変えないので、reservePool を既存 Evaluated 互換の形で渡す。
 const F = await finalizeSetlist(
-  evaluated.picked.map((t: any) => ({
-    title: t.title,
-    artist: t.artist,
-    uri: t.uri,
-    reason: t.reason ?? "チューニング条件に一致",
-    accepted: t.accepted ?? true,
-    confidence: t.confidence ?? 1,
-    debug: t.debug,
-  })),
+  E.reservePool.map((track) => ({
+    title: track.title,
+    artist: track.artist,
+    uri: track.uri,
+    reason: track.reason ?? "チューニング条件に一致",
+    accepted: true,
+    confidence: track.confidence ?? 1,
+    debug: track.debug,
+  })) as any,
   {
     mode,
     ...(mode === "duration"
-      ? { targetDurationMin: Number(duration || 30), maxTracksHardCap: 30 }
+      ? {
+          targetDurationMin: Number(duration || 30),
+          maxTracksHardCap: 30,
+        }
       : { maxTracks: Number(count || 5) }),
     artistPolicy: "auto",
     programTitle: title,
@@ -134,23 +149,65 @@ const F = await finalizeSetlist(
     shortReason: true,
   }
 );
-const t4 = Date.now();
-console.log("[tune] F finalize", t4 - t3, "ms");
+    const t4 = Date.now();
+    console.log("[tune] F finalize", t4 - t3, "ms");
 
-console.log("[tune] total", t4 - t0, "ms");
+    console.log("[tune] total", t4 - t0, "ms");
 
     const events = buildEvents(F as any);
 
-    return NextResponse.json({
-      runId,
-      input,
-      description,
-      C,
-      D,
-      E: evaluated,
-      F,
-      events,
+    const visibleUris = new Set(
+      (F?.tracks ?? [])
+        .map((track: any) => track?.uri)
+        .filter(Boolean)
+    );
+
+    const visibleQueue = F?.tracks ?? [];
+
+    const reservePool = E.reservePool.filter((track) => {
+      if (!track.uri) return true;
+      return !visibleUris.has(track.uri);
     });
+
+    const state: ProgramState = {
+  runId,
+  input,
+  description,
+  visibleQueue,
+  reservePool,
+  rejected: E.rejected,
+  events,
+};
+
+const runLogPayload = {
+  runId,
+  input,
+  description,
+  timings: {
+    C: t1 - t0,
+    D: t2 - t1,
+    E: t3 - t2,
+    F: t4 - t3,
+    total: t4 - t0,
+  },
+  C,
+  D,
+  E,
+  F,
+  events,
+  state,
+};
+
+const runlog = await saveRunLog({
+  runId,
+  payload: runLogPayload,
+});
+
+return NextResponse.json({
+  ...runLogPayload,
+  runlog,
+});
+
   } catch (e: any) {
     console.error("/api/program/tune error:", e);
 
