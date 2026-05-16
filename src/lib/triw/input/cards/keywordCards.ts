@@ -89,10 +89,10 @@ export const keywordCards: Record<string, KeywordCardDefinition> = {
 
   happiness: {
     id: "happiness",
-    label: "多幸感",
+    label: "ハッピー",
     category: "emotion",
     promptText:
-      "多幸感は、素直な明るさ、開放感、笑顔、軽やかさ、人と一緒にいる楽しさとして扱う。過度に幻想的な高揚ではなく、晴れた昼やポップソングのような親しみやすい幸福感を重視する。",
+      "ハッピーは、素直な明るさ、開放感、笑顔、軽やかさ、人と一緒にいる楽しさとして扱う。過度に幻想的な高揚ではなく、晴れた昼やポップソングのような親しみやすい幸福感を重視する。",
   },
 
   bittersweet: {
@@ -116,7 +116,7 @@ export const keywordCards: Record<string, KeywordCardDefinition> = {
     label: "陶酔",
     category: "emotion",
     promptText:
-      "陶酔は、意識が拡張するような高揚感、没入感、恍惚、光に包まれる感覚として扱う。多幸感よりも、現実感が薄れ、音に溶けていくような感覚を重視する。",
+      "陶酔は、意識が拡張するような高揚感、没入感、恍惚、光に包まれる感覚として扱う。現実感が薄れ、音に溶けていくような感覚を重視する。",
   },
 
   rain: {
@@ -231,4 +231,31 @@ export function getKeywordPromptTexts(keywords: string[]): string[] {
       return `「${card.label}」: ${card.promptText}`;
     })
     .filter(Boolean);
+}
+
+export const keywordCategoryLabels: Record<KeywordCardCategory, string> = {
+  culture: "文化",
+  texture: "質感",
+  emotion: "感情",
+  scene: "場面",
+  taste: "ムード",
+};
+
+export function getKeywordCards(): KeywordCardDefinition[] {
+  return Object.values(keywordCards);
+}
+
+export function getKeywordLabels(ids: string[]): string[] {
+  return ids.map((id) => keywordCards[id]?.label ?? id);
+}
+
+export function getKeywordCategories() {
+  return Object.entries(keywordCategoryLabels).map(([id, label]) => ({
+    id: id as KeywordCardCategory,
+    label,
+  }));
+}
+
+export function getKeywordCardsByCategory(category: KeywordCardCategory) {
+  return getKeywordCards().filter((card) => card.category === category);
 }

@@ -71,13 +71,25 @@ function getPopularity(item: any, track: any) {
 }
 
 function getYear(item: any, track: any) {
-  const releaseDate =
-    track?.album?.release_date ??
-    item?.release_date ??
+  const releaseYear =
+    track?.original_release_year ??
+    track?.release_year ??
+    item?.spotify?.original_release_year ??
+    item?.spotify?.release_year ??
+    item?.original_release_year ??
     item?.release_year ??
+    item?.year_guess ??
     null;
 
-  if (typeof releaseDate === "number") return releaseDate;
+  if (typeof releaseYear === "number") return releaseYear;
+
+  const releaseDate =
+    track?.album?.release_date ??
+    track?.release_date ??
+    item?.spotify?.album?.release_date ??
+    item?.spotify?.release_date ??
+    item?.release_date ??
+    null;
 
   if (typeof releaseDate === "string" && releaseDate.length >= 4) {
     const year = Number(releaseDate.slice(0, 4));

@@ -2,88 +2,31 @@
 
 import { useEffect, useState } from "react";
 
-type KeywordCard = {
-  id: string;
-  label: string;
-  group: string;
-};
-const keywordCards: KeywordCard[] = [
-  { id: "alternative", label: "オルタナ", group: "culture" },
-  { id: "mainstream", label: "ポップ", group: "culture" },
-  { id: "world", label: "ローカルグルーヴ", group: "culture" },
-  { id: "asia", label: "アジア都市圏", group: "culture" },
+import {
+  getKeywordCards,
+  getKeywordCategories,
+} from "@/lib/triw/input/cards/keywordCards";
 
-  { id: "lofi", label: "ローファイ", group: "texture" },
-  { id: "electronic", label: "電子音", group: "texture" },
-  { id: "jazz-like", label: "ジャズ感", group: "texture" },
-  { id: "heavy", label: "ヘヴィ", group: "texture" },
+import {
+  sliderControls,
+  type SliderId,
+  getSliderText,
+} from "@/lib/triw/input/sliders/sliderControls";
 
-  { id: "loneliness", label: "孤独", group: "emotion" },
-  { id: "happiness", label: "多幸感", group: "emotion" },
-  { id: "bittersweet", label: "切なさ", group: "emotion" },
-  { id: "riot", label: "暴発", group: "emotion" },
-  { id: "euphoria", label: "陶酔", group: "emotion" },
+import { buildDescription } from "@/lib/triw/program/buildTuneDescription";
 
-  { id: "rain", label: "雨", group: "scene" },
-  { id: "summer-feeling", label: "夏", group: "scene" },
-  { id: "winter-feeling", label: "冬", group: "scene" },
-  { id: "late-night", label: "深夜", group: "scene" },
-  { id: "morning-light", label: "朝", group: "scene" },
-  { id: "festival", label: "フェス", group: "scene" },
-  { id: "drive", label: "ドライブ", group: "scene" },
-  { id: "walk", label: "散歩", group: "scene" },
-  { id: "sleeping", label: "まどろみ", group: "scene" },
+type KeywordCard = ReturnType<typeof getKeywordCards>[number];
 
-  { id: "neon-chaos", label: "猥雑", group: "taste" },
-  { id: "rustic", label: "素朴", group: "taste" },
-];
-
-const keywordGroups = [
-  { id: "culture", label: "文化" },
-  { id: "texture", label: "質感" },
-  { id: "emotion", label: "感情" },
-  { id: "scene", label: "場面" },
-  { id: "taste", label: "ムード" },
-];
-
-function getSliderLevel(value: number) {
-  if (value < 20) return 1;
-  if (value < 40) return 2;
-  if (value < 60) return 3;
-  if (value < 80) return 4;
-  return 5;
+function buildDefaultSliderValues(): Record<SliderId, number> {
+  return Object.fromEntries(
+    sliderControls.map((control) => [control.id, control.defaultValue])
+  ) as Record<SliderId, number>;
 }
 
-function getEraText(value: number) {
-  const level = getSliderLevel(value);
-
-  if (level === 1) return "古い曲";
-  if (level === 2) return "やや古い曲";
-  if (level === 3) return "年代指定なし";
-  if (level === 4) return "やや新しい曲";
-  return "新しい曲";
-}
-
-function getTemperatureText(value: number) {
-  const level = getSliderLevel(value);
-
-  if (level === 1) return "クール";
-  if (level === 2) return "ややクール";
-  if (level === 3) return "温度指定なし";
-  if (level === 4) return "ややホット";
-  return "ホット";
-}
-
-function getPopularityText(value: number) {
-  const level = getSliderLevel(value);
-
-  if (level === 1) return "あまり再生されていない曲";
-  if (level === 2) return "ややひかえめ";
-  if (level === 3) return "指定なし";
-  if (level === 4) return "やや人気";
-  return "いま人気の曲";
-}
 export default function ProgramPage() {
+  const keywordCards = getKeywordCards();
+  const keywordGroups = getKeywordCategories();
+
   const [loading, setLoading] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [result, setResult] = useState<any>(null);
@@ -92,14 +35,14 @@ export default function ProgramPage() {
   const [autoPlay, setAutoPlay] = useState(false);
   const [error, setError] = useState("");
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-  const [era, setEra] = useState(50);
-  const [temperature, setTemperature] = useState(50);
-  const [popularity, setPopularity] = useState(50);
+  const [sliderValues, setSliderValues] = useState<Record<SliderId, number>>(
+    buildDefaultSliderValues
+  );
   const [talkEnabled, setTalkEnabled] = useState(true);
   const [inputMessage, setInputMessage] = useState("");
+
   const current = events[currentIndex];
 
-  // 仮の自動進行（まだ本格じゃない）
   useEffect(() => {
     if (!events.length || !autoPlay) return;
 
@@ -112,106 +55,71 @@ export default function ProgramPage() {
 
     return () => clearTimeout(timer);
   }, [currentIndex, events, autoPlay]);
+
+  function updateSlider(id: SliderId, value: number) {
+    setSliderValues((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  }
+
   function toggleKeyword(card: KeywordCard) {
-  setInputMessage("");
+    setInputMessage("");
 
-  setSelectedKeywords((prev) => {
-    if (prev.includes(card.id)) {
-      return prev.filter((id) => id !== card.id);
-    }
+    setSelectedKeywords((prev) => {
+      if (prev.includes(card.id)) {
+        return prev.filter((id) => id !== card.id);
+      }
 
-    const hasSameGroup = prev.some((id) => {
-      const selectedCard = keywordCards.find((k) => k.id === id);
-      return selectedCard?.group === card.group;
+      const hasSameCategory = prev.some((id) => {
+        const selectedCard = keywordCards.find((item) => item.id === id);
+        return selectedCard?.category === card.category;
+      });
+
+      if (hasSameCategory) {
+        setInputMessage("同じカテゴリのカードは1つまでです。");
+        return prev;
+      }
+
+      if (prev.length >= 3) {
+        setInputMessage("キーワードは最大3つまでです。");
+        return prev;
+      }
+
+      return [...prev, card.id];
     });
+  }
 
-    if (hasSameGroup) {
-      setInputMessage("同じカテゴリのカードは1つまでです。");
-      return prev;
-    }
-
-    if (prev.length >= 3) {
-      setInputMessage("キーワードは最大3つまでです。");
-      return prev;
-    }
-
-    return [...prev, card.id];
-  });
-}
   async function createProgram() {
-  setLoading(true);
-  setError("");
-  setResult(null);
-  setEvents([]);
-  setCurrentIndex(0);
-  setAutoPlay(false);
+    setLoading(true);
+    setError("");
+    setResult(null);
+    setEvents([]);
+    setCurrentIndex(0);
+    setAutoPlay(false);
 
-  const keywordLabels = selectedKeywords
-    .map((id) => keywordCards.find((k) => k.id === id)?.label)
-    .filter(Boolean)
-    .join("、");
-
-  const getSliderLevel = (value: number) => {
-  if (value < 20) return 1;
-  if (value < 40) return 2;
-  if (value < 60) return 3;
-  if (value < 80) return 4;
-  return 5;
-};
-
-const getEraText = (value: number) => {
-  const level = getSliderLevel(value);
-  if (level === 1) return "古い曲（かなりレトロ）";
-  if (level === 2) return "やや古い曲";
-  if (level === 3) return "年代指定なし";
-  if (level === 4) return "やや新しい曲";
-  return "新しい曲（モダン）";
-};
-
-const getTemperatureText = (value: number) => {
-  const level = getSliderLevel(value);
-  if (level === 1) return "クール（無機的・感情抑制）";
-  if (level === 2) return "ややクール";
-  if (level === 3) return "温度指定なし";
-  if (level === 4) return "ややホット";
-  return "ホット（生命感・感情量・身体性）";
-};
-
-const getPopularityText = (value: number) => {
-  const level = getSliderLevel(value);
-  if (level === 1) return "あまり再生されていない曲";
-  if (level === 2) return "ややひかえめ";
-  if (level === 3) return "指定なし";
-  if (level === 4) return "やや人気";
-  return "いま人気の曲";
-};
-
-const description = `
-キーワード: ${keywordLabels || "なし"}
-年代: ${era} / ${getEraText(era)}
-温度: ${temperature} / ${getTemperatureText(temperature)}
-人気傾向: ${popularity} / ${getPopularityText(popularity)}
-トーク: ${talkEnabled ? "あり" : "なし"}
-`;
-
-  try {
-    const res = await fetch("/api/program/tune", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: "TRIW チューニング番組",
-        description,
-        keywords: selectedKeywords,
-        era,
-        temperature,
-        popularity,
-        talkEnabled,
-        mode: "count",
-        count: 5,
-      }),
+    const description = buildDescription({
+      keywords: selectedKeywords,
+      ...sliderValues,
+      talkEnabled,
     });
+
+    try {
+      const res = await fetch("/api/program/tune", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: "TRIW チューニング番組",
+          description,
+          keywords: selectedKeywords,
+          ...sliderValues,
+          talkEnabled,
+          mode: "count",
+          count: 5,
+        }),
+      });
 
       const data = await res.json();
 
@@ -230,7 +138,6 @@ const description = `
     }
   }
 
-  // エラーを人間用に変換（Day8）
   function humanizeError(text: string) {
     if (!text) return "不明なエラー";
 
@@ -263,9 +170,7 @@ const description = `
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        const message =
-          data?.detail || data?.error || "再生に失敗しました";
-
+        const message = data?.detail || data?.error || "再生に失敗しました";
         setError(humanizeError(message));
         return;
       }
@@ -287,7 +192,6 @@ const description = `
     await playTrackByUri(current.track.uri);
   }
 
-  // Day7：次へ＋再生
   async function goNextAndPlay() {
     const nextIndex = Math.min(currentIndex + 1, events.length - 1);
     const nextEvent = events[nextIndex];
@@ -310,128 +214,111 @@ const description = `
   return (
     <main style={{ padding: 24, maxWidth: 800 }}>
       <h1>TRIW Program Test</h1>
+
       <section style={{ marginTop: 24, marginBottom: 24 }}>
-  <h2>Radio Tuning</h2>
+        <h2>Radio Tuning</h2>
 
-  <div style={{ marginBottom: 20 }}>
-    <h3>キーワード</h3>
-    <p style={{ fontSize: 13, opacity: 0.7 }}>
-      最大3つまで。同じカテゴリは1つまで。
-    </p>
+        <div style={{ marginBottom: 20 }}>
+          <h3>キーワード</h3>
+          <p style={{ fontSize: 13, opacity: 0.7 }}>
+            最大3つまで。同じカテゴリは1つまで。
+          </p>
 
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-     {keywordGroups.map((group) => {
-  const cards = keywordCards.filter((card) => card.group === group.id);
+          {keywordGroups.map((group) => {
+            const cards = keywordCards.filter(
+              (card) => card.category === group.id
+            );
 
-  return (
-    <div key={group.id} style={{ marginBottom: 16 }}>
-      <h4
-        style={{
-          fontSize: 13,
-          opacity: 0.7,
-          marginBottom: 8,
-        }}
-      >
-        {group.label}
-      </h4>
+            return (
+              <div key={group.id} style={{ marginBottom: 16 }}>
+                <h4
+                  style={{
+                    fontSize: 13,
+                    opacity: 0.7,
+                    marginBottom: 8,
+                  }}
+                >
+                  {group.label}
+                </h4>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {cards.map((card) => {
-          const selected = selectedKeywords.includes(card.id);
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {cards.map((card) => {
+                    const selected = selectedKeywords.includes(card.id);
+
+                    return (
+                      <button
+                        key={card.id}
+                        type="button"
+                        onClick={() => toggleKeyword(card)}
+                        style={{
+                          padding: "8px 12px",
+                          borderRadius: 999,
+                          border: "1px solid #ccc",
+                          background: selected ? "#dde7ff" : "#fff",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {card.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+
+          {inputMessage && (
+            <p style={{ color: "crimson", fontSize: 13 }}>{inputMessage}</p>
+          )}
+        </div>
+
+        {sliderControls.map((control) => {
+          const value = sliderValues[control.id] ?? control.defaultValue;
 
           return (
-            <button
-              key={card.id}
-              type="button"
-              onClick={() => toggleKeyword(card)}
-              style={{
-                padding: "8px 12px",
-                borderRadius: 999,
-                border: "1px solid #ccc",
-                background: selected ? "#dde7ff" : "#fff",
-                cursor: "pointer",
-              }}
-            >
-              {card.label}
-            </button>
+            <div key={control.id} style={{ marginBottom: 16 }}>
+              <label>
+                {control.label}：{getSliderText(control.id, value)}
+              </label>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  color: "#666",
+                  marginBottom: 4,
+                  marginTop: 4,
+                }}
+              >
+                <span>{control.leftLabel}</span>
+                <span>{control.centerLabel}</span>
+                <span>{control.rightLabel}</span>
+              </div>
+
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={value}
+                onChange={(e) =>
+                  updateSlider(control.id, Number(e.target.value))
+                }
+                style={{ width: "100%" }}
+              />
+            </div>
           );
         })}
-      </div>
-    </div>
-  );
-})}
-    </div>
 
-    {inputMessage && (
-      <p style={{ color: "crimson", fontSize: 13 }}>{inputMessage}</p>
-    )}
-  </div>
-
-  <div style={{ marginBottom: 16 }}>
-    <label>
-      温度：{temperature}
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={temperature}
-        onChange={(e) => setTemperature(Number(e.target.value))}
-        style={{ width: "100%" }}
-      />
-    </label>
-  </div>
-
-<div style={{ marginBottom: 16 }}>
-  <label>
-    人気傾向：{getPopularityText(popularity)}
-  </label>
-
-  {/* 左右ラベル */}
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-between",
-      fontSize: 12,
-      color: "#666",
-      marginBottom: 4,
-    }}
-  >
-    <span>深掘り</span>
-    <span>いま人気</span>
-  </div>
-
-  {/* スライダー本体 */}
-  <input
-    type="range"
-    min="0"
-    max="100"
-    value={popularity}
-    onChange={(e) => setPopularity(Number(e.target.value))}
-    style={{ width: "100%" }}
-  />
-</div>
-  <div style={{ marginBottom: 16 }}>
-   <label>
-     年代：{getEraText(era)}
-     <input
-      type="range"
-      min="0"
-      max="100"
-      value={era}
-      onChange={(e) => setEra(Number(e.target.value))}
-      style={{ width: "100%" }}
-     />
-   </label>
- </div>
-  <label>
-    <input
-      type="checkbox"
-      checked={talkEnabled}
-      onChange={(e) => setTalkEnabled(e.target.checked)}
-    />{" "}
-    トークを入れる
-  </label>
-</section>
+        <label>
+          <input
+            type="checkbox"
+            checked={talkEnabled}
+            onChange={(e) => setTalkEnabled(e.target.checked)}
+          />{" "}
+          トークを入れる
+        </label>
+      </section>
 
       <button onClick={createProgram} disabled={loading}>
         {loading ? "生成中..." : "番組生成テスト"}
@@ -495,6 +382,7 @@ const description = `
                   <p style={{ marginTop: 8 }}>{current.track.reason}</p>
                 </div>
               )}
+
               {current.track?.uri && (
                 <p style={{ marginTop: 12, fontSize: 12, opacity: 0.7 }}>
                   {current.track.uri}
@@ -529,9 +417,10 @@ const description = `
               次へ＆再生 ▶
             </button>
           </div>
+
           <section style={{ marginTop: 40 }}>
             <h2>Events一覧</h2>
-          
+
             {events.map((e, i) => (
               <div
                 key={i}
@@ -541,17 +430,17 @@ const description = `
                   background: i === currentIndex ? "#eef" : "#fafafa",
                 }}
               >
-                {i + 1}. {e.type === "track"
+                {i + 1}.{" "}
+                {e.type === "track"
                   ? `🎵 ${e.track?.title} / ${e.track?.artist}`
                   : e.type}
               </div>
             ))}
           </section>
-
         </section>
       )}
 
-            {result && (
+      {result && (
         <section style={{ marginTop: 40 }}>
           <h2>Day9 Debug Log</h2>
 
