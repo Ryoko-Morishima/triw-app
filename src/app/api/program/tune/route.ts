@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { estimateTargetCount } from "@/lib/openai";
 import { runTuneCandidatesC } from "@/lib/triw/selection/generateTuneCandidates";
 import { resolveCandidatesD } from "@/lib/resolve";
-import { finalizeSetlist } from "@/lib/finalize";
+import { buildVisibleQueue } from "@/lib/triw/program/buildVisibleQueue";
 import { buildEvents } from "@/lib/triw/program/buildEvents";
 import { evaluateTuneTracks } from "@/lib/triw/program/evaluateTuneTracks";
 import type { ProgramState } from "@/lib/triw/program/types";
@@ -33,8 +33,6 @@ export async function POST(req: NextRequest) {
     const runId = `tune_${Date.now()}_${Math.random()
       .toString(36)
       .slice(2, 8)}`;
-
-    const title = "TRIW チューニング番組";
 
     const description = buildDescription({
       keywords,
@@ -90,52 +88,20 @@ export async function POST(req: NextRequest) {
     const t3 = Date.now();
     console.log("[tune] E evaluate", t3 - t2, "ms");
 
-    // F: 最終整形
-    // reservePool を既存 finalize.ts 用の形式へ変換
-    const F = await finalizeSetlist(
-      E.reservePool.map((track) => ({
-        title: track.title,
-        artist: track.artist,
-        uri: track.uri,
-        reason: track.reason ?? "チューニング条件に一致",
-        accepted: true,
-        confidence: track.confidence ?? 1,
-        debug: track.debug,
-      })) as any,
-      {
-        mode,
-
-        ...(mode === "duration"
-          ? {
-              targetDurationMin: Number(duration || 30),
-              maxTracksHardCap: 30,
-            }
-          : {
-              maxTracks: Number(count || 5),
-            }),
-
-        artistPolicy: "auto",
-        programTitle: title,
-        programOverview: description,
-        interleaveRoles: false,
-        shortReason: true,
-      }
-    );
+    // F: 表に出す visibleQueue を作る
+    const visibleQueue = buildVisibleQueue(E.reservePool, {
+      maxTracks: Number(count || 5),
+    });
 
     const t4 = Date.now();
-    console.log("[tune] F finalize", t4 - t3, "ms");
-
+    console.log("[tune] F visibleQueue", t4 - t3, "ms");
     console.log("[tune] total", t4 - t0, "ms");
 
-    const events = buildEvents(F as any);
+    const events = buildEvents(visibleQueue);
 
     const visibleUris = new Set(
-      (F?.tracks ?? [])
-        .map((track: any) => track?.uri)
-        .filter(Boolean)
+      visibleQueue.map((track) => track.uri).filter(Boolean)
     );
-
-    const visibleQueue = F?.tracks ?? [];
 
     const reservePool = E.reservePool.filter((track) => {
       if (!track.uri) return true;
@@ -168,7 +134,11 @@ export async function POST(req: NextRequest) {
       C,
       D,
       E,
-      F,
+
+      F: {
+        visibleQueue,
+      },
+
       events,
       state,
     };
