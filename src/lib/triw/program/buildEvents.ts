@@ -1,19 +1,13 @@
-type FLike = {
-  tracks?: any[];
-  setlist?: any[];
-  items?: any[];
-};
+import type {
+  ProgramEvent,
+  ProgramVisibleTrack,
+} from "@/lib/triw/program/types";
 
-export function buildEvents(input: any) {
-  const source = Array.isArray(input)
-    ? input
-    : ((input ?? {}) as FLike).tracks ??
-      ((input ?? {}) as FLike).setlist ??
-      ((input ?? {}) as FLike).items ??
-      [];
-
-  return source.map((t: any) => ({
+export function buildEvents(
+  visibleQueue: ProgramVisibleTrack[]
+): ProgramEvent[] {
+  return visibleQueue.map((track) => ({
     type: "track",
-    track: t,
+    track,
   }));
 }

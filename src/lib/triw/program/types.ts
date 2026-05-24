@@ -24,12 +24,41 @@ export type ProgramEvaluatedTrack = {
   debug: ProgramTrackDebug;
 };
 
+export type ProgramVisibleTrack = {
+  title: string;
+  artist: string;
+  uri?: string;
+  index: number;
+  reason: string;
+  score: number;
+  debug: ProgramTrackDebug;
+};
+
+export type ProgramEvent = {
+  type: "track";
+  track: ProgramVisibleTrack;
+};
+
+export type ProgramInput = {
+  title?: string;
+  description?: string;
+  keywords: string[];
+  era: number;
+  temperature: number;
+  popularity: number;
+  talkEnabled: boolean;
+  mode: "count" | "duration";
+  count?: number;
+  duration?: number;
+};
+
 export type ProgramState = {
   runId: string;
-  input: any;
+  input: ProgramInput;
   description: string;
-  visibleQueue: any[];
+  visibleQueue: ProgramVisibleTrack[];
   reservePool: ProgramEvaluatedTrack[];
   rejected: ProgramEvaluatedTrack[];
-  events: any[];
+  events: ProgramEvent[];
 };
+

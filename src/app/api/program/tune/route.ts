@@ -4,14 +4,15 @@ export const runtime = "nodejs";
 import { NextRequest, NextResponse } from "next/server";
 import { estimateTargetCount } from "@/lib/openai";
 import { runTuneCandidatesC } from "@/lib/triw/selection/generateTuneCandidates";
-import { resolveCandidatesD } from "@/lib/resolve";
+import { resolveCandidatesD } from "@/lib/triw/spotify/resolveCandidates";
 import { buildVisibleQueue } from "@/lib/triw/program/buildVisibleQueue";
 import { buildEvents } from "@/lib/triw/program/buildEvents";
 import { evaluateTuneTracks } from "@/lib/triw/program/evaluateTuneTracks";
-import type { ProgramState } from "@/lib/triw/program/types";
+import type { ProgramInput, ProgramState } from "@/lib/triw/program/types";
 
 import { buildDescription } from "@/lib/triw/program/buildTuneDescription";
 import { buildTuneInterpretation } from "@/lib/triw/selection/buildTuneInterpretation";
+import { buildPromptPlan } from "@/lib/triw/prompt/buildPromptPlan";
 
 import { saveRunLog } from "@/lib/triw/logs/saveRunLog";
 
@@ -30,19 +31,30 @@ export async function POST(req: NextRequest) {
       duration,
     } = input ?? {};
 
+    const programInput: ProgramInput = {
+      title: input?.title ?? "TRIW チューニング番組",
+      description: input?.description,
+      keywords,
+      era: Number(era),
+      temperature: Number(temperature),
+      popularity: Number(popularity),
+      talkEnabled: Boolean(talkEnabled),
+      mode: mode === "duration" ? "duration" : "count",
+      count: count === undefined ? undefined : Number(count),
+      duration: duration === undefined ? undefined : Number(duration),
+    };
+
     const runId = `tune_${Date.now()}_${Math.random()
       .toString(36)
       .slice(2, 8)}`;
 
-    const description = buildDescription({
-      keywords,
-      era,
-      temperature,
-      popularity,
-      talkEnabled,
-    });
+    const description = buildDescription(programInput);
 
-    const targetCount = estimateTargetCount(mode, count, duration);
+    const targetCount = estimateTargetCount(
+      programInput.mode,
+      programInput.count ?? 5,
+      programInput.duration,
+    );
 
     const persona = {
       id: "tune",
@@ -52,14 +64,19 @@ export async function POST(req: NextRequest) {
     };
 
     const interpretation = buildTuneInterpretation({
-      keywords,
-      era: Number(era),
-      temperature: Number(temperature),
-      popularity: Number(popularity),
+      keywords: programInput.keywords,
+      era: programInput.era,
+      temperature: programInput.temperature,
+      popularity: programInput.popularity,
       description,
     });
 
+    const promptPlan = buildPromptPlan({
+      programInput,
+      interpretation,
+    });
     console.log("[interpretation]", interpretation);
+    console.log("[promptPlan]", promptPlan);
 
     const t0 = Date.now();
 
@@ -67,6 +84,7 @@ export async function POST(req: NextRequest) {
     const C = await runTuneCandidatesC({
       persona,
       interpretation,
+      promptPlan,
       targetCount,
     });
 
@@ -81,8 +99,8 @@ export async function POST(req: NextRequest) {
 
     // E: score / state 評価
     const E = evaluateTuneTracks(D?.resolved ?? [], {
-      popularity: Number(popularity),
-      era: Number(era),
+      popularity: programInput.popularity,
+      era: programInput.era,
     });
 
     const t3 = Date.now();
@@ -90,7 +108,7 @@ export async function POST(req: NextRequest) {
 
     // F: 表に出す visibleQueue を作る
     const visibleQueue = buildVisibleQueue(E.reservePool, {
-      maxTracks: Number(count || 5),
+      maxTracks: Number(programInput.count || 5),
     });
 
     const t4 = Date.now();
@@ -100,7 +118,7 @@ export async function POST(req: NextRequest) {
     const events = buildEvents(visibleQueue);
 
     const visibleUris = new Set(
-      visibleQueue.map((track) => track.uri).filter(Boolean)
+      visibleQueue.map((track) => track.uri).filter(Boolean),
     );
 
     const reservePool = E.reservePool.filter((track) => {
@@ -110,7 +128,7 @@ export async function POST(req: NextRequest) {
 
     const state: ProgramState = {
       runId,
-      input,
+      input: programInput,
       description,
       visibleQueue,
       reservePool,
@@ -120,8 +138,9 @@ export async function POST(req: NextRequest) {
 
     const runLogPayload = {
       runId,
-      input,
+      input: programInput,
       description,
+      promptPlan,
 
       timings: {
         C: t1 - t0,
@@ -159,7 +178,7 @@ export async function POST(req: NextRequest) {
       {
         error: String(e?.message || e),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

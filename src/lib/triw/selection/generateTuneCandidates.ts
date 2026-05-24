@@ -66,13 +66,14 @@ async function requestJson(prompt: { system: string; user: string }) {
 export async function runTuneCandidatesC(params: {
   persona: any;
   interpretation: any;
+  promptPlan?: any;
   targetCount: number;
 }): Promise<TuneCandidatesResponse> {
-  const { interpretation, targetCount } = params;
+  const { interpretation, promptPlan, targetCount } = params;
 
   const outCount = Math.min(Math.max(targetCount * 3, 12), 24);
 
-  const prompt = buildSelectionPrompt({ interpretation, outCount });
+  const prompt = buildSelectionPrompt({ interpretation, promptPlan, outCount });
   console.log("[tune] prompt.system\n", prompt.system);
   console.log("[tune] prompt.user\n", prompt.user);
 

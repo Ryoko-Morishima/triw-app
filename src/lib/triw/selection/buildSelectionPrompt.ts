@@ -2,13 +2,29 @@
 
 export function buildSelectionPrompt(params: {
   interpretation: any;
+  promptPlan?: any;
   outCount: number;
 }): { system: string; user: string } {
-  const { interpretation, outCount } = params;
+  const { interpretation, promptPlan, outCount } = params;
 
   const rationale = interpretation?.rationale ?? "";
   const softPreferencesText = interpretation?.soft_preferences_text ?? "";
   const selectionRules = interpretation?.selection_rules ?? "";
+
+  const emotionalDirection = promptPlan?.emotionalDirection ?? "";
+  const movement = promptPlan?.movement ?? "";
+
+  const textureHints = Array.isArray(promptPlan?.texture)
+    ? promptPlan.texture.join(", ")
+    : "";
+
+  const culturalHints = Array.isArray(promptPlan?.culturalHints)
+    ? promptPlan.culturalHints.join(", ")
+    : "";
+
+  const searchHints = Array.isArray(promptPlan?.searchHints)
+    ? promptPlan.searchHints.join(", ")
+    : "";
 
   const system = [
     "あなたはTRIWの軽量な一次選曲エンジンです。",
@@ -29,6 +45,23 @@ ${softPreferencesText}
 # 選曲方針
 
 ${selectionRules}
+
+# 選曲補助ヒント
+
+感情方向:
+${emotionalDirection}
+
+動き:
+${movement}
+
+音像:
+${textureHints}
+
+文化ヒント:
+${culturalHints}
+
+検索ヒント:
+${searchHints}
 
 # 固定ルール
 
