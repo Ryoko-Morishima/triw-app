@@ -9,6 +9,11 @@ export type TuneCandidate = {
 
 export type TuneCandidatesResponse = {
   candidates: TuneCandidate[];
+
+  prompt: {
+    system: string;
+    user: string;
+  };
 };
 
 const OPENAI_API_BASE = process.env.OPENAI_API_BASE || "https://api.openai.com";
@@ -97,5 +102,9 @@ export async function runTuneCandidatesC(params: {
 
   console.log("[tune] sanitized candidates", sanitized);
 
-  return { candidates: sanitized.slice(0, outCount) };
+  return {
+  candidates: sanitized.slice(0, outCount),
+
+  prompt,
+};
 }

@@ -142,6 +142,8 @@ export async function POST(req: NextRequest) {
       description,
       promptPlan,
 
+      prompt: C.prompt,
+
       timings: {
         C: t1 - t0,
         D: t2 - t1,

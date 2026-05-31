@@ -1,38 +1,21 @@
-import { mkdir, writeFile } from "fs/promises";
-import path from "path";
+// src/lib/triw/logs/saveRunLog.ts
+
+import { saveLog } from "./logStorage";
 
 type SaveRunLogInput = {
   runId: string;
   payload: any;
 };
 
-function safeFileName(name: string) {
-  return name.replace(/[^a-zA-Z0-9_-]/g, "_");
-}
-
-export async function saveRunLog({ runId, payload }: SaveRunLogInput) {
+export async function saveRunLog({
+  runId,
+  payload,
+}: SaveRunLogInput) {
   try {
-    const logDir =
-      process.env.TRIW_RUNLOG_DIR ??
-      path.join(process.cwd(), "triw-runlogs");
-
-    await mkdir(logDir, { recursive: true });
-
-    const fileName = `${safeFileName(runId)}.json`;
-    const filePath = path.join(logDir, fileName);
-
-    const data = {
-      savedAt: new Date().toISOString(),
-      ...payload,
-    };
-
-    await writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
-
-    return {
-      ok: true,
-      filePath,
-      fileName,
-    };
+    return await saveLog({
+      runId,
+      payload,
+    });
   } catch (error: any) {
     console.error("[runlog] save failed:", error);
 
