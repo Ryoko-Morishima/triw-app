@@ -2,14 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { buildEvents } from "@/lib/triw/program/buildEvents";
 
 export async function GET() {
-  const tracks = [
-    { title: "曲A" },
-    { title: "曲B" },
-  ];
-
-  const events = buildEvents(tracks);
-
-  return NextResponse.json({ events });
+  return NextResponse.json({
+    message: "program/create alive",
+  });
 }
 
 export async function POST(req: NextRequest) {
