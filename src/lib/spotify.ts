@@ -13,6 +13,7 @@ export async function requireSpotifyToken(): Promise<string> {
 
 async function sFetch(path: string, token: string, init: RequestInit = {}) {
   const url = path.startsWith("http") ? path : `${SPOTIFY_API}${path}`;
+
   const res = await fetch(url, {
     ...init,
     headers: {

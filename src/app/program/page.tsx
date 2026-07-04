@@ -19,13 +19,29 @@ type KeywordCard = ReturnType<typeof getKeywordCards>[number];
 
 function buildDefaultSliderValues(): Record<SliderId, number> {
   return Object.fromEntries(
-    sliderControls.map((control) => [control.id, control.defaultValue])
+    sliderControls.map((control) => [control.id, control.defaultValue]),
   ) as Record<SliderId, number>;
 }
+
+const panelTitleStyle = {
+  fontSize: 28,
+  fontWeight: 700,
+  marginBottom: 24,
+};
+
+const sectionTitleStyle = {
+  marginTop: 24,
+  marginBottom: 8,
+  paddingBottom: 4,
+  borderBottom: "1px solid #ddd",
+  fontSize: 18,
+  fontWeight: 700,
+};
 
 export default function ProgramPage() {
   const keywordCards = getKeywordCards();
   const keywordGroups = getKeywordCategories();
+  0;
 
   const [loading, setLoading] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -36,11 +52,11 @@ export default function ProgramPage() {
   const [error, setError] = useState("");
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [sliderValues, setSliderValues] = useState<Record<SliderId, number>>(
-    buildDefaultSliderValues
+    buildDefaultSliderValues,
   );
   const [talkEnabled, setTalkEnabled] = useState(true);
   const [inputMessage, setInputMessage] = useState("");
-
+  const [experimentMemo, setExperimentMemo] = useState("");
   const current = events[currentIndex];
 
   useEffect(() => {
@@ -89,7 +105,39 @@ export default function ProgramPage() {
       return [...prev, card.id];
     });
   }
+  async function saveExperiment() {
+    const experiment = {
+      savedAt: new Date().toISOString(),
+      memo: experimentMemo,
+      input: result?.input,
+      description: result?.state?.description,
+      promptPlan: result?.promptPlan,
+      prompt: result?.prompt,
+      candidates: result?.C?.candidates,
+      visibleQueue: result?.F?.visibleQueue,
 
+
+    };
+
+    try {
+      const res = await fetch("/api/experiments/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(experiment),
+      });
+
+      if (!res.ok) {
+        throw new Error("保存失敗");
+      }
+
+      alert("保存しました");
+    } catch (e) {
+      alert("保存に失敗しました");
+      console.error(e);
+    }
+  }
   async function createProgram() {
     setLoading(true);
     setError("");
@@ -122,6 +170,8 @@ export default function ProgramPage() {
       });
 
       const data = await res.json();
+
+      console.log("PROGRAM RESULT", data);
 
       if (!res.ok) {
         setError(JSON.stringify(data, null, 2));
@@ -226,7 +276,7 @@ export default function ProgramPage() {
 
           {keywordGroups.map((group) => {
             const cards = keywordCards.filter(
-              (card) => card.category === group.id
+              (card) => card.category === group.id,
             );
 
             return (
@@ -418,6 +468,85 @@ export default function ProgramPage() {
             </button>
           </div>
 
+          <section
+            style={{
+              marginTop: 40,
+              padding: 16,
+              border: "1px solid #ccc",
+              borderRadius: 12,
+            }}
+          >
+            <h2 style={panelTitleStyle}>
+              実験パネル
+            </h2>
+            <h3 style={sectionTitleStyle}>
+              (B) 意味生成（Interpretation）
+            </h3>
+            <pre style={{ whiteSpace: "pre-wrap" }}>
+              {result?.state?.description}
+            </pre>
+
+            <h3 style={sectionTitleStyle}>
+              (C) 選曲方針生成（PromptPlan）
+            </h3>
+            <pre style={{ whiteSpace: "pre-wrap" }}>
+              {JSON.stringify(result?.promptPlan, null, 2)}
+            </pre>
+            <h3 style={sectionTitleStyle}>
+              (D) 候補曲生成（Candidates）
+            </h3>
+
+            <ul>
+              {result?.C?.candidates?.map((track: any, i: number) => (
+                <li key={i}>
+                  {track.title} / {track.artist}
+                </li>
+              ))}
+            </ul>
+
+            <h3 style={sectionTitleStyle}>
+              (F) 採用曲（Visible Queue）
+            </h3>
+            <ul>
+              {result?.F?.visibleQueue?.map((track: any, i: number) => (
+                <li key={i}>
+                  {track.title} / {track.artist}
+                </li>
+              ))}
+            </ul>
+
+            <h3 style={sectionTitleStyle}>
+              (E) 評価後候補（Reserve Pool）
+            </h3>
+            <ul>
+              {result?.E?.reservePool?.map((track: any, i: number) => (
+                <li key={i}>
+                  {track.title} / {track.artist}
+                </li>
+              ))}
+            </ul>
+
+            <h3 style={sectionTitleStyle}>評価メモ</h3>
+
+            <textarea
+              value={experimentMemo}
+              onChange={(e) => setExperimentMemo(e.target.value)}
+              rows={6}
+              style={{
+                width: "100%",
+                padding: 8,
+                marginTop: 8,
+              }}
+            />
+
+            <div style={{ marginTop: 12 }}>
+              <button onClick={saveExperiment}>
+                実験を保存
+              </button>
+            </div>
+
+          </section>
+
           <section style={{ marginTop: 40 }}>
             <h2>Events一覧</h2>
 
@@ -445,8 +574,7 @@ export default function ProgramPage() {
           <h2>Day9 Debug Log</h2>
 
           <p>
-            <strong>runId:</strong>{" "}
-            <code>{result.runId ?? "runIdなし"}</code>
+            <strong>runId:</strong> <code>{result.runId ?? "runIdなし"}</code>
           </p>
 
           <details open>
