@@ -29,7 +29,7 @@ export async function GET(req: Request) {
   const redirect_uri = (process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI || "").trim();
   const scope =
     process.env.SPOTIFY_SCOPES ??
-    "playlist-modify-private playlist-modify-public user-read-email";
+  "playlist-modify-private playlist-modify-public user-read-email user-modify-playback-state";
 
   // PKCE
   const verifier = rand(64);
