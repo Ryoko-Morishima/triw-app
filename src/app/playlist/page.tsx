@@ -191,7 +191,7 @@ export default function Page() {
   const [customName, setCustomName] = useState("");
   const [customOverview, setCustomOverview] = useState("");
 
-  const [title, setTitle] = useState("MIXTAPEのタイトル");
+  const [title, setTitle] = useState("");
   const [desc, setDesc] = useState(
     "気分や聞きたいシーンを自由に書いて。90s/平成などの年代やアーティスト名もOK。"
   );
