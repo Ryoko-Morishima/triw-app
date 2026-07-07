@@ -6,7 +6,6 @@ import {
   estimateTargetCount,
   runCandidatesC,
   runInterpretB,
-  runPersonaA,
   runMemoNoteG,
   runSelfAuditD, // ★ 新：AI自己点検
 } from "@/lib/openai";
@@ -232,17 +231,15 @@ export async function POST(req: NextRequest) {
     let A: any;
     try {
       if (djId === "custom") {
-        const pseudoDj = {
+        A = {
           id: "custom",
           name: String(customDJ.name).trim(),
           description: String(customDJ.overview).trim(),
           profile: "",
+          source: "raw-description(custom)",
         };
-        A = await runPersonaA({ dj: pseudoDj, title, description });
-        if (A && typeof A === "object") (A as any).source = "ai-generated(custom)";
       } else {
-        const dj = pickDjFrom(DJ_LIST, djId);
-        A = await runPersonaA({ dj, title, description });
+        A = pickDjFrom(DJ_LIST, djId);
       }
       await saveRaw(runId, "A", A);
     } catch (e: any) {
