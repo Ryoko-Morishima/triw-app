@@ -354,6 +354,10 @@ export async function POST(req: NextRequest) {
     }));
     await saveRaw(runId, "D2.audit.before", { tracksForAuditCount: auditInput.length, sample: auditInput.slice(0, 5) });
 
+    // D2でdrop/replace判定された曲の title__artist キー（小文字・トリム済み）。
+    // 後段のrefill/topUp系すべてで共有し、除去済みの曲が再生成候補として無条件に復活しないようにする。
+    const droppedByD2Keys = new Set<string>();
+
     // ========================
     // D2: AI自己点検（“このDJらしいか？テーマに沿うか？”）
     // ========================
@@ -364,27 +368,67 @@ export async function POST(req: NextRequest) {
       // 表記ゆれ＆index正規化
       type Issue = {
         action?: string;           // "drop" | "replace" | ...
-        index?: number | string;   // 想定ズレを吸収
+        index?: number | string;   // LLM申告のindex（実測で不一致が起こることを確認済み・照合の最終フォールバックにのみ使う）
         key?: string | null;       // 曲キー（なければ後段で補う）
+        title?: string;            // LLMが申告する曲名（index不一致時の照合に使う）
+        artist?: string;           // LLMが申告するアーティスト名
         note?: string;
         replacement_hint?: string | null;
       };
 
-      function normalizeD2Issues(raw: Issue[], universeKeys: string[]) {
-        const norm = raw.map((it, i) => {
-          const action = String(it.action ?? "").trim().toLowerCase();
-          // indexは number に落とす（NaNは -1 扱い）
-          const idx = typeof it.index === "number"
-            ? it.index
-            : Number(String(it.index ?? "").replace(/[^\d\-]/g, ""));
-          const key = it.key && String(it.key).trim()
-            ? String(it.key).trim()
-            : (idx >= 0 && idx < universeKeys.length ? universeKeys[idx] : null);
-          return { action, index: Number.isFinite(idx) ? idx : -1, key, replacement_hint: it.replacement_hint ?? null, note: it.note ?? null, _row: i };
+      function normalizeD2Issues(
+        raw: Issue[],
+        universeKeys: string[],
+        universeTracks: { title?: string; artist?: string }[]
+      ) {
+        const normTitleArtist = (title?: string, artist?: string) =>
+          `${(title ?? "").toLowerCase().trim()}::${(artist ?? "").toLowerCase().trim()}`;
+
+        // title::artist（正規化済み）→ universeKeys 上のキー・インデックス
+        // LLMが返すindexはこの曲かどうかの照合に使えないことがある（実測で確認済み）ため、
+        // LLM自身が申告するtitle/artistでの一致を優先する。
+        const byTitleArtist = new Map<string, { key: string; index: number }>();
+        universeTracks.forEach((t, i) => {
+          const k = normTitleArtist(t?.title, t?.artist);
+          if (k !== "::" && !byTitleArtist.has(k)) {
+            byTitleArtist.set(k, { key: universeKeys[i], index: i });
+          }
         });
 
-        const dropIdx = norm.filter(n => n.action === "drop" && n.index >= 0).map(n => n.index);
-        const dropKeys = norm.filter(n => n.action === "drop" && n.key).map(n => n.key as string);
+        const norm = raw.map((it, i) => {
+          const action = String(it.action ?? "").trim().toLowerCase();
+          const rawIdx = typeof it.index === "number"
+            ? it.index
+            : Number(String(it.index ?? "").replace(/[^\d\-]/g, ""));
+
+          const matched = byTitleArtist.get(normTitleArtist(it.title, it.artist));
+
+          let key: string | null;
+          let index: number;
+          if (it.key && String(it.key).trim()) {
+            key = String(it.key).trim();
+            index = universeKeys.indexOf(key);
+          } else if (matched) {
+            key = matched.key;
+            index = matched.index;
+          } else if (Number.isFinite(rawIdx) && rawIdx >= 0 && rawIdx < universeKeys.length) {
+            // title/artistで照合できなかった場合のみ、最後の手段としてindexを使う
+            key = universeKeys[rawIdx];
+            index = rawIdx;
+          } else {
+            key = null;
+            index = -1;
+          }
+
+          return { action, index, key, replacement_hint: it.replacement_hint ?? null, note: it.note ?? null, _row: i };
+        });
+
+        const dropIdx = norm
+          .filter(n => (n.action === "drop" || n.action === "replace") && n.index >= 0)
+          .map(n => n.index);
+        const dropKeys = norm
+          .filter(n => (n.action === "drop" || n.action === "replace") && n.key)
+          .map(n => n.key as string);
         return { normalizedIssues: norm, dropIdx, dropKeys };
       }
 
@@ -392,7 +436,7 @@ export async function POST(req: NextRequest) {
       const universeKeys: string[] = (E?.picked ?? []).map((r: any) =>
         r?._key || r?.spotify?.id || `${r?.title ?? ""}::${r?.artist ?? ""}`
       );
-      const norm = normalizeD2Issues((D2?.issues ?? []) as Issue[], universeKeys);
+      const norm = normalizeD2Issues((D2?.issues ?? []) as Issue[], universeKeys, E?.picked ?? []);
       await saveRaw(runId, "D2.norm", {
         dropIdx: norm.dropIdx,
         dropKeys: norm.dropKeys,
@@ -439,11 +483,14 @@ export async function POST(req: NextRequest) {
       }).filter(x => x.byKey || x.byIdx);
       await saveRaw(runId, "D2.willDrop.snapshot", willDropSnapshot);
 
-      // 実際の除去（キー優先→インデックス）
+      // 実際の除去（キー優先→インデックス）。除去された曲は droppedByD2Keys にも記録する。
       let kept = (E?.picked ?? []).filter((t: any, i: number) => {
         const k = t?._key || t?.spotify?.id || `${(t?.title ?? "").toLowerCase().trim()}::${(t?.artist ?? "").toLowerCase().trim()}`;
-        if (k && dropKeySet.has(String(k).toLowerCase())) return false;
-        if (idxSet.has(i)) return false;
+        const isDropped = (k && dropKeySet.has(String(k).toLowerCase())) || idxSet.has(i);
+        if (isDropped) {
+          droppedByD2Keys.add(`${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`);
+          return false;
+        }
         return true;
       });
 
@@ -471,8 +518,11 @@ export async function POST(req: NextRequest) {
         });
         await saveRaw(runId, "C.refill", C_refill);
 
-        // c) 既出重複を除外
-        const existing = new Set(kept.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`));
+        // c) 既出重複を除外（D2でdrop/replace判定された曲も再登場させない）
+        const existing = new Set([
+          ...kept.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`),
+          ...droppedByD2Keys,
+        ]);
         const refillCandidates = (C_refill?.candidates ?? []).filter((c: any) => `${(c?.title ?? "").toLowerCase().trim()}__${(c?.artist ?? "").toLowerCase().trim()}` && !existing.has(`${(c?.title ?? "").toLowerCase().trim()}__${(c?.artist ?? "").toLowerCase().trim()}`));
 
         // d) 解決（チャンク＆429対応）
@@ -581,9 +631,10 @@ export async function POST(req: NextRequest) {
           }
           const refillTarget = Math.min(8, Math.max(2, Math.ceil(need * 1.5)));
           const C_refill2 = await runCandidatesC({ persona: A, interpretation: B, targetCount: refillTarget });
-          const existTA = new Set(
-            preF.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`)
-          );
+          const existTA = new Set([
+            ...preF.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`),
+            ...droppedByD2Keys,
+          ]);
           const cand2 = (C_refill2?.candidates ?? []).filter(
             (c: any) => !existTA.has(`${(c?.title ?? "").toLowerCase().trim()}__${(c?.artist ?? "").toLowerCase().trim()}`)
           );
@@ -608,9 +659,10 @@ export async function POST(req: NextRequest) {
           const remainMs = Math.max(0, targetMs - total);
           const need = Math.min(8, Math.max(2, Math.ceil(remainMs / avgMs))); // 目安で見積
           const C_refill2 = await runCandidatesC({ persona: A, interpretation: B, targetCount: need });
-          const existTA = new Set(
-            preF.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`)
-          );
+          const existTA = new Set([
+            ...preF.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`),
+            ...droppedByD2Keys,
+          ]);
           const cand2 = (C_refill2?.candidates ?? []).filter(
             (c: any) => !existTA.has(`${(c?.title ?? "").toLowerCase().trim()}__${(c?.artist ?? "").toLowerCase().trim()}`)
           );
