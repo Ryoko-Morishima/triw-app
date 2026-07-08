@@ -358,6 +358,10 @@ export async function POST(req: NextRequest) {
     // 後段のrefill/topUp系すべてで共有し、除去済みの曲が再生成候補として無条件に復活しないようにする。
     const droppedByD2Keys = new Set<string>();
 
+    // D2でaction:"replace"判定に付いていた replacement_hint。
+    // 後段のrefill/topUp系すべてで共有し、補充候補生成のプロンプトに反映する。
+    let replacementHintsFromD2: { index?: number; hint: string }[] = [];
+
     // ========================
     // D2: AI自己点検（“このDJらしいか？テーマに沿うか？”）
     // ========================
@@ -503,10 +507,11 @@ export async function POST(req: NextRequest) {
       const deficit = Math.max(0, targetTracks - kept.length);
 
       if (deficit > 0) {
-        // a) 置換ヒントをログ保存（将来のUI/意味解釈に使う）
-        await saveRaw(runId, "D2.replaceHints", (D2?.issues ?? [])
-          .filter((i: any) => String(i.action).trim().toLowerCase() === "replace")
-          .map((i: any) => ({ index: i.index, hint: i.replacement_hint || "" })));
+        // a) 置換ヒントをログ保存 & 補充候補生成に渡す
+        replacementHintsFromD2 = (D2?.issues ?? [])
+          .filter((i: any) => String(i.action).trim().toLowerCase() === "replace" && String(i.replacement_hint ?? "").trim())
+          .map((i: any) => ({ index: i.index, hint: String(i.replacement_hint).trim() }));
+        await saveRaw(runId, "D2.replaceHints", replacementHintsFromD2);
 
         // b) ちいさく候補補充（= deficit の 1.5倍まで、上限8）
         const refillTarget = Math.min(8, Math.max(2, Math.ceil(deficit * 1.5)));
@@ -515,6 +520,7 @@ export async function POST(req: NextRequest) {
           persona: A,
           interpretation: B,
           targetCount: refillTarget,
+          replacementHints: replacementHintsFromD2,
         });
         await saveRaw(runId, "C.refill", C_refill);
 
@@ -630,7 +636,7 @@ export async function POST(req: NextRequest) {
             return;
           }
           const refillTarget = Math.min(8, Math.max(2, Math.ceil(need * 1.5)));
-          const C_refill2 = await runCandidatesC({ persona: A, interpretation: B, targetCount: refillTarget });
+          const C_refill2 = await runCandidatesC({ persona: A, interpretation: B, targetCount: refillTarget, replacementHints: replacementHintsFromD2 });
           const existTA = new Set([
             ...preF.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`),
             ...droppedByD2Keys,
@@ -645,6 +651,7 @@ export async function POST(req: NextRequest) {
             D_refill2.resolved ?? [],
             { year_gate: !!era, era }
           );
+          await saveRaw(runId, "C.refill2.countMode", C_refill2);
           preF = dedupeByTrack(preF.concat((E_refill2?.picked ?? []).slice(0, need)));
           return;
         }
@@ -658,7 +665,7 @@ export async function POST(req: NextRequest) {
         for (let round = 0; round < 2 && total < lower; round++) {
           const remainMs = Math.max(0, targetMs - total);
           const need = Math.min(8, Math.max(2, Math.ceil(remainMs / avgMs))); // 目安で見積
-          const C_refill2 = await runCandidatesC({ persona: A, interpretation: B, targetCount: need });
+          const C_refill2 = await runCandidatesC({ persona: A, interpretation: B, targetCount: need, replacementHints: replacementHintsFromD2 });
           const existTA = new Set([
             ...preF.map((t: any) => `${(t?.title ?? "").toLowerCase().trim()}__${(t?.artist ?? "").toLowerCase().trim()}`),
             ...droppedByD2Keys,
@@ -673,6 +680,7 @@ export async function POST(req: NextRequest) {
             D_refill2.resolved ?? [],
             { year_gate: !!era, era }
           );
+          await saveRaw(runId, `C.refill2.durationMode.round${round}`, C_refill2);
           preF = dedupeByTrack(preF.concat(E_refill2?.picked ?? []));
           total = sumDurMs(preF);
         }

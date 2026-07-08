@@ -86,6 +86,9 @@ export type CandidateC = {
   intended_role?: "anchor" | "deep" | "wildcard";
   popularity_hint?: "high" | "mid" | "low";
   notes_for_scoring?: string;
+
+  // ★ 置換ヒント適用時の観測用（どのヒント番号に応えたか。該当なしなら null）
+  matched_hint_index?: number | null;
 };
 export type CandidatesCResponse = { candidates: CandidateC[] };
 
@@ -258,17 +261,30 @@ export async function runCandidatesC(params: {
   persona: any;
   interpretation: InterpretationB;
   targetCount: number;
+  replacementHints?: { index?: number; hint?: string | null }[];
 }): Promise<CandidatesCResponse> {
-  const { persona, interpretation, targetCount } = params;
+  const { persona, interpretation, targetCount, replacementHints } = params;
   const outCount = Math.min( Math.max(2, targetCount * 2), 24 ); // ← 24件に上限
+
+  const validHints = (replacementHints ?? []).filter(
+    (h): h is { index?: number; hint: string } => !!h?.hint && String(h.hint).trim().length > 0
+  );
 
   const system = `あなたはDJ本人として選曲します。候補ではなく“この回のための選曲”をちょうど${outCount}件出します。
 各曲はペルソナの個性と解釈Bの『テーマ・シグナル』に結びついていること。reasonは中立＋少しのキャラ味（※一人称は使わない）。`;
 
+  const hintsSection = validHints.length
+    ? `\n\n# 置換ヒント（必ず考慮すること）
+直前の自己監査で「この曲は合わない」と判定された枠の置き換え候補を探しています。
+以下は各枠について「どのテーマ要素に接続し、どんな質感/年代/言語で置くか」を示した指示です。
+無視せず、ヒントごとに最低1曲はその方向性に沿う候補を出力に含めてください。
+${validHints.map((h, i) => `- ヒント${i + 1}: ${h.hint}`).join("\n")}`
+    : "";
+
   const user = `# 参照（あなた＝DJ本人）
 - ペルソナA: ${JSON.stringify(persona)}
 - 解釈B: ${JSON.stringify(interpretation)}
-- 目標曲数: ${targetCount}
+- 目標曲数: ${targetCount}${hintsSection}
 
 # 重要方針
 - すべての曲で "whyThemeFit" に**どのテーマ・シグナルに接続しているか**を具体に書く
@@ -293,13 +309,14 @@ export async function runCandidatesC(params: {
     "intended_role": "anchor"|"deep"|"wildcard",
     "popularity_hint": "high"|"mid"|"low",
 
-    "notes_for_scoring"?: string
+    "notes_for_scoring"?: string,
+    "matched_hint_index"?: number|null
   }]
 }
 
 # 出力規律
 - ちょうど ${outCount} 件。
-- すべて "intended_role" と "popularity_hint" を付ける（説明用ラベル。評価スコアには使わない）。`;
+- すべて "intended_role" と "popularity_hint" を付ける（説明用ラベル。評価スコアには使わない）。${validHints.length ? `\n- 置換ヒントに応えて選んだ曲には "matched_hint_index" にヒント番号（1始まり）を入れる。ヒントに応えていない曲は null。` : ""}`;
 
   const json = await requestJson({ system, user, schemaName: "CandidatesC" });
   const items = Array.isArray((json as any)?.candidates) ? (json as any).candidates : [];
@@ -318,7 +335,8 @@ export async function runCandidatesC(params: {
 
       intended_role: (["anchor", "deep", "wildcard"] as const).includes(it.intended_role) ? it.intended_role : "deep",
       popularity_hint: (["high", "mid", "low"] as const).includes(it.popularity_hint) ? it.popularity_hint : "mid",
-      notes_for_scoring: it.notes_for_scoring ? String(it.notes_for_scoring) : ""
+      notes_for_scoring: it.notes_for_scoring ? String(it.notes_for_scoring) : "",
+      matched_hint_index: typeof it.matched_hint_index === "number" ? it.matched_hint_index : null,
     }));
 
   return { candidates: sanitized.slice(0, outCount) };
