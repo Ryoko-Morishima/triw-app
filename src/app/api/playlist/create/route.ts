@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireSpotifyToken, getMe, createPlaylist, addTracks } from "@/lib/spotify";
+import { requireSpotifyToken, createPlaylist, addTracks } from "@/lib/spotify";
 
 export async function POST(req: NextRequest) {
   try {
@@ -7,14 +7,14 @@ export async function POST(req: NextRequest) {
     const name = String(body?.name || "").trim();
     const description = String(body?.description || "").trim();
     const uris: string[] = Array.isArray(body?.uris) ? body.uris.filter(Boolean) : [];
+    const isPublic = Boolean(body?.public);
 
     if (!name || uris.length === 0) {
       return NextResponse.json({ error: "name と uris は必須です" }, { status: 400 });
     }
 
     const token = await requireSpotifyToken();
-    const me = await getMe(token);
-    const pl = await createPlaylist(token, me.id, name, description || "Created by TRIWinDev");
+    const pl = await createPlaylist(token, name, description || "Created by TRIWinDev", isPublic);
     await addTracks(token, pl.id, uris);
 
     return NextResponse.json({

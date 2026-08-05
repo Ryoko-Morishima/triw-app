@@ -25,8 +25,11 @@ async function sFetch(path: string, token: string, init: RequestInit = {}) {
   });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`Spotify API error ${res.status}: ${text}`);
+    const err = new Error(`Spotify API error ${res.status}: ${text}`) as Error & { status?: number };
+    err.status = res.status;
+    throw err;
   }
+  if (res.status === 204) return null;
   return res.json();
 }
 
@@ -250,16 +253,16 @@ export async function searchTracksByISRC(
 }
 
 // ---------- プレイリスト ----------
-export async function createPlaylist(token: string, userId: string, name: string, description: string) {
-  return sFetch(`/users/${encodeURIComponent(userId)}/playlists`, token, {
+export async function createPlaylist(token: string, name: string, description: string, isPublic = false) {
+  return sFetch(`/me/playlists`, token, {
     method: "POST",
-    body: JSON.stringify({ name, description, public: false }),
+    body: JSON.stringify({ name, description, public: isPublic }),
   });
 }
 
 export async function addTracks(token: string, playlistId: string, uris: string[]) {
   if (uris.length === 0) return;
-  await sFetch(`/playlists/${encodeURIComponent(playlistId)}/tracks`, token, {
+  await sFetch(`/playlists/${encodeURIComponent(playlistId)}/items`, token, {
     method: "POST",
     body: JSON.stringify({ uris }),
   });
@@ -274,4 +277,105 @@ export async function getAudioFeatures(token: string, ids: string[]) {
   if (!ids || ids.length === 0) return { audio_features: [] };
   const q = ids.map(encodeURIComponent).join(",");
   return sFetch(`/audio-features?ids=${q}`, token);
+}
+
+// ---------- 汎用検索候補（任意の曲目リスト用） ----------
+export type SearchCandidate = {
+  id: string;
+  uri: string;
+  name: string;
+  artists: string[];
+  album: string | null;
+  release_date: string | null;
+  popularity: number | null;
+  external_url: string | null;
+};
+
+function toSearchCandidate(it: any): SearchCandidate {
+  return {
+    id: it.id,
+    uri: it.uri,
+    name: it.name,
+    artists: (it.artists ?? []).map((a: any) => a.name),
+    album: it.album?.name ?? null,
+    release_date: it.album?.release_date ?? null,
+    popularity: typeof it.popularity === "number" ? it.popularity : null,
+    external_url: it.external_urls?.spotify ?? null,
+  };
+}
+
+export async function searchTrackCandidates(
+  token: string,
+  title: string,
+  artist: string,
+  limit: number = 10
+): Promise<SearchCandidate[]> {
+  const run = async (q: string) => {
+    const json = await sFetch(`/search?type=track&limit=${limit}&q=${encodeURIComponent(q)}`, token);
+    return (json?.tracks?.items ?? []) as any[];
+  };
+
+  let items = await run(`track:"${title}" artist:"${artist}"`);
+  if (items.length === 0) items = await run(`${title} ${artist}`);
+  if (items.length === 0) items = await run(title);
+
+  return items.map(toSearchCandidate);
+}
+
+export async function getTrackAsCandidate(token: string, trackId: string): Promise<SearchCandidate> {
+  const t = await getTrack(token, trackId);
+  return toSearchCandidate(t);
+}
+
+// ---------- 自分のプレイリスト一覧（既存プレイリストへの追加先探索用） ----------
+export type MyPlaylistSummary = {
+  id: string;
+  name: string;
+  public: boolean | null;
+  collaborative: boolean;
+  tracksTotal: number;
+  imageUrl: string | null;
+  ownerId: string;
+  ownerName: string | null;
+  isMine: boolean;
+  canEdit: boolean;
+  url: string | null;
+};
+
+export async function listMyPlaylists(token: string, maxItems: number = 300): Promise<MyPlaylistSummary[]> {
+  const me = await getMe(token);
+  const myId = me?.id;
+
+  const out: MyPlaylistSummary[] = [];
+  let url = `/me/playlists?limit=50`;
+  while (url && out.length < maxItems) {
+    const json = await sFetch(url, token);
+    const items = (json?.items ?? []) as any[];
+    for (const it of items) {
+      const ownerId = it?.owner?.id ?? "";
+      const isMine = ownerId === myId;
+      out.push({
+        id: it.id,
+        name: it.name,
+        public: typeof it.public === "boolean" ? it.public : null,
+        collaborative: !!it.collaborative,
+        tracksTotal: it?.tracks?.total ?? 0,
+        imageUrl: Array.isArray(it.images) && it.images.length ? it.images[0]?.url ?? null : null,
+        ownerId,
+        ownerName: it?.owner?.display_name ?? null,
+        isMine,
+        canEdit: isMine || !!it.collaborative,
+        url: it?.external_urls?.spotify ?? null,
+      });
+    }
+    url = json?.next ? json.next.replace(SPOTIFY_API, "") : "";
+  }
+
+  // 自分が所有 → 共同編集可 → その他 の順
+  out.sort((a, b) => {
+    const rank = (p: MyPlaylistSummary) => (p.isMine ? 0 : p.collaborative ? 1 : 2);
+    return rank(a) - rank(b);
+  });
+
+  return out;
 }
