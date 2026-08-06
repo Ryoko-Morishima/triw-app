@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Playlist Relay app icon — original artwork.
+       Black rounded square, three white "track list" bars on the left
+       feeding into a solid green right-pointing arrow. No text, no
+       gradients, no third-party logos. -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="#0B0B0B"/>
+  <rect x="104" y="152" width="170" height="40" rx="20" fill="#FFFFFF"/>
+  <rect x="104" y="236" width="170" height="40" rx="20" fill="#FFFFFF"/>
+  <rect x="104" y="320" width="170" height="40" rx="20" fill="#FFFFFF"/>
+  <polygon points="254,146 254,366 400,256" fill="#1DB954"/>
+</svg>

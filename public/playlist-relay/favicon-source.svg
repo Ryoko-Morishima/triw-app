@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Playlist Relay small-size favicon — simplified original artwork for
+       16x16/32x32 rendering: fewer, thicker elements than icon-source.svg
+       so the shape doesn't collapse at tiny sizes. -->
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="#0B0B0B"/>
+  <rect x="12" y="19" width="24" height="8" rx="4" fill="#FFFFFF"/>
+  <rect x="12" y="37" width="24" height="8" rx="4" fill="#FFFFFF"/>
+  <polygon points="34,14 34,50 52,32" fill="#1DB954"/>
+</svg>
