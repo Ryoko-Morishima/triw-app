@@ -41,14 +41,28 @@ type MyPlaylistSummary = {
 
 type RecentPlaylist = { id: string; name: string; url: string | null; updatedAt: number };
 
-const RECENTS_KEY = "triw_recent_playlists";
+const RECENTS_KEY = "playlist_relay_recent_playlists_v1";
+// Legacy key from the tool's previous life at /dark-playlist. We migrate its
+// data into RECENTS_KEY on first load but deliberately leave it in place
+// rather than deleting it.
+const LEGACY_RECENTS_KEY = "triw_recent_playlists";
 
 function loadRecents(): RecentPlaylist[] {
   try {
     const raw = window.localStorage.getItem(RECENTS_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    }
+    const legacyRaw = window.localStorage.getItem(LEGACY_RECENTS_KEY);
+    if (legacyRaw) {
+      const legacyParsed = JSON.parse(legacyRaw);
+      if (Array.isArray(legacyParsed) && legacyParsed.length > 0) {
+        window.localStorage.setItem(RECENTS_KEY, JSON.stringify(legacyParsed));
+        return legacyParsed;
+      }
+    }
+    return [];
   } catch {
     return [];
   }
@@ -90,7 +104,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
       <div style={{ padding: 24, border: "1px solid #ddd", borderRadius: 12, maxWidth: 480, margin: "40px auto", fontFamily: "system-ui" }}>
         <h2>まずはSpotifyにログイン</h2>
         <p style={{ color: "#666" }}>プレイリスト作成・追加にはSpotify連携が必要です。</p>
-        <a href="/api/auth/login?next=/dark-playlist" style={{ display: "inline-block", padding: "10px 16px", background: "#111", color: "#fff", borderRadius: 8, textDecoration: "none" }}>
+        <a href="/api/auth/login?next=/playlist-relay" style={{ display: "inline-block", padding: "10px 16px", background: "#111", color: "#fff", borderRadius: 8, textDecoration: "none" }}>
           Spotifyにログイン
         </a>
       </div>
@@ -99,7 +113,42 @@ function AuthGate({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-export default function PlaylistToolPage() {
+function SiteHeader({ authed }: { authed: boolean | null }) {
+  return (
+    <header
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "16px 24px",
+        borderBottom: "1px solid #eee",
+        fontFamily: "system-ui",
+      }}
+    >
+      <div>
+        <div style={{ fontWeight: "bold", fontSize: 18 }}>Playlist Relay</div>
+        <div style={{ fontSize: 13, color: "#666" }}>曲目リストを貼り付けて、Spotifyプレイリストへ。</div>
+      </div>
+      <div>
+        {authed === null ? null : authed ? (
+          <a href="/api/auth/logout" style={{ fontSize: 13, textDecoration: "underline", color: "#333" }}>
+            ログアウト
+          </a>
+        ) : (
+          <a
+            href="/api/auth/login?next=/playlist-relay"
+            style={{ fontSize: 13, border: "1px solid #ccc", borderRadius: 6, padding: "4px 10px", textDecoration: "none", color: "#333" }}
+          >
+            Spotifyにログイン
+          </a>
+        )}
+      </div>
+    </header>
+  );
+}
+
+export default function PlaylistRelayPage() {
+  const [headerAuthed, setHeaderAuthed] = useState<boolean | null>(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [text, setText] = useState("");
@@ -129,6 +178,13 @@ export default function PlaylistToolPage() {
       setDestMode("recent");
       setSelectedRecentId(r[0].id);
     }
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/auth/status")
+      .then((r) => r.json())
+      .then((j) => setHeaderAuthed(Boolean(j.authenticated)))
+      .catch(() => setHeaderAuthed(false));
   }, []);
 
   useEffect(() => {
@@ -268,11 +324,10 @@ export default function PlaylistToolPage() {
   }
 
   return (
-    <AuthGate>
-      <main style={{ maxWidth: 920, margin: "40px auto", padding: 24, fontFamily: "system-ui" }}>
-        <h1 style={{ fontSize: 26, marginBottom: 4 }}>Spotify プレイリストツール</h1>
-        <p style={{ color: "#666", marginBottom: 24 }}>曲目リストを貼り付けて、新規または既存のSpotifyプレイリストへ反映します。</p>
-
+    <>
+      <SiteHeader authed={headerAuthed} />
+      <AuthGate>
+        <main style={{ maxWidth: 920, margin: "24px auto", padding: 24, fontFamily: "system-ui" }}>
         <section style={{ marginBottom: 20 }}>
           <label style={{ fontWeight: "bold", display: "block", marginBottom: 6 }}>曲目リスト</label>
           <textarea
@@ -351,7 +406,7 @@ export default function PlaylistToolPage() {
                     {existingError.message}
                     {existingError.code === "INSUFFICIENT_SCOPE" && (
                       <div>
-                        <a href="/api/auth/login?next=/dark-playlist">Spotifyに再ログイン</a>
+                        <a href="/api/auth/login?next=/playlist-relay">Spotifyに再ログイン</a>
                       </div>
                     )}
                   </div>
@@ -507,7 +562,8 @@ export default function PlaylistToolPage() {
             <p>追加曲数: {result.addedCount}</p>
           </div>
         )}
-      </main>
-    </AuthGate>
+        </main>
+      </AuthGate>
+    </>
   );
 }

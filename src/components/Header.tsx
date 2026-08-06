@@ -18,6 +18,10 @@ export default function Header() {
   const loginHref =
     `/api/auth/login?next=${encodeURIComponent(pathname || "/")}`;
 
+  // Playlist Relay is a self-contained tool with its own minimal header;
+  // don't show the TRIW-wide nav there.
+  if (pathname?.startsWith("/playlist-relay")) return null;
+
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between border-b bg-white/90 backdrop-blur px-4 py-3">
       {/* 左側ロゴ/タイトル */}
